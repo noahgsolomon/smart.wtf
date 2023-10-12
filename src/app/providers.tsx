@@ -1,6 +1,5 @@
 'use client'
 
-import { ClerkProvider } from "@clerk/nextjs";
 import { ThemeProvider } from "next-themes"
 
 interface ProvidersProps {
@@ -12,6 +11,7 @@ const Providers = ({ children }: ProvidersProps) => {
             <ThemeProvider attribute="class">
                 {children}
             </ThemeProvider>
+
     );
 }
 
