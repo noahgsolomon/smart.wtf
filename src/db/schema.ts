@@ -1,6 +1,5 @@
-import { mysqlTable, mysqlSchema, AnyMySqlColumn, primaryKey, unique, int, varchar } from "drizzle-orm/mysql-core"
+import { mysqlTable, mysqlSchema, AnyMySqlColumn, primaryKey, int, varchar, unique } from "drizzle-orm/mysql-core"
 import { sql } from "drizzle-orm"
-
 
 export const authors = mysqlTable("authors", {
 	id: int("id").autoincrement().notNull(),
@@ -21,5 +20,15 @@ export const categories = mysqlTable("categories", {
 	return {
 		categoriesId: primaryKey(table.id),
 		category: unique("category").on(table.category),
+	}
+});
+
+export const something = mysqlTable("something", {
+	id: int("id").autoincrement().notNull(),
+	something: varchar("something", { length: 255 }).notNull(),
+},
+(table) => {
+	return {
+		somethingId: primaryKey(table.id),
 	}
 });
