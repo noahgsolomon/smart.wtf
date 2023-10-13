@@ -1,9 +1,23 @@
+'use client'
+
 import ThemeButton from "@/components/ui/theme";
-import { UserButton, UserProfile } from "@clerk/nextjs";
+import { UserButton } from "@clerk/nextjs";
+import { trpc } from "../_trpc/client";
 
 const Dashboard = () => {
 
+    const userQuery = trpc.users.user.useQuery();
+
+    if (userQuery.isLoading) {
+        return <div>Loading...</div>;
+    }
+
+    if (userQuery.isError) {
+        return <div>Error: {userQuery.error.message}</div>;
+    }
+
     return (
+        <>
         <header className="w-full flex flex-row gap-4 justify-end p-6">
             <ThemeButton />
             <UserButton afterSignOutUrl="/"
@@ -21,6 +35,14 @@ const Dashboard = () => {
             }}
             />
         </header>
+        <main>
+            <div>
+                {userQuery.data}
+                {/* {await serverClient.hey()} */}
+            </div>
+        </main>
+        </>
+        
     );
 }
 

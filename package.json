@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "introspect": "drizzle-kit introspect:mysql"
+    "introspect": "drizzle-kit introspect:mysql",
+    "studio": "drizzle-kit studio",
+    "push": "drizzle-kit push:mysql"
   },
   "dependencies": {
     "@clerk/nextjs": "^4.25.3",
@@ -15,15 +17,21 @@
     "@planetscale/database": "^1.11.0",
     "@radix-ui/react-icons": "^1.3.0",
     "@radix-ui/react-slot": "^1.0.2",
+    "@tanstack/react-query": "^4.36.1",
+    "@trpc/client": "^10.40.0",
+    "@trpc/react-query": "^10.40.0",
+    "@trpc/server": "^10.40.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
     "drizzle-orm": "^0.28.6",
     "lucide-react": "^0.285.0",
+    "mysql2": "^3.6.1",
     "next": "13.5.4",
     "next-themes": "^0.2.1",
     "react": "^18",
     "react-dom": "^18",
     "react-spring": "^9.7.3",
+    "superjson": "^2.0.0",
     "tailwind-merge": "^1.14.0",
     "tailwindcss-animate": "^1.0.7"
   },

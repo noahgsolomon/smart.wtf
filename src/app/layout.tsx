@@ -4,7 +4,7 @@ import { Inter } from 'next/font/google'
 import Head from 'next/head'
 import Providers from './providers'
 import { ClerkProvider } from '@clerk/nextjs'
-import { dark } from '@clerk/themes'
+import Provider from './_trpc/provider'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -25,7 +25,11 @@ export default function RootLayout({
       </Head>
       <body className={inter.className}>
         <ClerkProvider>
-          <Providers>{children}</Providers>
+            <Providers>
+              <Provider>
+                {children}
+              </Provider>
+            </Providers>
         </ClerkProvider>
       </body>
     </html>

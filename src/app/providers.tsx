@@ -11,7 +11,6 @@ const Providers = ({ children }: ProvidersProps) => {
             <ThemeProvider attribute="class">
                 {children}
             </ThemeProvider>
-
     );
 }
 
