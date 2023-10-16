@@ -5,6 +5,7 @@ import Head from 'next/head'
 import Providers from './providers'
 import { ClerkProvider } from '@clerk/nextjs'
 import Provider from './_trpc/provider'
+import NavBar from '@/components/navbar'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -27,6 +28,7 @@ export default function RootLayout({
         <ClerkProvider>
             <Providers>
               <Provider>
+                <NavBar />
                 {children}
               </Provider>
             </Providers>
