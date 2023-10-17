@@ -4,7 +4,7 @@ import { SignIn } from '@clerk/nextjs'
 const LoginPage = () => {
 
   return (
-    <div className='w-screen h-screen flex items-center justify-center'>
+    <div className='h-[calc(100vh-10rem)] flex items-center justify-center'>
       <SignIn
       appearance={{
         elements: {
