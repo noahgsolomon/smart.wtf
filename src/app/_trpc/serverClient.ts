@@ -1,11 +1,11 @@
-import { httpBatchLink } from "@trpc/client";
+// import { httpBatchLink } from "@trpc/client";
+// import { appRouter } from "@/app/server";
+// import { getAuth, SignedInAuthObject, SignedOutAuthObject } from '@clerk/nextjs/server';
 
-import { appRouter } from "@/app/server";
+// export const createServerClient = (req: any) => {
+//   const auth: SignedInAuthObject | SignedOutAuthObject = getAuth(req);
 
-export const serverClient = appRouter.createCaller({
-  links: [
-    httpBatchLink({
-      url: "http://localhost:3000/api/trpc",
-    }),
-  ],
-} as any);
+//   return appRouter.createCaller({
+//     auth: auth
+//   });
+// };

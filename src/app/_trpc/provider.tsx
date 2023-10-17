@@ -8,20 +8,20 @@ import SuperJSON from "superjson";
 import { trpc } from "./client";
 
 export default function Provider({ children }: { children: React.ReactNode }) {
-  const [queryClient] = useState(() => new QueryClient({}));
-  const [trpcClient] = useState(() =>
-  trpc.createClient({
-    links: [
-      httpBatchLink({
-        url: "http://localhost:3000/api/trpc",
-      }),
-    ],
-    transformer: SuperJSON, 
-  })
-);
-  return (
-    <trpc.Provider client={trpcClient} queryClient={queryClient}>
-      <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
-    </trpc.Provider>
-  );
+	const [queryClient] = useState(() => new QueryClient({}));
+	const [trpcClient] = useState(() =>
+		trpc.createClient({
+			links: [
+				httpBatchLink({
+					url: "http://localhost:3000/api/trpc",
+				}),
+			],
+			transformer: SuperJSON,
+		})
+	);
+	return (
+		<trpc.Provider client={trpcClient} queryClient={queryClient}>
+			<QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+		</trpc.Provider>
+	);
 }
