@@ -1,19 +1,31 @@
-"use client"
+"use client";
 
 import { MoonIcon, SunIcon } from "lucide-react";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
+import { Button } from "./button";
 
 export default function ThemeButton() {
-    const {resolvedTheme, setTheme} = useTheme();
+	const { resolvedTheme, setTheme } = useTheme();
 
-    const [mounted, setMounted] = useState(false);
+	const [mounted, setMounted] = useState(false);
 
-    useEffect(() => setMounted(true), []);
+	useEffect(() => setMounted(true), []);
 
-    if (!mounted) return null;
+	if (!mounted) return null;
 
-    return (
-        <button className={`${!mounted ? 'opacity-80' : ''} transition-all`} disabled={!mounted} onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')}>{resolvedTheme === 'light' ? (<SunIcon className="w-5 h-5 hover:opacity-80 hover:transition-all" />) : (<MoonIcon className="w-5 h-5 hover:opacity-80 hover:transition-all"/>)}</button>
-    )
+	return (
+		<Button
+			variant={"ghost"}
+			className={`${!mounted ? "opacity-80" : ""}`}
+			disabled={!mounted}
+			onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
+		>
+			{resolvedTheme === "light" ? (
+				<SunIcon className="w-4 h-4" />
+			) : (
+				<MoonIcon className="w-4 h-4" />
+			)}
+		</Button>
+	);
 }

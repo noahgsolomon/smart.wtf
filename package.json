@@ -32,6 +32,7 @@
     "react-dom": "^18",
     "react-spring": "^9.7.3",
     "superjson": "^2.0.0",
+    "tailwind-classes-sorter": "^0.2.5",
     "tailwind-merge": "^1.14.0",
     "tailwindcss-animate": "^1.0.7"
   },
@@ -45,6 +46,7 @@
     "eslint": "^8",
     "eslint-config-next": "13.5.4",
     "postcss": "^8",
+    "prettier": "3.0.3",
     "tailwindcss": "^3",
     "typescript": "^5"
   }
