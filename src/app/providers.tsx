@@ -1,17 +1,13 @@
-'use client'
+"use client";
 
-import { ThemeProvider } from "next-themes"
+import { ThemeProvider } from "next-themes";
 
 interface ProvidersProps {
-    children: React.ReactNode;
+  children: React.ReactNode;
 }
 
 const Providers = ({ children }: ProvidersProps) => {
-    return (
-            <ThemeProvider attribute="class">
-                {children}
-            </ThemeProvider>
-    );
-}
+  return <ThemeProvider attribute="class">{children}</ThemeProvider>;
+};
 
-export default Providers
+export default Providers;

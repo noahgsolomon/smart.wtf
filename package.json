@@ -3,13 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
     "build": "next build",
-    "start": "next start",
+    "db:push": "dotenv drizzle-kit push:mysql",
+    "db:studio": "dotenv drizzle-kit studio",
+    "dev": "next dev",
     "lint": "next lint",
-    "introspect": "drizzle-kit introspect:mysql",
-    "studio": "drizzle-kit studio",
-    "push": "drizzle-kit push:mysql"
+    "start": "next start"
   },
   "dependencies": {
     "@clerk/nextjs": "^4.25.3",
@@ -17,8 +16,10 @@
     "@planetscale/database": "^1.11.0",
     "@radix-ui/react-icons": "^1.3.0",
     "@radix-ui/react-slot": "^1.0.2",
+    "@t3-oss/env-nextjs": "^0.7.0",
     "@tanstack/react-query": "^4.36.1",
     "@trpc/client": "^10.40.0",
+    "@trpc/next": "^10.37.1",
     "@trpc/react-query": "^10.40.0",
     "@trpc/server": "^10.40.0",
     "class-variance-authority": "^0.7.0",
@@ -26,7 +27,7 @@
     "drizzle-orm": "^0.28.6",
     "lucide-react": "^0.285.0",
     "mysql2": "^3.6.1",
-    "next": "13.5.4",
+    "next": "^13.5.5",
     "next-themes": "^0.2.1",
     "react": "^18",
     "react-dom": "^18",
@@ -34,19 +35,26 @@
     "superjson": "^2.0.0",
     "tailwind-classes-sorter": "^0.2.5",
     "tailwind-merge": "^1.14.0",
-    "tailwindcss-animate": "^1.0.7"
+    "tailwindcss-animate": "^1.0.7",
+    "zod": "^3.22.4"
   },
   "devDependencies": {
+    "@types/eslint": "^8.44.2",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@typescript-eslint/eslint-plugin": "^6.3.0",
+    "@typescript-eslint/parser": "^6.3.0",
     "autoprefixer": "^10",
     "dotenv": "^16.3.1",
+    "dotenv-cli": "^7.3.0",
     "drizzle-kit": "^0.19.13",
     "eslint": "^8",
     "eslint-config-next": "13.5.4",
+    "mysql2": "^3.6.1",
     "postcss": "^8",
     "prettier": "3.0.3",
+    "prettier-plugin-tailwindcss": "^0.5.1",
     "tailwindcss": "^3",
     "typescript": "^5"
   }

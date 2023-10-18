@@ -1,29 +1,27 @@
-import { buttonVariants } from '@/components/ui/button';
-import { currentUser, useUser } from '@clerk/nextjs';
-import Link from 'next/link';
+import { currentUser } from "@clerk/nextjs";
+import Link from "next/link";
+import { buttonVariants } from "@/components/ui/button";
 
-const Home = async () => {
-	const user = await currentUser();
+export default async function Home() {
+  const user = await currentUser();
 
-	return (
-		<div>
-			<main className="flex gap-4 flex-col justify-center items-center mt-20">
-				{user ? (
-					<>
-						<div>Sup, {user.firstName}</div>
-						<Link
-							href="/dashboard"
-							className={buttonVariants({ variant: 'outline' })}
-						>
-							Dashboard
-						</Link>
-					</>
-				) : (
-					<div>Sup</div>
-				)}
-			</main>
-		</div>
-	);
-};
-
-export default Home;
+  return (
+    <div>
+      <main className="mt-20 flex flex-col items-center justify-center gap-4">
+        {user ? (
+          <>
+            <div>Sup, {user.firstName}</div>
+            <Link
+              href="/dashboard"
+              className={buttonVariants({ variant: "outline" })}
+            >
+              Dashboard
+            </Link>
+          </>
+        ) : (
+          <div>Sup</div>
+        )}
+      </main>
+    </div>
+  );
+}
