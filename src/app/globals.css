@@ -64,7 +64,7 @@
 
 .cl-userProfile-root .cl-card,
 .cl-userProfile-root .cl-formFieldInput {
-  @apply bg-card border-border rounded-lg border;
+  @apply rounded-lg border border-border bg-card;
 }
 
 .cl-userProfile-root .cl-modalCloseButton,
@@ -90,7 +90,7 @@
 }
 
 .cl-userProfile-root .cl-navbar {
-  @apply bg-card border-r-border rounded-l-lg rounded-r-none;
+  @apply rounded-l-lg rounded-r-none border-r-border bg-card;
 }
 
 .cl-userProfile-root .cl-navbar .cl-navbarButton {
@@ -124,5 +124,17 @@
 
 .cl-userProfile-root #google,
 .cl-userProfile-root #github {
-  @apply border-primary-foreground hover:bg-primary-foreground border py-3;
+  @apply border border-primary-foreground py-3 hover:bg-primary-foreground;
+}
+
+.cl-userButtonPopoverCard {
+  @apply max-w-[300px];
+}
+
+.cl-userProfile-root .cl-navbar {
+  @apply hidden;
+}
+
+.cl-userProfile-root .cl-card {
+  @apply max-w-[600px] justify-center;
 }

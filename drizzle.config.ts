@@ -6,7 +6,7 @@ dotenv.config({
 });
 
 export default {
-  schema: "./src/app/server/db/schema.ts",
+  schema: "./src/server/db/**/schema.ts",
   out: "./drizzle",
   driver: "mysql2",
   dbCredentials: {

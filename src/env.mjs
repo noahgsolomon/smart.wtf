@@ -11,8 +11,11 @@ export const env = createEnv({
       .string()
       .url()
       .refine(
-        (str) => !str.includes("YOUR_MYSQL_URL_HERE"),
-        "You forgot to change the default URL"
+        (str) =>
+          !str.includes(
+            'mysql://nz9osew56bg4qr8ul7oa:pscale_pw_4NUIwLmuUICdjZZ4fTmVS7bqE1cmQNPDFFaq4MlbFkg@aws.connect.psdb.cloud/newstack?ssl={"rejectUnauthorized":true}',
+          ),
+        "You forgot to change the default URL",
       ),
     NODE_ENV: z
       .enum(["development", "test", "production"])

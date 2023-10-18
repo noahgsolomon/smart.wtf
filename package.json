@@ -32,6 +32,7 @@
     "react": "^18",
     "react-dom": "^18",
     "react-spring": "^9.7.3",
+    "server-only": "^0.0.1",
     "superjson": "^2.0.0",
     "tailwind-classes-sorter": "^0.2.5",
     "tailwind-merge": "^1.14.0",
@@ -40,7 +41,7 @@
   },
   "devDependencies": {
     "@types/eslint": "^8.44.2",
-    "@types/node": "^20",
+    "@types/node": "^20.8.6",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "@typescript-eslint/eslint-plugin": "^6.3.0",
