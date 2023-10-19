@@ -1,17 +1,15 @@
-import UserDashboard from "@/components/userdashboard";
-import { api } from "@/trpc/server";
+import {
+  QuestionMarkCircledIcon,
+  QuestionMarkIcon,
+} from "@radix-ui/react-icons";
+import Image from "next/image";
 
-const Dashboard = async () => {
-  const user = await api.user.user.query();
-  const usersJunk = await api.user.other.mutate({
-    junk: "random junk in here",
-  });
-
+const Dashboard = () => {
   return (
     <>
       <main className="mt-20">
-        <div className="flex justify-center">
-          <UserDashboard />
+        <div className="flex items-center justify-center">
+          <div className="rounded-lg border-border"></div>
         </div>
       </main>
     </>
