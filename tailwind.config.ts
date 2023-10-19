@@ -22,6 +22,25 @@ module.exports = {
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
+        blob1: "hsl(var(--blob1))",
+        blob2: "hsl(var(--blob2))",
+        blob3: "hsl(var(--blob3))",
+        brain: {
+          DEFAULT: "hsl(var(--brain))",
+          foreground: "hsl(var(--brain-foreground))",
+        },
+        fish: {
+          DEFAULT: "hsl(var(--fish))",
+          foreground: "hsl(var(--fish-foreground))",
+        },
+        library: {
+          DEFAULT: "hsl(var(--library))",
+          foreground: "hsl(var(--library-foreground))",
+        },
+        success: {
+          DEFAULT: "hsl(var(--success))",
+          foreground: "hsl(var(--success-foreground))",
+        },
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",

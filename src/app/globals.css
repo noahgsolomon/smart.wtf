@@ -25,33 +25,63 @@
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
     --ring: 222.2 84% 4.9%;
-    --radius: 0.5rem;
+    --radius: 1rem;
     --link: 240 100% 55%; /* This is the blue link color */
     --link-hover: 240 100% 45%; /* Slightly darker shade for hover */
+    --progressBar: 210 25% 55%;
+    --blob1: 230 60% 75%; /* A light, muted blue */
+    --blob2: 260 50% 80%; /* A light, muted purple */
+    --blob3: 280 40% 85%; /* A light, muted pinkish color */
+    --brain: 340 25% 85%;
+    --brain-foreground: 340 15% 50%;
+
+    --fish: 355 90% 55%;
+    --fish-foreground: 355 45% 45%;
+
+    --success: 120 50% 50%;
+    --success-foreground: 120 25% 40%;
+
+    --library: 28 50% 40%;
+    --library-foreground: 28 25% 30%;
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9;
-    --link: 210 80% 70%; /* Lighter shade of blue for dark theme */
-    --link-hover: 210 80% 60%; /* Slightly darker shade for hover in dark theme */
+    --background: 222.2 84% 5.9%;
+    --foreground: 210 40% 99%;
+    --card: 222.2 84% 6.9%;
+    --card-foreground: 210 40% 91%;
+    --popover: 222.2 84% 5.9%;
+    --popover-foreground: 210 40% 99%;
+    --primary: 210 40% 99%;
+    --primary-foreground: 222.2 47.4% 12.2%;
+    --secondary: 217.2 32.6% 18.5%;
+    --secondary-foreground: 210 40% 99%;
+    --muted: 217.2 32.6% 18.5%;
+    --muted-foreground: 215 20.2% 66.1%;
+    --accent: 217.2 32.6% 18.5%;
+    --accent-foreground: 210 40% 99%;
+    --destructive: 0 62.8% 31.6%;
+    --destructive-foreground: 210 40% 99%;
+    --border: 217.2 32.6% 18.5%;
+    --input: 217.2 32.6% 18.5%;
+    --ring: 212.7 26.8% 84.9;
+    --link: 210 80% 71%; /* Lighter shade of blue for dark theme */
+    --link-hover: 210 80% 61%; /* Slightly darker shade for hover in dark theme */
+    --progressBar: 210 10% 85%;
+    --blob1: 230 20% 50%; /* A brighter, muted blue for dark theme */
+    --blob2: 260 15% 40%; /* A brighter, muted purple for dark theme */
+    --blob3: 280 10% 45%; /* A brighter, muted pinkish color for dark theme */
+    --brain: 330 25% 60%;
+    --brain-foreground: 330 12% 70%;
+
+    --fish: 355 90% 40%;
+    --fish-foreground: 355 45% 50%;
+
+    --success: 120 50% 40%;
+    --success-foreground: 120 25% 50%;
+
+    --library: 28 50% 30%;
+    --library-foreground: 28 25% 40%;
   }
 }
 
@@ -134,7 +164,7 @@
 }
 
 .cl-userButtonPopoverCard {
-  @apply max-w-[300px];
+  @apply max-w-[300px] pb-0 pt-3;
 }
 
 .cl-userProfile-root .cl-navbar {
