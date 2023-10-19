@@ -1,8 +1,4 @@
-import { db } from "@/server/db";
-import { users } from "@/server/db/schemas/schema";
 import { api } from "@/trpc/server";
-import { currentUser } from "@clerk/nextjs";
-import { eq } from "drizzle-orm";
 import { Loader2 } from "lucide-react";
 import { redirect } from "next/navigation";
 
