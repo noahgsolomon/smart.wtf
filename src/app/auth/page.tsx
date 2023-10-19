@@ -7,8 +7,7 @@ const Page = async () => {
   redirect("/dashboard");
 
   return (
-    <div className="flex h-[calc(100vh-10rem)] items-center justify-center">
-      <p>authenticating...</p>
+    <div className="flex h-screen w-screen items-center justify-center">
       <Loader2 className="h-5 w-5 animate-spin" />
     </div>
   );
