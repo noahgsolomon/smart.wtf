@@ -4,6 +4,8 @@
 
 @layer base {
   :root {
+    --x: 0;
+    --y: 0;
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
     --card: 0 0% 100%;
@@ -24,6 +26,8 @@
     --input: 214.3 31.8% 91.4%;
     --ring: 222.2 84% 4.9%;
     --radius: 0.5rem;
+    --link: 240 100% 55%; /* This is the blue link color */
+    --link-hover: 240 100% 45%; /* Slightly darker shade for hover */
   }
 
   .dark {
@@ -46,6 +50,8 @@
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
     --ring: 212.7 26.8% 83.9;
+    --link: 210 80% 70%; /* Lighter shade of blue for dark theme */
+    --link-hover: 210 80% 60%; /* Slightly darker shade for hover in dark theme */
   }
 }
 
@@ -138,3 +144,48 @@
 .cl-userProfile-root .cl-card {
   @apply max-w-[600px] justify-center;
 }
+
+@keyframes breathe {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.3);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.animate-breathe {
+  animation: breathe 4s infinite;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+/* 
+.animated-feature-cards::before {
+  @apply pointer-events-none absolute select-none rounded-lg opacity-0 transition-opacity duration-300 hover:opacity-100;
+  background: radial-gradient(
+    500px circle at var(--x) var(--y),
+    #d8b4fe 0,
+    #4c1d95 25%,
+    rgba(255, 255, 255, 0) 50%,
+    transparent 80%
+  );
+  z-index: -1;
+  content: "";
+  inset: -1px;
+}
+
+@media (max-width: 768px) {
+  .animated-feature-cards::before {
+    background: none !important;
+  }
+} */
