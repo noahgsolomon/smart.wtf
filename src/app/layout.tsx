@@ -7,6 +7,8 @@ import { ClerkProvider } from "@clerk/nextjs";
 import NavBar from "@/components/navbar";
 import { TRPCReactProvider } from "@/trpc/react";
 import { headers } from "next/headers";
+import ProgressBar from "./progressbar";
+import ProgressBarProvider from "./progressbar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -29,8 +31,10 @@ export default function RootLayout({
         <TRPCReactProvider headers={headers()}>
           <ClerkProvider>
             <Providers>
-              <NavBar />
-              {children}
+              <ProgressBarProvider>
+                <NavBar />
+                {children}
+              </ProgressBarProvider>
             </Providers>
           </ClerkProvider>
         </TRPCReactProvider>
