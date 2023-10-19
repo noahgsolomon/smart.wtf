@@ -1,10 +1,7 @@
-import { z } from "zod";
-
 import { createTRPCRouter, protectedProcedure } from "@/server/api/trpc";
-import { users } from "@/server/db/schemas/schema";
+import { users } from "@/server/db/schemas/users/schema";
 import { eq } from "drizzle-orm";
 import { currentUser } from "@clerk/nextjs";
-import { other } from "@/server/db/schemas/other/schema";
 
 export const userRouter = createTRPCRouter({
   exists: protectedProcedure.mutation(async ({ ctx }) => {
@@ -32,18 +29,4 @@ export const userRouter = createTRPCRouter({
 
     return { user: user };
   }),
-  other: protectedProcedure
-    .input(
-      z.object({
-        junk: z.string(),
-      }),
-    )
-    .mutation(async ({ input, ctx }) => {
-      await ctx.db.insert(other).values({
-        junk: input.junk,
-        user_id: ctx.user_id,
-      });
-
-      return { data: input.junk };
-    }),
 });

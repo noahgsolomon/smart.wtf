@@ -13,7 +13,7 @@ import superjson from "superjson";
 import { ZodError } from "zod";
 
 import { db } from "@/server/db";
-import { users } from "../db/schemas/schema";
+import { users } from "../db/schemas/users/schema";
 import { eq } from "drizzle-orm";
 
 interface CreateContextOptions {
