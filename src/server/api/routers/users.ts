@@ -1,11 +1,7 @@
 import { z } from "zod";
 
-import {
-  createTRPCRouter,
-  protectedProcedure,
-  publicProcedure,
-} from "@/server/api/trpc";
-import { posts, users } from "@/server/db/schemas/schema";
+import { createTRPCRouter, protectedProcedure } from "@/server/api/trpc";
+import { users } from "@/server/db/schemas/schema";
 import { eq } from "drizzle-orm";
 import { currentUser } from "@clerk/nextjs";
 import { other } from "@/server/db/schemas/other/schema";
@@ -18,12 +14,11 @@ export const userRouter = createTRPCRouter({
         .select()
         .from(users)
         .where(eq(users.clerk_id, clerkUser?.id ?? "some_nonexistent_id"));
-      console.log("21", user);
       if (user.length === 0) {
         await ctx.db.insert(users).values({
           name: clerkUser.firstName + " " + clerkUser.lastName,
           email:
-            clerkUser.emailAddresses[0]?.emailAddress ||
+            clerkUser.emailAddresses[0]?.emailAddress ??
             clerkUser.primaryEmailAddressId + "",
           clerk_id: clerkUser.id,
         });
