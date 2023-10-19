@@ -3,7 +3,7 @@ import { SignIn } from "@clerk/nextjs";
 
 const LoginPage = () => {
   return (
-    <div className="flex h-[calc(100vh-10rem)] items-center justify-center">
+    <div className="flex h-[calc(100vh)] items-center justify-center">
       <SignIn
         appearance={{
           elements: {

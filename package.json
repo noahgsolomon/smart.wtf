@@ -25,6 +25,7 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
     "drizzle-orm": "^0.28.6",
+    "framer-motion": "^10.16.4",
     "lucide-react": "^0.285.0",
     "mysql2": "^3.6.1",
     "next": "^13.5.5",
@@ -37,6 +38,7 @@
     "tailwind-classes-sorter": "^0.2.5",
     "tailwind-merge": "^1.14.0",
     "tailwindcss-animate": "^1.0.7",
+    "typed.js": "^2.0.16",
     "zod": "^3.22.4"
   },
   "devDependencies": {
