@@ -29,6 +29,11 @@ const NavBar: FunctionComponent = () => {
               <UserButton
                 afterSignOutUrl="/"
                 appearance={{
+                  userProfile: {
+                    elements: {
+                      userButtonPopoverCard: "p-0",
+                    },
+                  },
                   elements: {
                     userButtonTrigger: "focus:outline-none focus:ring-0 ",
                     rootBox: "w-10 h-10 flex items-center ",
