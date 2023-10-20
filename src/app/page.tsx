@@ -7,12 +7,12 @@ import {
   Brain,
   CheckCircle2,
   Fish,
-  HelpCircle,
 } from "lucide-react";
 import SuccessBlob from "@/components/ui/blobs/successblob";
 import LibraryBlob from "@/components/ui/blobs/libraryblob";
 import BrainBlob from "@/components/ui/blobs/brainblob";
 import SmartWtfLogo from "@/components/svg/smartwtf";
+import Image from "next/image";
 
 export default function Home() {
   return (
@@ -28,7 +28,7 @@ export default function Home() {
           </p>
         </div>
         <div className="mt-8 flex h-[800px] w-full items-center justify-center rounded-lg border border-border bg-card opacity-60 shadow-md shadow-secondary">
-          <SmartWtfLogo className="animate-breathe h-14 w-14 text-primary blur-[1px]" />
+          <SmartWtfLogo className="animate-breathe h-[100px] w-[100px] text-primary blur-[1px]" />
         </div>
         {/* <div className="mt-96">
           <div className="relative w-full max-w-full">
@@ -38,10 +38,10 @@ export default function Home() {
           </div>
         </div> */}
         <section className="mb-20 mt-20 flex w-full flex-col gap-16">
-          <h3 className="text-center text-4xl">
+          <h3 className="text-center text-5xl">
             &ldquo;wtf do you have to offer?&ldquo;
           </h3>
-          <div className="flex flex-col items-center justify-between gap-8 md:flex-row">
+          <div className="flex w-full flex-col items-center justify-between gap-8 md:flex-row">
             <div className="flex flex-col gap-4">
               <h3 className="text-3xl">Dive Deep, Interactively</h3>
               <p className="max-w-[35ch] text-sm">
@@ -53,19 +53,15 @@ export default function Home() {
                 understanding complex topics a breeze.
               </p>
             </div>
-            <div>
-              <div className="relative flex h-[400px] w-[400px] items-center justify-center rounded-lg border border-border bg-card opacity-80">
-                <Fish className="animate-breathe h-10 w-10 text-fish blur-[1px]" />
-                <FishBlob />
-              </div>
+            <div className="relative flex h-[400px] w-full max-w-[400px] items-center justify-center rounded-lg border border-border bg-card opacity-80">
+              <Fish className="animate-breathe h-10 w-10 text-fish blur-[1px]" />
+              <FishBlob />
             </div>
           </div>
-          <div className="flex flex-col items-center justify-between gap-8 md:flex-row">
-            <div>
-              <div className="relative flex h-[400px] w-[400px] items-center justify-center rounded-lg border border-border bg-card opacity-80">
-                <BookOpenCheck className="animate-breathe h-10 w-10 text-success blur-[1px]" />
-                <SuccessBlob />
-              </div>
+          <div className="flex w-full flex-col-reverse items-center justify-between gap-8 md:flex-row">
+            <div className="relative flex h-[400px] w-full max-w-[400px] items-center justify-center rounded-lg border border-border bg-card opacity-80">
+              <BookOpenCheck className="animate-breathe h-10 w-10 text-success blur-[1px]" />
+              <SuccessBlob />
             </div>
             <div className="flex flex-col gap-4">
               <h3 className="text-3xl">Ask as You Learn</h3>
@@ -81,9 +77,9 @@ export default function Home() {
               </p>
             </div>
           </div>
-          <div className="flex flex-col items-center justify-between gap-8 md:flex-row">
+          <div className="flex w-full flex-col items-center justify-between gap-8 md:flex-row">
             <div className="flex flex-col gap-4">
-              <h3 className="text-3xl">Your Library, Supercharged</h3>
+              <h3 className=" text-3xl">Supercharged Library</h3>
               <p className="max-w-[35ch] text-sm">
                 <span className="font-bold">Import, Digest, Understand:</span>
                 Bring your own books or PDFs and experience them like never
@@ -92,25 +88,23 @@ export default function Home() {
                 reading material into an immersive learning experience.
               </p>
             </div>
-            <div>
-              <div className="relative flex h-[400px] w-[400px] items-center justify-center rounded-lg border border-border bg-card opacity-80">
-                <BookMarked className="animate-breathe h-10 w-10 text-library blur-[1px]" />
-                <LibraryBlob />
-              </div>
+            <div className="relative flex h-[400px] w-full max-w-[400px]  items-center justify-center rounded-lg border border-border bg-card opacity-80">
+              <BookMarked className="animate-breathe h-10 w-10 text-library blur-[1px]" />
+              <LibraryBlob />
             </div>
           </div>
         </section>
         <div className="mb-[100px] mt-10 flex w-full flex-col items-center justify-center gap-8 rounded-lg p-3">
-          <h3 className="flex flex-row items-center gap-2">
-            Wanna be smart? Join the crew.
-            <Brain className="h-8 w-8 text-brain" />
-          </h3>
+          <h3 className="text-center">Wanna be smart? Join the crew.</h3>
           <div className="relative rounded-lg border border-border bg-card p-8 pb-4 opacity-80 shadow-md">
             <BrainBlob />
             <div className="flex flex-col">
               <p className="text-center text-5xl">
                 <span className="text-4xl line-through opacity-50">$15</span> $5
                 <span className="text-xl">{"  "}/ month</span>
+              </p>
+              <p className="mt-2 flex w-full justify-center text-center text-sm opacity-40">
+                cancel anytime.
               </p>
             </div>
             <ul className="mt-10 space-y-2 text-left">
@@ -139,10 +133,20 @@ export default function Home() {
                 Gamification
               </li>
             </ul>
-            <Button className="z-10 mt-10 w-full p-6 px-32 text-xl">
-              Start your 7 day free trial
-            </Button>
-            <p className="mt-1 text-center text-base opacity-60">
+            <div className="z-10 mb-4 mt-10 w-full max-w-[40ch] text-center text-xl text-primary md:px-32">
+              Click the brain to begin free trial.
+            </div>
+            <div className=" flex w-full items-center justify-center">
+              <Image
+                width="80"
+                height="80"
+                src="https://img.icons8.com/stickers/200/brain.png"
+                alt="brain"
+                className="animate-pulse cursor-pointer transition-all hover:scale-110"
+              />
+            </div>
+
+            <p className="mt-2 text-center text-base opacity-60">
               {"(no credit card required)"}
             </p>
           </div>

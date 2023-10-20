@@ -12,8 +12,8 @@ import ProgressBarProvider from "./progressbar";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Noah's Next.js Starter",
-  description: "TypeScript, Next.js, Tailwind CSS, Drizzle ORM, Shadcn ui",
+  title: "smart.wtf",
+  description: "Learning re-imagined",
 };
 
 export default function RootLayout({
