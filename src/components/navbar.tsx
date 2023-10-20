@@ -36,7 +36,9 @@ const NavBar: FunctionComponent = () => {
                 afterSignOutUrl="/"
                 appearance={{
                   userProfile: {
-                    elements: {},
+                    elements: {
+                      navbarMobileMenuRow: "hidden",
+                    },
                   },
                   elements: {
                     userButtonTrigger: "focus:outline-none focus:ring-0 ",
