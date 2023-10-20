@@ -4,6 +4,8 @@ import { buttonVariants } from "./ui/button";
 import { UserButton, auth } from "@clerk/nextjs";
 import Link from "next/link";
 import { Cloud } from "lucide-react";
+import { cn } from "@/lib/utils";
+import SmartWtfLogo from "./svg/smartwtf";
 
 const NavBar: FunctionComponent = () => {
   const { userId } = auth();
@@ -12,8 +14,13 @@ const NavBar: FunctionComponent = () => {
     <header className="border-sm fixed left-0 right-0 top-0 z-10 border-b border-border p-3 backdrop-blur-sm">
       <div className="flex justify-between">
         <div>
-          <Link className={buttonVariants({ variant: "ghost" })} href={"/"}>
-            <Cloud className="h-5 w-5 transition-all hover:opacity-80" />
+          <Link href={"/"}>
+            <SmartWtfLogo
+              className={cn(
+                buttonVariants({ variant: "ghost" }),
+                "h-14 w-14 cursor-pointer p-0 transition-all hover:opacity-80",
+              )}
+            />
           </Link>
         </div>
         <div className="flex items-center justify-end gap-4">

@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import FishBlob from "@/components/ui/blobs/fishblob";
 import HeroBlob from "@/components/ui/blobs/heroblob";
 import {
@@ -12,6 +12,7 @@ import {
 import SuccessBlob from "@/components/ui/blobs/successblob";
 import LibraryBlob from "@/components/ui/blobs/libraryblob";
 import BrainBlob from "@/components/ui/blobs/brainblob";
+import SmartWtfLogo from "@/components/svg/smartwtf";
 
 export default function Home() {
   return (
@@ -27,7 +28,7 @@ export default function Home() {
           </p>
         </div>
         <div className="mt-8 flex h-[800px] w-full items-center justify-center rounded-lg border border-border bg-card opacity-60 shadow-md shadow-secondary">
-          <HelpCircle className="animate-breathe h-10 w-10 text-primary blur-[1px]" />
+          <SmartWtfLogo className="animate-breathe h-14 w-14 text-primary blur-[1px]" />
         </div>
         {/* <div className="mt-96">
           <div className="relative w-full max-w-full">
@@ -36,7 +37,6 @@ export default function Home() {
             <div className="animate-blob animation-delay-4000 absolute -bottom-10 right-40 h-72 w-72 rounded-full bg-blob3 opacity-70 mix-blend-multiply blur-xl filter"></div>
           </div>
         </div> */}
-
         <section className="mb-20 mt-20 flex w-full flex-col gap-16">
           <h3 className="text-center text-4xl">
             &ldquo;wtf do you have to offer?&ldquo;
@@ -100,7 +100,6 @@ export default function Home() {
             </div>
           </div>
         </section>
-
         <div className="mb-[100px] mt-10 flex w-full flex-col items-center justify-center gap-8 rounded-lg p-3">
           <h3 className="flex flex-row items-center gap-2">
             Wanna be smart? Join the crew.
