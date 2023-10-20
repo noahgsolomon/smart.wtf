@@ -3,7 +3,6 @@ import ThemeButton from "./ui/theme";
 import { buttonVariants } from "./ui/button";
 import { UserButton, auth } from "@clerk/nextjs";
 import Link from "next/link";
-import { Cloud } from "lucide-react";
 import { cn } from "@/lib/utils";
 import SmartWtfLogo from "./svg/smartwtf";
 
