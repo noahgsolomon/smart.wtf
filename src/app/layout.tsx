@@ -39,7 +39,6 @@ export default function RootLayout({
         content="https://images.codefoli.com/smartwtf.png"
       />
       <meta name="twitter:url" content="https://smart.wtf/" />
-      <link rel="icon" href="./src/assets/gameboy.png" type="image/png" />
       <Head>
         <link rel="icon" href="/favicon.ico" />
       </Head>
