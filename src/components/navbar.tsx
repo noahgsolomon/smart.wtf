@@ -36,9 +36,7 @@ const NavBar: FunctionComponent = () => {
                 afterSignOutUrl="/"
                 appearance={{
                   userProfile: {
-                    elements: {
-                      userButtonPopoverCard: "p-0",
-                    },
+                    elements: {},
                   },
                   elements: {
                     userButtonTrigger: "focus:outline-none focus:ring-0 ",
