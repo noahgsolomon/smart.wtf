@@ -146,7 +146,8 @@
 [data-localization-key="userProfile.start.connectedAccountsSection.destructiveActionSubtitle"],
 [data-localization-key="userProfile.profilePage.imageFormTitle"],
 [data-localization-key="userProfile.start.dangerSection.deleteAccountDescription"],
-[data-localization-key="userProfile.start.activeDevicesSection.detailsSubtitle"] {
+[data-localization-key="userProfile.start.activeDevicesSection.detailsSubtitle"],
+[data-localization-key="userProfile.profilePage.successMessage"] {
   @apply text-primary opacity-60;
 }
 
@@ -161,6 +162,16 @@
 .cl-userProfile-root #google,
 .cl-userProfile-root #github {
   @apply border border-primary-foreground py-3 hover:bg-primary-foreground;
+}
+
+[data-localization-key="userProfile.start.connectedAccountsSection.primaryButton"],
+[data-localization-key="userProfile.formButtonReset"],
+[data-localization-key="userProfile.profilePage.imageFormSubtitle"] {
+  @apply text-link hover:text-link-hover;
+}
+
+[data-localization-key="userProfile.formButtonPrimary__continue"] {
+  @apply bg-link hover:bg-link-hover;
 }
 
 .cl-userButtonPopoverCard {

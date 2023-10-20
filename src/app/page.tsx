@@ -13,8 +13,17 @@ import LibraryBlob from "@/components/ui/blobs/libraryblob";
 import BrainBlob from "@/components/ui/blobs/brainblob";
 import SmartWtfLogo from "@/components/svg/smartwtf";
 import Image from "next/image";
+import Link from "next/link";
+import { auth } from "@clerk/nextjs";
+import { redirect } from "next/navigation";
 
 export default function Home() {
+  const user = auth();
+
+  if (user?.userId) {
+    redirect("/dashboard");
+  }
+
   return (
     <main className="relative mt-20 flex flex-col items-center justify-center gap-4">
       <HeroBlob />
@@ -136,17 +145,19 @@ export default function Home() {
             <div className="z-10 mb-4 mt-10 w-full max-w-[40ch] text-center text-xl text-primary md:px-32">
               Click the brain to begin free trial.
             </div>
-            <div className=" flex w-full items-center justify-center">
-              <Image
-                width="80"
-                height="80"
-                src="https://img.icons8.com/stickers/200/brain.png"
-                alt="brain"
-                className="animate-pulse cursor-pointer transition-all hover:scale-110"
-              />
+            <div className="flex items-center justify-center">
+              <Link href="/signup">
+                <Image
+                  width="80"
+                  height="80"
+                  src="https://img.icons8.com/stickers/200/brain.png"
+                  alt="brain"
+                  className="animate-pulse cursor-pointer transition-all hover:scale-110"
+                />
+              </Link>
             </div>
 
-            <p className="mt-2 text-center text-base opacity-60">
+            <p className="mt-2 text-center text-sm opacity-40">
               {"(no credit card required)"}
             </p>
           </div>
