@@ -183,7 +183,7 @@
 }
 
 .cl-userProfile-root .cl-card {
-  @apply max-w-[600px] justify-center;
+  @apply justify-center;
 }
 
 @keyframes breathe {
