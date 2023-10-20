@@ -1,9 +1,3 @@
-import {
-  QuestionMarkCircledIcon,
-  QuestionMarkIcon,
-} from "@radix-ui/react-icons";
-import Image from "next/image";
-
 const Dashboard = () => {
   return (
     <>

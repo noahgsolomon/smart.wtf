@@ -12,7 +12,6 @@ import {
 import SuccessBlob from "@/components/ui/blobs/successblob";
 import LibraryBlob from "@/components/ui/blobs/libraryblob";
 import BrainBlob from "@/components/ui/blobs/brainblob";
-import { BarChartIcon } from "@radix-ui/react-icons";
 
 export default function Home() {
   return (
@@ -32,29 +31,31 @@ export default function Home() {
         </div>
         {/* <div className="mt-96">
           <div className="relative w-full max-w-full">
-            <div className="animate-blob bg-blob1 absolute -top-20 right-0 h-72 w-72 rounded-full opacity-70 mix-blend-multiply blur-xl filter"></div>
-            <div className="animate-blob animation-delay-2000 bg-blob2 absolute -top-32 right-20 h-72 w-72 rounded-full opacity-70 mix-blend-multiply blur-xl filter"></div>
-            <div className="animate-blob animation-delay-4000 bg-blob3 absolute -bottom-10 right-40 h-72 w-72 rounded-full opacity-70 mix-blend-multiply blur-xl filter"></div>
+            <div className="animate-blob absolute -top-20 right-0 h-72 w-72 rounded-full bg-blob1 opacity-70 mix-blend-multiply blur-xl filter"></div>
+            <div className="animate-blob animation-delay-2000 absolute -top-32 right-20 h-72 w-72 rounded-full bg-blob2 opacity-70 mix-blend-multiply blur-xl filter"></div>
+            <div className="animate-blob animation-delay-4000 absolute -bottom-10 right-40 h-72 w-72 rounded-full bg-blob3 opacity-70 mix-blend-multiply blur-xl filter"></div>
           </div>
         </div> */}
 
         <section className="mb-20 mt-20 flex w-full flex-col gap-16">
-          <h3 className="text-center text-4xl">"wtf do you have to offer?"</h3>
+          <h3 className="text-center text-4xl">
+            &ldquo;wtf do you have to offer?&ldquo;
+          </h3>
           <div className="flex flex-col items-center justify-between gap-8 md:flex-row">
             <div className="flex flex-col gap-4">
               <h3 className="text-3xl">Dive Deep, Interactively</h3>
               <p className="max-w-[35ch] text-sm">
                 <span className="font-bold">Engage with Content:</span> Learn
                 with the depth of a book, enriched with interactive
-                demonstrations. Our platform isn't just about reading; it's
-                about engaging deeply with every piece of information.
+                demonstrations. Our platform isn&ldquo;t just about reading;
+                i&ldquo;s about engaging deeply with every piece of information.
                 Simulations, animations, and interactive elements make
                 understanding complex topics a breeze.
               </p>
             </div>
             <div>
               <div className="relative flex h-[400px] w-[400px] items-center justify-center rounded-lg border border-border bg-card opacity-80">
-                <Fish className="animate-breathe text-fish h-10 w-10 blur-[1px]" />
+                <Fish className="animate-breathe h-10 w-10 text-fish blur-[1px]" />
                 <FishBlob />
               </div>
             </div>
@@ -62,7 +63,7 @@ export default function Home() {
           <div className="flex flex-col items-center justify-between gap-8 md:flex-row">
             <div>
               <div className="relative flex h-[400px] w-[400px] items-center justify-center rounded-lg border border-border bg-card opacity-80">
-                <BookOpenCheck className="animate-breathe text-success h-10 w-10 blur-[1px]" />
+                <BookOpenCheck className="animate-breathe h-10 w-10 text-success blur-[1px]" />
                 <SuccessBlob />
               </div>
             </div>
@@ -71,11 +72,12 @@ export default function Home() {
               <p className="max-w-[35ch] text-sm">
                 <span className="font-bold">AI everything:</span> Highlight text
                 and pose questions directly to our tailored AI, specialized for
-                the content at hand. This isn't just any AI — it's imbued with a
-                unique personality crafted from the text you're reading. While
-                diving into content, effortlessly bookmark passages, jot down
-                notes, and receive instantaneous insights, clarifications, and
-                suggestions. Your learning becomes a seamless conversation.
+                the content at hand. This isn&ldquo;t just any AI — it&ldquo;s
+                imbued with a unique personality crafted from the text
+                you&ldquo;re reading. While diving into content, effortlessly
+                bookmark passages, jot down notes, and receive instantaneous
+                insights, clarifications, and suggestions. Your learning becomes
+                a seamless conversation.
               </p>
             </div>
           </div>
@@ -92,7 +94,7 @@ export default function Home() {
             </div>
             <div>
               <div className="relative flex h-[400px] w-[400px] items-center justify-center rounded-lg border border-border bg-card opacity-80">
-                <BookMarked className="text-library animate-breathe h-10 w-10 blur-[1px]" />
+                <BookMarked className="animate-breathe h-10 w-10 text-library blur-[1px]" />
                 <LibraryBlob />
               </div>
             </div>
@@ -102,7 +104,7 @@ export default function Home() {
         <div className="mb-[100px] mt-10 flex w-full flex-col items-center justify-center gap-8 rounded-lg p-3">
           <h3 className="flex flex-row items-center gap-2">
             Wanna be smart? Join the crew.
-            <Brain className="text-brain h-8 w-8" />
+            <Brain className="h-8 w-8 text-brain" />
           </h3>
           <div className="relative rounded-lg border border-border bg-card p-8 pb-4 opacity-80 shadow-md">
             <BrainBlob />

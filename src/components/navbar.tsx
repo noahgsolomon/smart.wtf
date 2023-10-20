@@ -1,7 +1,7 @@
-import { Suspense, type FunctionComponent } from "react";
+import { type FunctionComponent } from "react";
 import ThemeButton from "./ui/theme";
 import { buttonVariants } from "./ui/button";
-import { SignInButton, UserButton, auth } from "@clerk/nextjs";
+import { UserButton, auth } from "@clerk/nextjs";
 import Link from "next/link";
 import { Cloud } from "lucide-react";
 
