@@ -24,6 +24,24 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <meta name="title" content={"smart.wtf"} />
+      <meta name="description" content={"Learning re-imagined"} />
+      <meta property="og:type" content="website" />
+      <meta property="og:url" content="https://smart.wtf" />
+      <meta property="og:title" content={"smart.wtf"} />
+      <meta property="og:description" content={"Learning re-imagined"} />
+      <meta
+        property="og:image"
+        content="https://images.codefoli.com/smartwtf.png"
+      />
+      <meta property="twitter:card" content="summary_large_image" />
+      <meta property="twitter:url" content="https://smart.wtf" />
+      <meta property="twitter:title" content={"smart.wtf"} />
+      <meta property="twitter:description" content={"Learning re-imagined"} />
+      <meta
+        property="twitter:image"
+        content="https://images.codefoli.com/smartwtf.png"
+      />
       <Head>
         <link rel="icon" href="/favicon.ico" />
       </Head>
