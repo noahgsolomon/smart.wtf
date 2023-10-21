@@ -1,4 +1,4 @@
-const Dashboard = async () => {
+const Dashboard = () => {
   return (
     <>
       <main className="mt-20">
