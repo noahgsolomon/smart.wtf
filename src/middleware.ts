@@ -2,7 +2,8 @@ import { authMiddleware } from "@clerk/nextjs";
 
 // Use named export for authMiddleware
 export default authMiddleware({
-  publicRoutes: ["/"],
+  publicRoutes: ["/", "/api/webhooks/stripe"],
+  ignoredRoutes: ["/api/webhooks/stripe"],
 });
 
 export const config = {
