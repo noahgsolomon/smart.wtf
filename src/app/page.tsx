@@ -1,12 +1,13 @@
-import { Button, buttonVariants } from "@/components/ui/button";
 import FishBlob from "@/components/ui/blobs/fishblob";
 import HeroBlob from "@/components/ui/blobs/heroblob";
+import SmartWtfPng from "public/smartwtf.png";
 import {
   BookMarked,
   BookOpenCheck,
   Brain,
   CheckCircle2,
   Fish,
+  MousePointer2,
 } from "lucide-react";
 import SuccessBlob from "@/components/ui/blobs/successblob";
 import LibraryBlob from "@/components/ui/blobs/libraryblob";
@@ -143,17 +144,25 @@ export default function Home() {
               </li>
             </ul>
             <div className="z-10 mb-4 mt-10 w-full max-w-[40ch] text-center text-xl text-primary md:px-32">
-              Click the brain to begin free trial.
+              Click to begin free trial.
             </div>
             <div className="flex items-center justify-center">
               <Link href="/signup">
-                <Image
-                  width="80"
-                  height="80"
-                  src="https://img.icons8.com/stickers/200/brain.png"
-                  alt="brain"
-                  className="animate-pulse cursor-pointer transition-all hover:scale-110"
-                />
+                <div className="relative">
+                  <Image
+                    width="80"
+                    height="80"
+                    src={SmartWtfPng}
+                    alt="brain"
+                    className="animate-pulse cursor-pointer transition-all hover:scale-110"
+                  />
+                  <div className="mouse1 absolute">
+                    <MousePointer2 className="text-link opacity-80" />
+                    <div className="rounded-lg bg-link-hover px-2 py-1 text-xs text-secondary opacity-50">
+                      Noah
+                    </div>
+                  </div>
+                </div>
               </Link>
             </div>
 

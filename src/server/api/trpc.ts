@@ -73,5 +73,28 @@ const isAuthed = t.middleware(async ({ next }) => {
   });
 });
 
+const isSubscribed = t.middleware(async ({ next }) => {
+  const user = auth();
+  if (!user?.userId) {
+    throw new TRPCError({ code: "UNAUTHORIZED" });
+  }
+
+  const userFromDB = await db.query.users.findFirst({
+    where: eq(users.clerk_id, user.userId),
+  });
+
+  if (!userFromDB || !userFromDB.subscribed) {
+    throw new TRPCError({ code: "UNAUTHORIZED" });
+  }
+
+  return next({
+    ctx: {
+      user,
+      user_id: userFromDB.id,
+    },
+  });
+});
+
 // export this procedure to be used anywhere in your application
 export const protectedProcedure = t.procedure.use(isAuthed);
+export const subscribedProcedure = t.procedure.use(isSubscribed);

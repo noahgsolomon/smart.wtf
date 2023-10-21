@@ -38,6 +38,7 @@ const NavBar: FunctionComponent = () => {
                   userProfile: {
                     elements: {
                       navbarMobileMenuRow: "hidden",
+                      profileSection__danger: "hidden",
                     },
                   },
                   elements: {
