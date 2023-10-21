@@ -9,12 +9,55 @@ import { TRPCReactProvider } from "@/trpc/react";
 import { headers } from "next/headers";
 import ProgressBarProvider from "./progressbar";
 import { Analytics } from "@vercel/analytics/react";
+import { siteConfig } from "@/config/site";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export const metadata: Metadata = {
-  title: "smart.wtf",
-  description: "Learning re-imagined",
+export const metadata = {
+  title: {
+    default: siteConfig.name,
+    template: `%s | ${siteConfig.name}`,
+  },
+  description: siteConfig.description,
+  keywords: [
+    "Learning platform",
+    "Interactive learning",
+    "System design",
+    "AI and machine learning",
+    "Computer science",
+  ],
+  authors: [
+    {
+      name: "noahgsolomon",
+      url: "https://twitter.com/noahgsolomon",
+    },
+  ],
+  creator: "noahgsolomon",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "white" },
+    { media: "(prefers-color-scheme: dark)", color: "black" },
+  ],
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: siteConfig.url,
+    title: siteConfig.name,
+    description: siteConfig.description,
+    siteName: siteConfig.name,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: siteConfig.name,
+    description: siteConfig.description,
+    images: [`https://images.codefoli.com/smartwtf.png`],
+    creator: "@noahgsolomon",
+  },
+  icons: {
+    icon: "/favicon.ico",
+    shortcut: "/favicon-16x16.png",
+    apple: "/apple-touch-icon.png",
+  },
+  manifest: `${siteConfig.url}/site.webmanifest`,
 };
 
 export default function RootLayout({
@@ -24,21 +67,6 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <meta property="og:title" content="smart.wtf" />
-      <meta property="og:description" content="Learning re-imagined" />
-      <meta
-        property="og:image"
-        content="https://images.codefoli.com/smartwtf.png"
-      />
-      <meta property="og:url" content="https://smart.wtf/" />
-      <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:title" content="smart.wtf" />
-      <meta name="twitter:description" content="Learning re-imagined" />
-      <meta
-        name="twitter:image"
-        content="https://images.codefoli.com/smartwtf.png"
-      />
-      <meta name="twitter:url" content="https://smart.wtf/" />
       <Head>
         <link rel="icon" href="/favicon.ico" />
       </Head>
