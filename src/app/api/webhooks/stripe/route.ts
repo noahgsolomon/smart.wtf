@@ -48,6 +48,7 @@ export async function POST(request: Request) {
         stripeCurrentPeriodEnd: new Date(
           subscription.current_period_end * 1000,
         ),
+        subscribed: true,
       })
       .where(eq(users.id, parseInt(session.metadata.userId)));
   }
@@ -65,6 +66,7 @@ export async function POST(request: Request) {
         stripeCurrentPeriodEnd: new Date(
           subscription.current_period_end * 1000,
         ),
+        subscribed: true,
       })
       .where(eq(users.stripeSubscriptionId, subscription.id));
     // .where(eq(users.id, parseInt(session.metadata.userId)));

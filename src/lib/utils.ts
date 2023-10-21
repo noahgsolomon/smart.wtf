@@ -1,6 +1,6 @@
 import { siteConfig } from "@/config/site";
 import { type ClassValue, clsx } from "clsx";
-import { Metadata } from "next";
+import { type Metadata } from "next";
 import { twMerge } from "tailwind-merge";
 
 export function cn(...inputs: ClassValue[]) {
@@ -12,6 +12,15 @@ export function absoluteUrl(path: string) {
   if (process.env.MODE === "PROD")
     return `https://${process.env.WEBSITE}${path}`;
   return `http://localhost:${process.env.PORT ?? 3000}${path}`;
+}
+
+export function formatDate(input: string | number): string {
+  const date = new Date(input);
+  return date.toLocaleDateString("en-US", {
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+  });
 }
 
 export function constructMetadata({
