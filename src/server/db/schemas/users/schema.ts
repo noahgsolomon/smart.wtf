@@ -1,6 +1,5 @@
 import {
   boolean,
-  date,
   datetime,
   int,
   mysqlTable,

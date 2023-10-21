@@ -1,8 +1,4 @@
-import { api } from "@/trpc/server";
-
 const Dashboard = async () => {
-  const user = await api.user.user.query();
-
   return (
     <>
       <main className="mt-20">

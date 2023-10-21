@@ -13,7 +13,7 @@ const NavBar: FunctionComponent = async () => {
 
   let user;
   let daysSinceAccountCreation = 0;
-  let trialLength = 7;
+  const trialLength = 7;
 
   if (userId) {
     user = await api.user.user.query();

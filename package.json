@@ -38,6 +38,7 @@
     "react-dom": "^18",
     "react-spring": "^9.7.3",
     "server-only": "^0.0.1",
+    "sharp": "^0.32.6",
     "superjson": "^2.0.0",
     "tailwind-classes-sorter": "^0.2.5",
     "tailwind-merge": "^1.14.0",

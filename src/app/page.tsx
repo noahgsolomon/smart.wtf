@@ -4,7 +4,6 @@ import SmartWtfPng from "public/smartwtf.png";
 import {
   BookMarked,
   BookOpenCheck,
-  Brain,
   CheckCircle2,
   Fish,
   MousePointer2,

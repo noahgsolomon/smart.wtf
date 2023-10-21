@@ -8,20 +8,18 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
 export default function ThemeButton() {
   const { resolvedTheme, setTheme } = useTheme();
-  let [theme, setThemee] = useState(resolvedTheme);
+  const [theme, setThemee] = useState(resolvedTheme);
 
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     setMounted(true);
-    setThemee(localStorage.getItem("theme") || resolvedTheme);
+    setThemee(localStorage.getItem("theme") ?? "");
   }, []);
 
   if (!mounted)
