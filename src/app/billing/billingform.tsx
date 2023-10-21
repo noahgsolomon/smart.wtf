@@ -44,16 +44,16 @@ const BillingForm = ({ subscriptionPlan }: BillingFormProps) => {
           createStripeSession();
         }}
       >
-        <Card>
-          <CardHeader>
+        <Card className="p-4">
+          <CardHeader className="pb-20">
             <CardTitle>Subscription Plan</CardTitle>
             <CardDescription>
-              You are currently on the <strong>{subscriptionPlan.name}</strong>{" "}
-              plan.
+              You are currently on the{" "}
+              <strong>{subscriptionPlan.name ?? "FREE"}</strong> plan.
             </CardDescription>
           </CardHeader>
-          <CardFooter className="flex flex-col items-start space-y-2 md:flex-row md:justify-between md:space-x-0">
-            <Button type="submit">
+          <CardFooter className="flex flex-col items-start space-y-2 md:flex-row md:justify-between md:space-x-4">
+            <Button type="submit" className="py-6 md:py-2">
               {isLoading ? (
                 <Loader2 className="mr-4 h-4 w-4 animate-spin" />
               ) : null}
