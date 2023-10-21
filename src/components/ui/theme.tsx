@@ -1,39 +1,87 @@
 "use client";
 
-import { Loader2, MoonIcon, SunIcon } from "lucide-react";
+import { Laptop2, Loader2, MoonIcon, SunIcon } from "lucide-react";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
-import { Button } from "./button";
+import { Button, buttonVariants } from "./button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 export default function ThemeButton() {
   const { resolvedTheme, setTheme } = useTheme();
+  let [theme, setThemee] = useState(resolvedTheme);
 
   const [mounted, setMounted] = useState(false);
 
-  useEffect(() => setMounted(true), []);
+  useEffect(() => {
+    setMounted(true);
+    setThemee(localStorage.getItem("theme") || resolvedTheme);
+  }, []);
 
   if (!mounted)
     return (
       <Button
         variant={"ghost"}
         disabled={true}
-        className="opacity-80 transition-all"
+        className="px-2 opacity-80 transition-all"
       >
         <Loader2 className="h-4 w-4 animate-spin" />
       </Button>
     );
 
+  if (mounted) {
+    console.log(theme);
+  }
+
   return (
-    <Button
-      variant={"ghost"}
-      onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
-      className="transition-all"
-    >
-      {resolvedTheme === "light" ? (
-        <SunIcon className="h-4 w-4" />
-      ) : (
-        <MoonIcon className="h-4 w-4" />
-      )}
-    </Button>
+    <DropdownMenu>
+      <DropdownMenuTrigger className={buttonVariants({ variant: "ghost" })}>
+        {theme === "light" ? (
+          <SunIcon className="h-4 w-4" />
+        ) : theme === "dark" ? (
+          <MoonIcon className="h-4 w-4" />
+        ) : (
+          <Laptop2 className="h-4 w-4" />
+        )}
+      </DropdownMenuTrigger>
+      <DropdownMenuContent>
+        <DropdownMenuItem
+          className="gap-4"
+          onClick={() => {
+            setTheme("light");
+            setThemee("light");
+          }}
+        >
+          <SunIcon className="h-4 w-4" />
+          Light
+        </DropdownMenuItem>
+        <DropdownMenuItem
+          className="gap-4"
+          onClick={() => {
+            setTheme("dark");
+            setThemee("dark");
+          }}
+        >
+          <MoonIcon className="h-4 w-4" />
+          Dark
+        </DropdownMenuItem>
+        <DropdownMenuItem
+          className="gap-4"
+          onClick={() => {
+            setTheme("system");
+            setThemee("system");
+          }}
+        >
+          <Laptop2 className="h-4 w-4" />
+          System
+        </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
   );
 }

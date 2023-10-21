@@ -175,7 +175,7 @@
 }
 
 .cl-userButtonPopoverCard {
-  @apply max-w-[300px] pb-0 pt-3;
+  @apply max-w-[300px] overflow-hidden pb-0 pt-3;
 }
 
 .cl-userProfile-root .cl-navbar {
