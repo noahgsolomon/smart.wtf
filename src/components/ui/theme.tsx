@@ -50,7 +50,7 @@ export default function ThemeButton() {
       </DropdownMenuTrigger>
       <DropdownMenuContent>
         <DropdownMenuItem
-          className="gap-4"
+          className="cursor-pointer gap-4"
           onClick={() => {
             setTheme("light");
             setThemee("light");
@@ -60,7 +60,7 @@ export default function ThemeButton() {
           Light
         </DropdownMenuItem>
         <DropdownMenuItem
-          className="gap-4"
+          className="cursor-pointer gap-4"
           onClick={() => {
             setTheme("dark");
             setThemee("dark");
@@ -70,7 +70,7 @@ export default function ThemeButton() {
           Dark
         </DropdownMenuItem>
         <DropdownMenuItem
-          className="gap-4"
+          className="cursor-pointer gap-4"
           onClick={() => {
             setTheme("system");
             setThemee("system");

@@ -16,4 +16,10 @@ export const users = mysqlTable("users", {
   created_at: datetime("created_at", { mode: "date" })
     .notNull()
     .default(new Date()),
+  stripeCustomerId: varchar("stripe_customer_id", { length: 255 }),
+  stripeSubscriptionId: varchar("stripe_subscription_id", { length: 255 }),
+  stripePriceId: varchar("stripe_price_id", { length: 255 }),
+  stripeCurrentPeriodEnd: datetime("stripe_current_period_end", {
+    mode: "date",
+  }),
 });

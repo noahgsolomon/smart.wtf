@@ -57,13 +57,11 @@ const isAuthed = t.middleware(async ({ next }) => {
   if (!user?.userId) {
     throw new TRPCError({ code: "UNAUTHORIZED" });
   }
-  const userIdsFromDB = await db
-    .select({ id: users.id })
-    .from(users)
-    .where(eq(users.clerk_id, user.userId))
-    .limit(1);
+  const userIdsFromDB = await db.query.users.findFirst({
+    where: eq(users.clerk_id, user.userId),
+  });
 
-  const userId = userIdsFromDB[0]?.id ?? 0;
+  const userId = userIdsFromDB?.id ?? -1;
 
   return next({
     ctx: {

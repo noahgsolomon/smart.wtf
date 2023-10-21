@@ -1,13 +1,11 @@
 import BrainBlob from "@/components/ui/blobs/brainblob";
-import { CheckCircle2, MousePointer2 } from "lucide-react";
-import Image from "next/image";
-import Link from "next/link";
-import SmartWtfPng from "public/smartwtf.png";
+import { CheckCircle2 } from "lucide-react";
+import ProButton from "./probutton";
 
 const Page = () => {
   return (
     <div className="h-screen w-screen">
-      <div className="flex h-full w-full flex-col items-center justify-center gap-8 rounded-lg p-3 pt-10">
+      <div className="flex h-full w-full flex-col items-center justify-center gap-8 rounded-lg p-3 pt-24">
         <h3 className="text-center text-3xl">Wanna be smart? Join the crew.</h3>
         <div className="relative rounded-lg border border-border bg-card p-8 pb-4 opacity-80 shadow-md">
           <BrainBlob />
@@ -50,23 +48,7 @@ const Page = () => {
             Click to purchase.
           </div>
           <div className="flex items-center justify-center">
-            <Link href="/signup">
-              <div className="relative">
-                <Image
-                  width="80"
-                  height="80"
-                  src={SmartWtfPng}
-                  alt="brain"
-                  className="animate-pulse cursor-pointer transition-all hover:scale-110"
-                />
-                <div className="mouse1 absolute">
-                  <MousePointer2 className="text-link opacity-80" />
-                  <div className="rounded-lg bg-link-hover px-2 py-1 text-xs text-secondary opacity-50">
-                    Noah
-                  </div>
-                </div>
-              </div>
-            </Link>
+            <ProButton />
           </div>
         </div>
       </div>
