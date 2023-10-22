@@ -1,0 +1,8 @@
+{
+  "name": "smart wtf",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#020a1c",
+  "theme_color": "#020a1c"
+}
