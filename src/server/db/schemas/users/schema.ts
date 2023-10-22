@@ -11,6 +11,7 @@ export const users = mysqlTable("users", {
   name: varchar("name", { length: 200 }).notNull(),
   password: varchar("password", { length: 100 }),
   email: varchar("email", { length: 100 }).notNull().unique(),
+  username: varchar("username", { length: 30 }).notNull().unique(),
   clerk_id: varchar("clerk_id", { length: 200 }).notNull().unique(),
   subscribed: boolean("subscribed").notNull().default(false),
   created_at: datetime("created_at", { mode: "date" })

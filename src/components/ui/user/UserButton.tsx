@@ -11,10 +11,12 @@ import {
 import { Fish, Landmark, Settings } from "lucide-react";
 import { DropdownMenuLabel } from "@radix-ui/react-dropdown-menu";
 import Link from "next/link";
+import { trpc } from "@/trpc/client";
 
 const UserButton = () => {
   const user = useUser();
   const clerk = useClerk();
+  const userDB = trpc.user.user.useQuery();
 
   const logOutHandler = async () => {
     await clerk.signOut();
@@ -35,7 +37,7 @@ const UserButton = () => {
         <DropdownMenuLabel className="gap-4 border-b border-border p-2">
           <div>
             <h3 className="text-base">{user.user?.fullName}</h3>
-            <p className="text-sm opacity-60">@{user.user?.username}</p>
+            <p className="text-sm opacity-60">@{userDB.data?.user?.username}</p>
           </div>
         </DropdownMenuLabel>
         <Link href="/settings/achievements">

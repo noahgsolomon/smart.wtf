@@ -5,7 +5,7 @@ import Link from "next/link";
 
 const SideBar = () => {
   return (
-    <div className="ml-10 mt-20 hidden flex-col items-center justify-start md:flex">
+    <div className="ml-10 mt-32 hidden flex-col items-center justify-start md:flex">
       <Link
         href="/settings/achievements"
         className={cn(

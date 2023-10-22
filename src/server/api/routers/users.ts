@@ -6,6 +6,17 @@ import { absoluteUrl } from "@/lib/utils";
 import { getUserSubscriptionPlan, stripe } from "@/lib/stripe";
 import { PLANS } from "@/config/stripe";
 
+function generateRandomString(length: number) {
+  const charset =
+    "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+  let result = "";
+  for (let i = 0; i < length; i++) {
+    const randomIndex = Math.floor(Math.random() * charset.length);
+    result += charset.charAt(randomIndex);
+  }
+  return result;
+}
+
 export const userRouter = createTRPCRouter({
   exists: protectedProcedure.mutation(async ({ ctx }) => {
     const clerkUser = await currentUser();
@@ -21,6 +32,9 @@ export const userRouter = createTRPCRouter({
             clerkUser.emailAddresses[0]?.emailAddress ??
             clerkUser.primaryEmailAddressId + "",
           clerk_id: clerkUser.id,
+          username:
+            clerkUser.emailAddresses[0]?.emailAddress.split("@")[0] ??
+            generateRandomString(10),
         });
       }
     }

@@ -1,13 +1,7 @@
 import FishBlob from "@/components/ui/blobs/fishblob";
 import HeroBlob from "@/components/ui/blobs/heroblob";
 import SmartWtfPng from "public/smartwtf.png";
-import {
-  BookMarked,
-  BookOpenCheck,
-  CheckCircle2,
-  Fish,
-  MousePointer2,
-} from "lucide-react";
+import { BookMarked, BookOpenCheck, CheckCircle2, Fish } from "lucide-react";
 import SuccessBlob from "@/components/ui/blobs/successblob";
 import LibraryBlob from "@/components/ui/blobs/libraryblob";
 import BrainBlob from "@/components/ui/blobs/brainblob";
@@ -155,12 +149,12 @@ export default function Home() {
                     alt="brain"
                     className="animate-pulse cursor-pointer transition-all hover:scale-110"
                   />
-                  <div className="mouse1 absolute">
+                  {/* <div className="mouse1 absolute">
                     <MousePointer2 className="text-link opacity-80" />
                     <div className="rounded-lg bg-link-hover px-2 py-1 text-xs text-secondary opacity-50">
                       Noah
                     </div>
-                  </div>
+                  </div> */}
                 </div>
               </Link>
             </div>
