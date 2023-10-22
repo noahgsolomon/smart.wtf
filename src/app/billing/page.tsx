@@ -8,11 +8,10 @@ const Page = async () => {
 
   return (
     <div className="flex h-[calc(100vh-10rem)] w-screen items-center justify-center">
-      {subscriptionPlan.isSubscribed && !subscriptionPlan.isCanceled ? (
+      <div className="mx-auto flex w-full max-w-[60%] flex-col">
+        <h3 className="text-xl">Billing</h3>
         <BillingForm subscriptionPlan={subscriptionPlan} />
-      ) : (
-        <BillingForm subscriptionPlan={subscriptionPlan} />
-      )}
+      </div>
     </div>
   );
 };
