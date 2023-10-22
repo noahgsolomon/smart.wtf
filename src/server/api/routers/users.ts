@@ -29,9 +29,7 @@ export const userRouter = createTRPCRouter({
       if (user.length === 0) {
         await ctx.db.insert(users).values({
           name: clerkUser.firstName + " " + clerkUser.lastName,
-          email:
-            clerkUser.emailAddresses[0]?.emailAddress ??
-            clerkUser.primaryEmailAddressId + "",
+          email: clerkUser.emailAddresses[0]?.emailAddress ?? clerkUser.id,
           clerk_id: clerkUser.id,
           username:
             clerkUser.emailAddresses[0]?.emailAddress.split("@")[0] ??
