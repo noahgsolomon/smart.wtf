@@ -49,7 +49,7 @@ export const userRouter = createTRPCRouter({
   createStripeSession: protectedProcedure.mutation(async ({ ctx }) => {
     const userId = ctx.user_id;
 
-    const billingUrl = absoluteUrl("/billing");
+    const billingUrl = absoluteUrl("/settings/billing");
 
     if (!userId) {
       throw new Error("No user ID");
