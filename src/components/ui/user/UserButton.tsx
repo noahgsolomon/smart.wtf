@@ -11,7 +11,7 @@ import {
 import { Button, buttonVariants } from "../button";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { Loader2 } from "lucide-react";
+import { Fish, Landmark, Loader2, Settings } from "lucide-react";
 import { DropdownMenuLabel } from "@radix-ui/react-dropdown-menu";
 import Link from "next/link";
 
@@ -25,7 +25,7 @@ const UserButton = () => {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger className="relative rounded-full transition-all hover:opacity-80 focus:outline-0">
+      <DropdownMenuTrigger className="rounded-full transition-all hover:opacity-80 focus:outline-0">
         <Avatar className="border border-border">
           <AvatarImage
             className={`object-cover transition-all`}
@@ -33,11 +33,6 @@ const UserButton = () => {
           />
           <AvatarFallback>{user.user?.firstName?.at(0)}</AvatarFallback>
         </Avatar>
-        <Loader2
-          className={`absolute ${
-            user.isLoaded ? "hidden" : ""
-          } left-0 top-0 h-4 w-4 animate-spin opacity-60`}
-        />
       </DropdownMenuTrigger>
       <DropdownMenuContent className="mx-10 min-w-[300px] p-0">
         <DropdownMenuLabel className="gap-4 border-b border-border p-2">
@@ -46,17 +41,22 @@ const UserButton = () => {
             <p className="text-sm opacity-60">@{user.user?.username}</p>
           </div>
         </DropdownMenuLabel>
-        <Link href="/dashboard">
-          <DropdownMenuItem className="mx-1 my-1 cursor-pointer gap-4 text-sm">
-            Dashboard
+        <Link href="/settings/achievements">
+          <DropdownMenuItem className="mx-1 my-1 cursor-pointer gap-2 text-sm">
+            <Fish className="h-4 w-4" />
+            Achievements
           </DropdownMenuItem>
         </Link>
-        <DropdownMenuItem className="mx-1 my-1 cursor-pointer gap-4 text-sm">
-          Settings
-        </DropdownMenuItem>
-        <Link href="/billing">
+        <Link href="/settings/billing">
           <DropdownMenuItem className="mx-1 my-1 cursor-pointer gap-4 text-sm">
+            <Landmark className="h-4 w-4" />
             Billing
+          </DropdownMenuItem>
+        </Link>
+        <Link href="/settings">
+          <DropdownMenuItem className="mx-1 my-1 cursor-pointer gap-4 text-sm">
+            <Settings className="h-4 w-4" />
+            Settings
           </DropdownMenuItem>
         </Link>
         <div className="border-t border-border">
