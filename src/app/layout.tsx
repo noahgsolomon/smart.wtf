@@ -16,8 +16,10 @@ export const metadata = constructMetadata();
 
 export default function RootLayout({
   children,
+  modal,
 }: {
   children: React.ReactNode;
+  modal: React.ReactNode;
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
@@ -31,6 +33,7 @@ export default function RootLayout({
               <ProgressBarProvider>
                 <NavBar />
                 {children}
+                {modal}
                 <Analytics />
               </ProgressBarProvider>
             </Providers>
