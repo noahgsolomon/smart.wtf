@@ -8,7 +8,7 @@ const ProButton = () => {
   const { mutate: createStripeSession } =
     trpc.user.createStripeSession.useMutation({
       onSuccess: ({ url }) => {
-        window.location.href = url ?? "billing";
+        window.location.href = url ?? "settings/billing";
       },
     });
 
