@@ -22,6 +22,12 @@ const config = {
         port: "",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "images.codefoli.com",
+        port: "",
+        pathname: "/**",
+      },
     ],
   },
 };
