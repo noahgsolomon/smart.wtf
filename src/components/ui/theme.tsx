@@ -22,7 +22,7 @@ export default function ThemeButton() {
     setThemee(localStorage.getItem("theme") ?? "");
   }, []);
 
-  if (!mounted)
+  if (!mounted) {
     return (
       <Button
         variant={"ghost"}
@@ -32,10 +32,16 @@ export default function ThemeButton() {
         <Loader2 className="h-4 w-4 animate-spin" />
       </Button>
     );
+  }
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger className={buttonVariants({ variant: "ghost" })}>
+      <DropdownMenuTrigger
+        className={buttonVariants({
+          variant: "ghost",
+          className: "focus:outline-none",
+        })}
+      >
         {theme === "light" ? (
           <SunIcon className="h-4 w-4" />
         ) : theme === "dark" ? (
