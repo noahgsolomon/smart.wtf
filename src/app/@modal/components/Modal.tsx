@@ -1,5 +1,5 @@
 "use client";
-import { useCallback, useRef, useEffect, MouseEventHandler } from "react";
+import { useCallback, useRef, useEffect, type MouseEventHandler } from "react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 

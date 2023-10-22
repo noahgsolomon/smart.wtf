@@ -1,5 +1,3 @@
-import SideBar from "../components/sidebar";
-
 const Page = () => {
   return (
     <div className="mx-10 mt-28 flex w-full flex-col">

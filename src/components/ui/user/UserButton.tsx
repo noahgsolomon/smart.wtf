@@ -8,10 +8,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Button, buttonVariants } from "../button";
-import Image from "next/image";
-import { useEffect, useState } from "react";
-import { Fish, Landmark, Loader2, Settings } from "lucide-react";
+import { Fish, Landmark, Settings } from "lucide-react";
 import { DropdownMenuLabel } from "@radix-ui/react-dropdown-menu";
 import Link from "next/link";
 
@@ -19,8 +16,8 @@ const UserButton = () => {
   const user = useUser();
   const clerk = useClerk();
 
-  const logOutHandler = () => {
-    clerk.signOut();
+  const logOutHandler = async () => {
+    await clerk.signOut();
   };
 
   return (

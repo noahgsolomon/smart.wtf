@@ -1,4 +1,4 @@
-import { Suspense, type FunctionComponent } from "react";
+import { type FunctionComponent } from "react";
 import ThemeButton from "./ui/theme";
 import { buttonVariants } from "./ui/button";
 import { auth } from "@clerk/nextjs";
@@ -8,7 +8,6 @@ import SmartWtfLogo from "./svg/smartwtf";
 import { api } from "@/trpc/server";
 import FreeTrialBanner from "./freetrialbanner";
 import UserButton from "./ui/user/UserButton";
-import { Loader2 } from "lucide-react";
 
 const NavBar: FunctionComponent = async () => {
   const { userId } = auth();
