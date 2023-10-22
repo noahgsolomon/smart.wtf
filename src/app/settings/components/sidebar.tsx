@@ -10,7 +10,7 @@ const SideBar = () => {
         href="/settings/achievements"
         className={cn(
           buttonVariants({ variant: "ghost" }),
-          "pr-30 mx-1 my-1 flex w-full flex-row justify-start gap-2 rounded-lg pl-4 transition-all hover:bg-secondary",
+          "pr-30 mx-1 my-1 flex w-full flex-row justify-start gap-2 rounded-lg pl-4 transition-all hover:bg-secondary focus:bg-secondary",
         )}
       >
         <Fish className="h-4 w-4" />
@@ -20,7 +20,7 @@ const SideBar = () => {
         href="/settings/billing"
         className={cn(
           buttonVariants({ variant: "ghost" }),
-          "pr-30 mx-1 my-1 flex w-full flex-row justify-start gap-2 rounded-lg pl-4 transition-all hover:bg-secondary",
+          "pr-30 mx-1 my-1 flex w-full flex-row justify-start gap-2 rounded-lg pl-4 transition-all hover:bg-secondary focus:bg-secondary",
         )}
       >
         <Landmark className="h-4 w-4" />
@@ -30,7 +30,7 @@ const SideBar = () => {
         href="/settings"
         className={cn(
           buttonVariants({ variant: "ghost" }),
-          "pr-30 mx-1 my-1 flex w-full flex-row justify-start gap-2 rounded-lg pl-4 transition-all hover:bg-secondary",
+          "pr-30 mx-1 my-1 flex w-full flex-row justify-start gap-2 rounded-lg pl-4 transition-all hover:bg-secondary focus:bg-secondary",
         )}
       >
         <Settings className="h-4 w-4" />
