@@ -1,12 +1,14 @@
-import { type FunctionComponent } from "react";
+import { Suspense, type FunctionComponent } from "react";
 import ThemeButton from "./ui/theme";
 import { buttonVariants } from "./ui/button";
-import { UserButton, auth } from "@clerk/nextjs";
+import { auth } from "@clerk/nextjs";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import SmartWtfLogo from "./svg/smartwtf";
 import { api } from "@/trpc/server";
 import FreeTrialBanner from "./freetrialbanner";
+import UserButton from "./ui/user/UserButton";
+import { Loader2 } from "lucide-react";
 
 const NavBar: FunctionComponent = async () => {
   const { userId } = auth();
@@ -46,7 +48,7 @@ const NavBar: FunctionComponent = async () => {
           }
         />
       )}
-      <div className="flex justify-between px-3 py-1">
+      <div className="flex justify-between px-[5%] py-1">
         <div>
           <Link href={"/"}>
             <SmartWtfLogo
@@ -83,40 +85,7 @@ const NavBar: FunctionComponent = async () => {
                   UPGRADE
                 </Link>
               )}
-              {user?.user?.subscribed && (
-                <Link
-                  href={"/billing"}
-                  className={buttonVariants({ variant: "glowing" })}
-                >
-                  Billing
-                </Link>
-              )}
-              <UserButton
-                afterSignOutUrl="/"
-                appearance={{
-                  userProfile: {
-                    elements: {
-                      navbarMobileMenuRow: "hidden",
-                      profileSection__danger: "hidden",
-                    },
-                  },
-                  elements: {
-                    userButtonTrigger: "focus:outline-none focus:ring-0 ",
-                    rootBox: "w-10 h-10 flex items-center ",
-                    avatarBox:
-                      "border-border rounded-lg border-[1px] hover:opacity-80 transition-all w-9 h-9 active:border-2",
-                    userButtonPopoverCard:
-                      "rounded-lg border border-border bg-card",
-                    userPreviewMainIdentifier: "text-primary",
-                    userPreviewSecondaryIdentifier: "text-primary opacity-60",
-                    userButtonPopoverFooter: "opacity-0 hidden",
-                    userButtonPopoverActionButton:
-                      "hover:bg-primary-foreground",
-                    userButtonPopoverActionButtonText: "text-primary",
-                    userButtonPopoverActionButtonIcon: "text-primary",
-                  },
-                }}
-              />
+              <UserButton />
             </>
           ) : (
             <>

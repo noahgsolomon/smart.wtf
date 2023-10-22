@@ -33,10 +33,6 @@ export default function ThemeButton() {
       </Button>
     );
 
-  if (mounted) {
-    console.log(theme);
-  }
-
   return (
     <DropdownMenu>
       <DropdownMenuTrigger className={buttonVariants({ variant: "ghost" })}>
