@@ -1,6 +1,5 @@
 import { CalendarCheck } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
-import fish from "./fish.svg";
 import FishIcon from "./icons/fishicon";
 import DolphinIcon from "./icons/dolphinicon";
 import OctopusIcon from "./icons/octopusicon";
