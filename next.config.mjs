@@ -3,11 +3,8 @@
  * for Docker builds.
  */
 
-const { default: next } = require("next");
-const withPWA = require("next-pwa");
-
 /** @type {import("next").NextConfig} */
-const nextConfig = {
+const config = {
   experimental: {
     serverActions: true,
   },
@@ -35,4 +32,4 @@ const nextConfig = {
   },
 };
 
-module.exports = nextConfig;
+export default config;
