@@ -47,7 +47,7 @@ export function constructMetadata({
         },
       ],
     },
-    manifest: "/manifest.json",
+    // manifest: "/manifest.json",
     twitter: {
       card: "summary_large_image",
       title,
