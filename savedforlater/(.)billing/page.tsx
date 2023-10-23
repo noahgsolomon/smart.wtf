@@ -1,5 +1,5 @@
 import { getUserSubscriptionPlan } from "@/lib/stripe";
-import BillingForm from "../../src/app/settings/billing/billingform";
+import BillingForm from "../../src/app/settings/components/billing/billingform";
 
 const Page = async () => {
   const subscriptionPlan = await getUserSubscriptionPlan();

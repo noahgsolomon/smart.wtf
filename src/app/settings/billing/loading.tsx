@@ -1,4 +1,4 @@
-import { CardSkeleton } from "@/components/ui/cardskeleton";
+import { CardSkeleton } from "@/app/settings/components/billing/billingskeleton";
 
 const Loading = () => {
   return (
