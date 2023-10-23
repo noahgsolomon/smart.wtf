@@ -5,6 +5,8 @@ import { currentUser } from "@clerk/nextjs";
 import { absoluteUrl } from "@/lib/utils";
 import { getUserSubscriptionPlan, stripe } from "@/lib/stripe";
 import { PLANS } from "@/config/stripe";
+import { z } from "zod";
+import { instructors } from "@/server/db/schemas/instructors/schema";
 
 function generateRandomString(length: number) {
   const charset =
@@ -38,6 +40,14 @@ export const userRouter = createTRPCRouter({
       }
     }
   }),
+  delete: protectedProcedure.mutation(async ({ ctx }) => {
+    await ctx.db.transaction(async (trx) => {
+      await trx.delete(instructors).where(eq(instructors.user_id, ctx.user_id));
+
+      await trx.delete(users).where(eq(users.id, ctx.user_id));
+    });
+    return { status: "OK" };
+  }),
   user: protectedProcedure.query(async ({ ctx }) => {
     const user = await ctx.db.query.users.findFirst({
       where: eq(users.id, ctx.user_id),
@@ -45,6 +55,73 @@ export const userRouter = createTRPCRouter({
 
     return { user: user };
   }),
+
+  setUsername: protectedProcedure
+    .input(
+      z.object({
+        username: z.string().min(3).max(20),
+      }),
+    )
+    .mutation(async ({ ctx, input }) => {
+      if (!input.username) {
+        return {
+          data: null,
+          status: "ERROR",
+          message: "Username must be at least 3 characters",
+        };
+      }
+      const user = await ctx.db.query.users.findFirst({
+        where: eq(users.username, input.username),
+      });
+      if (user) {
+        return {
+          data: null,
+          status: "ERROR",
+          message: "Username already exists",
+        };
+      }
+      await ctx.db
+        .update(users)
+        .set({
+          username: input.username,
+        })
+        .where(eq(users.id, ctx.user_id));
+
+      return {
+        data: input.username,
+        status: "OK",
+        message: "username has been changed.",
+      };
+    }),
+
+  setName: protectedProcedure
+    .input(
+      z.object({
+        name: z.string().min(3).max(75),
+      }),
+    )
+    .mutation(async ({ ctx, input }) => {
+      if (!input.name) {
+        return {
+          data: null,
+          status: "ERROR",
+          message: "name must be at least 3 characters",
+        };
+      }
+
+      await ctx.db
+        .update(users)
+        .set({
+          name: input.name,
+        })
+        .where(eq(users.id, ctx.user_id));
+
+      return {
+        data: input.name,
+        status: "OK",
+        message: "name has been changed.",
+      };
+    }),
 
   createStripeSession: protectedProcedure.mutation(async ({ ctx }) => {
     const userId = ctx.user_id;
