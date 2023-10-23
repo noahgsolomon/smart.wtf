@@ -30,13 +30,13 @@ const UserButton = () => {
             className={`object-cover transition-all`}
             src={user.user?.imageUrl}
           />
-          <AvatarFallback>{user.user?.firstName?.at(0)}</AvatarFallback>
+          <AvatarFallback>{userDB.data?.user?.name.at(0)}</AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="mx-10 min-w-[300px] p-0">
         <DropdownMenuLabel className="gap-4 border-b border-border p-2">
           <div>
-            <h3 className="text-base">{user.user?.fullName}</h3>
+            <h3 className="text-base">{userDB.data?.user?.name}</h3>
             <p className="text-sm opacity-60">@{userDB.data?.user?.username}</p>
           </div>
         </DropdownMenuLabel>
