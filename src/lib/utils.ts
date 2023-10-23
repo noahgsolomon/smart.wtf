@@ -27,13 +27,11 @@ export function constructMetadata({
   title = siteConfig.name,
   description = siteConfig.description,
   image = siteConfig.ogImage,
-  icons = "/favicon.ico",
   noIndex = false,
 }: {
   title?: string;
   description?: string;
   image?: string;
-  icons?: string;
   noIndex?: boolean;
 } = {}): Metadata {
   return {
@@ -49,6 +47,7 @@ export function constructMetadata({
         },
       ],
     },
+    manifest: "/manifest.json",
     twitter: {
       card: "summary_large_image",
       title,
@@ -56,9 +55,9 @@ export function constructMetadata({
       images: [image],
       creator: "@noahgsolomon",
     },
-    icons,
+    icons: { apple: "/smartwtf.png" },
     metadataBase: new URL("https://smart.wtf"),
-    themeColor: "#FFF",
+    themeColor: "#030a1b",
     ...(noIndex && {
       robots: {
         index: true,
