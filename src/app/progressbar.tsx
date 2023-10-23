@@ -8,7 +8,7 @@ const ProgressBarProvider = ({ children }: { children: React.ReactNode }) => {
     <>
       {children}
       <Next13ProgressBar
-        height="2px"
+        height="0px"
         color="hsl(var(--primary))"
         options={{ showSpinner: true }}
         showOnShallow
