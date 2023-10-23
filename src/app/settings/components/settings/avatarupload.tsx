@@ -36,7 +36,7 @@ const AvatarUpload = () => {
     setDragging(true);
   };
 
-  const handleDrop = (event: React.DragEvent<HTMLDivElement>) => {
+  const handleDrop = async (event: React.DragEvent<HTMLDivElement>) => {
     event.preventDefault();
     setDragging(false);
     if (
@@ -45,9 +45,7 @@ const AvatarUpload = () => {
     ) {
       const file = event.dataTransfer.items[0].getAsFile();
       if (file && (file.type === "image/png" || file.type === "image/jpeg")) {
-        clerk.user
-          ?.setProfileImage({ file })
-          .catch.bind(clerk.user?.setProfileImage);
+        await clerk.user?.setProfileImage({ file });
         toast({
           title: "Success",
           description: "Profile image updated",
