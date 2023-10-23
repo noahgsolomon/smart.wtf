@@ -29,6 +29,18 @@ module.exports = {
           DEFAULT: "hsl(var(--brain))",
           foreground: "hsl(var(--brain-foreground))",
         },
+        common: {
+          DEFAULT: "hsl(var(--common))",
+          foreground: "hsl(var(--common-foreground))",
+        },
+        uncommon: {
+          DEFAULT: "hsl(var(--uncommon))",
+          foreground: "hsl(var(--uncommon-foreground))",
+        },
+        rare: {
+          DEFAULT: "hsl(var(--rare))",
+          foreground: "hsl(var(--rare-foreground))",
+        },
         fish: {
           DEFAULT: "hsl(var(--fish))",
           foreground: "hsl(var(--fish-foreground))",

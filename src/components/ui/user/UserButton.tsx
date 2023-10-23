@@ -8,7 +8,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Fish, Landmark, Settings } from "lucide-react";
+import { Fish, Home, Landmark, Settings } from "lucide-react";
 import { DropdownMenuLabel } from "@radix-ui/react-dropdown-menu";
 import Link from "next/link";
 import { trpc } from "@/trpc/client";
@@ -40,6 +40,12 @@ const UserButton = () => {
             <p className="text-sm opacity-60">@{userDB.data?.user?.username}</p>
           </div>
         </DropdownMenuLabel>
+        <Link href="/dashboard">
+          <DropdownMenuItem className="mx-1 my-1 cursor-pointer gap-4 text-sm">
+            <Home className="h-4 w-4" />
+            Dashboard
+          </DropdownMenuItem>
+        </Link>
         <Link href="/settings/achievements">
           <DropdownMenuItem className="mx-1 my-1 cursor-pointer gap-2 text-sm">
             <Fish className="h-4 w-4" />
