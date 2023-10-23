@@ -43,6 +43,12 @@
 
     --library: 28 50% 40%;
     --library-foreground: 28 25% 30%;
+    --common: 120 25% 75%; /* Muted Green */
+    --common-foreground: 120 15% 40%;
+    --uncommon: 240 25% 75%; /* Muted Blue */
+    --uncommon-foreground: 240 15% 40%;
+    --rare: 58 100% 55%; /* Gold */
+    --rare-foreground: 58 45% 35%;
   }
 
   .dark {
@@ -73,6 +79,13 @@
     --blob3: 280 10% 45%; /* A brighter, muted pinkish color for dark theme */
     --brain: 330 25% 60%;
     --brain-foreground: 330 12% 70%;
+
+    --common: 120 25% 45%; /* Brighter Green */
+    --common-foreground: 120 15% 70%;
+    --uncommon: 240 25% 55%; /* Brighter Blue */
+    --uncommon-foreground: 240 15% 70%;
+    --rare: 58 100% 40%; /* Brighter Gold */
+    --rare-foreground: 58 45% 85%;
 
     --fish: 355 90% 40%;
     --fish-foreground: 355 45% 50%;
