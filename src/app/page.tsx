@@ -5,11 +5,11 @@ import { BookMarked, BookOpenCheck, CheckCircle2, Fish } from "lucide-react";
 import SuccessBlob from "@/components/ui/blobs/successblob";
 import LibraryBlob from "@/components/ui/blobs/libraryblob";
 import BrainBlob from "@/components/ui/blobs/brainblob";
-import SmartWtfLogo from "@/components/svg/smartwtf";
 import Image from "next/image";
 import Link from "next/link";
 import { auth } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
+import Donut from "../components/donut";
 
 export default function Home() {
   const user = auth();
@@ -26,12 +26,10 @@ export default function Home() {
           <h1 className="max-w-[10ch] text-center text-6xl font-bold">
             smart.wtf
           </h1>
-          <p className="text-center text-2xl opacity-60">
-            Where Books Meet Interactive Brilliance.
-          </p>
+          <p className="text-center text-2xl opacity-60">Coming soon...</p>
         </div>
-        <div className="mt-8 flex h-[800px] w-full items-center justify-center rounded-lg border border-border bg-card opacity-60 shadow-md shadow-secondary">
-          <SmartWtfLogo className="animate-breathe h-[100px] w-[100px] text-primary blur-[1px]" />
+        <div className="mt-8 flex h-[600px] w-full items-center justify-center overflow-hidden rounded-lg border border-border bg-card opacity-60 shadow-md shadow-secondary">
+          <Donut />
         </div>
         {/* <div className="mt-96">
           <div className="relative w-full max-w-full">
