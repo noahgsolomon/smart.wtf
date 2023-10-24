@@ -48,7 +48,7 @@ const Donut = () => {
       }
       setAnimation(s.join(""));
     };
-    const intervalId = setInterval(a, 65);
+    const intervalId = setInterval(a, 50);
     return () => clearInterval(intervalId);
   }, []);
 
