@@ -111,94 +111,6 @@
   display: none;
 }
 
-.cl-userProfile-root .cl-card,
-.cl-userProfile-root .cl-formFieldInput {
-  @apply rounded-lg border border-border bg-card;
-}
-
-.cl-userProfile-root .cl-modalCloseButton,
-.cl-userProfile-root .cl-userPreviewMainIdentifier,
-.cl-userProfile-root .cl-headerTitle,
-.cl-userProfile-root .cl-profileSectionTitleText,
-.cl-userProfile-root .cl-accordionTriggerButton,
-.cl-userProfile-root .cl-userPreviewSecondaryIdentifier,
-[data-localization-key="userProfile.connectedAccountPage.removeResource.messageLine1"],
-[data-localization-key="userProfile.connectedAccountPage.removeResource.messageLine2"],
-[data-localization-key="userProfile.start.connectedAccountsSection.destructiveActionTitle"],
-[data-localization-key="userProfile.start.dangerSection.deleteAccountTitle"],
-[data-localization-key="userProfile.start.activeDevicesSection.detailsTitle"],
-.cl-userProfile-root .cl-navbarMobileMenuButton,
-.cl-userProfile-root .cl-accordionTriggerButton *,
-[data-localization-key="userProfile.deletePage.actionDescription"],
-[data-localization-key="userProfile.deletePage.messageLine1"],
-[data-localization-key="userProfile.deletePage.messageLine2"],
-.cl-userProfile-root .cl-formFieldLabel,
-[data-localization-key="userProfile.connectedAccountPage.formHint"],
-[data-localization-key="userProfile.connectedAccountPage.socialButtonsBlockButton"] {
-  @apply text-card-foreground;
-}
-
-.cl-userProfile-root .cl-navbar {
-  @apply rounded-l-lg rounded-r-none border-r-border bg-card;
-}
-
-.cl-userProfile-root .cl-navbar .cl-navbarButton {
-  @apply text-accent-foreground;
-}
-
-.cl-userProfile-root .cl-scrollBox {
-  @apply rounded-lg;
-}
-
-.cl-userProfile-root .cl-headerSubtitle,
-.cl-userProfile-root .cl-userPreviewSecondaryIdentifier,
-.cl-userProfile-root .cl-fileDropAreaHint,
-.cl-userProfile-root .cl-fileDropAreaFooterHint,
-.cl-userProfile-root .cl-breadcrumbsItem,
-.cl-userProfile-root .cl-breadcrumbsItemDivider,
-[data-localization-key="userProfile.start.connectedAccountsSection.destructiveActionSubtitle"],
-[data-localization-key="userProfile.profilePage.imageFormTitle"],
-[data-localization-key="userProfile.start.dangerSection.deleteAccountDescription"],
-[data-localization-key="userProfile.start.activeDevicesSection.detailsSubtitle"],
-[data-localization-key="userProfile.profilePage.successMessage"] {
-  @apply text-primary opacity-60;
-}
-
-.cl-userProfile-root .cl-fileDropAreaBox {
-  @apply bg-primary-foreground;
-}
-
-.cl-userProfile-root .cl-internal-xkj3jj {
-  @apply stroke-primary;
-}
-
-.cl-userProfile-root #google,
-.cl-userProfile-root #github {
-  @apply border border-primary-foreground py-3 hover:bg-primary-foreground;
-}
-
-[data-localization-key="userProfile.start.connectedAccountsSection.primaryButton"],
-[data-localization-key="userProfile.formButtonReset"],
-[data-localization-key="userProfile.profilePage.imageFormSubtitle"] {
-  @apply text-link hover:text-link-hover;
-}
-
-[data-localization-key="userProfile.formButtonPrimary__continue"] {
-  @apply bg-link hover:bg-link-hover;
-}
-
-.cl-userButtonPopoverCard {
-  @apply max-w-[300px] overflow-hidden pb-0 pt-3;
-}
-
-.cl-userProfile-root .cl-navbar {
-  @apply hidden;
-}
-
-.cl-userProfile-root .cl-card {
-  @apply justify-center;
-}
-
 @keyframes breathe {
   0% {
     transform: scale(1);
@@ -320,4 +232,30 @@
   animation: mouseWander3 3.5s infinite;
   animation-timing-function: cubic-bezier(0.32, 0.64, 0.76, 0.4);
   animation-delay: 1.5s;
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.gradientShift {
+  background: linear-gradient(
+    270deg,
+    hsl(var(--link)),
+    hsl(var(--link-hover)),
+    hsl(var(--link)),
+    hsl(var(--primary))
+  );
+  background-size: 600% 600%;
+  animation: gradientShift 8s ease infinite;
+  -webkit-background-clip: text;
+  color: transparent;
 }

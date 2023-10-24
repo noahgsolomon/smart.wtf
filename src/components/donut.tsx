@@ -9,6 +9,9 @@ const Donut = () => {
     let A = 0,
       B = 0;
     const M = Math;
+    const customChars = "smart.wtf";
+    let charIndex = 0;
+
     const a = () => {
       const s = [],
         t = [];
@@ -39,17 +42,18 @@ const Donut = () => {
             m >= 0 &&
             m < 79 &&
             B > t[I]! &&
-            ((t[I] = B), (s[I] = ".,-~:;=!*#$@"[h > 0 ? h : 0]));
+            ((t[I] = B), (s[I] = customChars[charIndex]));
+          charIndex = (charIndex + 1) % customChars.length;
         }
       }
       setAnimation(s.join(""));
     };
-    const intervalId = setInterval(a, 50);
+    const intervalId = setInterval(a, 65);
     return () => clearInterval(intervalId);
   }, []);
 
   return (
-    <pre className="animate-breathe text-xs text-primary md:text-sm">
+    <pre className="gradientShift text-xs text-primary md:text-sm">
       {animation}
     </pre>
   );
