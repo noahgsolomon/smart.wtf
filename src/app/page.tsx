@@ -26,7 +26,7 @@ export default function Home() {
           <h1 className="max-w-[10ch] text-center text-6xl font-bold">
             smart.wtf
           </h1>
-          <p className="text-center text-2xl opacity-60">Coming soon...</p>
+          <p className="text-center text-2xl opacity-60">coming soon...</p>
         </div>
         <Donut />
         {/* <div className="mt-96">
