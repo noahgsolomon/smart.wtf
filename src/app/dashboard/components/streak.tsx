@@ -4,34 +4,52 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import Image from "next/image";
+import blazing from "public/blazing.png";
 
 const Streak = () => {
   return (
-    <div>
-      <div className=" mx-auto flex">
-        <div className="overflow-x-auto overflow-y-hidden rounded-md border border-border bg-card p-2 pb-5 shadow-md md:p-5">
-          <ul className="flex w-[800px] flex-nowrap pb-2 pl-10 text-sm">
-            <li className="w-[68px]">Jan</li>
-            <li className="w-[68px]">Feb</li>
-            <li className="w-[68px]">Mar</li>
-            <li className="w-[68px]">Apr</li>
-            <li className="w-[68px]">May</li>
-            <li className="w-[68px]">Jun</li>
-            <li className="w-[68px]">Jul</li>
-            <li className="w-[68px]">Aug</li>
-            <li className="w-[68px]">Sep</li>
-            <li className="w-[68px]">Oct</li>
-            <li className="w-[68px]">Nov</li>
-            <li className="w-[68px]">Dec</li>
-          </ul>
-
-          <div className="flex flex-row gap-2">
-            <ul className="days flex flex-col gap-4 pt-4 text-xs">
-              <li>Mon</li>
-              <li>Wed</li>
-              <li>Fri</li>
+    <div className="relative ">
+      <TooltipProvider>
+        <Tooltip>
+          <TooltipTrigger>
+            <div className="absolute -left-2 top-0 pb-4">
+              <div className="flex cursor-pointer items-end gap-2 transition-all hover:scale-105">
+                <Image
+                  className="object-contain"
+                  width={50}
+                  height={50}
+                  src={blazing}
+                  alt={"fire fish"}
+                />
+              </div>
+            </div>
+          </TooltipTrigger>
+          <TooltipContent>you&apos;re on a streak!</TooltipContent>
+        </Tooltip>
+        <div className=" mx-auto flex">
+          <div className="overflow-x-auto overflow-y-hidden rounded-md border border-border bg-card p-2 pb-5 shadow-md md:p-5">
+            <ul className="flex w-[800px] flex-nowrap pb-2 pl-10 text-sm">
+              <li className="w-[68px]">Jan</li>
+              <li className="w-[68px]">Feb</li>
+              <li className="w-[68px]">Mar</li>
+              <li className="w-[68px]">Apr</li>
+              <li className="w-[68px]">May</li>
+              <li className="w-[68px]">Jun</li>
+              <li className="w-[68px]">Jul</li>
+              <li className="w-[68px]">Aug</li>
+              <li className="w-[68px]">Sep</li>
+              <li className="w-[68px]">Oct</li>
+              <li className="w-[68px]">Nov</li>
+              <li className="w-[68px]">Dec</li>
             </ul>
-            <TooltipProvider>
+
+            <div className="flex flex-row gap-2">
+              <ul className="days flex flex-col gap-4 pt-4 text-xs">
+                <li>Mon</li>
+                <li>Wed</li>
+                <li>Fri</li>
+              </ul>
               <ul className="squares flex flex-col gap-x-[0.1rem] gap-y-[0.2rem] pr-2">
                 <div className="flex flex-row  gap-x-[0.1rem] gap-y-[0.15rem]">
                   <Tooltip>
@@ -542,14 +560,12 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-success p-[0.4rem] opacity-70"
+                        className="rounded-sm bg-success p-[0.4rem] opacity-80"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
                       <p>10.22.23</p>
-                      <ul>
-                        <li>studied systems design</li>
-                      </ul>
+                      <p>no activity</p>
                     </TooltipContent>
                   </Tooltip>
                   <Tooltip>
@@ -1182,14 +1198,12 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-success p-[0.4rem] "
+                        className="rounded-sm bg-success p-[0.4rem] opacity-80 "
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
                       <p>10.23.23</p>
-                      <ul>
-                        <li>studied systems design</li>
-                      </ul>
+                      <p>systems design</p>
                     </TooltipContent>
                   </Tooltip>
                   <Tooltip>
@@ -1810,14 +1824,12 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-success p-[0.4rem] opacity-50"
+                        className="rounded-sm bg-success p-[0.4rem] opacity-80"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
                       <p>10.24.23</p>
-                      <ul>
-                        <li>studied systems design</li>
-                      </ul>
+                      <p>systems design</p>
                     </TooltipContent>
                   </Tooltip>
                   <Tooltip>
@@ -3052,14 +3064,12 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-success p-[0.4rem] opacity-70"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
                       <p>10.19.23</p>
-                      <ul>
-                        <li>studied systems design</li>
-                      </ul>
+                      <p>no activity</p>
                     </TooltipContent>
                   </Tooltip>
                   <Tooltip>
@@ -3680,14 +3690,12 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-success p-[0.4rem] "
+                        className="rounded-sm bg-success p-[0.4rem] opacity-80 "
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
                       <p>10.20.23</p>
-                      <ul>
-                        <li>studied systems design</li>
-                      </ul>
+                      <p>systems design</p>
                     </TooltipContent>
                   </Tooltip>
                   <Tooltip>
@@ -4308,14 +4316,12 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-success p-[0.4rem] opacity-70"
+                        className="rounded-sm bg-success p-[0.4rem] opacity-80"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
                       <p>10.21.23</p>
-                      <ul>
-                        <li>studied systems design</li>
-                      </ul>
+                      <p>systems design</p>
                     </TooltipContent>
                   </Tooltip>
                   <Tooltip>
@@ -4440,10 +4446,10 @@ const Streak = () => {
                   </Tooltip>
                 </div>
               </ul>
-            </TooltipProvider>
+            </div>
           </div>
         </div>
-      </div>
+      </TooltipProvider>
     </div>
   );
 };
