@@ -47,20 +47,20 @@
     --common-foreground: 120 15% 40%;
     --uncommon: 240 25% 75%; /* Muted Blue */
     --uncommon-foreground: 240 15% 40%;
-    --rare: 58 100% 55%; /* Gold */
-    --rare-foreground: 58 45% 35%;
+    --rare: 58 100% 45%; /* Gold */
+    --rare-foreground: 58 45% 95%;
   }
 
   .dark {
-    --background: 222.2 84% 5.9%;
+    --background: 222.2 84% 9.9%;
     --foreground: 210 40% 99%;
-    --card: 222.2 84% 6.9%;
+    --card: 222.2 84% 13.9%;
     --card-foreground: 210 40% 91%;
     --popover: 222.2 84% 5.9%;
     --popover-foreground: 210 40% 99%;
     --primary: 210 40% 99%;
     --primary-foreground: 222.2 47.4% 12.2%;
-    --secondary: 217.2 32.6% 18.5%;
+    --secondary: 210 32.6% 25.5%;
     --secondary-foreground: 210 40% 99%;
     --muted: 217.2 32.6% 18.5%;
     --muted-foreground: 215 20.2% 66.1%;
