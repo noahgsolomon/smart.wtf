@@ -33,10 +33,7 @@ const Donut = () => {
             d = l * A * o - a * e,
             m = (40 + 30 * B * (f * A * n - d * c)) | 0,
             v = (12 + 15 * B * (f * A * c + d * n)) | 0,
-            I = m + 80 * v,
-            h =
-              (8 * ((a * e - l * r * o) * n - l * r * e - a * o - f * r * c)) |
-              0;
+            I = m + 80 * v;
           v < 22 &&
             v >= 0 &&
             m >= 0 &&
