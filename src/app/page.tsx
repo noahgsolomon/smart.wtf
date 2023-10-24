@@ -22,15 +22,13 @@ export default function Home() {
     <main className="relative mt-20 flex flex-col items-center justify-center gap-4">
       <HeroBlob />
       <div className="mt-[100px] flex w-[90%] flex-col items-center justify-center bg-opacity-60 text-4xl lg:w-[75%]">
-        <div className="flex flex-col items-center justify-center gap-8 ">
+        <div className="flex flex-col items-center justify-center gap-8 pb-8">
           <h1 className="max-w-[10ch] text-center text-6xl font-bold">
             smart.wtf
           </h1>
           <p className="text-center text-2xl opacity-60">Coming soon...</p>
         </div>
-        <div className="mt-8 flex h-[600px] w-full items-center justify-center overflow-hidden rounded-lg border border-border bg-card opacity-60 shadow-md shadow-secondary">
-          <Donut />
-        </div>
+        <Donut />
         {/* <div className="mt-96">
           <div className="relative w-full max-w-full">
             <div className="animate-blob absolute -top-20 right-0 h-72 w-72 rounded-full bg-blob1 opacity-70 mix-blend-multiply blur-xl filter"></div>
