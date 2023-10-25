@@ -9,7 +9,7 @@ import blazing from "public/blazing.png";
 
 const Streak = () => {
   return (
-    <div className="relative ">
+    <div className="relative">
       <TooltipProvider>
         <Tooltip>
           <TooltipTrigger>
