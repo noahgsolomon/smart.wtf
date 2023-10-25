@@ -1,9 +1,9 @@
 import { CalendarCheck } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
-import FishIcon from "./icons/fishicon";
-import DolphinIcon from "./icons/dolphinicon";
-import OctopusIcon from "./icons/octopusicon";
-import StarfishIcon from "./icons/starfishicon";
+import smartwtfmember from "public/smartwtfmember.png";
+import ai from "public/ai.png";
+import quiz from "public/quiz.png";
+import Image from "next/image";
 
 const Page = () => {
   return (
@@ -15,10 +15,15 @@ const Page = () => {
           Your achievements
         </h3>
         <div className="flex flex-wrap justify-center gap-4">
-          <div className="shadow-common w-[250px] rounded-lg border border-border p-4 shadow-sm">
+          <div className="w-[250px] rounded-lg border border-border p-4 shadow-md">
             <h3 className="text-center font-bold">Consistent Scholar</h3>
             <div className="flex items-center justify-center py-4">
-              <FishIcon />
+              <Image
+                width={100}
+                height={100}
+                src={smartwtfmember}
+                alt="smart wtf member"
+              />
             </div>
             <p className="mb-2 text-center text-sm opacity-80">
               Logged in and studied for 7 consecutive days.
@@ -33,13 +38,13 @@ const Page = () => {
               </div>
             </div>
           </div>
-          <div className="shadow-uncommon w-[250px] rounded-lg border border-border p-4 shadow-sm">
-            <h3 className="text-center font-bold">Early Bird</h3>
+          <div className="w-[250px] rounded-lg border border-border p-4 shadow-md">
+            <h3 className="text-center font-bold">Quiz Wiz</h3>
             <div className="flex items-center justify-center py-4">
-              <OctopusIcon />
+              <Image width={100} height={100} src={quiz} alt="quiz" />
             </div>
             <p className="mb-2 text-center text-sm opacity-80">
-              Completed a lesson or activity before 9 AM, 10 times.
+              Earn a 100% on a quiz or test.
             </p>
             <div className="space-y-2">
               <p className="flex flex-row items-center justify-center gap-1 text-sm opacity-60">
@@ -50,37 +55,20 @@ const Page = () => {
               </div>
             </div>
           </div>
-          <div className="shadow-rare w-[250px] rounded-lg border border-border p-4 shadow-sm">
-            <h3 className="text-center font-bold">Quiz Whiz</h3>
+          <div className="w-[250px] rounded-lg border border-border p-4 shadow-md">
+            <h3 className="text-center font-bold">AI something</h3>
             <div className="flex items-center justify-center py-4">
-              <DolphinIcon />
+              <Image width={100} height={100} src={ai} alt="ai question" />
             </div>
             <p className="mb-2 text-center text-sm opacity-80">
-              Scored above 90% on 5 quizzes or tests.
-            </p>
-            <div className="space-y-2">
-              <p className="flex flex-row items-center justify-center gap-1 text-sm opacity-60">
-                <CalendarCheck className="h-4 w-4" /> 09.01.2021
-              </p>
-              <div className="flex justify-center">
-                <Badge variant="rare">rare</Badge>
-              </div>
-            </div>
-          </div>
-          <div className="shadow-rare w-[250px] rounded-lg border border-border p-4 shadow-sm">
-            <h3 className="text-center font-bold">Systems Design God</h3>
-            <div className="flex items-center justify-center py-4">
-              <StarfishIcon />
-            </div>
-            <p className="mb-2 text-center text-sm opacity-80">
-              Completed advanced systems design lessons.
+              Ask the AI a question.
             </p>
             <div className="space-y-2">
               <p className="flex flex-row items-center justify-center gap-1 text-sm opacity-60">
                 <CalendarCheck className="h-4 w-4" /> 10.10.2021
               </p>
               <div className="flex justify-center">
-                <Badge variant="rare">rare</Badge>
+                <Badge variant="uncommon">uncommon</Badge>
               </div>
             </div>
           </div>
