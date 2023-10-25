@@ -41,15 +41,12 @@ export default function Modal({ children }: { children: React.ReactNode }) {
   return (
     <div
       ref={overlay}
-      className={`fixed bottom-0 left-0 right-0 top-0 z-10 mx-auto bg-black/60 transition-opacity ${
+      className={`fixed bottom-0 left-0 right-0 top-0 z-10 mx-auto flex items-center justify-center bg-black/60 transition-opacity ${
         isVisible ? "opacity-100" : "opacity-0"
       }`}
       onClick={onClick}
     >
-      <div
-        ref={wrapper}
-        className="absolute left-1/2 top-1/2 w-full -translate-x-1/2 -translate-y-3/4"
-      >
+      <div ref={wrapper} className="flex w-full justify-center px-5">
         {children}
       </div>
     </div>
