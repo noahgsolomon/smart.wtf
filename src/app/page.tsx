@@ -1,15 +1,14 @@
-import FishBlob from "@/components/ui/blobs/fishblob";
-import HeroBlob from "@/components/ui/blobs/heroblob";
 import SmartWtfPng from "public/smartwtf.png";
-import { BookMarked, BookOpenCheck, CheckCircle2, Fish } from "lucide-react";
-import SuccessBlob from "@/components/ui/blobs/successblob";
-import LibraryBlob from "@/components/ui/blobs/libraryblob";
+import { CheckCircle2 } from "lucide-react";
 import BrainBlob from "@/components/ui/blobs/brainblob";
 import Image from "next/image";
 import Link from "next/link";
 import { auth } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
-import Donut from "../components/donut";
+import smartWtfHero from "public/smartwtfhero.png";
+import interactiveLearning from "public/interactivelearning.png";
+import askAsYouLearn from "public/askasyoulearn.png";
+import superchargedLibrary from "public/superchargedlibrary.png";
 
 export default function Home() {
   const user = auth();
@@ -19,16 +18,23 @@ export default function Home() {
   }
 
   return (
-    <main className="relative mt-20 flex flex-col items-center justify-center gap-4">
-      <HeroBlob />
-      <div className="mt-[100px] flex w-[90%] flex-col items-center justify-center bg-opacity-60 text-4xl lg:w-[75%]">
+    <main className="relative mt-6 flex flex-col items-center justify-center gap-4">
+      {/* <HeroBlob /> */}
+      <div className="mt-[100px] flex w-[90%] flex-col items-center justify-center bg-opacity-60 text-4xl lg:w-[75%] xl:w-[60%]">
         <div className="flex flex-col items-center justify-center gap-8 pb-8">
           <h1 className="max-w-[10ch] text-center text-6xl font-bold">
             smart.wtf
           </h1>
           <p className="text-center text-2xl opacity-60">coming soon...</p>
+          <Image
+            className="rounded-lg border border-border shadow-md"
+            width={600}
+            height={600}
+            src={smartWtfHero}
+            alt="smart.wtf"
+          />
         </div>
-        <Donut />
+
         {/* <div className="mt-96">
           <div className="relative w-full max-w-full">
             <div className="animate-blob absolute -top-20 right-0 h-72 w-72 rounded-full bg-blob1 opacity-70 mix-blend-multiply blur-xl filter"></div>
@@ -37,7 +43,7 @@ export default function Home() {
           </div>
         </div> */}
         <section className="mb-20 mt-20 flex w-full flex-col gap-16">
-          <h3 className="text-center text-5xl">
+          <h3 className="text-center text-4xl">
             &ldquo;wtf do you have to offer?&ldquo;
           </h3>
           <div className="flex w-full flex-col items-center justify-between gap-8 md:flex-row">
@@ -46,30 +52,42 @@ export default function Home() {
               <p className="max-w-[35ch] text-sm">
                 <span className="font-bold">Engage with Content:</span> Learn
                 with the depth of a book, enriched with interactive
-                demonstrations. Our platform isn&ldquo;t just about reading;
-                i&ldquo;s about engaging deeply with every piece of information.
+                demonstrations. Our platform isn&apos;t just about reading;
+                it&apos;s about engaging deeply with every piece of information.
                 Simulations, animations, and interactive elements make
                 understanding complex topics a breeze.
               </p>
             </div>
-            <div className="relative flex h-[400px] w-full max-w-[400px] items-center justify-center rounded-lg border border-border bg-card opacity-80">
-              <Fish className="animate-breathe h-10 w-10 text-fish blur-[1px]" />
-              <FishBlob />
+            <div className="rounded-lg shadow-md">
+              <Image
+                width={400}
+                height={400}
+                src={interactiveLearning}
+                className="rounded-lg border border-border"
+                alt="interactive learning"
+              />
+              {/* <FishBlob /> */}
             </div>
           </div>
           <div className="flex w-full flex-col-reverse items-center justify-between gap-8 md:flex-row">
-            <div className="relative flex h-[400px] w-full max-w-[400px] items-center justify-center rounded-lg border border-border bg-card opacity-80">
-              <BookOpenCheck className="animate-breathe h-10 w-10 text-success blur-[1px]" />
-              <SuccessBlob />
+            <div className="rounded-lg shadow-md">
+              <Image
+                width={400}
+                height={400}
+                src={askAsYouLearn}
+                className="rounded-lg border border-border"
+                alt="interactive learning"
+              />
+              {/* <FishBlob /> */}
             </div>
             <div className="flex flex-col gap-4">
               <h3 className="text-3xl">Ask as You Learn</h3>
               <p className="max-w-[35ch] text-sm">
                 <span className="font-bold">AI everything:</span> Highlight text
                 and pose questions directly to our tailored AI, specialized for
-                the content at hand. This isn&ldquo;t just any AI — it&ldquo;s
+                the content at hand. This isn&apos;t just any AI — it&apos;s
                 imbued with a unique personality crafted from the text
-                you&ldquo;re reading. While diving into content, effortlessly
+                you&apos;re reading. While diving into content, effortlessly
                 bookmark passages, jot down notes, and receive instantaneous
                 insights, clarifications, and suggestions. Your learning becomes
                 a seamless conversation.
@@ -87,9 +105,14 @@ export default function Home() {
                 reading material into an immersive learning experience.
               </p>
             </div>
-            <div className="relative flex h-[400px] w-full max-w-[400px]  items-center justify-center rounded-lg border border-border bg-card opacity-80">
-              <BookMarked className="animate-breathe h-10 w-10 text-library blur-[1px]" />
-              <LibraryBlob />
+            <div className="rounded-lg shadow-md">
+              <Image
+                width={400}
+                height={400}
+                src={superchargedLibrary}
+                className="rounded-lg border border-border"
+                alt="supercharged library"
+              />
             </div>
           </div>
         </section>
