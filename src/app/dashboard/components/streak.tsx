@@ -27,7 +27,7 @@ const Streak = () => {
           </TooltipTrigger>
           <TooltipContent>you&apos;re on a streak!</TooltipContent>
         </Tooltip>
-        <div className=" mx-auto flex">
+        <div className="flex">
           <div className="overflow-x-auto overflow-y-hidden rounded-md border border-border bg-card p-2 pb-5 shadow-md md:p-5">
             <ul className="flex w-[800px] flex-nowrap pb-2 pl-10 text-sm">
               <li className="w-[68px]">Jan</li>
@@ -56,7 +56,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all transition-all hover:opacity-30 hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -68,7 +68,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -80,7 +80,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -92,7 +92,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -104,7 +104,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -116,7 +116,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -128,7 +128,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -140,7 +140,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -152,7 +152,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -164,7 +164,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -176,7 +176,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -188,7 +188,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -200,7 +200,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -212,7 +212,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -224,7 +224,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -236,7 +236,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -248,7 +248,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -260,7 +260,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -272,7 +272,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -284,7 +284,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -296,7 +296,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -308,7 +308,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -320,7 +320,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -332,7 +332,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -344,7 +344,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -356,7 +356,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -368,7 +368,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -380,7 +380,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -392,7 +392,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -404,7 +404,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -416,7 +416,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -428,7 +428,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -440,7 +440,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -452,7 +452,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -464,7 +464,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -476,7 +476,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -488,7 +488,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -500,7 +500,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -512,7 +512,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -524,7 +524,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -536,7 +536,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -548,7 +548,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -560,7 +560,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-success p-[0.4rem] opacity-80"
+                        className="rounded-sm bg-success p-[0.4rem] opacity-80 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -572,7 +572,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -584,7 +584,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -596,7 +596,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -608,7 +608,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -620,7 +620,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -632,7 +632,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -644,7 +644,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -656,7 +656,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -668,7 +668,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -680,7 +680,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -694,7 +694,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -706,7 +706,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -718,7 +718,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -730,7 +730,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -742,7 +742,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -754,7 +754,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -766,7 +766,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -778,7 +778,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -790,7 +790,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -802,7 +802,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -814,7 +814,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -826,7 +826,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -838,7 +838,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -850,7 +850,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -862,7 +862,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -874,7 +874,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -886,7 +886,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -898,7 +898,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -910,7 +910,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -922,7 +922,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -934,7 +934,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -946,7 +946,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -958,7 +958,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -970,7 +970,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -982,7 +982,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -994,7 +994,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -1006,7 +1006,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -1018,7 +1018,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -1030,7 +1030,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -1042,7 +1042,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -1054,7 +1054,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -1066,7 +1066,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -1078,7 +1078,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -1090,7 +1090,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -1102,7 +1102,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -1114,7 +1114,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -1126,7 +1126,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -1138,7 +1138,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -1150,7 +1150,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -1162,7 +1162,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -1174,7 +1174,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -1186,7 +1186,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -1198,7 +1198,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-success p-[0.4rem] opacity-80 "
+                        className="rounded-sm bg-success p-[0.4rem] opacity-80 transition-all hover:opacity-30 "
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -1210,7 +1210,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -1222,7 +1222,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -1234,7 +1234,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -1246,7 +1246,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -1258,7 +1258,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -1270,7 +1270,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -1282,7 +1282,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -1294,7 +1294,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -1306,7 +1306,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -1320,7 +1320,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -1332,7 +1332,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -1344,7 +1344,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -1356,7 +1356,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -1368,7 +1368,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -1380,7 +1380,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -1392,7 +1392,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -1404,7 +1404,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -1416,7 +1416,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -1428,7 +1428,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -1440,7 +1440,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -1452,7 +1452,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -1464,7 +1464,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -1476,7 +1476,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -1488,7 +1488,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -1500,7 +1500,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -1512,7 +1512,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -1524,7 +1524,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -1536,7 +1536,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -1548,7 +1548,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -1560,7 +1560,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -1572,7 +1572,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -1584,7 +1584,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -1596,7 +1596,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -1608,7 +1608,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -1620,7 +1620,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -1632,7 +1632,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -1644,7 +1644,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -1656,7 +1656,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -1668,7 +1668,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -1680,7 +1680,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -1692,7 +1692,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -1704,7 +1704,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -1716,7 +1716,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -1728,7 +1728,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -1740,7 +1740,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -1752,7 +1752,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -1764,7 +1764,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -1776,7 +1776,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -1788,7 +1788,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -1800,7 +1800,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -1812,7 +1812,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -1824,7 +1824,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-success p-[0.4rem] opacity-80"
+                        className="rounded-sm bg-success p-[0.4rem] opacity-80 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -1836,7 +1836,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -1848,7 +1848,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -1860,7 +1860,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -1872,7 +1872,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -1884,7 +1884,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -1896,7 +1896,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -1908,7 +1908,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -1920,7 +1920,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -1932,7 +1932,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -1946,7 +1946,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -1958,7 +1958,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -1970,7 +1970,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -1982,7 +1982,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -1994,7 +1994,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -2006,7 +2006,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -2018,7 +2018,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -2030,7 +2030,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -2042,7 +2042,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -2054,7 +2054,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -2066,7 +2066,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -2078,7 +2078,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -2090,7 +2090,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -2102,7 +2102,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -2114,7 +2114,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -2126,7 +2126,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -2138,7 +2138,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -2150,7 +2150,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -2162,7 +2162,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -2174,7 +2174,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -2186,7 +2186,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -2198,7 +2198,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -2210,7 +2210,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -2222,7 +2222,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -2234,7 +2234,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -2246,7 +2246,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -2258,7 +2258,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -2270,7 +2270,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -2282,7 +2282,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -2294,7 +2294,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -2306,7 +2306,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -2318,7 +2318,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -2330,7 +2330,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -2342,7 +2342,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -2354,7 +2354,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -2366,7 +2366,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -2378,7 +2378,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -2390,7 +2390,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -2402,7 +2402,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -2414,7 +2414,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -2426,7 +2426,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -2438,7 +2438,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -2450,7 +2450,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -2462,7 +2462,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -2474,7 +2474,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -2486,7 +2486,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -2498,7 +2498,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -2510,7 +2510,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -2522,7 +2522,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -2534,7 +2534,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -2546,7 +2546,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -2558,7 +2558,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -2572,7 +2572,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -2584,7 +2584,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -2596,7 +2596,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -2608,7 +2608,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -2620,7 +2620,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -2632,7 +2632,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -2644,7 +2644,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -2656,7 +2656,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -2668,7 +2668,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -2680,7 +2680,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -2692,7 +2692,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -2704,7 +2704,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -2716,7 +2716,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -2728,7 +2728,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -2740,7 +2740,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -2752,7 +2752,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -2764,7 +2764,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -2776,7 +2776,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -2788,7 +2788,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -2800,7 +2800,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -2812,7 +2812,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -2824,7 +2824,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -2836,7 +2836,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -2848,7 +2848,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -2860,7 +2860,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -2872,7 +2872,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -2884,7 +2884,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -2896,7 +2896,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -2908,7 +2908,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -2920,7 +2920,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -2932,7 +2932,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -2944,7 +2944,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -2956,7 +2956,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -2968,7 +2968,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -2980,7 +2980,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -2992,7 +2992,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -3004,7 +3004,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -3016,7 +3016,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -3028,7 +3028,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -3040,7 +3040,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -3052,7 +3052,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -3064,7 +3064,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -3076,7 +3076,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -3088,7 +3088,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -3100,7 +3100,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -3112,7 +3112,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -3124,7 +3124,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -3136,7 +3136,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -3148,7 +3148,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -3160,7 +3160,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -3172,7 +3172,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -3184,7 +3184,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -3198,7 +3198,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -3210,7 +3210,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -3222,7 +3222,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -3234,7 +3234,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -3246,7 +3246,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -3258,7 +3258,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -3270,7 +3270,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -3282,7 +3282,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -3294,7 +3294,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -3306,7 +3306,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -3318,7 +3318,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -3330,7 +3330,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -3342,7 +3342,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -3354,7 +3354,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -3366,7 +3366,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -3378,7 +3378,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -3390,7 +3390,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -3402,7 +3402,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -3414,7 +3414,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -3426,7 +3426,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -3438,7 +3438,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -3450,7 +3450,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -3462,7 +3462,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -3474,7 +3474,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -3486,7 +3486,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -3498,7 +3498,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -3510,7 +3510,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -3522,7 +3522,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -3534,7 +3534,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -3546,7 +3546,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -3558,7 +3558,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -3570,7 +3570,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -3582,7 +3582,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -3594,7 +3594,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -3606,7 +3606,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -3618,7 +3618,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -3630,7 +3630,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -3642,7 +3642,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -3654,7 +3654,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -3666,7 +3666,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -3678,7 +3678,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -3690,7 +3690,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-success p-[0.4rem] opacity-80 "
+                        className="rounded-sm bg-success p-[0.4rem] opacity-80 transition-all hover:opacity-30 "
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -3702,7 +3702,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -3714,7 +3714,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -3726,7 +3726,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -3738,7 +3738,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -3750,7 +3750,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -3762,7 +3762,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -3774,7 +3774,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -3786,7 +3786,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -3798,7 +3798,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -3810,7 +3810,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -3824,7 +3824,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -3836,7 +3836,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -3848,7 +3848,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -3860,7 +3860,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -3872,7 +3872,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -3884,7 +3884,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -3896,7 +3896,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -3908,7 +3908,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -3920,7 +3920,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -3932,7 +3932,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -3944,7 +3944,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -3956,7 +3956,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -3968,7 +3968,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -3980,7 +3980,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -3992,7 +3992,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -4004,7 +4004,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -4016,7 +4016,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -4028,7 +4028,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -4040,7 +4040,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -4052,7 +4052,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -4064,7 +4064,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -4076,7 +4076,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -4088,7 +4088,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -4100,7 +4100,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -4112,7 +4112,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -4124,7 +4124,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -4136,7 +4136,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -4148,7 +4148,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -4160,7 +4160,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -4172,7 +4172,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -4184,7 +4184,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -4196,7 +4196,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -4208,7 +4208,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -4220,7 +4220,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -4232,7 +4232,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -4244,7 +4244,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -4256,7 +4256,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -4268,7 +4268,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -4280,7 +4280,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -4292,7 +4292,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -4304,7 +4304,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -4316,7 +4316,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-success p-[0.4rem] opacity-80"
+                        className="rounded-sm bg-success p-[0.4rem] opacity-80 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -4328,7 +4328,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -4340,7 +4340,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -4352,7 +4352,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -4364,7 +4364,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -4376,7 +4376,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -4388,7 +4388,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -4400,7 +4400,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -4412,7 +4412,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -4424,7 +4424,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -4436,7 +4436,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
