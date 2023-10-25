@@ -8,6 +8,7 @@ import SmartWtfLogo from "./svg/smartwtf";
 import { api } from "@/trpc/server";
 import FreeTrialBanner from "./freetrialbanner";
 import UserButton from "./ui/user/UserButton";
+import { MessageSquare } from "lucide-react";
 
 const NavBar: FunctionComponent = async () => {
   const { userId } = auth();
@@ -84,6 +85,12 @@ const NavBar: FunctionComponent = async () => {
                   UPGRADE
                 </Link>
               )}
+              <Link
+                href={"/chat"}
+                className={buttonVariants({ variant: "outline" })}
+              >
+                <MessageSquare className="h-4 w-4" />
+              </Link>
               <UserButton />
             </>
           ) : (

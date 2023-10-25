@@ -38,7 +38,7 @@ export default function ThemeButton() {
     <DropdownMenu>
       <DropdownMenuTrigger
         className={buttonVariants({
-          variant: "ghost",
+          variant: "outline",
           className: "focus:outline-none",
         })}
       >

@@ -8,7 +8,7 @@ const SignUpPage = () => {
         appearance={{
           elements: {
             alertText: "text-primary",
-            card: "shadow-md shadow-secondary rounded-lg border border-border bg-card",
+            card: "shadow-md rounded-lg border border-border bg-card",
             headerTitle: "text-primary",
             headerSubtitle: "text-primary opacity-60",
             socialButtonsBlockButton:

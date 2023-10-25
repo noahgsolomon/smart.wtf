@@ -32,6 +32,7 @@
     "@trpc/react-query": "^10.40.0",
     "@trpc/server": "^10.40.0",
     "@vercel/analytics": "^1.1.1",
+    "ai": "^2.2.18",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
     "date-fns": "^2.30.0",

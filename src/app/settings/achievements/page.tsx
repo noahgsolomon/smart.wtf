@@ -10,12 +10,12 @@ const Page = () => {
     <div className="mx-10 mt-40 flex w-full flex-col">
       <h3 className="mb-2 text-3xl font-bold">Achievements</h3>
       <p className="mb-4 opacity-60 ">View account achievements</p>
-      <div className="rounded-lg border border-border bg-card p-6">
+      <div className="rounded-lg border border-border p-6">
         <h3 className="mb-4 text-center text-2xl font-bold">
           Your achievements
         </h3>
         <div className="flex flex-wrap justify-center gap-4">
-          <div className="w-[250px] rounded-lg border border-border p-4 shadow-md">
+          <div className="w-[250px] rounded-lg border border-border bg-card p-4 shadow-md">
             <h3 className="text-center font-bold">Consistent Scholar</h3>
             <div className="flex items-center justify-center py-4">
               <Image
@@ -38,7 +38,7 @@ const Page = () => {
               </div>
             </div>
           </div>
-          <div className="w-[250px] rounded-lg border border-border p-4 shadow-md">
+          <div className="w-[250px] rounded-lg border border-border bg-card p-4 shadow-md">
             <h3 className="text-center font-bold">Quiz Wiz</h3>
             <div className="flex items-center justify-center py-4">
               <Image width={100} height={100} src={quiz} alt="quiz" />
@@ -55,7 +55,7 @@ const Page = () => {
               </div>
             </div>
           </div>
-          <div className="w-[250px] rounded-lg border border-border p-4 shadow-md">
+          <div className="w-[250px] rounded-lg border border-border bg-card p-4 shadow-md">
             <h3 className="text-center font-bold">AI something</h3>
             <div className="flex items-center justify-center py-4">
               <Image width={100} height={100} src={ai} alt="ai question" />
