@@ -22,12 +22,18 @@ const CalculusOverview = () => {
         <h2 className="max-w-[20ch] text-xl">
           Multivariable Calculus Overview.pdf
         </h2>
-        <div className="flex flex-row items-center gap-2">
-          <h3 className="text-xs opacity-60">30%</h3>
-          <Progress value={30} />
-        </div>
-        <div>
-          <Badge>PDF</Badge>
+        <div className="flex flex-col gap-2">
+          <div>
+            <h3 className="text-sm">Progress</h3>
+            <div className="flex flex-row items-center gap-2">
+              <h3 className="text-xs opacity-60">30%</h3>
+              <Progress indicatorClassName="rounded-r-lg" value={30} />
+            </div>
+          </div>
+
+          <div>
+            <Badge>PDF</Badge>
+          </div>
         </div>
       </div>
     </div>
