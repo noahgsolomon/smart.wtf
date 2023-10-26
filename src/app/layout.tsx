@@ -6,7 +6,6 @@ import NavBar from "@/components/navbar";
 import { TRPCReactProvider } from "@/trpc/react";
 import { headers } from "next/headers";
 import ProgressBarProvider from "./progressbar";
-import { Analytics } from "@vercel/analytics/react";
 import { constructMetadata } from "@/lib/utils";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -30,7 +29,6 @@ export default function RootLayout({
                 <NavBar />
                 {children}
                 {modal}
-                <Analytics />
               </ProgressBarProvider>
             </Providers>
           </ClerkProvider>
