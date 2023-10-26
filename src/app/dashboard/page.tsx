@@ -54,7 +54,7 @@ const Dashboard = async () => {
         <section className="py-10">
           <div className="flex flex-col gap-12 rounded-lg border border-border p-8">
             <div>
-              <h1>Smart Wtf Courses</h1>
+              <h1>Courses</h1>
               <div className="flex flex-wrap gap-8 py-4">
                 <SystemsDesignCourseCard />
                 <WebOptimizationCourseCard />

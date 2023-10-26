@@ -18,7 +18,7 @@
     --secondary-foreground: 222.2 47.4% 11.2%;
     --muted: 210 40% 96.1%;
     --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 210 40% 96.1%;
+    --accent: 210 40% 93.1%;
     --accent-foreground: 222.2 47.4% 11.2%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
@@ -26,6 +26,8 @@
     --input: 214.3 31.8% 91.4%;
     --ring: 222.2 84% 4.9%;
     --radius: 0.5rem;
+    --blue: 210 100% 50%;
+    --light-blue: 210 80% 85%;
     --link: 240 100% 55%; /* This is the blue link color */
     --link-hover: 240 100% 45%; /* Slightly darker shade for hover */
     --progressBar: 210 25% 55%;
@@ -71,6 +73,8 @@
     --border: 217.2 32.6% 18.5%;
     --input: 217.2 32.6% 18.5%;
     --ring: 212.7 26.8% 84.9;
+    --blue: 210 80% 60%;
+    --light-blue: 210 60% 70%;
     --link: 210 80% 71%; /* Lighter shade of blue for dark theme */
     --link-hover: 210 80% 61%; /* Slightly darker shade for hover in dark theme */
     --progressBar: 210 10% 85%;

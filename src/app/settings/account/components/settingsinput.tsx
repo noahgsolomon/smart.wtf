@@ -28,7 +28,7 @@ const SettingsInput = () => {
     usernameUpload.mutate(
       { username },
       {
-        onSuccess: (data) => {
+        onSuccess: async (data) => {
           toast({
             title: data.status === "OK" ? "Sucess!" : "Error",
             description: data.message,
@@ -36,7 +36,7 @@ const SettingsInput = () => {
           });
           setUsername("");
           if (data.status === "OK") {
-            userDB.refetch().catch.bind(userDB.refetch);
+            await userDB.refetch();
           }
         },
       },
@@ -55,7 +55,7 @@ const SettingsInput = () => {
     nameUpload.mutate(
       { name },
       {
-        onSuccess: (data) => {
+        onSuccess: async (data) => {
           toast({
             title: data.status === "OK" ? "Sucess!" : "Error",
             description: data.message,
@@ -63,7 +63,7 @@ const SettingsInput = () => {
           });
           setName("");
           if (data.status === "OK") {
-            userDB.refetch().catch.bind(userDB.refetch);
+            await userDB.refetch();
           }
         },
       },

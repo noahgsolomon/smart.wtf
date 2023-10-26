@@ -27,7 +27,7 @@ const SettingsActionButtons = () => {
 
   const deleteUser = trpc.user.delete.useMutation();
 
-  const deleteHandler = () => {
+  const deleteHandler = async () => {
     setDeleting(true);
     try {
       deleteUser
@@ -40,9 +40,8 @@ const SettingsActionButtons = () => {
             });
           },
         })
-        .catch.bind(deleteUser.mutateAsync);
-      clerk.user?.delete().catch.bind(clerk.user?.delete);
-      logOutHandler().catch.bind(logOutHandler);
+      await clerk.user?.delete();
+      await logOutHandler();
     } catch (e) {
       toast({
         title: "Error",
