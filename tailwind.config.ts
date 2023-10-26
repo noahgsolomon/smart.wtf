@@ -25,6 +25,8 @@ module.exports = {
         blob1: "hsl(var(--blob1))",
         blob2: "hsl(var(--blob2))",
         blob3: "hsl(var(--blob3))",
+        lightBlue: "hsl(var(--light-blue))",
+        blue: "hsl(var(--blue))",
         brain: {
           DEFAULT: "hsl(var(--brain))",
           foreground: "hsl(var(--brain-foreground))",
