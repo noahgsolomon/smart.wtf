@@ -21,6 +21,9 @@ const badgeVariants = cva(
           "border-transparent bg-uncommon text-uncommon-foreground shadow hover:bg-uncommon/80",
         rare: "border-transparent bg-rare text-rare-foreground shadow hover:bg-rare/80",
         outline: "text-foreground",
+        hard: "border-transparent bg-red-500 text-secondary dark:text-primary shadow hover:bg-red-400",
+        medium:
+          "border-transparent bg-yellow-500 text-secondary dark:text-primary shadow hover:bg-yellow-400",
       },
     },
     defaultVariants: {
