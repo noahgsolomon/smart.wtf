@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     url: "https://smart.wtf",
     title: "smart.wtf",
     description: "interactive learning",
-    images: ['https://images.codefoli.com/smartwtf.png']
+    images: ['https://images.codefoli.com/alienplanet.png']
   },
   title: "smart.wtf",
   description: "interactive learning",
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     site: "smart.wtf",
     creator: "@noahgsolomon",
-    images: ['https://images.codefoli.com/smartwtf.png']
+    images: ['https://images.codefoli.com/alienplanet.png']
 
   },
 }
