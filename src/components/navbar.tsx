@@ -80,7 +80,7 @@ const NavBar: FunctionComponent = async () => {
               {!user?.user?.subscribed && (
                 <Link
                   href={"/pricing"}
-                  className={buttonVariants({ variant: "glowing" })}
+                  className={buttonVariants({ variant: "outline" })}
                 >
                   UPGRADE
                 </Link>
