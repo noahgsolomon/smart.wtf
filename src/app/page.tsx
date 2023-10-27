@@ -3,7 +3,7 @@ import BrainBlob from "@/components/ui/blobs/brainblob";
 import Image from "next/image";
 import Link from "next/link";
 import { auth } from "@clerk/nextjs";
-import pirateShip from "public/pirateship.png";
+import alienPlanet from "public/alienplanet.png";
 import { redirect } from "next/navigation";
 import wtfCoin from "public/wtfcoin.png";
 import interactiveLearning from "public/interactivelearning.png";
@@ -30,7 +30,7 @@ export default function Home() {
             className="rounded-lg border border-border shadow-md"
             width={600}
             height={600}
-            src={pirateShip}
+            src={alienPlanet}
             alt="smart.wtf"
           />
         </div>
