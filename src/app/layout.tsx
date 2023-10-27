@@ -12,6 +12,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   appleWebApp: true,
+  icons: ['https://images.codefoli.com/wtfcoin.png'],
   openGraph: {
     url: "https://smart.wtf",
     title: "smart.wtf",
