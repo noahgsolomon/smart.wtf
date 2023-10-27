@@ -1,4 +1,3 @@
-import { siteConfig } from "@/config/site";
 import { type ClassValue, clsx } from "clsx";
 import { type Metadata } from "next";
 import { twMerge } from "tailwind-merge";
@@ -23,48 +22,4 @@ export function formatDate(input: string | number): string {
     day: "numeric",
     year: "numeric",
   });
-}
-
-export function constructMetadata({
-  title = siteConfig.name,
-  description = siteConfig.description,
-  image = siteConfig.ogImage,
-  noIndex = false,
-}: {
-  title?: string;
-  description?: string;
-  image?: string;
-  noIndex?: boolean;
-} = {}): Metadata {
-  return {
-    title,
-    description,
-    openGraph: {
-      title,
-      description,
-      images: [
-        {
-          url: image,
-          alt: title,
-        },
-      ],
-    },
-    // manifest: "/manifest.json",
-    twitter: {
-      card: "summary_large_image",
-      title,
-      description,
-      images: [image],
-      creator: "@noahgsolomon",
-    },
-    icons: { apple: "/smartwtf.png" },
-    metadataBase: new URL("https://smart.wtf"),
-    themeColor: "#030a1b",
-    ...(noIndex && {
-      robots: {
-        index: true,
-        follow: true,
-      },
-    }),
-  };
 }

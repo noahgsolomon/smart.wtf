@@ -6,11 +6,28 @@ import NavBar from "@/components/navbar";
 import { TRPCReactProvider } from "@/trpc/react";
 import { headers } from "next/headers";
 import ProgressBarProvider from "./progressbar";
-import { constructMetadata } from "@/lib/utils";
+import { Metadata } from "next";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export const metadata = constructMetadata();
+export const metadata: Metadata = {
+  appleWebApp: true,
+  openGraph: {
+    url: "https://smart.wtf",
+    title: "smart.wtf",
+    description: "interactive learning",
+    images: ['https://images.codefoli.com/smartwtf.png']
+  },
+  title: "smart.wtf",
+  description: "interactive learning",
+  twitter: {
+    card: "summary_large_image",
+    site: "smart.wtf",
+    creator: "@noahgsolomon",
+    images: ['https://images.codefoli.com/smartwtf.png']
+
+  },
+}
 
 export default function RootLayout({
   children,
