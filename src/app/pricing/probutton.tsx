@@ -2,7 +2,7 @@
 
 import { trpc } from "@/trpc/client";
 import Image from "next/image";
-import SmartWtfPng from "public/smartwtf.png";
+import wtfCoin from "public/wtfcoin.png";
 
 const ProButton = () => {
   const { mutate: createStripeSession } =
@@ -18,7 +18,7 @@ const ProButton = () => {
         <Image
           width="80"
           height="80"
-          src={SmartWtfPng}
+          src={wtfCoin}
           alt="brain"
           className="animate-pulse cursor-pointer transition-all hover:scale-110"
         />

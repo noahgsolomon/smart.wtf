@@ -1,11 +1,11 @@
-import SmartWtfPng from "public/smartwtf.png";
 import { CheckCircle2 } from "lucide-react";
 import BrainBlob from "@/components/ui/blobs/brainblob";
 import Image from "next/image";
 import Link from "next/link";
 import { auth } from "@clerk/nextjs";
+import pirateShip from "public/pirateship.png";
 import { redirect } from "next/navigation";
-import smartWtfHero from "public/smartwtfhero.png";
+import wtfCoin from "public/wtfcoin.png";
 import interactiveLearning from "public/interactivelearning.png";
 import askAsYouLearn from "public/askasyoulearn.png";
 import superchargedLibrary from "public/superchargedlibrary.png";
@@ -30,7 +30,7 @@ export default function Home() {
             className="rounded-lg border border-border shadow-md"
             width={600}
             height={600}
-            src={smartWtfHero}
+            src={pirateShip}
             alt="smart.wtf"
           />
         </div>
@@ -164,7 +164,7 @@ export default function Home() {
                   <Image
                     width="80"
                     height="80"
-                    src={SmartWtfPng}
+                    src={wtfCoin}
                     alt="brain"
                     className="animate-pulse cursor-pointer transition-all hover:scale-110"
                   />

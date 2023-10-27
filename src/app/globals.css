@@ -51,6 +51,9 @@
     --uncommon-foreground: 240 15% 40%;
     --rare: 58 100% 45%; /* Gold */
     --rare-foreground: 58 45% 95%;
+
+    --gold: 58 100% 50%; /* Gold for light mode */
+    --gold-foreground: 58 45% 40%; /* Foreground for gold in light mode */
   }
 
   .dark {
@@ -99,6 +102,9 @@
 
     --library: 28 50% 30%;
     --library-foreground: 28 25% 40%;
+
+       --gold: 58 100% 40%; /* Gold for dark mode */
+    --gold-foreground: 58 45% 60%; /* Foreground for gold in dark mode */
   }
 }
 
