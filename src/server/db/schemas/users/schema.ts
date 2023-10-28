@@ -26,9 +26,3 @@ export const users = mysqlTable("users", {
     mode: "date",
   }),
 });
-
-export const usersRelations = relations(users, ({many}) => ({
-  courses: many(courses),
-
-  courseLikes: many(courseLikes)
-}));
