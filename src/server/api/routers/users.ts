@@ -6,7 +6,6 @@ import { absoluteUrl } from "@/lib/utils";
 import { getUserSubscriptionPlan, stripe } from "@/lib/stripe";
 import { PLANS } from "@/config/stripe";
 import { z } from "zod";
-import { instructors } from "@/server/db/schemas/instructors/schema";
 
 function generateRandomString(length: number) {
   const charset =
@@ -42,8 +41,6 @@ export const userRouter = createTRPCRouter({
   }),
   delete: protectedProcedure.mutation(async ({ ctx }) => {
     await ctx.db.transaction(async (trx) => {
-      await trx.delete(instructors).where(eq(instructors.user_id, ctx.user_id));
-
       await trx.delete(users).where(eq(users.id, ctx.user_id));
     });
     return { status: "OK" };
