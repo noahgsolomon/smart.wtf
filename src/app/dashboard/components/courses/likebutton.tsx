@@ -24,7 +24,7 @@ const CourseLikeButton = ({
     like.mutate(
       { courseId },
       {
-        onSuccess: (data) => {
+        onSuccess: () => {
           if (!isLiked) {
             toast({
               title: "Success",

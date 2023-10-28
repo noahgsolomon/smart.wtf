@@ -8,7 +8,6 @@ import SmartWtfLogo from "../svg/smartwtf";
 import { api } from "@/trpc/server";
 import FreeTrialBanner from "./freetrialbanner";
 import UserButton from "../ui/user/UserButton";
-import { MessageSquare } from "lucide-react";
 import ChatButton from "./chatbutton";
 
 const NavBar: FunctionComponent = async () => {
