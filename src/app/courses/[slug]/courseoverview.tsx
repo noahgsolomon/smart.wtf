@@ -17,6 +17,7 @@ export default async function CourseOverview({
 }) {
   const course = (await api.course.getCourseBySlug.query({ slug: params.slug }))
     .course;
+  console.log(JSON.stringify(course, null, 2));
 
   return (
     <div className="flex flex-col items-center justify-center gap-16 px-10 pb-8">

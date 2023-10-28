@@ -1,6 +1,6 @@
 "use client";
 
-import { Laptop2, Loader2, MoonIcon, Skull, SunIcon } from "lucide-react";
+import { Laptop2, MoonIcon, Skull, SunIcon } from "lucide-react";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import { Button, buttonVariants } from "../ui/button";

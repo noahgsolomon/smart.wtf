@@ -50,7 +50,7 @@ export const courseLikes = mysqlTable(
   }),
 );
 
-export const courseLikesRelations = relations(courseLikes, ({ one, many }) => ({
+export const courseLikesRelations = relations(courseLikes, ({ one }) => ({
   users: one(users, {
     fields: [courseLikes.userId],
     references: [users.id],
