@@ -9,6 +9,8 @@ import Link from "next/link";
 import { MessageSquare } from "lucide-react";
 import CalculusOverview from "./components/calculusoverview";
 import Courses from "./components/courses/courses";
+import { Suspense } from "react";
+import { CourseSkeleton } from "./components/courses/courseskeleton";
 
 const Dashboard = async () => {
   const user = (await api.user.user.query()).user;
@@ -52,7 +54,9 @@ const Dashboard = async () => {
         </div>
         <section className="py-10">
           <div className="flex flex-col gap-12 rounded-lg border border-border p-8">
-            <Courses />
+            <Suspense fallback={<CourseSkeleton />}>
+              <Courses />
+            </Suspense>
             <div>
               <h1>Your Files</h1>
               <div className="flex flex-wrap gap-8 py-4">
