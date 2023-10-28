@@ -41,7 +41,7 @@ export default function Modal({ children }: { children: React.ReactNode }) {
   return (
     <div
       ref={overlay}
-      className={`fixed bottom-0 left-0 right-0 top-0 z-10 mx-auto flex items-center justify-center bg-black/60 transition-opacity ${
+      className={`fixed bottom-0 left-0 right-0 top-0 z-30 mx-auto flex items-center justify-center bg-black/60 transition-opacity ${
         isVisible ? "opacity-100" : "opacity-0"
       }`}
       onClick={onClick}

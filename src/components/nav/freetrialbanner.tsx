@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { buttonVariants } from "./ui/button";
-import { Progress } from "./ui/progress";
+import { buttonVariants } from "../ui/button";
+import { Progress } from "../ui/progress";
 import { cn } from "@/lib/utils";
 
 const FreeTrialBanner = ({
