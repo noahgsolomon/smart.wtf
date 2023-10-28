@@ -27,7 +27,7 @@ const CourseCard = ({course}:
 
     return (
         <div className="relative">
-      <Badge className="absolute -left-2 -top-2 z-10 rounded-lg">new</Badge>
+      <Badge className="absolute -left-2 -top-2 z-[1] rounded-lg">new</Badge>
       <CourseLikeButton courseId={course.id} clicked={course.courseLikes.length > 0}/>
       <div className="group cursor-pointer overflow-hidden rounded-lg border border-border bg-card shadow-sm transition-all hover:border-primary hover:shadow-md ">
         <div className="relative overflow-hidden border-b border-border">
@@ -76,7 +76,7 @@ const CourseCard = ({course}:
                     className={`object-cover transition-all`}
                     src={"https://images.codefoli.com/ricknmort.png"}
                   />
-                  <AvatarFallback>{course.instructor.name.slice(0).toUpperCase()}</AvatarFallback>
+                  <AvatarFallback>{course.instructor.name.charAt(0).toUpperCase()}</AvatarFallback>
                 </Avatar>
               </div>
               <div>

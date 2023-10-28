@@ -2,7 +2,7 @@ import "./globals.css";
 import { Inter } from "next/font/google";
 import Providers from "./providers";
 import { ClerkProvider } from "@clerk/nextjs";
-import NavBar from "@/components/navbar";
+import NavBar from "@/components/nav/navbar";
 import { TRPCReactProvider } from "@/trpc/react";
 import { headers } from "next/headers";
 import ProgressBarProvider from "./progressbar";
@@ -39,7 +39,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={inter.className}>
+      <body className={`${inter.className} antialiased`}>
         <TRPCReactProvider headers={headers()}>
           <ClerkProvider>
             <Providers>
