@@ -1,4 +1,4 @@
-import Chat from "../dashboard/components/chat";
+import Chat from "../../components/chat";
 
 const Page = () => {
   return (
