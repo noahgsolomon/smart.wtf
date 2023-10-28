@@ -10,7 +10,7 @@ export function absoluteUrl(path: string) {
   if (process.env.MODE === "PROD")
     return `https://${process.env.WEBSITE}${path}`;
   if (process.env.MODE === "DEV")
-    return `https://dev.smart.wtf`;
+    return `https://${process.env.VERCEL_URL}${path}`;
   return `http://localhost:${process.env.PORT ?? 3000}${path}`;
 }
 

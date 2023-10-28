@@ -8,7 +8,7 @@ export const transformer = superjson;
 function getBaseUrl() {
   if (typeof window !== "undefined") return "";
   if (process.env.MODE === "PROD") return `https://${process.env.WEBSITE}`;
-  if (process.env.MODE === "DEV") return `https://dev.smart.wtf`;
+  if (process.env.MODE === "DEV") return `https://${process.env.VERCEL_URL}`;
   return `http://localhost:${process.env.PORT ?? 3000}`;
 }
 
