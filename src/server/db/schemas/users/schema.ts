@@ -1,4 +1,3 @@
-import { relations } from "drizzle-orm";
 import {
   boolean,
   datetime,
@@ -6,7 +5,6 @@ import {
   mysqlTable,
   varchar,
 } from "drizzle-orm/mysql-core";
-import { courseLikes, courses } from "../courses/schema";
 
 export const users = mysqlTable("users", {
   id: int("id").primaryKey().autoincrement(),

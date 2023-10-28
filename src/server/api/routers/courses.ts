@@ -6,7 +6,7 @@ import { z } from "zod";
 
 export const courseRouter = createTRPCRouter({
     getCourses: protectedProcedure.query(async ({ctx}) => {
-        let courses = await ctx.db.query.courses.findMany({
+        const courses = await ctx.db.query.courses.findMany({
             with: {
                 instructor: {
                     columns: {

@@ -6,7 +6,7 @@ import NavBar from "@/components/navbar";
 import { TRPCReactProvider } from "@/trpc/react";
 import { headers } from "next/headers";
 import ProgressBarProvider from "./progressbar";
-import { Metadata } from "next";
+import { type Metadata } from "next";
 
 const inter = Inter({ subsets: ["latin"] });
 
