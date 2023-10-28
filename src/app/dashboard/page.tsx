@@ -3,13 +3,12 @@ import Streak from "./components/streak";
 import cool from "public/cool.png";
 import Image from "next/image";
 import LatestAchievements from "./components/latestachievements";
-import SystemsDesignCourseCard from "./components/systemsdesigncoursecard";
-import WebOptimizationCourseCard from "./components/weboptimizationcoursecard";
 import { buttonVariants } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Link from "next/link";
 import { MessageSquare } from "lucide-react";
 import CalculusOverview from "./components/calculusoverview";
+import Courses from "./components/courses/courses";
 
 const Dashboard = async () => {
   const user = (await api.user.user.query()).user;
@@ -53,13 +52,7 @@ const Dashboard = async () => {
         </div>
         <section className="py-10">
           <div className="flex flex-col gap-12 rounded-lg border border-border p-8">
-            <div>
-              <h1>Courses</h1>
-              <div className="flex flex-wrap gap-8 py-4">
-                <SystemsDesignCourseCard />
-                <WebOptimizationCourseCard />
-              </div>
-            </div>
+            <Courses />
             <div>
               <h1>Your Files</h1>
               <div className="flex flex-wrap gap-8 py-4">
