@@ -1,44 +1,63 @@
-import { int, mysqlTable, unique, varchar } from "drizzle-orm/mysql-core";
+import {
+  int,
+  mysqlTable,
+  unique,
+  uniqueIndex,
+  varchar,
+} from "drizzle-orm/mysql-core";
 import { relations } from "drizzle-orm";
 import { users } from "../users/schema";
 
-export const courses = mysqlTable("courses", {
-  id: int("id").primaryKey().autoincrement(),
-  name: varchar("name", {length: 200}).notNull(),
-  description: varchar("description", {length: 500}).notNull(),
-  instructorId: int("instructor_id").notNull(),
-  likesCount: int('likes_count').default(0).notNull(),
-  imageUrl: varchar('image_url', {length: 100}).notNull(),
-  difficulty: varchar('difficulty', {length: 25, enum: ['EASY'  , 'MEDIUM', 'HARD']}).notNull().default('EASY')
-});
+export const courses = mysqlTable(
+  "courses",
+  {
+    id: int("id").primaryKey().autoincrement(),
+    name: varchar("name", { length: 200 }).notNull(),
+    description: varchar("description", { length: 500 }).notNull(),
+    instructorId: int("instructor_id").notNull(),
+    likesCount: int("likes_count").default(0).notNull(),
+    imageUrl: varchar("image_url", { length: 100 }).notNull(),
+    difficulty: varchar("difficulty", {
+      length: 25,
+      enum: ["EASY", "MEDIUM", "HARD"],
+    })
+      .notNull()
+      .default("EASY"),
+    slug: varchar("slug", { length: 100 }).notNull().default("").unique(),
+  },
+  (t) => ({
+    slugIdx: uniqueIndex("slug_idx").on(t.slug),
+  }),
+);
 
 export const coursesRelations = relations(courses, ({ one, many }) => ({
   instructor: one(users, {
     fields: [courses.instructorId],
     references: [users.id],
   }),
-  courseLikes: many(courseLikes)
+  courseLikes: many(courseLikes),
 }));
 
-export const courseLikes = mysqlTable('course_likes', {
-  id: int('id').primaryKey().autoincrement(),
-  courseId: int('course_id').notNull(),
-  userId: int('user_id').notNull()
-}, (t) => ({
-  unq: unique().on(t.userId, t.courseId),
-}));
+export const courseLikes = mysqlTable(
+  "course_likes",
+  {
+    id: int("id").primaryKey().autoincrement(),
+    courseId: int("course_id").notNull(),
+    userId: int("user_id").notNull(),
+  },
+  (t) => ({
+    unq: unique().on(t.userId, t.courseId),
+  }),
+);
 
-export const courseLikesRelations = relations(courseLikes, ({one}) => ({
-
+export const courseLikesRelations = relations(courseLikes, ({ one, many }) => ({
   users: one(users, {
     fields: [courseLikes.userId],
-    references: [users.id]
+    references: [users.id],
   }),
 
   courses: one(courses, {
     fields: [courseLikes.courseId],
-    references: [courses.id]
-  })
-
-
+    references: [courses.id],
+  }),
 }));
