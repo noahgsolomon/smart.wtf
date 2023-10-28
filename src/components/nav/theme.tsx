@@ -1,6 +1,6 @@
 "use client";
 
-import { Laptop2, MoonIcon, Skull, SunIcon } from "lucide-react";
+import { Laptop2, MoonIcon, SunIcon } from "lucide-react";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import { Button, buttonVariants } from "../ui/button";
@@ -45,10 +45,8 @@ export default function ThemeButton() {
           <SunIcon className="h-4 w-4" />
         ) : theme === "dark" ? (
           <MoonIcon className="h-4 w-4" />
-        ) : theme === "system" ? (
-          <Laptop2 className="h-4 w-4" />
         ) : (
-          <Skull className="h-4 w-4" />
+          <Laptop2 className="h-4 w-4" />
         )}
       </DropdownMenuTrigger>
       <DropdownMenuContent>
