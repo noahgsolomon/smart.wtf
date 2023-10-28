@@ -1,3 +1,4 @@
+import { relations } from "drizzle-orm";
 import {
   boolean,
   datetime,
@@ -5,6 +6,7 @@ import {
   mysqlTable,
   varchar,
 } from "drizzle-orm/mysql-core";
+import { courseLikes, courses } from "../courses/schema";
 
 export const users = mysqlTable("users", {
   id: int("id").primaryKey().autoincrement(),
@@ -24,3 +26,9 @@ export const users = mysqlTable("users", {
     mode: "date",
   }),
 });
+
+export const usersRelations = relations(users, ({many}) => ({
+  courses: many(courses),
+
+  courseLikes: many(courseLikes)
+}));
