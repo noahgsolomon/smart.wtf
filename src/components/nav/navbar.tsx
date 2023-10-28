@@ -1,5 +1,5 @@
 import { type FunctionComponent } from "react";
-import ThemeButton from "../ui/theme";
+import ThemeButton from "./theme";
 import { buttonVariants } from "../ui/button";
 import { auth } from "@clerk/nextjs";
 import Link from "next/link";
@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
 import SmartWtfLogo from "../svg/smartwtf";
 import { api } from "@/trpc/server";
 import FreeTrialBanner from "./freetrialbanner";
-import UserButton from "../ui/user/UserButton";
+import UserButton from "./UserButton";
 import ChatButton from "./chatbutton";
 
 const NavBar: FunctionComponent = async () => {
@@ -85,6 +85,7 @@ const NavBar: FunctionComponent = async () => {
                   UPGRADE
                 </Link>
               )}
+              {/* <WtfButton /> */}
               <ChatButton />
               <UserButton />
             </>

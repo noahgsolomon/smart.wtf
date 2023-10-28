@@ -28,12 +28,17 @@
     --radius: 0.5rem;
     --blue: 210 100% 50%;
     --light-blue: 210 80% 85%;
-    --link: 240 100% 55%; /* This is the blue link color */
-    --link-hover: 240 100% 45%; /* Slightly darker shade for hover */
+    --link: 240 100% 55%;
+    /* This is the blue link color */
+    --link-hover: 240 100% 45%;
+    /* Slightly darker shade for hover */
     --progressBar: 210 25% 55%;
-    --blob1: 230 60% 75%; /* A light, muted blue */
-    --blob2: 260 50% 80%; /* A light, muted purple */
-    --blob3: 280 40% 85%; /* A light, muted pinkish color */
+    --blob1: 230 60% 75%;
+    /* A light, muted blue */
+    --blob2: 260 50% 80%;
+    /* A light, muted purple */
+    --blob3: 280 40% 85%;
+    /* A light, muted pinkish color */
     --brain: 340 25% 85%;
     --brain-foreground: 340 15% 50%;
 
@@ -45,15 +50,20 @@
 
     --library: 28 50% 40%;
     --library-foreground: 28 25% 30%;
-    --common: 120 25% 75%; /* Muted Green */
+    --common: 120 25% 75%;
+    /* Muted Green */
     --common-foreground: 120 15% 40%;
-    --uncommon: 240 25% 75%; /* Muted Blue */
+    --uncommon: 240 25% 75%;
+    /* Muted Blue */
     --uncommon-foreground: 240 15% 40%;
-    --rare: 58 100% 45%; /* Gold */
+    --rare: 58 100% 45%;
+    /* Gold */
     --rare-foreground: 58 45% 95%;
 
-    --gold: 58 100% 50%; /* Gold for light mode */
-    --gold-foreground: 58 45% 40%; /* Foreground for gold in light mode */
+    --gold: 58 100% 50%;
+    /* Gold for light mode */
+    --gold-foreground: 58 45% 40%;
+    /* Foreground for gold in light mode */
   }
 
   .dark {
@@ -78,20 +88,28 @@
     --ring: 212.7 26.8% 84.9;
     --blue: 210 80% 60%;
     --light-blue: 210 60% 70%;
-    --link: 210 80% 71%; /* Lighter shade of blue for dark theme */
-    --link-hover: 210 80% 61%; /* Slightly darker shade for hover in dark theme */
+    --link: 210 80% 71%;
+    /* Lighter shade of blue for dark theme */
+    --link-hover: 210 80% 61%;
+    /* Slightly darker shade for hover in dark theme */
     --progressBar: 210 10% 85%;
-    --blob1: 230 20% 50%; /* A brighter, muted blue for dark theme */
-    --blob2: 260 15% 40%; /* A brighter, muted purple for dark theme */
-    --blob3: 280 10% 45%; /* A brighter, muted pinkish color for dark theme */
+    --blob1: 230 20% 50%;
+    /* A brighter, muted blue for dark theme */
+    --blob2: 260 15% 40%;
+    /* A brighter, muted purple for dark theme */
+    --blob3: 280 10% 45%;
+    /* A brighter, muted pinkish color for dark theme */
     --brain: 330 25% 60%;
     --brain-foreground: 330 12% 70%;
 
-    --common: 120 25% 45%; /* Brighter Green */
+    --common: 120 25% 45%;
+    /* Brighter Green */
     --common-foreground: 120 15% 70%;
-    --uncommon: 240 25% 55%; /* Brighter Blue */
+    --uncommon: 240 25% 55%;
+    /* Brighter Blue */
     --uncommon-foreground: 240 15% 70%;
-    --rare: 58 100% 40%; /* Brighter Gold */
+    --rare: 58 100% 40%;
+    /* Brighter Gold */
     --rare-foreground: 58 45% 85%;
 
     --fish: 355 90% 40%;
@@ -103,8 +121,10 @@
     --library: 28 50% 30%;
     --library-foreground: 28 25% 40%;
 
-       --gold: 58 100% 40%; /* Gold for dark mode */
-    --gold-foreground: 58 45% 60%; /* Foreground for gold in dark mode */
+    --gold: 58 100% 40%;
+    /* Gold for dark mode */
+    --gold-foreground: 58 45% 60%;
+    /* Foreground for gold in dark mode */
   }
 }
 
@@ -112,6 +132,7 @@
   * {
     @apply border-border;
   }
+
   body {
     @apply bg-background text-foreground;
   }
@@ -125,9 +146,11 @@
   0% {
     transform: scale(1);
   }
+
   50% {
     transform: scale(1.3);
   }
+
   100% {
     transform: scale(1);
   }
@@ -141,10 +164,12 @@
   from {
     opacity: 0;
   }
+
   to {
     opacity: 1;
   }
 }
+
 /* 
 .animated-feature-cards::before {
   @apply pointer-events-none absolute select-none rounded-lg opacity-0 transition-opacity duration-300 hover:opacity-100;
@@ -166,106 +191,40 @@
   }
 } */
 
-@keyframes mouseWander1 {
-  0% {
-    transform: translate(0, 0);
-  }
-  25% {
-    transform: translate(-10px, 5px);
-  }
-  50% {
-    transform: translate(5px, -10px);
-  }
-  75% {
-    transform: translate(10px, 10px);
-  }
-  100% {
-    transform: translate(0, 0);
-  }
-}
-
-@keyframes mouseWander2 {
-  0% {
-    transform: translate(0, 0);
-  }
-  25% {
-    transform: translate(-10px, 5px);
-  }
-  50% {
-    transform: translate(5px, -10px);
-  }
-  75% {
-    transform: translate(10px, 10px);
-  }
-  100% {
-    transform: translate(0, 0);
-  }
-}
-
-@keyframes mouseWander3 {
-  0% {
-    transform: translate(0, 0);
-  }
-  25% {
-    transform: translate(-10px, 5px);
-  }
-  50% {
-    transform: translate(5px, -10px);
-  }
-  75% {
-    transform: translate(10px, 10px);
-  }
-  100% {
-    transform: translate(0, 0);
-  }
-}
-
-.mouse1 {
-  right: -25px;
-  bottom: 0px;
-  animation: mouseWander1 4s infinite;
-  animation-timing-function: cubic-bezier(0.68, -0.55, 0.27, 1.55);
-  animation-delay: 0s;
-}
-
-.mouse2 {
-  right: 35px;
-  top: -50px;
-  animation: mouseWander2 4.5s infinite;
-  animation-timing-function: cubic-bezier(0.5, 0.25, 0.75, 1);
-  animation-delay: 1s;
-}
-
-.mouse3 {
-  right: 5px;
-  top: -15px;
-  animation: mouseWander3 3.5s infinite;
-  animation-timing-function: cubic-bezier(0.32, 0.64, 0.76, 0.4);
-  animation-delay: 1.5s;
-}
 
 @keyframes gradientShift {
   0% {
     background-position: 0% 50%;
   }
+
   50% {
     background-position: 100% 50%;
   }
+
   100% {
     background-position: 0% 50%;
   }
 }
 
 .gradientShift {
-  background: linear-gradient(
-    270deg,
-    hsl(var(--link)),
-    hsl(var(--link-hover)),
-    hsl(var(--link)),
-    hsl(var(--primary))
-  );
+  background: linear-gradient(270deg,
+      hsl(var(--link)),
+      hsl(var(--link-hover)),
+      hsl(var(--link)),
+      hsl(var(--primary)));
   background-size: 600% 600%;
   animation: gradientShift 8s ease infinite;
   -webkit-background-clip: text;
   color: transparent;
+}
+
+@keyframes fillUp {
+  from {
+    stroke-dashoffset: 283;
+    /* Approximate value for the circumference of the circle */
+  }
+}
+
+.progress-circle {
+  animation: fillUp 0.2s ease-out forwards;
 }
