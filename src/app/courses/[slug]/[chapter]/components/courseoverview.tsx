@@ -7,14 +7,13 @@ import { cn } from "@/lib/utils";
 
 export default async function CourseOverview({
   params,
-  searchParams,
 }: {
-  params: { slug: string };
-  searchParams: { chapter?: string };
+  params: { slug: string; chapter: string };
 }) {
   const chapter =
-    searchParams.chapter && Number.isInteger(parseInt(searchParams.chapter))
-      ? parseInt(searchParams.chapter)
+    params.chapter.split("chapter-")[1]! &&
+    Number.isInteger(parseInt(params.chapter.split("chapter-")[1]!))
+      ? parseInt(params.chapter.split("chapter-")[1]!)
       : 1;
 
   const course = (
@@ -26,13 +25,8 @@ export default async function CourseOverview({
 
   const chapterNum = course?.courseChapters[0]?.order ?? 1;
 
-  console.log("course", JSON.stringify(course, null, 2));
-
   return (
     <div className="flex flex-col items-center justify-center gap-16 px-10 pb-8">
-      {/* <h1>{course?.name}</h1>
-      <p>{course?.description}</p>
-      <p>{course?.slug}</p> */}
       <div className="flex flex-col items-center justify-center gap-8">
         <div className="flex flex-col gap-4 text-center text-3xl">
           <p>Chapter {chapterNum}:</p>
@@ -45,7 +39,7 @@ export default async function CourseOverview({
             return (
               <Link
                 key={index}
-                href={""}
+                href={"?something=idk"}
                 className="relative max-w-[350px] cursor-pointer justify-center rounded-lg border border-border bg-card shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md sm:max-w-none lg:w-[800px]"
               >
                 {(chapterNum !== 1 || index !== 0) && (
@@ -83,7 +77,7 @@ export default async function CourseOverview({
                 buttonVariants(),
                 "flex flex-row gap-1 transition-all hover:gap-2",
               )}
-              href={`?chapter=${chapterNum - 1}}`}
+              href={`chapter-${chapterNum - 1}}`}
             >
               <ArrowLeft className="h-4 w-4" />
               Chapter {chapterNum - 1}{" "}
@@ -95,7 +89,7 @@ export default async function CourseOverview({
                 buttonVariants(),
                 "flex flex-row gap-1 transition-all hover:gap-2",
               )}
-              href={`?chapter=${chapterNum + 1}}}`}
+              href={`chapter-${chapterNum + 1}}}`}
             >
               Chapter {chapterNum + 1} <ArrowRight className="h-4 w-4" />
             </Link>
