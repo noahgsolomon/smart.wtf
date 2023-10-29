@@ -1,4 +1,8 @@
-import { courseLikes, courses } from "@/server/db/schemas/courses/schema";
+import {
+  courseChapters,
+  courseLikes,
+  courses,
+} from "@/server/db/schemas/courses/schema";
 import { createTRPCRouter, protectedProcedure } from "../trpc";
 import { and, eq } from "drizzle-orm";
 import { z } from "zod";
@@ -28,20 +32,22 @@ export const courseRouter = createTRPCRouter({
   }),
 
   getCourseBySlug: protectedProcedure
-    .input(z.object({ slug: z.string() }))
+    .input(z.object({ slug: z.string(), chapter: z.number() }))
     .query(async ({ ctx, input }) => {
       const course = await ctx.db.query.courses.findFirst({
         where: eq(courses.slug, input.slug),
         with: {
-          instructor: {
-            columns: {
-              name: true,
-            },
-          },
-          courseLikes: {
-            where: eq(courseLikes.userId, ctx.user_id),
-            columns: {
-              courseId: true,
+          courseChapters: {
+            where: eq(courseChapters.order, input.chapter),
+            with: {
+              courseChapterSections: {
+                columns: {
+                  name: true,
+                  description: true,
+                  imageUrl: true,
+                  order: true,
+                },
+              },
             },
           },
         },
