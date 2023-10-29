@@ -23,6 +23,7 @@ export const courses = mysqlTable(
       .notNull()
       .default("EASY"),
     slug: varchar("slug", { length: 100 }).notNull().default("").unique(),
+    chapters: int("chapters").notNull().default(0),
   },
   (t) => ({
     slugIdx: uniqueIndex("slug_idx").on(t.slug),
