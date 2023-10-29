@@ -15,7 +15,6 @@ export const courses = mysqlTable(
     name: varchar("name", { length: 200 }).notNull(),
     description: varchar("description", { length: 500 }).notNull(),
     instructorId: int("instructor_id").notNull(),
-    likesCount: int("likes_count").default(0).notNull(),
     imageUrl: varchar("image_url", { length: 100 }).notNull(),
     difficulty: varchar("difficulty", {
       length: 25,
@@ -36,6 +35,8 @@ export const coursesRelations = relations(courses, ({ one, many }) => ({
     references: [users.id],
   }),
   courseLikes: many(courseLikes),
+
+  courseChapters: many(courseChapters),
 }));
 
 export const courseLikes = mysqlTable(
@@ -61,3 +62,41 @@ export const courseLikesRelations = relations(courseLikes, ({ one }) => ({
     references: [courses.id],
   }),
 }));
+
+export const courseChapters = mysqlTable("course_chapters", {
+  id: int("id").primaryKey().autoincrement(),
+  courseId: int("course_id").notNull(),
+  order: int("order").notNull(),
+  name: varchar("name", { length: 200 }).notNull(),
+});
+
+export const courseChaptersRelations = relations(
+  courseChapters,
+  ({ one, many }) => ({
+    courses: one(courses, {
+      fields: [courseChapters.courseId],
+      references: [courses.id],
+    }),
+
+    courseChapterSections: many(courseChapterSections),
+  }),
+);
+
+export const courseChapterSections = mysqlTable("course_chapter_sections", {
+  id: int("id").primaryKey().autoincrement(),
+  chapterId: int("chapter_id").notNull(),
+  order: int("order").notNull(),
+  name: varchar("name", { length: 200 }).notNull(),
+  description: varchar("description", { length: 500 }).notNull(),
+  imageUrl: varchar("image_url", { length: 200 }).notNull(),
+});
+
+export const courseChapterSectionsRelations = relations(
+  courseChapterSections,
+  ({ one }) => ({
+    courseChapters: one(courseChapters, {
+      fields: [courseChapterSections.chapterId],
+      references: [courseChapters.id],
+    }),
+  }),
+);
