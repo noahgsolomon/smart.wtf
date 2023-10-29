@@ -1,6 +1,4 @@
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
-import { Progress } from "@/components/ui/progress";
 import { Circle } from "lucide-react";
 import Image from "next/image";
 import wtfCoin from "public/wtfcoin.png";
@@ -72,7 +70,7 @@ const CourseCard = ({
               {course.description}
             </div>
 
-            <div className="flex flex-col">
+            {/* <div className="flex flex-col">
               <h3 className="text-sm">Progress</h3>
               <div className="flex flex-row items-center gap-2">
                 <h3 className="text-xs opacity-60">10%</h3>
@@ -82,9 +80,9 @@ const CourseCard = ({
                   value={10}
                 />
               </div>
-            </div>
+            </div> */}
             <div className="flex flex-row justify-between">
-              <div className="flex flex-row items-center gap-2">
+              {/* <div className="flex flex-row items-center gap-2">
                 <div>
                   <Avatar className="h-[35px] w-[35px] border border-border">
                     <AvatarImage
@@ -97,10 +95,13 @@ const CourseCard = ({
                   </Avatar>
                 </div>
                 <div>
+                  
+                </div>
+                <div>
                   <h3 className="text-sm">{course.instructor.name}</h3>
                   <h3 className="text-xs">Instructor</h3>
                 </div>
-              </div>
+              </div> */}
               <div className="group flex flex-row items-center rounded-lg border border-border bg-background p-1 transition-all hover:scale-105">
                 <Image width={30} height={30} src={wtfCoin} alt="wtf coin" />
                 <p className="text-sm"> + 500</p>
