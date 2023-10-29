@@ -15,7 +15,6 @@ const CourseCard = ({
     name: string;
     description: string;
     instructorId: number;
-    likesCount: number;
     imageUrl: string;
     difficulty: "EASY" | "MEDIUM" | "HARD";
     slug: string;
