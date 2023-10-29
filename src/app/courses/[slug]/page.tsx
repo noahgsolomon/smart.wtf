@@ -1,15 +1,6 @@
-import CourseOverview from "./courseoverview";
+import { redirect } from "next/navigation";
 
-export default function Page({
-  params,
-  searchParams,
-}: {
-  params: { slug: string };
-  searchParams: { chapter?: string };
-}) {
-  return (
-    <div className="pt-32">
-      <CourseOverview params={params} searchParams={searchParams} />
-    </div>
-  );
+export default function Page({ params }: { params: { slug: string } }) {
+  redirect(`/courses/${params.slug}/chapter-1`);
+  return <></>;
 }
