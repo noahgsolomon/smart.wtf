@@ -8,7 +8,7 @@ export default function Page({
   params: { slug: string; chapter: string };
 }) {
   return (
-    <div className="pt-32">
+    <div>
       <Suspense fallback={<CourseOverviewSkeleton />}>
         <CourseOverview params={params} />
       </Suspense>
