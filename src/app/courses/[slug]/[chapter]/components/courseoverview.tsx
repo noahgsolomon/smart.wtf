@@ -77,7 +77,7 @@ export default async function CourseOverview({
                 buttonVariants(),
                 "flex flex-row gap-1 transition-all hover:gap-2",
               )}
-              href={`chapter-${chapterNum - 1}}`}
+              href={`chapter-${chapterNum - 1}`}
             >
               <ArrowLeft className="h-4 w-4" />
               Chapter {chapterNum - 1}{" "}
@@ -89,7 +89,7 @@ export default async function CourseOverview({
                 buttonVariants(),
                 "flex flex-row gap-1 transition-all hover:gap-2",
               )}
-              href={`chapter-${chapterNum + 1}}}`}
+              href={`chapter-${chapterNum + 1}`}
             >
               Chapter {chapterNum + 1} <ArrowRight className="h-4 w-4" />
             </Link>
