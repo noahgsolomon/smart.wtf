@@ -1,5 +1,5 @@
 import { api } from "@/trpc/server";
-import { ArrowLeft, ArrowRight, Lock } from "lucide-react";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { buttonVariants } from "@/components/ui/button";
@@ -40,13 +40,13 @@ export default async function CourseOverview({
               <Link
                 key={index}
                 href={"?something=idk"}
-                className="relative max-w-[350px] cursor-pointer justify-center rounded-lg border border-border bg-card shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md sm:max-w-none lg:w-[650px]"
+                className="relative max-w-[350px] cursor-pointer justify-center rounded-lg border border-border bg-card shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md sm:max-w-none lg:w-[800px]"
               >
-                {(chapterNum !== 1 || index !== 0) && (
+                {/* {(chapterNum !== 1 || index !== 0) && (
                   <div className="absolute bottom-0 left-0 right-0 top-0 flex items-center justify-center rounded-lg bg-black/30 dark:bg-black/50">
                     <Lock className="h-4 w-4" />
                   </div>
-                )}
+                )} */}
                 <div className=" flex flex-col justify-between sm:flex-row">
                   <div className="flex flex-col gap-2 px-4 py-2">
                     <h3 className="max-w-[20ch] text-base lg:text-lg">
