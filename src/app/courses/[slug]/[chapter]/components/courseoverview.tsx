@@ -28,9 +28,9 @@ export default async function CourseOverview({
   return (
     <div className="flex flex-col items-center justify-center gap-16 px-10 pb-8">
       <div className="flex flex-col items-center justify-center gap-8">
-        <div className="flex flex-col gap-4 text-center text-3xl">
-          <p>Chapter {chapterNum}:</p>
-          <h1>{course?.courseChapters[0]?.name}</h1>
+        <div className="flex flex-col text-center text-3xl">
+          <p className="font-bold">Chapter {chapterNum}:</p>
+          <h1 className="font-bold">{course?.courseChapters[0]?.name}</h1>
         </div>
 
         {course?.courseChapters[0]?.courseChapterSections
@@ -49,7 +49,7 @@ export default async function CourseOverview({
                 )} */}
                 <div className=" flex flex-col justify-between sm:flex-row">
                   <div className="flex flex-col gap-2 px-4 py-2">
-                    <h3 className="max-w-[20ch] text-base lg:text-lg">
+                    <h3 className="max-w-[20ch] text-base font-bold lg:text-lg">
                       {section.name}
                     </h3>
                     <p className="max-w-[40ch] text-xs lg:text-sm">

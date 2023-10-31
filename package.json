@@ -38,6 +38,7 @@
     "date-fns": "^2.30.0",
     "drizzle-orm": "^0.28.6",
     "framer-motion": "^10.16.4",
+    "geist": "^1.0.0",
     "lucide-react": "^0.285.0",
     "mysql2": "^3.6.1",
     "next": "latest",

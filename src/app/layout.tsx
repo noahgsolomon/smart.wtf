@@ -7,8 +7,7 @@ import { TRPCReactProvider } from "@/trpc/react";
 import { headers } from "next/headers";
 import { type Metadata } from "next";
 import ProgressBarProvider from "./progressbar";
-
-const inter = Inter({ subsets: ["latin"] });
+import { GeistSans } from "geist/font";
 
 export const metadata: Metadata = {
   appleWebApp: true,
@@ -38,7 +37,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.className} antialiased`}>
+      <body className={`${GeistSans.className} antialiased`}>
         <TRPCReactProvider headers={headers()}>
           <ClerkProvider>
             <Providers>
