@@ -1,6 +1,6 @@
 "use client";
 
-import { type FunctionComponent } from "react";
+import { useMemo, type FunctionComponent } from "react";
 import ThemeButton from "./theme";
 import { buttonVariants } from "../ui/button";
 import { useAuth } from "@clerk/nextjs";
@@ -19,7 +19,7 @@ const NavBar: FunctionComponent = () => {
 
   const path = usePathname();
 
-  console.log(path);
+  const initialPath = useMemo(() => path, []);
 
   let user;
   let daysSinceAccountCreation = 0;
@@ -98,7 +98,7 @@ const NavBar: FunctionComponent = () => {
                     </Link>
                   )}
                   {/* <WtfButton /> */}
-                  <ChatButton />
+                  <ChatButton query={`prev=${initialPath}`} />
                   <UserButton />
                 </>
               ) : (
