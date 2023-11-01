@@ -56,7 +56,7 @@
     "react-dom": "^18",
     "react-spring": "^9.7.3",
     "server-only": "^0.0.1",
-    "sharp": "latest",
+    "sharp": "^0.32.6",
     "stripe": "^14.1.0",
     "superjson": "^2.0.0",
     "tailwind-classes-sorter": "^0.2.5",
