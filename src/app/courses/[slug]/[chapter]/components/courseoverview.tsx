@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { redirect } from "next/navigation";
 
 export default async function CourseOverview({
   params,
@@ -23,9 +24,13 @@ export default async function CourseOverview({
     })
   ).course;
 
+  if (course === null) {
+    console.log("undddddd");
+    redirect("/404");
+  }
+
   const chapterNum = course?.courseChapters[0]?.order ?? 1;
 
-  // await new Promise((resolve) => setTimeout(resolve, 10000000));
   return (
     <div className="flex flex-col items-center justify-center gap-16 px-10 pb-8">
       <div className="flex flex-col items-center justify-center gap-8">
