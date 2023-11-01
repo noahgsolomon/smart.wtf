@@ -25,6 +25,7 @@ export default async function CourseOverview({
 
   const chapterNum = course?.courseChapters[0]?.order ?? 1;
 
+  // await new Promise((resolve) => setTimeout(resolve, 10000000));
   return (
     <div className="flex flex-col items-center justify-center gap-16 px-10 pb-8">
       <div className="flex flex-col items-center justify-center gap-8">
@@ -32,7 +33,31 @@ export default async function CourseOverview({
           <p className="font-bold">Chapter {chapterNum}:</p>
           <h1 className="font-bold">{course?.courseChapters[0]?.name}</h1>
         </div>
-
+        <div className="flex flex-row justify-center gap-2">
+          {chapterNum > 1 && (
+            <Link
+              className={cn(
+                buttonVariants(),
+                "flex flex-row gap-1 transition-all hover:gap-2",
+              )}
+              href={`chapter-${chapterNum - 1}`}
+            >
+              <ArrowLeft className="h-4 w-4" />
+              Chapter {chapterNum - 1}{" "}
+            </Link>
+          )}
+          {(course?.chapters ?? 1) > chapterNum && (
+            <Link
+              className={cn(
+                buttonVariants(),
+                "flex flex-row gap-1 transition-all hover:gap-2",
+              )}
+              href={`chapter-${chapterNum + 1}`}
+            >
+              Chapter {chapterNum + 1} <ArrowRight className="h-4 w-4" />
+            </Link>
+          )}
+        </div>
         {course?.courseChapters[0]?.courseChapterSections
           .sort((a, b) => a.order - b.order)
           .map((section, index) => {
@@ -69,32 +94,6 @@ export default async function CourseOverview({
               </Link>
             );
           })}
-
-        <div className="flex flex-row justify-center gap-2">
-          {chapterNum > 1 && (
-            <Link
-              className={cn(
-                buttonVariants(),
-                "flex flex-row gap-1 transition-all hover:gap-2",
-              )}
-              href={`chapter-${chapterNum - 1}`}
-            >
-              <ArrowLeft className="h-4 w-4" />
-              Chapter {chapterNum - 1}{" "}
-            </Link>
-          )}
-          {(course?.chapters ?? 1) > chapterNum && (
-            <Link
-              className={cn(
-                buttonVariants(),
-                "flex flex-row gap-1 transition-all hover:gap-2",
-              )}
-              href={`chapter-${chapterNum + 1}`}
-            >
-              Chapter {chapterNum + 1} <ArrowRight className="h-4 w-4" />
-            </Link>
-          )}
-        </div>
       </div>
     </div>
   );

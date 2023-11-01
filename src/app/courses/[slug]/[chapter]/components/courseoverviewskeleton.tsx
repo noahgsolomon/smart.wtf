@@ -6,7 +6,11 @@ export default function CourseOverviewSkeleton() {
     <div className="flex flex-col items-center justify-center gap-16 px-10 pb-8">
       <div className="flex flex-col items-center justify-center gap-8">
         <div className="flex flex-col gap-4 text-center text-3xl">
-          <Skeleton className="h-10 w-48" />
+          <Skeleton className="mb-8 h-10 w-64" />
+        </div>
+        <div className="flex flex-row justify-center gap-2">
+          <Skeleton className="h-8 w-20 "></Skeleton>
+          <Skeleton className="h-8 w-20"></Skeleton>
         </div>
         <Card className="relative h-[250px] w-[350px] cursor-pointer justify-center rounded-lg border border-border bg-card shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md sm:h-[150px] sm:w-[500px] lg:h-[200px] lg:w-[800px]">
           <div className="flex h-full w-full flex-col justify-between sm:flex-row">
