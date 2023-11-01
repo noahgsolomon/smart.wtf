@@ -11,7 +11,11 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-export default function ThemeButton() {
+export default function ThemeButton({
+  className = "",
+}: {
+  className?: string;
+}) {
   const { resolvedTheme, setTheme } = useTheme();
   const [theme, setThemee] = useState(resolvedTheme);
 
@@ -25,7 +29,7 @@ export default function ThemeButton() {
   if (!mounted) {
     return (
       <Button
-        variant={"outline"}
+        variant={"ghost"}
         disabled={true}
         className="px-4 py-2 opacity-80 transition-all"
       >
@@ -38,7 +42,8 @@ export default function ThemeButton() {
     <DropdownMenu>
       <DropdownMenuTrigger
         className={buttonVariants({
-          variant: "outline",
+          variant: "ghost",
+          className: className,
         })}
       >
         {theme === "light" ? (
