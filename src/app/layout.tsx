@@ -1,5 +1,4 @@
 import "./globals.css";
-import { Inter } from "next/font/google";
 import Providers from "./providers";
 import { ClerkProvider } from "@clerk/nextjs";
 import NavBar from "@/components/nav/navbar";

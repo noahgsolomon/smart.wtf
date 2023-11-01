@@ -37,8 +37,8 @@ const CourseCard = ({
             <div className="transition-all group-hover:scale-[105%]">
               <Image
                 src={course.imageUrl}
-                width={300}
-                height={300}
+                width={325}
+                height={325}
                 className="rounded-t-lg"
                 alt="systems design group-hover:bg-black"
               />
