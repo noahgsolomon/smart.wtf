@@ -53,6 +53,10 @@ export const courseRouter = createTRPCRouter({
         },
       });
 
+      if (!course) {
+        return { course: null };
+      }
+
       return { course: course };
     }),
 
