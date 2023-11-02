@@ -13,12 +13,15 @@ export default async function Page() {
       order: 1,
     },
     {
-      markdown: `## Defining Systems Design 
+      markdown: `
   Systems Design is an interdisciplinary process that defines the architecture, modules, interfaces, and data for a system to meet specific requirements. It's an exercise in foresight, innovation, and precision that aims to build systems capable of not just meeting the current demands but also adapting to future changes and challenges.`,
       order: 2,
     },
     {
-      markdown: `  ## The Living Organism of a System
+      markdown: `  # The Living Organism of a System
+
+      ![robot-surhery](https://images.codefoli.com/robot-surgery.png)
+      
   Imagine a system as a living organism. Like any living thing, a system must grow, respond to its environment, remain healthy, and protect itself against threats. The core concepts of systems design—scalability, reliability, availability, efficiency, and security—are akin to the vital signs of this organism.
 
 **Scalability** is the breath of a system, allowing it to expand and contract as necessary, accommodating an influx of users, a surge in data, or an increase in transactions without losing its composure. Scalability ensures that the system can sustain growth and change without compromising performance.
@@ -44,7 +47,7 @@ As we move forward, keep in mind that Systems Design is not a static field; it i
       order: 4,
     },
     {
-      markdown: `  ## What we will cover:
+      markdown: `  # What we will cover:
   
   ### Chapter 1: Fundamentals of System Design
 This chapter lays the foundation for system design by exploring the key components and architecture of modern systems, highlighting the importance of understanding both for aspiring system designers. It delves into scalability, comparing vertical and horizontal scaling techniques, and underscores the significance of knowing how to apply them for sustainable system growth. Additionally, the chapter discusses the critical performance metrics of latency and throughput, stressing their roles in evaluating and optimizing the efficiency and responsiveness of a system.
@@ -103,7 +106,7 @@ Chapter 10 offers a pragmatic perspective by presenting real-world case studies 
 
   return (
     <div className="flex justify-center px-4 pb-4 pt-28">
-      <div className="prose relative px-8 py-2 dark:prose-invert">
+      <div className="prose prose-slate relative px-8 py-2 dark:prose-invert">
         <CopyButton />
         {content}
       </div>
