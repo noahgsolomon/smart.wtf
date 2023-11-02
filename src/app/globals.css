@@ -257,7 +257,7 @@ h6 {
   @apply text-base font-bold;
 }
 
-p {
+.prose p {
   @apply text-lg;
 }
 
@@ -266,10 +266,6 @@ p {
   @apply text-primary border-border border-b pb-2
 }
 
-.prose h2 a {
-  /*add a # before the text of .prose h1*/
-  @apply text-blue
-}
 
 .prose a {
   @apply no-underline transition-all hover:opacity-90
@@ -278,6 +274,10 @@ p {
 .prose h2 a::before {
   content: '';
   @apply mr-2;
+}
+
+.prose img {
+  @apply mx-auto my-0 rounded-lg border border-border w-[50%]
 }
 
 .prose h2 a:hover::before {
