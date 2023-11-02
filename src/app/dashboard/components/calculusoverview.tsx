@@ -10,15 +10,15 @@ const CalculusOverview = () => {
         <div className="relative cursor-pointer">
           <Image
             src={functionImage}
-            width={300}
-            height={300}
+            width={325}
+            height={325}
             className="rounded-t-lg transition-all group-hover:scale-105"
             alt="calculus"
           />
         </div>
       </div>
 
-      <div className="flex h-[200px] flex-col justify-between gap-2 p-4">
+      <div className="flex flex-col gap-2 p-4">
         <h2 className="max-w-[20ch] text-xl">
           Multivariable Calculus Overview.pdf
         </h2>

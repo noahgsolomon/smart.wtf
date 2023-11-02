@@ -27,10 +27,10 @@ const CourseCard = ({
   return (
     <div className="relative">
       <Badge className="absolute -left-2 -top-2 z-[1] rounded-lg">new</Badge>
-      <CourseLikeButton
+      {/* <CourseLikeButton
         courseId={course.id}
         clicked={course.courseLikes.length > 0}
-      />
+      /> */}
       <Link href={"/courses/" + course.slug}>
         <div className="group cursor-pointer overflow-hidden rounded-lg border border-border bg-card shadow-sm transition-all hover:border-primary hover:shadow-md ">
           <div className="relative overflow-hidden border-b border-border">
@@ -58,7 +58,7 @@ const CourseCard = ({
             </div>
           </div>
 
-          <div className="flex min-h-[200px] flex-col justify-between gap-2 p-4">
+          <div className="flex min-h-[150px] flex-col justify-between gap-2 p-4">
             <div className="flex flex-row justify-between">
               <h2 className="text-xl">{course.name}</h2>
               <div className="flex flex-row items-center gap-1 rounded-lg bg-secondary p-1 text-xs font-bold text-opacity-60">
