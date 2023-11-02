@@ -10,7 +10,7 @@ import blazing from "public/blazing.png";
 const Streak = () => {
   return (
     <div className="relative">
-      <TooltipProvider>
+      <TooltipProvider delayDuration={0}>
         <Tooltip>
           <TooltipTrigger>
             <div className="absolute -left-2 top-0 pb-4">
@@ -56,7 +56,7 @@ const Streak = () => {
                     <TooltipTrigger>
                       <li
                         data-level="0"
-                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all transition-all hover:opacity-30 hover:opacity-30"
+                        className="rounded-sm bg-primary p-[0.4rem] opacity-20 transition-all hover:opacity-30"
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
