@@ -102,8 +102,8 @@ Chapter 10 offers a pragmatic perspective by presenting real-world case studies 
   });
 
   return (
-    <div className="flex justify-center px-4 pt-28">
-      <div className="prose relative dark:prose-invert">
+    <div className="flex justify-center px-4 pb-4 pt-28">
+      <div className="prose relative px-8 py-2 dark:prose-invert">
         <CopyButton />
         {content}
       </div>

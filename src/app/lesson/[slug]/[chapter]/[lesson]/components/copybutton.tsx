@@ -27,7 +27,7 @@ export default function CopyButton() {
     <>
       <Button
         onClick={handleCopy}
-        className="absolute right-1 top-4 opacity-80 transition-all"
+        className="absolute -right-1 -top-1 opacity-80 transition-all"
         variant={"ghost"}
       >
         {copied ? (
