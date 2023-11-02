@@ -14,7 +14,7 @@ export default function LessonHeading() {
   const pathname = usePathname();
 
   return (
-    <div className="fixed left-0 right-0 top-0 z-20 flex w-screen flex-row items-center justify-between border border-b-border  bg-background py-2 shadow md:px-10">
+    <div className="fixed left-0 right-0 top-0 z-20 flex w-screen flex-row items-center justify-between border border-b-border  bg-background py-2 shadow-sm md:px-10">
       <Link href={"/courses/"} className={buttonVariants({ variant: "ghost" })}>
         <X className="h-4 w-4" />
       </Link>
@@ -29,8 +29,8 @@ export default function LessonHeading() {
         <div className="cursor-pointer transition-all hover:scale-105">
           <Image
             className="m-1"
-            width={45}
-            height={45}
+            width={30}
+            height={30}
             src={blazing}
             alt="streak"
           />
