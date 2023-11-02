@@ -2,7 +2,6 @@ import { Badge } from "@/components/ui/badge";
 import { Circle } from "lucide-react";
 import Image from "next/image";
 import wtfCoin from "public/wtfcoin.png";
-import CourseLikeButton from "./likebutton";
 import Link from "next/link";
 
 const CourseCard = ({
