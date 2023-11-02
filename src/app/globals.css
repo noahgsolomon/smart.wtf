@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  scroll-behavior: smooth;
+}
+
 @layer base {
   :root {
     --x: 0;
@@ -254,5 +258,45 @@ h6 {
 }
 
 p {
-  @apply text-base;
+  @apply text-lg;
+}
+
+.prose h1 {
+  /*add a # before the text of .prose h1*/
+  @apply text-primary border-border border-b pb-2
+}
+
+.prose h2 a {
+  /*add a # before the text of .prose h1*/
+  @apply text-blue
+}
+
+.prose a {
+  @apply no-underline transition-all hover:opacity-90
+}
+
+.prose h2 a::before {
+  content: '';
+  @apply mr-2;
+}
+
+.prose h2 a:hover::before {
+  content: '##';
+  @apply opacity-50
+}
+
+
+.prose h1 a::before {
+  content: '';
+  @apply mr-2;
+}
+
+.prose h1 a:hover::before {
+  content: '#';
+  @apply opacity-50
+}
+
+:target {
+  scroll-margin-top: 75px;
+  /* Adjust this value to match your navbar's height */
 }
