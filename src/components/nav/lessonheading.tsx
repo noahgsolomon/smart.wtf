@@ -52,7 +52,7 @@ export default function LessonHeading() {
         <HoverCard openDelay={0} closeDelay={0}>
           <HoverCardTrigger asChild>
             <Progress
-              indicatorClassName="rounded-r-lg "
+              indicatorClassName="border-r border-border rounded-r-lg "
               value={50}
               className="h-full w-[40%] cursor-pointer border border-border transition-all hover:opacity-80"
             />
