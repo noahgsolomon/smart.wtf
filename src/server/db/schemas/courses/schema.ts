@@ -181,6 +181,10 @@ export const quizzes = mysqlTable("quizzes", {
   optionTwo: varchar("option_two", { length: 500 }).notNull(),
   optionThree: varchar("option_three", { length: 500 }).notNull(),
   optionFour: varchar("option_four", { length: 500 }).notNull(),
+  correctOption: varchar("correct_option", {
+    length: 25,
+    enum: ["ONE", "TWO", "THREE", "FOUR"],
+  }).notNull(),
   explanationMarkdown: text("explanation_markdown").notNull(),
 });
 
