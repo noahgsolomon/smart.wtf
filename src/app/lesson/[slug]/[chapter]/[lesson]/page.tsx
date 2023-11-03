@@ -5,7 +5,7 @@ import slug from "rehype-slug";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import { api } from "@/trpc/server";
 import { redirect } from "next/navigation";
-import { Button, buttonVariants } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import Link from "next/link";
 
 export default async function Page({
@@ -40,9 +40,10 @@ export default async function Page({
   console.log("len", section.section.length);
 
   const { content } = await compileMDX({
-    source: section.section[subSection - 1]?.blocks
-      .map((block) => block.markdown)
-      .join("\n\n")!,
+    source:
+      section.section[subSection - 1]?.blocks
+        .map((block) => block.markdown)
+        .join("\n\n") ?? "",
     options: {
       mdxOptions: {
         remarkPlugins: [remarkGfm],
