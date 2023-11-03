@@ -69,11 +69,11 @@ export default async function CourseOverview({
             return (
               <Link
                 key={index}
-                href={"/lesson/1/2/3"}
+                href={`/lesson/${course.slug}/${chapterNum}/${section.id}?l=1`}
                 className="relative max-w-[350px] cursor-pointer justify-center rounded-lg border border-border bg-card shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md sm:max-w-none lg:w-[800px]"
               >
                 {(chapterNum !== 1 || index !== 0) && (
-                  <div className="absolute bottom-0 left-0 right-0 top-0 flex items-center justify-center rounded-lg bg-black/30 dark:bg-black/50">
+                  <div className="absolute bottom-0 left-0 right-0 top-0 z-10 flex items-center justify-center rounded-lg bg-black/30 dark:bg-black/50">
                     <Lock className="h-4 w-4" />
                   </div>
                 )}
