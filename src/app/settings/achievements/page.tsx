@@ -1,4 +1,4 @@
-import { CalendarCheck } from "lucide-react";
+import { CalendarCheck, Lock } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import smartwtfmember from "public/smartwtfmember.png";
 import ai from "public/ai.png";
@@ -7,10 +7,16 @@ import Image from "next/image";
 
 const Page = () => {
   return (
-    <div className="mx-10 mt-40 flex w-full flex-col">
+    <div className=" mx-10 mt-40 flex w-full flex-col">
       <h3 className="mb-2 text-3xl font-bold">Achievements</h3>
       <p className="mb-4 opacity-60 ">View account achievements</p>
-      <div className="rounded-lg border border-border p-6">
+      <div className="relative rounded-lg border border-border p-6">
+        <div className="absolute bottom-0 left-0 right-0 top-0 z-10 flex items-center justify-center rounded-lg bg-black/30 dark:bg-black/50">
+          <div className="flex flex-col items-center">
+            <Lock className="h-4 w-4" />
+            <h3>Coming Soon</h3>
+          </div>
+        </div>
         <h3 className="mb-4 text-center text-2xl font-bold">
           Your achievements
         </h3>

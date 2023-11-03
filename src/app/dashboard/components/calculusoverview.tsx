@@ -2,10 +2,17 @@ import { Badge } from "@/components/ui/badge";
 import Image from "next/image";
 import functionImage from "public/function.png";
 import { Progress } from "@/components/ui/progress";
+import { Lock } from "lucide-react";
 
 const CalculusOverview = () => {
   return (
-    <div className="group cursor-pointer overflow-hidden rounded-lg border border-border bg-card shadow-sm transition-all hover:border-primary hover:shadow-md ">
+    <div className="group relative cursor-pointer overflow-hidden rounded-lg border border-border bg-card shadow-sm transition-all hover:border-primary hover:shadow-md ">
+      <div className="absolute bottom-0 left-0 right-0 top-0 z-10 flex items-center justify-center rounded-lg bg-black/30 dark:bg-black/50">
+        <div className="flex flex-col items-center">
+          <Lock className="h-4 w-4" />
+          Coming Soon
+        </div>
+      </div>
       <div className="overflow-hidden border-b border-border">
         <div className="relative cursor-pointer">
           <Image

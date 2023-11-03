@@ -10,6 +10,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import ai from "public/ai.png";
+import { Lock } from "lucide-react";
 
 const LatestAchievements = () => {
   return (
@@ -18,9 +19,12 @@ const LatestAchievements = () => {
       <div className="flex">
         <TooltipProvider>
           <div className="relative flex flex-row gap-4 rounded-lg border border-border bg-card p-2 shadow-md">
+            <div className="absolute bottom-0 left-0 right-0 top-0 z-10 flex items-center justify-center rounded-lg bg-black/30 dark:bg-black/50">
+              <Lock className="h-4 w-4" />
+            </div>
             <Tooltip>
               <TooltipTrigger>
-                <div className="bg-common flex cursor-pointer items-center overflow-hidden rounded-full border border-border transition-all hover:scale-105">
+                <div className="flex cursor-pointer items-center overflow-hidden rounded-full border border-border bg-common transition-all hover:scale-105">
                   <Image
                     width={50}
                     height={50}
@@ -34,7 +38,7 @@ const LatestAchievements = () => {
 
             <Tooltip>
               <TooltipTrigger>
-                <div className="bg-uncommon cursor-pointer overflow-hidden rounded-full border border-border transition-all hover:scale-105">
+                <div className="cursor-pointer overflow-hidden rounded-full border border-border bg-uncommon transition-all hover:scale-105">
                   <Image width={50} height={50} src={quiz} alt="100% on quiz" />
                 </div>
               </TooltipTrigger>
@@ -43,7 +47,7 @@ const LatestAchievements = () => {
 
             <Tooltip>
               <TooltipTrigger>
-                <div className="bg-uncommon cursor-pointer overflow-hidden rounded-full border border-border transition-all hover:scale-105">
+                <div className="cursor-pointer overflow-hidden rounded-full border border-border bg-uncommon transition-all hover:scale-105">
                   <Image width={50} height={50} src={ai} alt="prompt ai" />
                 </div>
               </TooltipTrigger>

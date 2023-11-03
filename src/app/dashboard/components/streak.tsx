@@ -4,16 +4,23 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { Lock } from "lucide-react";
 import Image from "next/image";
 import blazing from "public/blazing.png";
 
 const Streak = () => {
   return (
     <div className="relative">
+      <div className="absolute bottom-0 left-0 right-0 top-0 z-10 flex items-center justify-center rounded-lg bg-black/30 dark:bg-black/50">
+        <div className="flex flex-col items-center">
+          <Lock className="h-4 w-4" />
+          Coming Soon
+        </div>
+      </div>
       <TooltipProvider delayDuration={0}>
         <Tooltip>
           <TooltipTrigger>
-            <div className="absolute -left-2 top-0 pb-4">
+            <div className="absolute left-1 top-1 pb-4">
               <div className="flex cursor-pointer items-end gap-2 transition-all hover:scale-105">
                 <Image
                   className="object-contain"

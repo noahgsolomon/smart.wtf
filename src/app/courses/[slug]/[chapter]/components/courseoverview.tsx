@@ -67,16 +67,14 @@ export default async function CourseOverview({
           .sort((a, b) => a.order - b.order)
           .map((section, index) => {
             return (
-              <Link
+              <div
                 key={index}
-                href={`/lesson/${course.slug}/${chapterNum}/${section.id}?l=1`}
+                // href={`/lesson/${course.slug}/${chapterNum}/${section.id}?l=1`}
                 className="relative max-w-[350px] cursor-pointer justify-center rounded-lg border border-border bg-card shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md sm:max-w-none lg:w-[800px]"
               >
-                {(chapterNum !== 1 || index !== 0) && (
-                  <div className="absolute bottom-0 left-0 right-0 top-0 z-10 flex items-center justify-center rounded-lg bg-black/30 dark:bg-black/50">
-                    <Lock className="h-4 w-4" />
-                  </div>
-                )}
+                <div className="absolute bottom-0 left-0 right-0 top-0 z-10 flex items-center justify-center rounded-lg bg-black/30 dark:bg-black/50">
+                  <Lock className="h-4 w-4" />
+                </div>
                 <div className=" flex flex-col justify-between sm:flex-row">
                   <div className="flex flex-col gap-2 px-4 py-2">
                     <h3 className="max-w-[20ch] text-base font-bold lg:text-lg">
@@ -96,7 +94,7 @@ export default async function CourseOverview({
                     />
                   </div>
                 </div>
-              </Link>
+              </div>
             );
           })}
       </div>
