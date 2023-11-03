@@ -9,9 +9,9 @@ import SmartWtfLogo from "../svg/smartwtf";
 import FreeTrialBanner from "./freetrialbanner";
 import UserButton from "./UserButton";
 import ChatButton from "./chatbutton";
-import LessonHeading from "./lessonheading";
 import { usePathname } from "next/navigation";
 import { trpc } from "@/trpc/client";
+import LessonHeading from "@/app/lesson/components/lessonheading";
 
 const NavBar = () => {
   const { userId } = useAuth();
