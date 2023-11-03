@@ -1,6 +1,5 @@
 "use client";
 
-import { useMemo, type FunctionComponent } from "react";
 import ThemeButton from "./theme";
 import { buttonVariants } from "../ui/button";
 import { useAuth } from "@clerk/nextjs";
@@ -14,12 +13,10 @@ import LessonHeading from "./lessonheading";
 import { usePathname } from "next/navigation";
 import { trpc } from "@/trpc/client";
 
-const NavBar: FunctionComponent = () => {
+const NavBar = () => {
   const { userId } = useAuth();
 
   const path = usePathname();
-
-  const initialPath = useMemo(() => path, []);
 
   let user;
   let daysSinceAccountCreation = 0;
@@ -98,7 +95,7 @@ const NavBar: FunctionComponent = () => {
                     </Link>
                   )}
                   {/* <WtfButton /> */}
-                  <ChatButton query={`prev=${initialPath}`} />
+                  <ChatButton query={`prev=${path}`} />
                   <UserButton />
                 </>
               ) : (
