@@ -6,7 +6,7 @@ import { Clock, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import blazing from "public/blazing.png";
-import { useParams, usePathname } from "next/navigation";
+import { useParams, usePathname, useSearchParams } from "next/navigation";
 
 import {
   HoverCard,
@@ -16,10 +16,12 @@ import {
 import { trpc } from "@/trpc/client";
 import ThemeButton from "@/components/nav/theme";
 import ChatButton from "@/components/nav/chatbutton";
+import { cn } from "@/lib/utils";
 
 export default function LessonHeading() {
   const pathname = usePathname();
   const params = useParams();
+  const searchParams = useSearchParams();
 
   const section = trpc.course.getCourseSection.useQuery({
     sectionId: parseInt(
@@ -56,7 +58,12 @@ export default function LessonHeading() {
               >
                 <HoverCardTrigger asChild>
                   <Progress
-                    className="h-full border border-border"
+                    className={cn(
+                      `h-full border border-border`,
+                      searchParams.get("l") === s.order.toString()
+                        ? "border-primary"
+                        : "",
+                    )}
                     indicatorClassName="rounded-r-lg "
                     value={0}
                   />
