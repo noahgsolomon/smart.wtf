@@ -47,15 +47,21 @@ export default function LessonHeading() {
           console.log(Math.round((s.time / totalTime) * 100.0));
           return (
             <HoverCard key={s.id} openDelay={0} closeDelay={0}>
-              <HoverCardTrigger asChild>
-                <Progress
-                  indicatorClassName="rounded-r-lg "
-                  value={0}
-                  className={`h-full w-[${Math.round(
-                    (s.time / totalTime) * 100.0,
-                  )}%] cursor-pointer border border-border transition-all hover:opacity-80`}
-                />
-              </HoverCardTrigger>
+              <Link
+                className={` transition-all hover:opacity-80`}
+                style={{
+                  width: `${Math.round((s.time / totalTime) * 100.0)}%`,
+                }}
+                href={`?l=${s.order}`}
+              >
+                <HoverCardTrigger asChild>
+                  <Progress
+                    className="h-full border border-border"
+                    indicatorClassName="rounded-r-lg "
+                    value={0}
+                  />
+                </HoverCardTrigger>
+              </Link>
               <HoverCardContent className="w-48">
                 <div className="flex justify-between space-x-4">
                   <div className="space-y-1">
