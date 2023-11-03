@@ -2,6 +2,7 @@ import {
   courseChapters,
   courseLikes,
   courses,
+  subSections,
 } from "@/server/db/schemas/courses/schema";
 import { createTRPCRouter, protectedProcedure } from "../trpc";
 import { and, eq } from "drizzle-orm";
@@ -42,6 +43,7 @@ export const courseRouter = createTRPCRouter({
             with: {
               courseChapterSections: {
                 columns: {
+                  id: true,
                   name: true,
                   description: true,
                   imageUrl: true,
@@ -58,6 +60,24 @@ export const courseRouter = createTRPCRouter({
       }
 
       return { course: course };
+    }),
+
+  getCourseSection: protectedProcedure
+    .input(z.object({ sectionId: z.number() }))
+    .query(async ({ ctx, input }) => {
+      const section = await ctx.db.query.subSections.findMany({
+        where: eq(subSections.sectionId, input.sectionId),
+
+        with: {
+          blocks: true,
+        },
+      });
+
+      if (!section) {
+        return { section: null };
+      }
+
+      return { section: section };
     }),
 
   addLike: protectedProcedure
