@@ -9,10 +9,7 @@ import blazing from "public/blazing.png";
 import ThemeButton from "./theme";
 import ChatButton from "./chatbutton";
 import { usePathname } from "next/navigation";
-import { CalendarIcon } from "@radix-ui/react-icons";
 
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Button } from "@/components/ui/button";
 import {
   HoverCard,
   HoverCardContent,
@@ -52,7 +49,7 @@ export default function LessonHeading() {
         <HoverCard openDelay={0} closeDelay={0}>
           <HoverCardTrigger asChild>
             <Progress
-              indicatorClassName="border-r border-border rounded-r-lg "
+              indicatorClassName="rounded-r-lg "
               value={50}
               className="h-full w-[40%] cursor-pointer border border-border transition-all hover:opacity-80"
             />
