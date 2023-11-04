@@ -5,9 +5,9 @@ import slug from "rehype-slug";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import { api } from "@/trpc/server";
 import { redirect } from "next/navigation";
-import { buttonVariants } from "@/components/ui/button";
-import Link from "next/link";
 import Quiz from "@/app/lesson/components/interactive/quiz";
+import LessonButtons from "./components/lessonbuttons";
+import Link from "next/link";
 
 export default async function Page({
   params,
@@ -45,7 +45,7 @@ export default async function Page({
 
         {section.section[subSection - 1]?.blocks
           .sort((a, b) => a.order - b.order)
-          .map(async (block) => {
+          .map(async (block, index) => {
             const { content: markdownContent } = await compileMDX({
               source: block.markdown,
               options: {
@@ -74,6 +74,8 @@ export default async function Page({
                 });
                 return (
                   <Quiz
+                    blockId={block.id}
+                    completed={block.userCompletedBlocks.length > 0}
                     key={component.quizzes?.id ?? 1}
                     content={question}
                     explanation={explanation}
@@ -91,26 +93,45 @@ export default async function Page({
               }
             });
 
+            const blockVisible =
+              block.order === 1 ||
+              (index - 1 >= 0 &&
+                section.section[subSection - 1]?.blocks[index - 1] &&
+                (section.section[subSection - 1]?.blocks[index - 1]
+                  ?.userCompletedBlocks.length ?? 0) > 0);
+
+            console.log(
+              "blockVisible",
+              block.order,
+              blockVisible,
+              section.section[subSection - 1]?.blocks[index - 1]
+                ?.userCompletedBlocks.length,
+            );
+
             return (
-              <>
-                {markdownContent}
+              <div key={index} className={`${blockVisible ? "" : "hidden"}`}>
+                <div id={block.id.toString() ?? 0}>{markdownContent}</div>
                 {quiz}
-              </>
+                {blockVisible &&
+                  section.section[subSection - 1]?.blocks.length ===
+                    block.order && (
+                    <Link
+                      href={`${
+                        section.section.length > subSection
+                          ? `?l=${subSection + 1}`
+                          : `/courses/${params.slug}/chapter-${params.chapter}`
+                      }`}
+                    >
+                      <LessonButtons
+                        block={block}
+                        section={section}
+                        subSection={subSection}
+                      />
+                    </Link>
+                  )}
+              </div>
             );
           })}
-
-        {section.section.length > subSection ? (
-          <Link className={buttonVariants()} href={`?l=${subSection + 1}`}>
-            Continue
-          </Link>
-        ) : (
-          <Link
-            className={buttonVariants()}
-            href={`/courses/${params.slug}/chapter-${params.chapter}`}
-          >
-            Finish
-          </Link>
-        )}
       </div>
     </div>
   );
