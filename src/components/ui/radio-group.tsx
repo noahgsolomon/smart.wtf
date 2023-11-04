@@ -38,7 +38,7 @@ const RadioGroupItem = React.forwardRef<
         "aspect-square h-4 w-4 rounded-full border border-primary text-primary shadow  hover:bg-primary/10 focus:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50",
         `${
           correct
-            ? "bg-success"
+            ? "bg-success hover:bg-success/60"
             : incorrect
             ? "bg-destructive hover:bg-destructive/60"
             : ""

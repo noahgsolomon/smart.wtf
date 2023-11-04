@@ -23,11 +23,13 @@ export default function LessonHeading() {
   const params = useParams();
   const searchParams = useSearchParams();
 
-  const section = trpc.course.getCourseSection.useQuery({
+  const sectionQuery = trpc.course.getCourseSection.useQuery({
     sectionId: parseInt(
       params.lesson && typeof params.lesson === "string" ? params.lesson : "1",
     ),
-  }).data?.section;
+  });
+
+  const section = sectionQuery.data?.section;
 
   const totalTime =
     section?.reduce((total, s) => {
