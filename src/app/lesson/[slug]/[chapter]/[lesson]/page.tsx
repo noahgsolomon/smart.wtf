@@ -39,7 +39,7 @@ export default async function Page({
   if (section.section === null) redirect("/404");
 
   return (
-    <div className="flex justify-center px-4 pb-4 pt-28">
+    <div className="flex justify-center px-0 pb-4 pt-28 md:px-4">
       <div className="prose prose-slate relative px-8 py-2 dark:prose-invert">
         <CopyButton />
 
