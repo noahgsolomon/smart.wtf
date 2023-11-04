@@ -11,37 +11,70 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { type ReactElement, useState } from "react";
+import { type ReactElement, useState, useEffect } from "react";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
-
-const FormSchema = z.object({
-  answer: z.enum(["ONE", "TWO", "THREE", "FOUR"]),
-});
-
-function onSubmit(data: z.infer<typeof FormSchema>) {
-  console.log(data.answer);
-}
+import { Toaster } from "@/components/ui/toaster";
+import { useToast } from "@/components/ui/use-toast";
+import { trpc } from "@/trpc/client";
 
 export default function Quiz({
+  blockId,
   content,
   explanation,
   options,
   answer,
+  completed,
 }: {
+  blockId: number;
   content: ReactElement;
   explanation: ReactElement;
   options: string[];
   answer: "ONE" | "TWO" | "THREE" | "FOUR";
+  completed?: boolean;
 }) {
-  console.log(answer);
   const FormSchema = z.object({
     answer: z.enum(["ONE", "TWO", "THREE", "FOUR"]),
   });
 
+  const { toast } = useToast();
+
+  const [guessed, setGuessed] = useState<("ONE" | "TWO" | "THREE" | "FOUR")[]>(
+    [],
+  );
+
+  const mutateBlock = trpc.course.setBlockCompleted.useMutation();
+
+  function handleCompleteBlock() {
+    mutateBlock.mutate({
+      blockId,
+    });
+  }
+
   const form = useForm<z.infer<typeof FormSchema>>();
 
   const [side, setSide] = useState<"QUESTION" | "ANSWER">("QUESTION");
+
+  useEffect(() => {
+    if (completed) {
+      setGuessed((prev) => [...prev, answer]);
+    }
+  }, [completed]);
+
+  function onSubmit(data: z.infer<typeof FormSchema>) {
+    setGuessed((prev) => {
+      if (!prev.includes(data.answer)) {
+        return [...prev, data.answer];
+      }
+      return prev;
+    });
+    if (data.answer === answer) {
+      toast({
+        title: "Correct",
+        description: "You got it right!",
+      });
+    }
+  }
 
   return (
     <div className="p-4">
@@ -73,6 +106,43 @@ export default function Quiz({
                               >
                                 <FormControl>
                                   <RadioGroupItem
+                                    disabled={
+                                      guessed.includes(
+                                        index === 0
+                                          ? "ONE"
+                                          : index === 1
+                                          ? "TWO"
+                                          : index === 2
+                                          ? "THREE"
+                                          : "FOUR",
+                                      ) || guessed.includes(answer)
+                                    }
+                                    correct={
+                                      index === 0
+                                        ? answer === "ONE" &&
+                                          guessed.includes("ONE")
+                                        : index === 1
+                                        ? answer === "TWO" &&
+                                          guessed.includes("TWO")
+                                        : index === 2
+                                        ? answer === "THREE" &&
+                                          guessed.includes("THREE")
+                                        : answer === "FOUR" &&
+                                          guessed.includes("FOUR")
+                                    }
+                                    incorrect={
+                                      index === 0
+                                        ? answer !== "ONE" &&
+                                          guessed.includes("ONE")
+                                        : index === 1
+                                        ? answer !== "TWO" &&
+                                          guessed.includes("TWO")
+                                        : index === 2
+                                        ? answer !== "THREE" &&
+                                          guessed.includes("THREE")
+                                        : answer !== "FOUR" &&
+                                          guessed.includes("FOUR")
+                                    }
                                     value={
                                       index === 0
                                         ? "ONE"
@@ -97,8 +167,15 @@ export default function Quiz({
                   )}
                 />
                 <div className="flex flex-row gap-2 py-6">
-                  <Button type="submit">Check</Button>
+                  {completed ? null : guessed.includes(answer) ? (
+                    <Button type="button" onClick={handleCompleteBlock}>
+                      Continue
+                    </Button>
+                  ) : (
+                    <Button type="submit">Check</Button>
+                  )}
                   <Button
+                    type="button"
                     variant={"secondary"}
                     onClick={() => {
                       setSide("ANSWER");
@@ -126,6 +203,7 @@ export default function Quiz({
           </div>
         )}
       </div>
+      <Toaster />
     </div>
   );
 }
