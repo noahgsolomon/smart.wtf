@@ -7,6 +7,7 @@ import {
 import { createTRPCRouter, protectedProcedure } from "../trpc";
 import { and, eq } from "drizzle-orm";
 import { z } from "zod";
+import { userCompletedBlocks } from "@/server/db/schemas/users/schema";
 
 export const courseRouter = createTRPCRouter({
   getCourses: protectedProcedure.query(async ({ ctx }) => {
@@ -77,6 +78,12 @@ export const courseRouter = createTRPCRouter({
                 },
                 with: { quizzes: true, questions: true },
               },
+              userCompletedBlocks: {
+                where: eq(userCompletedBlocks.userId, ctx.user_id),
+                columns: {
+                  blockId: true,
+                },
+              },
             },
           },
         },
@@ -87,6 +94,15 @@ export const courseRouter = createTRPCRouter({
       }
 
       return { section: section };
+    }),
+
+  setBlockCompleted: protectedProcedure
+    .input(z.object({ blockId: z.number() }))
+    .mutation(async ({ ctx, input }) => {
+      await ctx.db.insert(userCompletedBlocks).values({
+        userId: ctx.user_id,
+        blockId: input.blockId,
+      });
     }),
 
   addLike: protectedProcedure
