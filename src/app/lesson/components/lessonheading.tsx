@@ -65,7 +65,13 @@ export default function LessonHeading() {
                         : "",
                     )}
                     indicatorClassName="rounded-r-lg "
-                    value={0}
+                    value={
+                      (s.blocks
+                        .map((b) => (b.userCompletedBlocks.length > 0 ? 1 : 0))
+                        .reduce((acc: number, curr) => acc + curr, 0) /
+                        s.blocks.length) *
+                      100
+                    }
                   />
                 </HoverCardTrigger>
               </Link>
