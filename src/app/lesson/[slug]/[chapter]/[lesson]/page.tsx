@@ -74,6 +74,7 @@ export default async function Page({
                 });
                 return (
                   <Quiz
+                    params={params}
                     blockId={block.id}
                     completed={block.userCompletedBlocks.length > 0}
                     key={component.quizzes?.id ?? 1}
@@ -93,42 +94,36 @@ export default async function Page({
               }
             });
 
-            const blockVisible =
-              block.order === 1 ||
-              (index - 1 >= 0 &&
-                section.section[subSection - 1]?.blocks[index - 1] &&
-                (section.section[subSection - 1]?.blocks[index - 1]
-                  ?.userCompletedBlocks.length ?? 0) > 0);
-
-            console.log(
-              "blockVisible",
-              block.order,
-              blockVisible,
-              section.section[subSection - 1]?.blocks[index - 1]
-                ?.userCompletedBlocks.length,
-            );
+            // const blockVisible =
+            //   true ||
+            //   (index - 1 >= 0 &&
+            //     section.section![subSection - 1]?.blocks[index - 1] &&
+            //     (section.section![subSection - 1]?.blocks[index - 1]
+            //       ?.userCompletedBlocks.length ?? 0) > 0);
 
             return (
-              <div key={index} className={`${blockVisible ? "" : "hidden"}`}>
+              <div key={index} className={``}>
+                {/*${blockVisible ? "" : "hidden"} */}
                 <div id={block.id.toString() ?? 0}>{markdownContent}</div>
                 {quiz}
-                {blockVisible &&
-                  section.section[subSection - 1]?.blocks.length ===
-                    block.order && (
-                    <Link
-                      href={`${
-                        section.section.length > subSection
-                          ? `?l=${subSection + 1}`
-                          : `/courses/${params.slug}/chapter-${params.chapter}`
-                      }`}
-                    >
-                      <LessonButtons
-                        block={block}
-                        section={section}
-                        subSection={subSection}
-                      />
-                    </Link>
-                  )}
+                {/* blockVisible && */}
+                {section.section[subSection - 1]?.blocks.length ===
+                  block.order && (
+                  <Link
+                    href={`${
+                      section.section.length > subSection
+                        ? `?l=${subSection + 1}`
+                        : `/courses/${params.slug}/chapter-${params.chapter}`
+                    }`}
+                  >
+                    <LessonButtons
+                      params={params}
+                      block={block}
+                      section={section}
+                      subSection={subSection}
+                    />
+                  </Link>
+                )}
               </div>
             );
           })}
