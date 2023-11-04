@@ -37,7 +37,7 @@ export default function LessonHeading() {
     }, 0) ?? 1;
 
   return (
-    <div className="fixed left-0 right-0 top-0 z-20 flex w-screen flex-row items-center justify-between border border-b-border  bg-background py-2 shadow-sm md:px-10">
+    <div className="fixed left-0 right-0 top-0 z-20 flex w-screen flex-row items-center justify-between border-b border-border  bg-background py-2 shadow-sm md:px-10">
       <Link
         href={`/courses/${
           typeof params.slug === "string" ? params.slug : "unknown"
