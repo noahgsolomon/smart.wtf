@@ -46,7 +46,7 @@ export default function LessonHeading() {
       >
         <X className="h-4 w-4" />
       </Link>
-      <div className="flex h-4 w-[400px] flex-row ">
+      <div className="flex h-4 w-[200px] flex-row md:w-[400px] ">
         {section?.map((s) => {
           console.log(Math.round((s.time / totalTime) * 100.0));
           return (
