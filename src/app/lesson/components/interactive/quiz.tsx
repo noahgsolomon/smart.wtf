@@ -17,6 +17,7 @@ import { useForm } from "react-hook-form";
 import { Toaster } from "@/components/ui/toaster";
 import { useToast } from "@/components/ui/use-toast";
 import { trpc } from "@/trpc/client";
+import { useRouter } from "next/navigation";
 
 export default function Quiz({
   blockId,
@@ -25,6 +26,7 @@ export default function Quiz({
   options,
   answer,
   completed,
+  params,
 }: {
   blockId: number;
   content: ReactElement;
@@ -32,6 +34,7 @@ export default function Quiz({
   options: string[];
   answer: "ONE" | "TWO" | "THREE" | "FOUR";
   completed?: boolean;
+  params: { slug: string; chapter: string; lesson: string };
 }) {
   const FormSchema = z.object({
     answer: z.enum(["ONE", "TWO", "THREE", "FOUR"]),
@@ -43,15 +46,16 @@ export default function Quiz({
     [],
   );
 
+  const sectionQuery = trpc.course.getCourseSection.useQuery({
+    sectionId: parseInt(
+      params.lesson && typeof params.lesson === "string" ? params.lesson : "1",
+    ),
+  });
+
   const mutateBlock = trpc.course.setBlockCompleted.useMutation();
 
-  function handleCompleteBlock() {
-    mutateBlock.mutate({
-      blockId,
-    });
-  }
-
   const form = useForm<z.infer<typeof FormSchema>>();
+  const router = useRouter();
 
   const [side, setSide] = useState<"QUESTION" | "ANSWER">("QUESTION");
 
@@ -59,7 +63,7 @@ export default function Quiz({
     if (completed) {
       setGuessed((prev) => [...prev, answer]);
     }
-  }, [completed]);
+  }, [completed, answer]);
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
     setGuessed((prev) => {
@@ -69,6 +73,12 @@ export default function Quiz({
       return prev;
     });
     if (data.answer === answer) {
+      mutateBlock.mutate({
+        blockId,
+      });
+      sectionQuery.remove();
+      sectionQuery.refetch();
+      router.refresh();
       toast({
         title: "Correct",
         description: "You got it right!",
@@ -167,13 +177,9 @@ export default function Quiz({
                   )}
                 />
                 <div className="flex flex-row gap-2 py-6">
-                  {completed ? null : guessed.includes(answer) ? (
-                    <Button type="button" onClick={handleCompleteBlock}>
-                      Continue
-                    </Button>
-                  ) : (
+                  {!guessed.includes(answer) ? (
                     <Button type="submit">Check</Button>
-                  )}
+                  ) : null}
                   <Button
                     type="button"
                     variant={"secondary"}
