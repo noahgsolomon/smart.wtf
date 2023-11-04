@@ -11,7 +11,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { ReactElement, useState } from "react";
+import { type ReactElement, useState } from "react";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 
@@ -34,6 +34,7 @@ export default function Quiz({
   options: string[];
   answer: "ONE" | "TWO" | "THREE" | "FOUR";
 }) {
+  console.log(answer);
   const FormSchema = z.object({
     answer: z.enum(["ONE", "TWO", "THREE", "FOUR"]),
   });
@@ -66,7 +67,10 @@ export default function Quiz({
                         >
                           {options.map((option, index) => {
                             return (
-                              <FormItem className="flex items-center space-x-3 space-y-0">
+                              <FormItem
+                                key={index}
+                                className="flex items-center space-x-3 space-y-0"
+                              >
                                 <FormControl>
                                   <RadioGroupItem
                                     value={

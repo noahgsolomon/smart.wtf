@@ -8,7 +8,6 @@ import { redirect } from "next/navigation";
 import { buttonVariants } from "@/components/ui/button";
 import Link from "next/link";
 import Quiz from "@/app/lesson/components/interactive/quiz";
-import { ReactElement } from "react";
 
 export default async function Page({
   params,
@@ -47,7 +46,6 @@ export default async function Page({
         {section.section[subSection - 1]?.blocks
           .sort((a, b) => a.order - b.order)
           .map(async (block) => {
-            let contentBlocksJSX: ReactElement = <></>;
             const { content: markdownContent } = await compileMDX({
               source: block.markdown,
               options: {
@@ -69,22 +67,23 @@ export default async function Page({
             const quiz = block.interactiveComponents.map(async (component) => {
               if (component.type === "QUIZ") {
                 const { content: explanation } = await compileMDX({
-                  source: component.quizzes?.explanationMarkdown!,
+                  source: component.quizzes?.explanationMarkdown ?? "",
                 });
                 const { content: question } = await compileMDX({
-                  source: component.quizzes?.questionMarkdown!,
+                  source: component.quizzes?.questionMarkdown ?? "",
                 });
                 return (
                   <Quiz
+                    key={component.quizzes?.id ?? 1}
                     content={question}
                     explanation={explanation}
                     options={[
-                      component.quizzes?.optionOne!,
-                      component.quizzes?.optionTwo!,
-                      component.quizzes?.optionThree!,
-                      component.quizzes?.optionFour!,
+                      component.quizzes?.optionOne ?? "",
+                      component.quizzes?.optionTwo ?? "",
+                      component.quizzes?.optionThree ?? "",
+                      component.quizzes?.optionFour ?? "",
                     ]}
-                    answer={component.quizzes?.correctOption!}
+                    answer={component.quizzes?.correctOption ?? "ONE"}
                   />
                 );
               } else {
