@@ -4,9 +4,11 @@ import {
   datetime,
   int,
   mysqlTable,
+  unique,
+  uniqueIndex,
   varchar,
 } from "drizzle-orm/mysql-core";
-import { courseLikes, courses } from "../courses/schema";
+import { blocks, courseLikes, courses } from "../courses/schema";
 
 export const users = mysqlTable("users", {
   id: int("id").primaryKey().autoincrement(),
@@ -32,3 +34,33 @@ export const usersRelations = relations(users, ({ many }) => ({
 
   courses: many(courses),
 }));
+
+export const userCompletedBlocks = mysqlTable(
+  "user_completed_blocks",
+  {
+    id: int("id").primaryKey().autoincrement(),
+    userId: int("user_id").notNull(),
+    blockId: int("block_id").notNull(),
+    completedAt: datetime("completed_at", { mode: "date" })
+      .notNull()
+      .default(new Date()),
+  },
+  (t) => ({
+    unq: unique().on(t.userId, t.blockId),
+    userBlockIdx: uniqueIndex("user_block_idx").on(t.userId, t.blockId),
+  }),
+);
+
+export const userCompletedBlocksRelations = relations(
+  userCompletedBlocks,
+  ({ one }) => ({
+    users: one(users, {
+      fields: [userCompletedBlocks.userId],
+      references: [users.id],
+    }),
+    blocks: one(blocks, {
+      fields: [userCompletedBlocks.blockId],
+      references: [blocks.id],
+    }),
+  }),
+);

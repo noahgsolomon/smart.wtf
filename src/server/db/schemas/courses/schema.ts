@@ -7,7 +7,7 @@ import {
   varchar,
 } from "drizzle-orm/mysql-core";
 import { relations } from "drizzle-orm";
-import { users } from "../users/schema";
+import { userCompletedBlocks, users } from "../users/schema";
 
 export const courses = mysqlTable(
   "courses",
@@ -145,6 +145,7 @@ export const blocksRelations = relations(blocks, ({ one, many }) => ({
     references: [subSections.id],
   }),
   interactiveComponents: many(interactiveComponents),
+  userCompletedBlocks: many(userCompletedBlocks),
 }));
 
 export const interactiveComponents = mysqlTable("interactive_components", {
