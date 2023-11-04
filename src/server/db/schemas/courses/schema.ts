@@ -175,8 +175,7 @@ export const interactiveComponentsRelations = relations(
 
 export const quizzes = mysqlTable("quizzes", {
   id: int("id").primaryKey().autoincrement(),
-  interactiveComponentId: int("interactive_component_id").notNull(),
-  questionMarkdown: varchar("question_markdown", { length: 200 }).notNull(),
+  questionMarkdown: text("question_markdown").notNull(),
   optionOne: varchar("option_one", { length: 500 }).notNull(),
   optionTwo: varchar("option_two", { length: 500 }).notNull(),
   optionThree: varchar("option_three", { length: 500 }).notNull(),
@@ -188,24 +187,9 @@ export const quizzes = mysqlTable("quizzes", {
   explanationMarkdown: text("explanation_markdown").notNull(),
 });
 
-export const quizzesRelations = relations(quizzes, ({ one }) => ({
-  interactiveComponents: one(interactiveComponents, {
-    fields: [quizzes.interactiveComponentId],
-    references: [interactiveComponents.id],
-  }),
-}));
-
 export const questions = mysqlTable("questions", {
   id: int("id").primaryKey().autoincrement(),
-  interactiveComponentId: int("interactive_component_id").notNull(),
   questionMarkdown: text("question_markdown").notNull(),
 });
-
-export const questionsRelations = relations(questions, ({ one }) => ({
-  interactiveComponents: one(interactiveComponents, {
-    fields: [questions.interactiveComponentId],
-    references: [interactiveComponents.id],
-  }),
-}));
 
 // export const courseChapterSection
