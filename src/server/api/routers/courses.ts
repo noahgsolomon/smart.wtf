@@ -69,7 +69,16 @@ export const courseRouter = createTRPCRouter({
         where: eq(subSections.sectionId, input.sectionId),
 
         with: {
-          blocks: true,
+          blocks: {
+            with: {
+              interactiveComponents: {
+                columns: {
+                  type: true,
+                },
+                with: { quizzes: true, questions: true },
+              },
+            },
+          },
         },
       });
 
