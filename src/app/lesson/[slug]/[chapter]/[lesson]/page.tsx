@@ -7,6 +7,8 @@ import { api } from "@/trpc/server";
 import { redirect } from "next/navigation";
 import { buttonVariants } from "@/components/ui/button";
 import Link from "next/link";
+import Quiz from "@/app/lesson/components/interactive/quiz";
+import { ReactElement } from "react";
 
 export default async function Page({
   params,
@@ -37,34 +39,67 @@ export default async function Page({
 
   if (section.section === null) redirect("/404");
 
-  console.log("len", section.section.length);
-
-  const { content } = await compileMDX({
-    source:
-      section.section[subSection - 1]?.blocks
-        .map((block) => block.markdown)
-        .join("\n\n") ?? "",
-    options: {
-      mdxOptions: {
-        remarkPlugins: [remarkGfm],
-        rehypePlugins: [
-          slug,
-          [
-            rehypeAutolinkHeadings,
-            {
-              behavior: "wrap",
-            },
-          ],
-        ],
-      },
-    },
-  });
-
   return (
     <div className="flex justify-center px-4 pb-4 pt-28">
       <div className="prose prose-slate relative px-8 py-2 dark:prose-invert">
         <CopyButton />
-        {content}
+
+        {section.section[subSection - 1]?.blocks
+          .sort((a, b) => a.order - b.order)
+          .map(async (block) => {
+            let contentBlocksJSX: ReactElement = <></>;
+            const { content: markdownContent } = await compileMDX({
+              source: block.markdown,
+              options: {
+                mdxOptions: {
+                  remarkPlugins: [remarkGfm],
+                  rehypePlugins: [
+                    slug,
+                    [
+                      rehypeAutolinkHeadings,
+                      {
+                        behavior: "wrap",
+                      },
+                    ],
+                  ],
+                },
+              },
+            });
+
+            const quiz = block.interactiveComponents.map(async (component) => {
+              if (component.type === "QUIZ") {
+                const { content: explanation } = await compileMDX({
+                  source: component.quizzes?.explanationMarkdown!,
+                });
+                const { content: question } = await compileMDX({
+                  source: component.quizzes?.questionMarkdown!,
+                });
+                return (
+                  <Quiz
+                    content={question}
+                    explanation={explanation}
+                    options={[
+                      component.quizzes?.optionOne!,
+                      component.quizzes?.optionTwo!,
+                      component.quizzes?.optionThree!,
+                      component.quizzes?.optionFour!,
+                    ]}
+                    answer={component.quizzes?.correctOption!}
+                  />
+                );
+              } else {
+                return <></>;
+              }
+            });
+
+            return (
+              <>
+                {markdownContent}
+                {quiz}
+              </>
+            );
+          })}
+
         {section.section.length > subSection ? (
           <Link className={buttonVariants()} href={`?l=${subSection + 1}`}>
             Continue
