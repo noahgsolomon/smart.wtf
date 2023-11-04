@@ -20,21 +20,37 @@ const RadioGroup = React.forwardRef<
 });
 RadioGroup.displayName = RadioGroupPrimitive.Root.displayName;
 
+type RadioGroupItemProps = React.ComponentPropsWithoutRef<
+  typeof RadioGroupPrimitive.Item
+> & {
+  correct?: boolean;
+  incorrect?: boolean;
+};
+
 const RadioGroupItem = React.forwardRef<
   React.ElementRef<typeof RadioGroupPrimitive.Item>,
-  React.ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Item>
->(({ className, children, ...props }, ref) => {
+  RadioGroupItemProps
+>(({ className, correct, incorrect, children, ...props }, ref) => {
   return (
     <RadioGroupPrimitive.Item
       ref={ref}
       className={cn(
         "aspect-square h-4 w-4 rounded-full border border-primary text-primary shadow  hover:bg-primary/10 focus:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50",
+        `${
+          correct
+            ? "bg-success"
+            : incorrect
+            ? "bg-destructive hover:bg-destructive/60"
+            : ""
+        }`,
         className,
       )}
       {...props}
     >
       <RadioGroupPrimitive.Indicator className="flex items-center justify-center">
-        <CircleDot className="h-3.5 w-3.5 fill-primary" />
+        {!correct && !incorrect && (
+          <CircleDot className="h-3.5 w-3.5 fill-primary" />
+        )}
       </RadioGroupPrimitive.Indicator>
     </RadioGroupPrimitive.Item>
   );
