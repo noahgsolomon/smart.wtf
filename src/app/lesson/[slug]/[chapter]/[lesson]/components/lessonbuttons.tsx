@@ -3,8 +3,18 @@
 import { Button } from "@/components/ui/button";
 import { trpc } from "@/trpc/client";
 
-export default function LessonButtons({ block, subSection, section }: any) {
+export default function LessonButtons({
+  block,
+  subSection,
+  section,
+  params,
+}: any) {
   const blockMutate = trpc.course.setBlockCompleted.useMutation();
+  const sectionQuery = trpc.course.getCourseSection.useQuery({
+    sectionId: parseInt(
+      params.lesson && typeof params.lesson === "string" ? params.lesson : "1",
+    ),
+  });
 
   return (
     <>
@@ -14,6 +24,8 @@ export default function LessonButtons({ block, subSection, section }: any) {
             blockMutate.mutate({
               blockId: block.id,
             });
+            sectionQuery.remove();
+            sectionQuery.refetch();
           }}
         >
           Continue
@@ -24,6 +36,8 @@ export default function LessonButtons({ block, subSection, section }: any) {
             blockMutate.mutate({
               blockId: block.id,
             });
+            sectionQuery.remove();
+            sectionQuery.refetch();
           }}
         >
           Finish
