@@ -52,10 +52,10 @@ export const courseRouter = createTRPCRouter({
       }
 
       // Assuming sectionsPercentagesCompleted is already declared.
-      let sectionsPercentagesCompleted = [];
+      const sectionsPercentagesCompleted = [];
 
       for (const section of chapter.courseChapterSections ?? []) {
-        let subSectionsPercentagesCompleted = [];
+        const subSectionsPercentagesCompleted = [];
         for (const subSection of section.subSections ?? []) {
           let completedBlockCount = 0;
           for (const block of subSection.blocks ?? []) {
