@@ -10,6 +10,139 @@ import { z } from "zod";
 import { userCompletedBlocks } from "@/server/db/schemas/users/schema";
 
 export const courseRouter = createTRPCRouter({
+  getChapterProgress: protectedProcedure
+    .input(
+      z.object({
+        courseId: z.number(),
+        chapter: z.number(),
+      }),
+    )
+    .query(async ({ input, ctx }) => {
+      const chapter = await ctx.db.query.courseChapters.findFirst({
+        where: and(
+          eq(courseChapters.courseId, input.courseId),
+          eq(courseChapters.order, input.chapter),
+        ),
+        columns: { id: true },
+        with: {
+          courseChapterSections: {
+            columns: { id: true },
+            with: {
+              subSections: {
+                columns: { id: true },
+                with: {
+                  blocks: {
+                    columns: { id: true },
+                    with: {
+                      userCompletedBlocks: {
+                        columns: { id: true },
+                        where: eq(userCompletedBlocks.userId, ctx.user_id),
+                      },
+                    },
+                  },
+                },
+              },
+            },
+          },
+        },
+      });
+
+      if (!chapter) {
+        return { status: "ERROR", data: [] };
+      }
+
+      // Assuming sectionsPercentagesCompleted is already declared.
+      let sectionsPercentagesCompleted = [];
+
+      for (const section of chapter.courseChapterSections ?? []) {
+        let subSectionsPercentagesCompleted = [];
+        for (const subSection of section.subSections ?? []) {
+          let completedBlockCount = 0;
+          for (const block of subSection.blocks ?? []) {
+            if (block.userCompletedBlocks.length !== 0) {
+              completedBlockCount++;
+            }
+          }
+          // Guard against division by zero if there are no blocks.
+          const totalBlocks = subSection.blocks.length || 1;
+          const percentageCompleted =
+            totalBlocks > 0 ? (completedBlockCount / totalBlocks) * 100 : 0;
+
+          subSectionsPercentagesCompleted.push({
+            subSectionId: subSection.id,
+            percentageCompleted: percentageCompleted,
+          });
+        }
+
+        // Calculate the average completion percentage for the section.
+        const averagePercentageCompleted =
+          subSectionsPercentagesCompleted.reduce(
+            (acc, curr) => acc + curr.percentageCompleted,
+            0,
+          ) / (subSectionsPercentagesCompleted.length || 1); // Guard against division by zero if there are no subsections.
+
+        sectionsPercentagesCompleted.push({
+          sectionId: section.id,
+          percentageCompleted: averagePercentageCompleted,
+        });
+      }
+
+      // Do something with sectionsPercentagesCompleted, like returning it or logging it.
+      console.log(sectionsPercentagesCompleted);
+
+      return { status: "OK", data: sectionsPercentagesCompleted };
+    }),
+  isCourseStarted: protectedProcedure
+    .input(
+      z.object({
+        courseId: z.number(),
+      }),
+    )
+    .query(async ({ input, ctx }) => {
+      const course = await ctx.db.query.courses.findFirst({
+        where: eq(courses.id, input.courseId),
+        columns: { id: true },
+        with: {
+          courseChapters: {
+            columns: { id: true },
+            where: eq(courseChapters.order, 1),
+            with: {
+              courseChapterSections: {
+                columns: { id: true },
+                where: eq(subSections.order, 1),
+                with: {
+                  subSections: {
+                    columns: { id: true },
+                    with: {
+                      blocks: {
+                        columns: { id: true },
+                        with: {
+                          userCompletedBlocks: {
+                            columns: { id: true },
+                            where: eq(userCompletedBlocks.userId, ctx.user_id),
+                          },
+                        },
+                      },
+                    },
+                  },
+                },
+              },
+            },
+          },
+        },
+      });
+      for (const section of course?.courseChapters[0]?.courseChapterSections ??
+        []) {
+        for (const block of section?.subSections[0]?.blocks ?? []) {
+          if (block.userCompletedBlocks.length !== 0) {
+            return { isCourseStarted: true };
+          }
+        }
+      }
+
+      console.log(false);
+      return { isCourseStarted: false };
+    }),
   getCourses: protectedProcedure.query(async ({ ctx }) => {
     const courses = await ctx.db.query.courses.findMany({
       with: {

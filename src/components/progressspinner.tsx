@@ -1,4 +1,8 @@
-export default function ProgressSpinner({ progress = 0 }) {
+export default function ProgressSpinner({
+  progress = 0,
+}: {
+  progress: number;
+}) {
   // Ensure progress is between 0 and 100
   const strokePercent = Math.min(Math.max(progress, 0), 100);
   const radius = 45;
@@ -35,7 +39,7 @@ export default function ProgressSpinner({ progress = 0 }) {
         alignmentBaseline="middle"
         textAnchor="middle"
       >
-        {strokePercent}%
+        {strokePercent.toFixed(0)}%
       </text>
     </svg>
   );
