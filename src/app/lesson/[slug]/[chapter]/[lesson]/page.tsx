@@ -1,4 +1,3 @@
-import CopyButton from "./components/copybutton";
 import { compileMDX } from "next-mdx-remote/rsc";
 import remarkGfm from "remark-gfm";
 import slug from "rehype-slug";
@@ -41,7 +40,7 @@ export default async function Page({
   return (
     <div className="flex justify-center px-0 pb-4 pt-28 md:px-4">
       <div className="prose prose-slate relative px-8 py-2 dark:prose-invert">
-        <CopyButton />
+        {/* <CopyButton /> */}
 
         {section.section[subSection - 1]?.blocks
           .sort((a, b) => a.order - b.order)
@@ -109,20 +108,29 @@ export default async function Page({
                 {/* blockVisible && */}
                 {section.section[subSection - 1]?.blocks.length ===
                   block.order && (
-                  <Link
-                    href={`${
-                      section.section.length > subSection
-                        ? `?l=${subSection + 1}`
-                        : `/courses/${params.slug}/chapter-${params.chapter}`
-                    }`}
-                  >
-                    <LessonButtons
-                      params={params}
-                      block={block}
-                      section={section}
-                      subSection={subSection}
-                    />
-                  </Link>
+                  <>
+                    {section.section.length > subSection ? (
+                      <Link href={`?l=${subSection + 1}`}>
+                        <LessonButtons
+                          params={params}
+                          block={block}
+                          section={section}
+                          subSection={subSection}
+                        />
+                      </Link>
+                    ) : (
+                      <a
+                        href={`/courses/${params.slug}/chapter-${params.chapter}`}
+                      >
+                        <LessonButtons
+                          params={params}
+                          block={block}
+                          section={section}
+                          subSection={subSection}
+                        />
+                      </a>
+                    )}
+                  </>
                 )}
               </div>
             );

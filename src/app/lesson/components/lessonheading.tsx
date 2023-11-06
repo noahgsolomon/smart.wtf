@@ -38,14 +38,14 @@ export default function LessonHeading() {
 
   return (
     <div className="fixed left-0 right-0 top-0 z-20 flex w-screen flex-row items-center justify-between border-b border-border  bg-background py-2 shadow-sm md:px-10">
-      <Link
+      <a
         href={`/courses/${
           typeof params.slug === "string" ? params.slug : "unknown"
         }/chapter-${typeof params.chapter === "string" ? params.chapter : "1"}`}
         className={buttonVariants({ variant: "ghost" })}
       >
         <X className="h-4 w-4" />
-      </Link>
+      </a>
       <div className="flex h-4 w-[200px] flex-row md:w-[400px] ">
         {section?.map((s) => {
           console.log(Math.round((s.time / totalTime) * 100.0));
