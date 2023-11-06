@@ -78,7 +78,6 @@ export default function Quiz({
       });
       sectionQuery.remove();
       sectionQuery.refetch();
-      router.refresh();
       toast({
         title: "Correct",
         description: "You got it right!",
