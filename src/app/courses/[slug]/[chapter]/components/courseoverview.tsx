@@ -5,6 +5,7 @@ import Link from "next/link";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { redirect } from "next/navigation";
+import ProgressSpinner from "@/components/progressspinner";
 
 export default async function CourseOverview({
   params,
@@ -28,6 +29,13 @@ export default async function CourseOverview({
     console.log("undddddd");
     redirect("/404");
   }
+
+  const chapterProgress = await api.course.getChapterProgress.query({
+    courseId: course?.id,
+    chapter,
+  });
+
+  console.log(JSON.stringify(chapterProgress, null, 2));
 
   const chapterNum = course?.courseChapters[0]?.order ?? 1;
 
@@ -66,6 +74,7 @@ export default async function CourseOverview({
         {course?.courseChapters[0]?.courseChapterSections
           .sort((a, b) => a.order - b.order)
           .map((section, index) => {
+            console.log("section id", section.id);
             return (
               <Link
                 key={index}
@@ -86,6 +95,13 @@ export default async function CourseOverview({
                     <p className="max-w-[40ch] text-xs lg:text-sm">
                       {section.description}
                     </p>
+                    <ProgressSpinner
+                      progress={
+                        chapterProgress.data.find(
+                          (s) => s.sectionId === section.id,
+                        )?.percentageCompleted ?? 0
+                      }
+                    />
                   </div>
                   <div>
                     <Image
