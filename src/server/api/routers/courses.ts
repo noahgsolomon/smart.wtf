@@ -88,7 +88,6 @@ export const courseRouter = createTRPCRouter({
       }
 
       // Do something with sectionsPercentagesCompleted, like returning it or logging it.
-      console.log(sectionsPercentagesCompleted);
 
       return { status: "OK", data: sectionsPercentagesCompleted };
     }),
@@ -140,7 +139,6 @@ export const courseRouter = createTRPCRouter({
         }
       }
 
-      console.log(false);
       return { isCourseStarted: false };
     }),
   getCourses: protectedProcedure.query(async ({ ctx }) => {
@@ -227,6 +225,94 @@ export const courseRouter = createTRPCRouter({
       }
 
       return { section: section };
+    }),
+
+  setSubsectionCompleted: protectedProcedure
+    .input(z.object({ sectionId: z.number(), order: z.number() }))
+    .mutation(async ({ ctx, input }) => {
+      console.log(
+        `[${new Date().toISOString()}] - Start setSubsectionCompleted mutation`,
+      );
+      console.log(`[${new Date().toISOString()}] - Input received: `, input);
+
+      try {
+        console.log(
+          `[${new Date().toISOString()}] - Querying subsection with sectionId: ${
+            input.sectionId
+          } and order: ${input.order}`,
+        );
+        const subsection = await ctx.db.query.subSections.findFirst({
+          where: and(
+            eq(subSections.sectionId, input.sectionId),
+            eq(subSections.order, input.order),
+          ),
+          columns: { id: true },
+          with: {
+            blocks: {
+              columns: { id: true },
+              with: {
+                userCompletedBlocks: {
+                  columns: { id: true },
+                  where: eq(userCompletedBlocks.userId, ctx.user_id),
+                },
+              },
+            },
+          },
+        });
+
+        console.log(
+          `[${new Date().toISOString()}] - Subsection query result: `,
+          subsection,
+        );
+
+        if (!subsection) {
+          console.log(`[${new Date().toISOString()}] - No subsection found`);
+          return { status: "ERROR" };
+        }
+
+        for (const block of subsection.blocks) {
+          console.log(
+            `[${new Date().toISOString()}] - Processing block with ID: ${
+              block.id
+            }`,
+          );
+          if (block.userCompletedBlocks.length !== 0) {
+            console.log(
+              `[${new Date().toISOString()}] - Block ID: ${
+                block.id
+              } already completed by user ID: ${ctx.user_id}`,
+            );
+            continue;
+          }
+          console.log(
+            `[${new Date().toISOString()}] - Marking block ID: ${
+              block.id
+            } as completed for user ID: ${ctx.user_id}`,
+          );
+          await ctx.db.insert(userCompletedBlocks).values({
+            userId: ctx.user_id,
+            blockId: block.id,
+          });
+          console.log(
+            `[${new Date().toISOString()}] - Block ID: ${
+              block.id
+            } marked as completed`,
+          );
+        }
+
+        console.log(
+          `[${new Date().toISOString()}] - Completed processing all blocks for subsection ID: ${
+            input.sectionId
+          }`,
+        );
+        return { status: "OK" };
+      } catch (error) {
+        console.error(
+          `[${new Date().toISOString()}] - Error in setSubsectionCompleted mutation: `,
+          error,
+        );
+        return { status: "ERROR", error: error };
+      }
     }),
 
   setBlockCompleted: protectedProcedure

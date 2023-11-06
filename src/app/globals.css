@@ -267,8 +267,12 @@ h6 {
 }
 
 
-.prose a {
+.prose h1 a, .prose h2 a, .prose h3 a, .prose h4 a, .prose h5 a, .prose h6 a {
   @apply no-underline transition-all hover:opacity-90
+}
+
+.prose p a, .prose li a, .prose ul a {
+  @apply transition-all hover:opacity-90
 }
 
 /* .prose h2 a::before {
