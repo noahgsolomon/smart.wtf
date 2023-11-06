@@ -9,7 +9,7 @@ export default function LessonButtons({
   section,
   params,
 }: any) {
-  const blockMutate = trpc.course.setBlockCompleted.useMutation();
+  const subSectionMutate = trpc.course.setSubsectionCompleted.useMutation();
   const sectionQuery = trpc.course.getCourseSection.useQuery({
     sectionId: parseInt(
       params.lesson && typeof params.lesson === "string" ? params.lesson : "1",
@@ -21,8 +21,9 @@ export default function LessonButtons({
       {section.section.length > subSection ? (
         <Button
           onClick={() => {
-            blockMutate.mutate({
-              blockId: block.id,
+            subSectionMutate.mutate({
+              sectionId: parseInt(params.lesson),
+              order: subSection,
             });
             sectionQuery.remove();
             sectionQuery.refetch();
@@ -33,8 +34,9 @@ export default function LessonButtons({
       ) : (
         <Button
           onClick={() => {
-            blockMutate.mutate({
-              blockId: block.id,
+            subSectionMutate.mutate({
+              sectionId: parseInt(params.lesson),
+              order: subSection,
             });
             sectionQuery.remove();
             sectionQuery.refetch();
