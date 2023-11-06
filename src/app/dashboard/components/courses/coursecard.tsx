@@ -3,8 +3,11 @@ import { Circle } from "lucide-react";
 import Image from "next/image";
 import wtfCoin from "public/wtfcoin.png";
 import Link from "next/link";
+import { api } from "@/trpc/server";
+import { cn } from "@/lib/utils";
+import { Suspense } from "react";
 
-const CourseCard = ({
+const CourseCard = async ({
   course,
 }: {
   course: {
@@ -23,6 +26,10 @@ const CourseCard = ({
     }[];
   };
 }) => {
+  const isStarted = await api.course.isCourseStarted.query({
+    courseId: course.id,
+  });
+
   return (
     <div className="relative">
       <Badge className="absolute -left-2 -top-2 z-[1] rounded-lg">new</Badge>
@@ -61,8 +68,19 @@ const CourseCard = ({
             <div className="flex flex-row justify-between">
               <h2 className="text-xl">{course.name}</h2>
               <div className="flex flex-row items-center gap-1 rounded-lg bg-secondary p-1 text-xs font-bold text-opacity-60">
-                <Circle className="h-3 w-3 fill-blue text-secondary" />
-                STARTED
+                <Suspense fallback={<div></div>}>
+                  <Circle
+                    className={cn(
+                      "h-3 w-3 text-secondary",
+                      `${
+                        isStarted.isCourseStarted
+                          ? "fill-blue"
+                          : "fill-destructive"
+                      }`,
+                    )}
+                  />
+                  {isStarted.isCourseStarted ? "STARTED" : "NOT STARTED"}
+                </Suspense>
               </div>
             </div>
             <div className="max-w-[35ch] text-xs opacity-60">
