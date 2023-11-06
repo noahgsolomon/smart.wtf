@@ -1,7 +1,6 @@
 import { Badge } from "@/components/ui/badge";
 import { Circle } from "lucide-react";
 import Image from "next/image";
-import wtfCoin from "public/wtfcoin.png";
 import Link from "next/link";
 import { api } from "@/trpc/server";
 import { cn } from "@/lib/utils";
@@ -64,23 +63,27 @@ const CourseCard = async ({
             </div>
           </div>
 
-          <div className="flex min-h-[150px] flex-col justify-between gap-2 p-4">
-            <div className="flex flex-row justify-between">
-              <h2 className="text-xl">{course.name}</h2>
-              <div className="flex flex-row items-center gap-1 rounded-lg bg-secondary p-1 text-xs font-bold text-opacity-60">
-                <Suspense fallback={<div></div>}>
-                  <Circle
-                    className={cn(
-                      "h-3 w-3 text-secondary",
-                      `${
-                        isStarted.isCourseStarted
-                          ? "fill-blue"
-                          : "fill-destructive"
-                      }`,
-                    )}
-                  />
-                  {isStarted.isCourseStarted ? "STARTED" : "NOT STARTED"}
-                </Suspense>
+          <div className="flex min-h-[100px] flex-col justify-between gap-2 p-4">
+            <div className="flex flex-col justify-between gap-2">
+              <h2 className="text-2xl">{course.name}</h2>
+              <div className="flex">
+                <div className="flex flex-row items-center gap-1 rounded-lg bg-secondary p-1 text-xs font-bold text-opacity-60">
+                  <Suspense fallback={<div></div>}>
+                    <Circle
+                      className={cn(
+                        "h-2 w-2 text-secondary",
+                        `${
+                          isStarted.isCourseStarted
+                            ? "fill-blue"
+                            : "fill-destructive"
+                        }`,
+                      )}
+                    />
+                    <p>
+                      {isStarted.isCourseStarted ? "STARTED" : "NOT STARTED"}
+                    </p>
+                  </Suspense>
+                </div>
               </div>
             </div>
             <div className="max-w-[35ch] text-xs opacity-60">
@@ -98,8 +101,8 @@ const CourseCard = async ({
                 />
               </div>
             </div> */}
-            <div className="flex flex-row justify-between">
-              {/* <div className="flex flex-row items-center gap-2">
+            {/* <div className="flex flex-row justify-between"> */}
+            {/* <div className="flex flex-row items-center gap-2">
                 <div>
                   <Avatar className="h-[35px] w-[35px] border border-border">
                     <AvatarImage
@@ -119,11 +122,11 @@ const CourseCard = async ({
                   <h3 className="text-xs">Instructor</h3>
                 </div>
               </div> */}
-              <div className="group flex flex-row items-center rounded-lg border border-border bg-background p-1 transition-all hover:scale-105">
+            {/* <div className="group flex flex-row items-center rounded-lg border border-border bg-background p-1 transition-all hover:scale-105">
                 <Image width={30} height={30} src={wtfCoin} alt="wtf coin" />
                 <p className="text-sm"> + 500</p>
-              </div>
-            </div>
+              </div> */}
+            {/* </div> */}
           </div>
         </div>
       </Link>
