@@ -51,6 +51,8 @@ export default function Quiz({
     ),
   });
 
+  const [isFlipped, setIsFlipped] = useState(false);
+
   const mutateBlock = trpc.course.setBlockCompleted.useMutation();
 
   const form = useForm<z.infer<typeof FormSchema>>();
@@ -62,6 +64,11 @@ export default function Quiz({
       setGuessed((prev) => [...prev, answer]);
     }
   }, [completed, answer]);
+
+  const toggleFlip = () => {
+    setIsFlipped(!isFlipped);
+    setSide(side === "QUESTION" ? "ANSWER" : "QUESTION");
+  };
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
     setGuessed((prev) => {
@@ -79,132 +86,135 @@ export default function Quiz({
       toast({
         title: "Correct",
         description: "You got it right!",
+        variant: "success",
       });
     }
   }
 
   return (
     <div className="p-4">
-      <div className="rounded-lg border border-border px-4 py-0">
-        {side === "QUESTION" ? (
-          <>
-            <div>{content}</div>
-            <Form {...form}>
-              <form
-                onSubmit={form.handleSubmit(onSubmit)}
-                className="w-2/3 space-y-6"
-              >
-                <FormField
-                  control={form.control}
-                  name="answer"
-                  render={({ field }) => (
-                    <FormItem className="space-y-3">
-                      <FormControl>
-                        <RadioGroup
-                          onValueChange={field.onChange}
-                          defaultValue={field.value}
-                          className="flex flex-col space-y-1"
-                        >
-                          {options.map((option, index) => {
-                            return (
-                              <FormItem
-                                key={index}
-                                className="flex items-center space-x-3 space-y-0"
-                              >
-                                <FormControl>
-                                  <RadioGroupItem
-                                    disabled={
-                                      guessed.includes(
+      <div className="card-container">
+        <div className={`card ${isFlipped ? "is-flipped" : ""}`}>
+          {side === "QUESTION" ? (
+            <div className="front">
+              <div>{content}</div>
+              <Form {...form}>
+                <form
+                  onSubmit={form.handleSubmit(onSubmit)}
+                  className="w-2/3 space-y-6"
+                >
+                  <FormField
+                    control={form.control}
+                    name="answer"
+                    render={({ field }) => (
+                      <FormItem className="space-y-3">
+                        <FormControl>
+                          <RadioGroup
+                            onValueChange={field.onChange}
+                            defaultValue={field.value}
+                            className="flex flex-col space-y-1"
+                          >
+                            {options.map((option, index) => {
+                              return (
+                                <FormItem
+                                  key={index}
+                                  className="flex items-center space-x-3 space-y-0"
+                                >
+                                  <FormControl>
+                                    <RadioGroupItem
+                                      disabled={
+                                        guessed.includes(
+                                          index === 0
+                                            ? "ONE"
+                                            : index === 1
+                                            ? "TWO"
+                                            : index === 2
+                                            ? "THREE"
+                                            : "FOUR",
+                                        ) || guessed.includes(answer)
+                                      }
+                                      correct={
+                                        index === 0
+                                          ? answer === "ONE" &&
+                                            guessed.includes("ONE")
+                                          : index === 1
+                                          ? answer === "TWO" &&
+                                            guessed.includes("TWO")
+                                          : index === 2
+                                          ? answer === "THREE" &&
+                                            guessed.includes("THREE")
+                                          : answer === "FOUR" &&
+                                            guessed.includes("FOUR")
+                                      }
+                                      incorrect={
+                                        index === 0
+                                          ? answer !== "ONE" &&
+                                            guessed.includes("ONE")
+                                          : index === 1
+                                          ? answer !== "TWO" &&
+                                            guessed.includes("TWO")
+                                          : index === 2
+                                          ? answer !== "THREE" &&
+                                            guessed.includes("THREE")
+                                          : answer !== "FOUR" &&
+                                            guessed.includes("FOUR")
+                                      }
+                                      value={
                                         index === 0
                                           ? "ONE"
                                           : index === 1
                                           ? "TWO"
                                           : index === 2
                                           ? "THREE"
-                                          : "FOUR",
-                                      ) || guessed.includes(answer)
-                                    }
-                                    correct={
-                                      index === 0
-                                        ? answer === "ONE" &&
-                                          guessed.includes("ONE")
-                                        : index === 1
-                                        ? answer === "TWO" &&
-                                          guessed.includes("TWO")
-                                        : index === 2
-                                        ? answer === "THREE" &&
-                                          guessed.includes("THREE")
-                                        : answer === "FOUR" &&
-                                          guessed.includes("FOUR")
-                                    }
-                                    incorrect={
-                                      index === 0
-                                        ? answer !== "ONE" &&
-                                          guessed.includes("ONE")
-                                        : index === 1
-                                        ? answer !== "TWO" &&
-                                          guessed.includes("TWO")
-                                        : index === 2
-                                        ? answer !== "THREE" &&
-                                          guessed.includes("THREE")
-                                        : answer !== "FOUR" &&
-                                          guessed.includes("FOUR")
-                                    }
-                                    value={
-                                      index === 0
-                                        ? "ONE"
-                                        : index === 1
-                                        ? "TWO"
-                                        : index === 2
-                                        ? "THREE"
-                                        : "FOUR"
-                                    }
-                                  />
-                                </FormControl>
-                                <FormLabel className="text-lg">
-                                  {option}
-                                </FormLabel>
-                              </FormItem>
-                            );
-                          })}
-                        </RadioGroup>
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <div className="flex flex-row gap-2 py-6">
-                  {!guessed.includes(answer) ? (
-                    <Button type="submit">Check</Button>
-                  ) : null}
-                  <Button
-                    type="button"
-                    variant={"secondary"}
-                    onClick={() => {
-                      setSide("ANSWER");
-                    }}
-                  >
-                    Show Explanation
-                  </Button>
-                </div>
-              </form>
-            </Form>
-          </>
-        ) : (
-          <div>
-            {explanation}
-            <div className="flex flex-row gap-2 py-6">
-              <Button
-                variant={"secondary"}
-                onClick={() => {
-                  setSide("QUESTION");
-                }}
-              >
-                Back to problem
-              </Button>
+                                          : "FOUR"
+                                      }
+                                    />
+                                  </FormControl>
+                                  <FormLabel className="text-lg">
+                                    {option}
+                                  </FormLabel>
+                                </FormItem>
+                              );
+                            })}
+                          </RadioGroup>
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <div className="flex flex-row gap-2 py-6">
+                    {!guessed.includes(answer) ? (
+                      <Button type="submit">Check</Button>
+                    ) : null}
+                    <Button
+                      type="button"
+                      variant={"secondary"}
+                      onClick={() => {
+                        toggleFlip();
+                      }}
+                    >
+                      Show Explanation
+                    </Button>
+                  </div>
+                </form>
+              </Form>
             </div>
-          </div>
-        )}
+          ) : (
+            <div className="back">
+              {explanation}
+              <div className="flex flex-row gap-2 py-6">
+                <Button
+                  variant={"secondary"}
+                  onClick={() => {
+                    toggleFlip();
+                  }}
+                >
+                  Back to problem
+                </Button>
+              </div>
+            </div>
+          )}
+        </div>
       </div>
       <Toaster />
     </div>

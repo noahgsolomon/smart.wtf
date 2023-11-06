@@ -277,7 +277,7 @@ h6 {
 } */
 
 .prose img {
-  @apply mx-auto my-0 rounded-lg border border-border w-[50%]
+  @apply mx-auto my-0 rounded-lg w-[75%] max-w-[500px] h-auto;
 }
 
 /* .prose h2 a:hover::before {
@@ -299,4 +299,41 @@ h6 {
 :target {
   scroll-margin-top: 75px;
   /* Adjust this value to match your navbar's height */
+}
+
+/* The container for the card */
+.card-container {
+  perspective: 1000px;
+  /* Create perspective */
+}
+
+/* The card itself */
+.card {
+  width: 100%;
+  /* Set card width */
+  height: 100%;
+  /* Set card height */
+  position: relative;
+  transform-style: preserve-3d;
+  /* Preserve 3d transformations */
+  transition: transform 0.4s;
+  /* Animate the transform property */
+}
+
+/* The flipping state */
+.card.is-flipped {
+  transform: rotateY(-180deg);
+  /* Flip the card */
+}
+
+/* The front and back sides of the card */
+.front,
+.back {
+  @apply p-4 rounded-lg border border-border shadow-sm w-full h-full bg-card
+  /* Hide the back side of the card when facing away */
+}
+
+/* Position the back side */
+.back {
+  transform: rotateY(180deg);
 }

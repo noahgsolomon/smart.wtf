@@ -22,7 +22,9 @@ export default function ProgressSpinner({
         className="stroke-secondary"
       />
       <circle
-        className="progress-circle stroke-blue"
+        className={`progress-circle ${
+          progress === 100 ? "stroke-success" : "stroke-blue"
+        }`}
         cx="50"
         cy="50"
         r={radius}
