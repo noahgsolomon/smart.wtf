@@ -3,7 +3,7 @@
 import { useSectionContext } from "@/app/lesson/sectioncontext";
 import { Button } from "@/components/ui/button";
 import { trpc } from "@/trpc/client";
-import { Section } from "@/types";
+import { type Section } from "@/types";
 
 export default function LessonButtons({
   subSection,

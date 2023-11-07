@@ -1,13 +1,13 @@
 "use client";
 
-import { Section } from "@/types";
+import { type Section } from "@/types";
 import React, {
   createContext,
   useContext,
   useState,
-  ReactNode,
-  Dispatch,
-  SetStateAction,
+  type ReactNode,
+  type Dispatch,
+  type SetStateAction,
 } from "react";
 
 type SectionContextType = {

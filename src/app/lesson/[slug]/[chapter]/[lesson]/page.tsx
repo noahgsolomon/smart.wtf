@@ -60,7 +60,7 @@ export default function Page({
                 const markdown = (
                   <Markdown
                     components={{
-                      img: ({ node, ...props }) => (
+                      img: ({ ...props }) => (
                         <Image
                           className="rounded-lg"
                           src={
@@ -95,7 +95,7 @@ export default function Page({
                     const explanation = (
                       <Markdown
                         components={{
-                          img: ({ node, ...props }) => (
+                          img: ({ ...props }) => (
                             <Image
                               src={
                                 props.src ??
@@ -114,7 +114,7 @@ export default function Page({
                     const question = (
                       <Markdown
                         components={{
-                          img: ({ node, ...props }) => (
+                          img: ({ ...props }) => (
                             <Image
                               src={
                                 props.src ??
