@@ -12,6 +12,7 @@ import Markdown from "react-markdown";
 import Quiz from "@/app/lesson/components/interactive/quiz";
 import { type Section } from "@/types";
 import LessonHeading from "@/app/lesson/components/lessonheading";
+import { useSectionContext } from "@/app/lesson/sectioncontext";
 
 export default function Page({
   params,
@@ -31,7 +32,7 @@ export default function Page({
     ),
   });
 
-  const [section, setSection] = useState<Section[]>([]);
+  const { section, setSection } = useSectionContext();
 
   useEffect(() => {
     if (!sectionQuery.isLoading) {
@@ -88,7 +89,6 @@ export default function Page({
                     return (
                       <Quiz
                         subSection={lessonNumber}
-                        setSection={setSection}
                         params={params}
                         blockId={block.id}
                         completed={block.userCompletedBlocks.length > 0}
@@ -129,7 +129,6 @@ export default function Page({
                         {section.length > lessonNumber ? (
                           <Link href={`?l=${lessonNumber + 1}`}>
                             <LessonButtons
-                              setSection={setSection}
                               params={params}
                               section={section}
                               subSection={lessonNumber}
@@ -140,7 +139,6 @@ export default function Page({
                             href={`/courses/${params.slug}/chapter-${params.chapter}`}
                           >
                             <LessonButtons
-                              setSection={setSection}
                               params={params}
                               section={section}
                               subSection={lessonNumber}

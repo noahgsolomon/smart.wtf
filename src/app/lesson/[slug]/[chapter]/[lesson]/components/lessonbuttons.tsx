@@ -1,22 +1,21 @@
 "use client";
 
+import { useSectionContext } from "@/app/lesson/sectioncontext";
 import { Button } from "@/components/ui/button";
 import { trpc } from "@/trpc/client";
 import { Section } from "@/types";
-import { type Dispatch, type SetStateAction } from "react";
 
 export default function LessonButtons({
   subSection,
-  setSection,
   section,
   params,
 }: {
   section: Section[];
-  setSection: Dispatch<SetStateAction<Section[]>>;
   subSection: number;
   params: { lesson: string; slug: string; chapter: string };
 }) {
   const subSectionMutate = trpc.course.setSubsectionCompleted.useMutation();
+  const { setSection } = useSectionContext();
 
   const handleContinue = () => {
     subSectionMutate.mutate({

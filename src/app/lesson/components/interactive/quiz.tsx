@@ -24,9 +24,9 @@ import { Toaster } from "@/components/ui/toaster";
 import { useToast } from "@/components/ui/use-toast";
 import { trpc } from "@/trpc/client";
 import { type Section } from "@/types";
+import { useSectionContext } from "../../sectioncontext";
 
 export default function Quiz({
-  setSection,
   subSection,
   blockId,
   content,
@@ -36,7 +36,6 @@ export default function Quiz({
   completed,
   params,
 }: {
-  setSection: Dispatch<SetStateAction<Section[]>>;
   subSection: number;
   blockId: number;
   content: ReactElement;
@@ -80,6 +79,8 @@ export default function Quiz({
     setIsFlipped(!isFlipped);
     setSide(side === "QUESTION" ? "ANSWER" : "QUESTION");
   };
+
+  const { setSection } = useSectionContext();
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
     setGuessed((prev) => {
