@@ -3,7 +3,6 @@
 import { redirect } from "next/navigation";
 import { trpc } from "@/trpc/client";
 import { useEffect } from "react";
-import rehypePrettyCode from "rehype-pretty-code";
 import remarkGfm from "remark-gfm";
 import slug from "rehype-slug";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
@@ -11,10 +10,10 @@ import LessonButtons from "./components/lessonbuttons";
 import Link from "next/link";
 import Markdown from "react-markdown";
 import Quiz from "@/app/lesson/components/interactive/quiz";
-import { type Section } from "@/types";
 import LessonHeading from "@/app/lesson/components/lessonheading";
 import { useSectionContext } from "@/app/lesson/sectioncontext";
 import rehypeHighlight from "rehype-highlight";
+import Image from "next/image";
 
 export default function Page({
   params,
@@ -60,6 +59,22 @@ export default function Page({
               .map((block, index) => {
                 const markdown = (
                   <Markdown
+                    components={{
+                      img: ({ node, ...props }) => (
+                        <Image
+                          className="rounded-lg"
+                          src={
+                            props.src ??
+                            "https://images.codefoli.com/smartwtf.png"
+                          }
+                          alt={props.alt ?? "smartwtf"}
+                          priority={true}
+                          layout="responsive"
+                          width={1792}
+                          height={1024}
+                        />
+                      ),
+                    }}
                     remarkPlugins={[remarkGfm]}
                     rehypePlugins={[
                       slug,
@@ -78,13 +93,39 @@ export default function Page({
                 const quiz = block.interactiveComponents.map((component) => {
                   if (component.type === "QUIZ") {
                     const explanation = (
-                      <Markdown>
+                      <Markdown
+                        components={{
+                          img: ({ node, ...props }) => (
+                            <Image
+                              src={
+                                props.src ??
+                                "https://images.codefoli.com/smartwtf.png"
+                              }
+                              alt={props.alt ?? "smartwtf"}
+                              layout="responsive"
+                            />
+                          ),
+                        }}
+                      >
                         {component.quizzes?.explanationMarkdown ??
                           "## no explanation right now, sorry :("}
                       </Markdown>
                     );
                     const question = (
-                      <Markdown>
+                      <Markdown
+                        components={{
+                          img: ({ node, ...props }) => (
+                            <Image
+                              src={
+                                props.src ??
+                                "https://images.codefoli.com/smartwtf.png"
+                              }
+                              alt={props.alt ?? "smartwtf"}
+                              layout="responsive"
+                            />
+                          ),
+                        }}
+                      >
                         {component.quizzes?.questionMarkdown ??
                           "## no question right now, sorry :("}
                       </Markdown>
