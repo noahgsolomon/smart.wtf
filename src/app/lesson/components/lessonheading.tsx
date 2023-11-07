@@ -48,7 +48,6 @@ export default function LessonHeading() {
       </a>
       <div className="flex h-4 w-[200px] flex-row md:w-[400px] ">
         {section?.map((s) => {
-          console.log(Math.round((s.time / totalTime) * 100.0));
           return (
             <HoverCard key={s.id} openDelay={0} closeDelay={0}>
               <Link

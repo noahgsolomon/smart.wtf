@@ -14,8 +14,6 @@ const ChatButton = ({
 }) => {
   const pathname = usePathname();
 
-  console.log("QUEERRRY", query);
-
   return (
     <>
       {pathname === `/lesson/chat?${query}` || pathname === `/chat?${query}` ? (
