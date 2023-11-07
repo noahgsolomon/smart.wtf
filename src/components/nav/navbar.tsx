@@ -11,7 +11,6 @@ import UserButton from "./UserButton";
 import ChatButton from "./chatbutton";
 import { usePathname } from "next/navigation";
 import { trpc } from "@/trpc/client";
-import LessonHeading from "@/app/lesson/components/lessonheading";
 
 const NavBar = () => {
   const { userId } = useAuth();
@@ -117,9 +116,7 @@ const NavBar = () => {
             </div>
           </div>
         </header>
-      ) : (
-        <LessonHeading />
-      )}
+      ) : null}
     </>
   );
 };
