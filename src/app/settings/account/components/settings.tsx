@@ -1,7 +1,7 @@
 "use client";
 
 import AvatarUpload from "./avatarupload";
-import { Toaster } from "@/components/ui/toaster";
+import { Toaster } from "react-hot-toast";
 import SettingsInput from "./settingsinput";
 import SettingsActionButtons from "./settingsactionbuttons";
 

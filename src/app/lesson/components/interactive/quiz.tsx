@@ -11,20 +11,13 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import {
-  type ReactElement,
-  useState,
-  useEffect,
-  type Dispatch,
-  type SetStateAction,
-} from "react";
+import { type ReactElement, useState, useEffect } from "react";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
-import { Toaster } from "@/components/ui/toaster";
-import { useToast } from "@/components/ui/use-toast";
 import { trpc } from "@/trpc/client";
-import { type Section } from "@/types";
 import { useSectionContext } from "../../sectioncontext";
+import { useRouter } from "next/navigation";
+import toast, { Toaster } from "react-hot-toast";
 
 export default function Quiz({
   subSection,
@@ -49,7 +42,7 @@ export default function Quiz({
     answer: z.enum(["ONE", "TWO", "THREE", "FOUR"]),
   });
 
-  const { toast } = useToast();
+  const notify = () => toast.success("correct!");
 
   const [guessed, setGuessed] = useState<("ONE" | "TWO" | "THREE" | "FOUR")[]>(
     [],
@@ -67,6 +60,8 @@ export default function Quiz({
 
   const form = useForm<z.infer<typeof FormSchema>>();
 
+  const router = useRouter();
+
   const [side, setSide] = useState<"QUESTION" | "ANSWER">("QUESTION");
 
   useEffect(() => {
@@ -80,7 +75,7 @@ export default function Quiz({
     setSide(side === "QUESTION" ? "ANSWER" : "QUESTION");
   };
 
-  const { setSection } = useSectionContext();
+  const { section, setSection } = useSectionContext();
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
     setGuessed((prev) => {
@@ -116,18 +111,38 @@ export default function Quiz({
         });
       });
 
-      toast({
-        title: "Correct",
-        description: "You got it right!",
-        variant: "success",
-      });
-      setTimeout(() => {
-        window.scrollBy({
-          top: 800,
-          behavior: "smooth",
-        });
-      }, 100);
+      notify();
       sectionQuery.refetch();
+      const currentBlock = section[subSection - 1]?.blocks.find(
+        (b) => b.id === blockId,
+      );
+      const currentBlockOrder = currentBlock?.order ?? 0;
+
+      const totalBlocksInPreviousSections = section
+        .slice(0, subSection - 1)
+        .reduce(
+          (total, currentSection) => total + currentSection.blocks.length,
+          0,
+        );
+      const globalCurrentBlockOrder =
+        totalBlocksInPreviousSections + currentBlockOrder;
+
+      console.log("currentBlockOrder", currentBlockOrder);
+      console.log(
+        "section[subSection - 1]?.blocks.length ?? 0",
+        section[subSection - 1]?.blocks.length ?? 0,
+      );
+
+      const isNotLastBlockInSubsection =
+        currentBlockOrder < (section[subSection - 1]?.blocks.length ?? 0);
+
+      console.log(globalCurrentBlockOrder + 1);
+
+      if (isNotLastBlockInSubsection) {
+        setTimeout(() => {
+          router.push(`#${globalCurrentBlockOrder + 1}`);
+        }, 100);
+      }
     }
   }
 

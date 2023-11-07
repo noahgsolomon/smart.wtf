@@ -1,5 +1,5 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { useToast } from "@/components/ui/use-toast";
+import toast from "react-hot-toast";
 import { useClerk, useUser } from "@clerk/nextjs";
 import { ArrowLeft } from "lucide-react";
 import { type ChangeEvent, useRef, useState } from "react";
@@ -7,8 +7,6 @@ import { type ChangeEvent, useRef, useState } from "react";
 const AvatarUpload = () => {
   const clerk = useClerk();
   const user = useUser();
-
-  const { toast } = useToast();
 
   const [dragging, setDragging] = useState(false);
 
@@ -18,11 +16,7 @@ const AvatarUpload = () => {
     const file = event.target.files?.item(0);
     if (file) {
       await clerk.user?.setProfileImage({ file });
-      toast({
-        title: "Success",
-        description: "Profile image updated",
-        variant: "success",
-      });
+      toast.success("Profile image updated");
     }
   };
 
@@ -46,17 +40,9 @@ const AvatarUpload = () => {
       const file = event.dataTransfer.items[0].getAsFile();
       if (file && (file.type === "image/png" || file.type === "image/jpeg")) {
         await clerk.user?.setProfileImage({ file });
-        toast({
-          title: "Success",
-          description: "Profile image updated",
-          variant: "success",
-        });
+        toast.success("Profile image updated");
       } else {
-        toast({
-          title: "Error",
-          description: "Invalid file type",
-          variant: "destructive",
-        });
+        toast.error("invalid file type");
       }
     }
   };

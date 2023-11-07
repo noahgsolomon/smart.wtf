@@ -2,7 +2,8 @@
 
 import { redirect } from "next/navigation";
 import { trpc } from "@/trpc/client";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import rehypePrettyCode from "rehype-pretty-code";
 import remarkGfm from "remark-gfm";
 import slug from "rehype-slug";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
@@ -13,6 +14,7 @@ import Quiz from "@/app/lesson/components/interactive/quiz";
 import { type Section } from "@/types";
 import LessonHeading from "@/app/lesson/components/lessonheading";
 import { useSectionContext } from "@/app/lesson/sectioncontext";
+import rehypeHighlight from "rehype-highlight";
 
 export default function Page({
   params,
@@ -67,6 +69,7 @@ export default function Page({
                           behavior: "wrap",
                         },
                       ],
+                      rehypeHighlight,
                     ]}
                   >
                     {block.markdown}
