@@ -176,6 +176,7 @@ export const courseRouter = createTRPCRouter({
               courseChapterSections: {
                 columns: {
                   id: true,
+                  implemented: true,
                   name: true,
                   description: true,
                   imageUrl: true,
