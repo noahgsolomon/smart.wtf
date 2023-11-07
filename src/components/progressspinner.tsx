@@ -10,7 +10,7 @@ export default function ProgressSpinner({
   const offset = circumference - (strokePercent / 100) * circumference;
 
   return (
-    <svg fill="none" height="32" width="32" viewBox="0 0 100 100">
+    <svg fill="none" height="40" width="40" viewBox="0 0 100 100">
       <circle
         cx="50"
         cy="50"

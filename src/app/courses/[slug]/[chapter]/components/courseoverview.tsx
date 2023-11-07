@@ -26,7 +26,6 @@ export default async function CourseOverview({
   ).course;
 
   if (course === null) {
-    console.log("undddddd");
     redirect("/404");
   }
 
@@ -34,8 +33,6 @@ export default async function CourseOverview({
     courseId: course?.id,
     chapter,
   });
-
-  console.log(JSON.stringify(chapterProgress, null, 2));
 
   const chapterNum = course?.courseChapters[0]?.order ?? 1;
 
@@ -91,13 +88,15 @@ export default async function CourseOverview({
                 </div>
               )}
               <div className="flex flex-col justify-between sm:flex-row">
-                <div className="flex flex-col gap-2 px-4 py-2">
-                  <h3 className="max-w-[20ch] text-base font-bold lg:text-lg">
-                    {section.name}
-                  </h3>
-                  <p className="max-w-[40ch] text-xs lg:text-sm">
-                    {section.description}
-                  </p>
+                <div className="flex flex-col gap-2 px-4 py-2 sm:flex-row lg:flex-col">
+                  <div>
+                    <h3 className="max-w-[20ch] text-base font-bold lg:text-lg">
+                      {section.name}
+                    </h3>
+                    <p className="max-w-[40ch] text-xs lg:text-sm">
+                      {section.description}
+                    </p>
+                  </div>
                   <ProgressSpinner
                     progress={
                       chapterProgress.data.find(
