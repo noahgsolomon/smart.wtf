@@ -1,4 +1,5 @@
 import {
+  boolean,
   int,
   mysqlTable,
   text,
@@ -91,6 +92,7 @@ export const courseChapterSections = mysqlTable("course_chapter_sections", {
   name: varchar("name", { length: 200 }).notNull(),
   description: varchar("description", { length: 500 }).notNull(),
   imageUrl: varchar("image_url", { length: 200 }).notNull(),
+  implemented: boolean("implemented").notNull().default(false),
 });
 
 export const courseChapterSectionsRelations = relations(
