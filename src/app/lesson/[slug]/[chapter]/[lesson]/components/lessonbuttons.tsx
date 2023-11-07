@@ -3,12 +3,49 @@
 import { Button } from "@/components/ui/button";
 import { trpc } from "@/trpc/client";
 
+type Section = {
+  id: number;
+  name: string;
+  order: number;
+  sectionId: number;
+  time: number;
+  blocks: {
+    id: number;
+    subSectionId: number;
+    order: number;
+    markdown: string;
+    interactiveComponents: {
+      type: "QUIZ" | "QUESTION";
+      quizzes: {
+        id: number;
+        questionMarkdown: string;
+        optionOne: string;
+        optionTwo: string;
+        optionThree: string;
+        optionFour: string;
+        correctOption: "ONE" | "TWO" | "THREE" | "FOUR";
+        explanationMarkdown: string;
+      } | null;
+      questions: {
+        id: number;
+        questionMarkdown: string;
+      } | null;
+    }[];
+    userCompletedBlocks: {
+      blockId: number;
+    }[];
+  }[];
+};
+
 export default function LessonButtons({
-  block,
   subSection,
   section,
   params,
-}: any) {
+}: {
+  section: Section[];
+  subSection: number;
+  params: { lesson: string; slug: string; chapter: string };
+}) {
   const subSectionMutate = trpc.course.setSubsectionCompleted.useMutation();
   const sectionQuery = trpc.course.getCourseSection.useQuery({
     sectionId: parseInt(
@@ -18,7 +55,7 @@ export default function LessonButtons({
 
   return (
     <>
-      {section.section.length > subSection ? (
+      {section.length > subSection ? (
         <Button
           onClick={() => {
             subSectionMutate.mutate({
