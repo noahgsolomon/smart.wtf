@@ -11,15 +11,23 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { type ReactElement, useState, useEffect } from "react";
+import {
+  type ReactElement,
+  useState,
+  useEffect,
+  type Dispatch,
+  type SetStateAction,
+} from "react";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { Toaster } from "@/components/ui/toaster";
 import { useToast } from "@/components/ui/use-toast";
 import { trpc } from "@/trpc/client";
+import { type Section } from "@/types";
 
 export default function Quiz({
-  refetch,
+  setSection,
+  subSection,
   blockId,
   content,
   explanation,
@@ -28,7 +36,8 @@ export default function Quiz({
   completed,
   params,
 }: {
-  refetch: () => void;
+  setSection: Dispatch<SetStateAction<Section[]>>;
+  subSection: number;
   blockId: number;
   content: ReactElement;
   explanation: ReactElement;
@@ -83,14 +92,41 @@ export default function Quiz({
       mutateBlock.mutate({
         blockId,
       });
-      refetch();
-      sectionQuery.remove();
-      sectionQuery.refetch();
+
+      setSection((prev) => {
+        return prev.map((section, index) => {
+          if (index === subSection - 1) {
+            const updatedBlocks = section.blocks.map((block) => {
+              if (block.id === blockId) {
+                const updatedUserCompletedBlocks = [
+                  ...block.userCompletedBlocks,
+                  { blockId: blockId },
+                ];
+                return {
+                  ...block,
+                  userCompletedBlocks: updatedUserCompletedBlocks,
+                };
+              }
+              return block;
+            });
+            return { ...section, blocks: updatedBlocks };
+          }
+          return section;
+        });
+      });
+
       toast({
         title: "Correct",
         description: "You got it right!",
         variant: "success",
       });
+      setTimeout(() => {
+        window.scrollBy({
+          top: 800,
+          behavior: "smooth",
+        });
+      }, 100);
+      sectionQuery.refetch();
     }
   }
 
