@@ -11,3 +11,37 @@ export type UserSubscriptionPlan = SubscriptionPlan &
     stripeCurrentPeriodEnd: Date;
     subscribed: boolean;
   };
+
+export type Section = {
+  id: number;
+  name: string;
+  order: number;
+  sectionId: number;
+  time: number;
+  blocks: {
+    id: number;
+    subSectionId: number;
+    order: number;
+    markdown: string;
+    interactiveComponents: {
+      type: "QUIZ" | "QUESTION";
+      quizzes: {
+        id: number;
+        questionMarkdown: string;
+        optionOne: string;
+        optionTwo: string;
+        optionThree: string;
+        optionFour: string;
+        correctOption: "ONE" | "TWO" | "THREE" | "FOUR";
+        explanationMarkdown: string;
+      } | null;
+      questions: {
+        id: number;
+        questionMarkdown: string;
+      } | null;
+    }[];
+    userCompletedBlocks: {
+      blockId: number;
+    }[];
+  }[];
+};
