@@ -13,23 +13,15 @@ import {
   HoverCardContent,
   HoverCardTrigger,
 } from "@/components/ui/hover-card";
-import { trpc } from "@/trpc/client";
 import ThemeButton from "@/components/nav/theme";
 import ChatButton from "@/components/nav/chatbutton";
 import { cn } from "@/lib/utils";
+import { type Section } from "@/types";
 
-export default function LessonHeading() {
+export default function LessonHeading({ section }: { section: Section[] }) {
   const pathname = usePathname();
   const params = useParams();
   const searchParams = useSearchParams();
-
-  const sectionQuery = trpc.course.getCourseSection.useQuery({
-    sectionId: parseInt(
-      params.lesson && typeof params.lesson === "string" ? params.lesson : "1",
-    ),
-  });
-
-  const section = sectionQuery.data?.section;
 
   const totalTime =
     section?.reduce((total, s) => {

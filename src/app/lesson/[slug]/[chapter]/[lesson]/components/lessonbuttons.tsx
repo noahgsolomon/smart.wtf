@@ -2,85 +2,47 @@
 
 import { Button } from "@/components/ui/button";
 import { trpc } from "@/trpc/client";
-
-type Section = {
-  id: number;
-  name: string;
-  order: number;
-  sectionId: number;
-  time: number;
-  blocks: {
-    id: number;
-    subSectionId: number;
-    order: number;
-    markdown: string;
-    interactiveComponents: {
-      type: "QUIZ" | "QUESTION";
-      quizzes: {
-        id: number;
-        questionMarkdown: string;
-        optionOne: string;
-        optionTwo: string;
-        optionThree: string;
-        optionFour: string;
-        correctOption: "ONE" | "TWO" | "THREE" | "FOUR";
-        explanationMarkdown: string;
-      } | null;
-      questions: {
-        id: number;
-        questionMarkdown: string;
-      } | null;
-    }[];
-    userCompletedBlocks: {
-      blockId: number;
-    }[];
-  }[];
-};
+import { Section } from "@/types";
+import { type Dispatch, type SetStateAction } from "react";
 
 export default function LessonButtons({
   subSection,
+  setSection,
   section,
   params,
 }: {
   section: Section[];
+  setSection: Dispatch<SetStateAction<Section[]>>;
   subSection: number;
   params: { lesson: string; slug: string; chapter: string };
 }) {
   const subSectionMutate = trpc.course.setSubsectionCompleted.useMutation();
-  const sectionQuery = trpc.course.getCourseSection.useQuery({
-    sectionId: parseInt(
-      params.lesson && typeof params.lesson === "string" ? params.lesson : "1",
-    ),
-  });
+
+  const handleContinue = () => {
+    subSectionMutate.mutate({
+      sectionId: parseInt(params.lesson),
+      order: subSection,
+    });
+    setSection((prev) => {
+      const newSections = JSON.parse(JSON.stringify(prev));
+      const currentSubSection = newSections[subSection - 1];
+      if (currentSubSection?.blocks) {
+        for (const block of currentSubSection.blocks) {
+          if (block.userCompletedBlocks.length === 0) {
+            block.userCompletedBlocks.push({ blockId: block.id });
+          }
+        }
+      }
+      return newSections;
+    });
+  };
 
   return (
     <>
       {section.length > subSection ? (
-        <Button
-          onClick={() => {
-            subSectionMutate.mutate({
-              sectionId: parseInt(params.lesson),
-              order: subSection,
-            });
-            sectionQuery.remove();
-            sectionQuery.refetch();
-          }}
-        >
-          Continue
-        </Button>
+        <Button onClick={handleContinue}>Continue</Button>
       ) : (
-        <Button
-          onClick={() => {
-            subSectionMutate.mutate({
-              sectionId: parseInt(params.lesson),
-              order: subSection,
-            });
-            sectionQuery.remove();
-            sectionQuery.refetch();
-          }}
-        >
-          Finish
-        </Button>
+        <Button onClick={handleContinue}>Finish</Button>
       )}
     </>
   );
