@@ -198,34 +198,45 @@ export const courseRouter = createTRPCRouter({
   getCourseSection: protectedProcedure
     .input(z.object({ sectionId: z.number() }))
     .query(async ({ ctx, input }) => {
-      const section = await ctx.db.query.subSections.findMany({
-        where: eq(subSections.sectionId, input.sectionId),
+      console.log(`Fetching section with ID: ${input.sectionId}`); // Log the input
 
-        with: {
-          blocks: {
-            with: {
-              interactiveComponents: {
-                columns: {
-                  type: true,
+      try {
+        const section = await ctx.db.query.subSections.findMany({
+          where: eq(subSections.sectionId, input.sectionId),
+          with: {
+            blocks: {
+              with: {
+                interactiveComponents: {
+                  columns: {
+                    type: true,
+                  },
+                  with: { quizzes: true, questions: true },
                 },
-                with: { quizzes: true, questions: true },
-              },
-              userCompletedBlocks: {
-                where: eq(userCompletedBlocks.userId, ctx.user_id),
-                columns: {
-                  blockId: true,
+                userCompletedBlocks: {
+                  where: eq(userCompletedBlocks.userId, ctx.user_id),
+                  columns: {
+                    blockId: true,
+                  },
                 },
               },
             },
           },
-        },
-      });
+        });
 
-      if (!section) {
-        return { section: null };
+        if (!section) {
+          console.log(`No section found for ID: ${input.sectionId}`); // Log when no section is found
+          return { section: null };
+        }
+
+        console.log(`Section found: ${JSON.stringify(section, null, 2)}`); // Log the found section
+        return { section: section };
+      } catch (error) {
+        console.error(
+          `Error fetching section with ID: ${input.sectionId}`,
+          error,
+        ); // Log any errors
+        throw error; // Rethrow the error to handle it according to your error handling policy
       }
-
-      return { section: section };
     }),
 
   setSubsectionCompleted: protectedProcedure
