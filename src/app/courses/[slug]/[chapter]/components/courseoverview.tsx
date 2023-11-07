@@ -47,6 +47,7 @@ export default async function CourseOverview({
           <h1 className="font-bold">{course?.courseChapters[0]?.name}</h1>
         </div>
         <div className="flex flex-row justify-center gap-2">
+          {/* Previous Chapter Link */}
           {chapterNum > 1 && (
             <Link
               className={cn(
@@ -56,9 +57,10 @@ export default async function CourseOverview({
               href={`chapter-${chapterNum - 1}`}
             >
               <ArrowLeft className="h-4 w-4" />
-              Chapter {chapterNum - 1}{" "}
+              Chapter {chapterNum - 1}
             </Link>
           )}
+          {/* Next Chapter Link */}
           {(course?.chapters ?? 1) > chapterNum && (
             <Link
               className={cn(
@@ -71,51 +73,57 @@ export default async function CourseOverview({
             </Link>
           )}
         </div>
+        {/* Section Links */}
         {course?.courseChapters[0]?.courseChapterSections
           .sort((a, b) => a.order - b.order)
-          .map((section, index) => {
-            console.log("section id", section.id);
-            return (
-              <Link
-                key={index}
-                href={`/lesson/${course.slug}/${chapterNum}/${section.id}?l=1`}
-                className="relative max-w-[350px] cursor-pointer justify-center rounded-lg border border-border bg-card shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md sm:max-w-none lg:w-[800px]"
-              >
-                {section.order !== 1 && (
-                  <div className="absolute bottom-0 left-0 right-0 top-0 z-10 flex items-center justify-center rounded-lg bg-black/30 dark:bg-black/50">
-                    <Lock className="h-4 w-4" />
-                  </div>
-                )}
-
-                <div className=" flex flex-col justify-between sm:flex-row">
-                  <div className="flex flex-col gap-2 px-4 py-2">
-                    <h3 className="max-w-[20ch] text-base font-bold lg:text-lg">
-                      {section.name}
-                    </h3>
-                    <p className="max-w-[40ch] text-xs lg:text-sm">
-                      {section.description}
-                    </p>
-                    <ProgressSpinner
-                      progress={
-                        chapterProgress.data.find(
-                          (s) => s.sectionId === section.id,
-                        )?.percentageCompleted ?? 0
-                      }
-                    />
-                  </div>
-                  <div>
-                    <Image
-                      className="rounded-b-lg border-t border-t-border sm:w-[250px] sm:rounded-r-lg sm:rounded-bl-none sm:border-l sm:border-t-0 sm:border-border lg:w-[350px]"
-                      width={350}
-                      height={200}
-                      src={section.imageUrl}
-                      alt={section.imageUrl}
-                    />
-                  </div>
+          .map((section, index) => (
+            <div
+              key={index}
+              className={`relative max-w-[350px] justify-center rounded-lg border border-border bg-card shadow-sm transition-all sm:max-w-none lg:w-[800px] ${
+                section.implemented
+                  ? "cursor-pointer hover:-translate-y-0.5 hover:shadow-md"
+                  : "cursor-not-allowed"
+              }`}
+            >
+              {!section.implemented && (
+                <div className="absolute bottom-0 left-0 right-0 top-0 z-10 flex items-center justify-center rounded-lg bg-black/30 dark:bg-black/50">
+                  <Lock className="h-4 w-4" />
                 </div>
-              </Link>
-            );
-          })}
+              )}
+              <div className="flex flex-col justify-between sm:flex-row">
+                <div className="flex flex-col gap-2 px-4 py-2">
+                  <h3 className="max-w-[20ch] text-base font-bold lg:text-lg">
+                    {section.name}
+                  </h3>
+                  <p className="max-w-[40ch] text-xs lg:text-sm">
+                    {section.description}
+                  </p>
+                  <ProgressSpinner
+                    progress={
+                      chapterProgress.data.find(
+                        (s) => s.sectionId === section.id,
+                      )?.percentageCompleted ?? 0
+                    }
+                  />
+                </div>
+                <div>
+                  <Image
+                    className="rounded-b-lg border-t border-t-border sm:w-[250px] sm:rounded-r-lg sm:rounded-bl-none sm:border-l sm:border-t-0 sm:border-border lg:w-[350px]"
+                    width={350}
+                    height={200}
+                    src={section.imageUrl}
+                    alt={section.name}
+                  />
+                </div>
+              </div>
+              {section.implemented && (
+                <Link
+                  className="absolute inset-0 z-20"
+                  href={`/lesson/${course.slug}/${chapterNum}/${section.id}?l=1`}
+                ></Link>
+              )}
+            </div>
+          ))}
       </div>
     </div>
   );
