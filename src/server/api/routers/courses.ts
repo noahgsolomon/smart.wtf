@@ -198,8 +198,6 @@ export const courseRouter = createTRPCRouter({
   getCourseSection: protectedProcedure
     .input(z.object({ sectionId: z.number() }))
     .query(async ({ ctx, input }) => {
-      console.log(`Fetching section with ID: ${input.sectionId}`); // Log the input
-
       try {
         const section = await ctx.db.query.subSections.findMany({
           where: eq(subSections.sectionId, input.sectionId),
@@ -224,11 +222,9 @@ export const courseRouter = createTRPCRouter({
         });
 
         if (!section) {
-          console.log(`No section found for ID: ${input.sectionId}`); // Log when no section is found
           return { section: null };
         }
 
-        console.log(`Section found: ${JSON.stringify(section, null, 2)}`); // Log the found section
         return { section: section };
       } catch (error) {
         console.error(
@@ -242,17 +238,7 @@ export const courseRouter = createTRPCRouter({
   setSubsectionCompleted: protectedProcedure
     .input(z.object({ sectionId: z.number(), order: z.number() }))
     .mutation(async ({ ctx, input }) => {
-      console.log(
-        `[${new Date().toISOString()}] - Start setSubsectionCompleted mutation`,
-      );
-      console.log(`[${new Date().toISOString()}] - Input received: `, input);
-
       try {
-        console.log(
-          `[${new Date().toISOString()}] - Querying subsection with sectionId: ${
-            input.sectionId
-          } and order: ${input.order}`,
-        );
         const subsection = await ctx.db.query.subSections.findFirst({
           where: and(
             eq(subSections.sectionId, input.sectionId),
@@ -272,57 +258,21 @@ export const courseRouter = createTRPCRouter({
           },
         });
 
-        console.log(
-          `[${new Date().toISOString()}] - Subsection query result: `,
-          subsection,
-        );
-
         if (!subsection) {
-          console.log(`[${new Date().toISOString()}] - No subsection found`);
           return { status: "ERROR" };
         }
 
         for (const block of subsection.blocks) {
-          console.log(
-            `[${new Date().toISOString()}] - Processing block with ID: ${
-              block.id
-            }`,
-          );
           if (block.userCompletedBlocks.length !== 0) {
-            console.log(
-              `[${new Date().toISOString()}] - Block ID: ${
-                block.id
-              } already completed by user ID: ${ctx.user_id}`,
-            );
             continue;
           }
-          console.log(
-            `[${new Date().toISOString()}] - Marking block ID: ${
-              block.id
-            } as completed for user ID: ${ctx.user_id}`,
-          );
           await ctx.db.insert(userCompletedBlocks).values({
             userId: ctx.user_id,
             blockId: block.id,
           });
-          console.log(
-            `[${new Date().toISOString()}] - Block ID: ${
-              block.id
-            } marked as completed`,
-          );
         }
-
-        console.log(
-          `[${new Date().toISOString()}] - Completed processing all blocks for subsection ID: ${
-            input.sectionId
-          }`,
-        );
         return { status: "OK" };
       } catch (error) {
-        console.error(
-          `[${new Date().toISOString()}] - Error in setSubsectionCompleted mutation: `,
-          error,
-        );
         return { status: "ERROR", error: error };
       }
     }),
