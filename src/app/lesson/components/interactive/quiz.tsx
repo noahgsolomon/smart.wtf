@@ -19,6 +19,7 @@ import { useToast } from "@/components/ui/use-toast";
 import { trpc } from "@/trpc/client";
 
 export default function Quiz({
+  refetch,
   blockId,
   content,
   explanation,
@@ -27,6 +28,7 @@ export default function Quiz({
   completed,
   params,
 }: {
+  refetch: () => void;
   blockId: number;
   content: ReactElement;
   explanation: ReactElement;
@@ -81,6 +83,7 @@ export default function Quiz({
       mutateBlock.mutate({
         blockId,
       });
+      refetch();
       sectionQuery.remove();
       sectionQuery.refetch();
       toast({
