@@ -99,8 +99,10 @@ export default function Page({
     if (isNotLastBlockInSubsection && nextBlock) {
       console.log("YESSS");
       setTimeout(() => {
-        router.push(`#${nextBlock.id}`);
-      }, 2000);
+        document.getElementById(nextBlock.id.toString())!.scrollIntoView({
+          behavior: "smooth",
+        });
+      }, 100);
     }
   };
 
