@@ -1,9 +1,7 @@
 import { api } from "@/trpc/server";
-import { ArrowLeft, ArrowRight, Lock } from "lucide-react";
+import { Lock } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { buttonVariants } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
 import { redirect } from "next/navigation";
 import ProgressSpinner from "@/components/progressspinner";
 import ChapterButtons from "./chapterbuttons";
@@ -32,9 +30,10 @@ export default async function CourseOverview({
 
   const course = {
     ...courseData.course,
-    courseChapters: courseData.course?.courseChapters
-      .slice()
-      .sort((a, b) => a.order - b.order)!,
+    courseChapters:
+      courseData.course?.courseChapters
+        .slice()
+        .sort((a, b) => a.order - b.order) ?? [],
   };
 
   console.log("course", JSON.stringify(course, null, 2));
@@ -44,7 +43,7 @@ export default async function CourseOverview({
   }
 
   const chapterProgress = await api.course.getChapterProgress.query({
-    courseId: course?.id!,
+    courseId: course?.id ?? 0,
     chapter,
   });
 

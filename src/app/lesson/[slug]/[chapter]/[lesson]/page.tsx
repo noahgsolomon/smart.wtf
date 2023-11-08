@@ -46,7 +46,7 @@ export default function Page({
     } else {
       console.log("loading");
     }
-  }, [sectionQuery.isLoading, sectionQuery.data?.section]);
+  }, [setSection, sectionQuery.isLoading, sectionQuery.data?.section]);
 
   return (
     <>
