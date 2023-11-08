@@ -42,7 +42,8 @@ export default function Quiz({
     answer: z.enum(["ONE", "TWO", "THREE", "FOUR"]),
   });
 
-  const notify = () => toast.success("correct!");
+  const correct = () => toast.success("correct!");
+  const incorrect = () => toast.error("incorrect!");
 
   const [guessed, setGuessed] = useState<("ONE" | "TWO" | "THREE" | "FOUR")[]>(
     [],
@@ -111,7 +112,7 @@ export default function Quiz({
         });
       });
 
-      notify();
+      correct();
       sectionQuery.refetch();
       const currentBlock = section[subSection - 1]?.blocks.find(
         (b) => b.id === blockId,
@@ -143,6 +144,8 @@ export default function Quiz({
           router.push(`#${globalCurrentBlockOrder + 1}`);
         }, 100);
       }
+    } else {
+      incorrect();
     }
   }
 
