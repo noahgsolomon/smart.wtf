@@ -89,19 +89,14 @@ export default function Page({
       (b) => b.order === currentBlock?.order! + 1,
     );
 
-    console.log("currentBlock", JSON.stringify(currentBlock, null, 2));
-
-    console.log("nextBlock", JSON.stringify(nextBlock, null, 2));
     const currentBlockOrder = currentBlock?.order!;
-
-    console.log("currentBlockOrder", currentBlockOrder);
-    console.log(
-      "section[subSection - 1]?.blocks.length ?? 0",
-      section[lessonNumber - 1]?.blocks.length!,
-    );
 
     const isNotLastBlockInSubsection =
       currentBlockOrder < (section[lessonNumber - 1]?.blocks.length ?? 0);
+
+    console.log(isNotLastBlockInSubsection && nextBlock);
+
+    console.log("nextBlock", nextBlock?.id);
 
     if (isNotLastBlockInSubsection && nextBlock) {
       setTimeout(() => {
