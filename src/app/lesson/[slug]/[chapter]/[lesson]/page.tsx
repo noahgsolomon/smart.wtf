@@ -100,7 +100,7 @@ export default function Page({
       console.log("YESSS");
       setTimeout(() => {
         router.push(`#${nextBlock.id}`);
-      }, 100);
+      }, 2000);
     }
   };
 
