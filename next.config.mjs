@@ -18,15 +18,15 @@ const withMDX = nextMDX({
   },
 });
 
-const nextConfig = {
+const nextConfig = withMDX({
   experimental: {
-    ppr: true,
+    webpackBuildWorker: true,
     mdxRs: true,
   },
   pageExtensions: ["js", "jsx", "mdx", "ts", "tsx"],
   images: {
     domains: ["img.icons8.con", "img.clerk.com", "images.codefoli.com"],
   },
-};
+});
 
-export default withMDX(nextConfig);
+export default nextConfig;

@@ -16,7 +16,6 @@ import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { trpc } from "@/trpc/client";
 import { useSectionContext } from "../../sectioncontext";
-import { useRouter } from "next/navigation";
 import toast, { Toaster } from "react-hot-toast";
 
 export default function Quiz({
@@ -60,8 +59,6 @@ export default function Quiz({
   const mutateBlock = trpc.course.setBlockCompleted.useMutation();
 
   const form = useForm<z.infer<typeof FormSchema>>();
-
-  const router = useRouter();
 
   const [side, setSide] = useState<"QUESTION" | "ANSWER">("QUESTION");
 

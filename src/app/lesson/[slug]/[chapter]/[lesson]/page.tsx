@@ -1,6 +1,6 @@
 "use client";
 
-import { redirect, useRouter } from "next/navigation";
+import { redirect } from "next/navigation";
 import { trpc } from "@/trpc/client";
 import { useEffect } from "react";
 import remarkGfm from "remark-gfm";
@@ -29,7 +29,6 @@ export default function Page({
   }
   const lessonNumber = parseInt(searchParams.l ?? "1");
 
-  const router = useRouter();
   const sectionQuery = trpc.course.getCourseSection.useQuery({
     sectionId: parseInt(
       params.lesson && typeof params.lesson === "string" ? params.lesson : "1",
