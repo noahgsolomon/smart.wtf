@@ -171,6 +171,7 @@ export const courseRouter = createTRPCRouter({
         where: eq(courses.slug, input.slug),
         with: {
           courseChapters: {
+            orderBy: (courseChapters, { asc }) => [asc(courseChapters.order)],
             with: {
               courseChapterSections: {
                 columns: {
