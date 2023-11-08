@@ -3,7 +3,7 @@
 import ProgressSpinner from "@/components/progressspinner";
 import { Lock } from "lucide-react";
 import Image from "next/image";
-import { api } from "@/trpc/server";
+import { type api } from "@/trpc/server";
 import Link from "next/link";
 import { motion } from "framer-motion";
 

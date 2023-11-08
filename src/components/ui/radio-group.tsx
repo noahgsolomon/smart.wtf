@@ -30,7 +30,7 @@ type RadioGroupItemProps = React.ComponentPropsWithoutRef<
 const RadioGroupItem = React.forwardRef<
   React.ElementRef<typeof RadioGroupPrimitive.Item>,
   RadioGroupItemProps
->(({ className, correct, incorrect, children, ...props }, ref) => {
+>(({ className, correct, incorrect, ...props }, ref) => {
   return (
     <RadioGroupPrimitive.Item
       ref={ref}

@@ -92,12 +92,12 @@ export default function Page({
     console.log("currentBlock", JSON.stringify(currentBlock, null, 2));
 
     console.log("nextBlock", JSON.stringify(nextBlock, null, 2));
-    const currentBlockOrder = currentBlock?.order ?? 0;
+    const currentBlockOrder = currentBlock?.order!;
 
     console.log("currentBlockOrder", currentBlockOrder);
     console.log(
       "section[subSection - 1]?.blocks.length ?? 0",
-      section[lessonNumber - 1]?.blocks.length ?? 0,
+      section[lessonNumber - 1]?.blocks.length!,
     );
 
     const isNotLastBlockInSubsection =
