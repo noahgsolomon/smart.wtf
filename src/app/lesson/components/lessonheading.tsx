@@ -29,7 +29,7 @@ export default function LessonHeading({ section }: { section: Section[] }) {
     }, 0) ?? 1;
 
   return (
-    <div className="fixed left-0 right-0 top-0 z-20 flex w-screen flex-row items-center justify-between border-b border-border  bg-background py-2 shadow-sm md:px-10">
+    <div className="fixed left-0 right-0 top-0 z-20 flex w-screen flex-row items-center justify-between border-b border-border bg-background  px-2 py-2 shadow-sm md:px-10">
       <a
         href={`/courses/${
           typeof params.slug === "string" ? params.slug : "unknown"
@@ -38,12 +38,12 @@ export default function LessonHeading({ section }: { section: Section[] }) {
       >
         <X className="h-4 w-4" />
       </a>
-      <div className="flex h-4 w-[200px] flex-row md:w-[400px] ">
+      <div className="flex h-4 w-[200px] flex-row gap-1 md:w-[400px] ">
         {section?.map((s) => {
           return (
             <HoverCard key={s.id} openDelay={0} closeDelay={0}>
               <Link
-                className={` transition-all hover:opacity-80`}
+                className={`transition-all hover:opacity-80`}
                 style={{
                   width: `${Math.round((s.time / totalTime) * 100.0)}%`,
                 }}
@@ -52,12 +52,12 @@ export default function LessonHeading({ section }: { section: Section[] }) {
                 <HoverCardTrigger asChild>
                   <Progress
                     className={cn(
-                      `h-full border border-border`,
+                      `h-full`,
                       searchParams.get("l") === s.order.toString()
-                        ? "border-primary"
+                        ? "ring-2 ring-lightBlue"
                         : "",
                     )}
-                    indicatorClassName="rounded-r-lg "
+                    indicatorClassName="rounded-r-lg bg-blue"
                     value={
                       (s.blocks
                         .map((b) => (b.userCompletedBlocks.length > 0 ? 1 : 0))
