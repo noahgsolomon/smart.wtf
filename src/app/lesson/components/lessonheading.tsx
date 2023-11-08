@@ -33,7 +33,7 @@ export default function LessonHeading({ section }: { section: Section[] }) {
       <a
         href={`/courses/${
           typeof params.slug === "string" ? params.slug : "unknown"
-        }/chapter-${typeof params.chapter === "string" ? params.chapter : "1"}`}
+        }?chapter=${typeof params.chapter === "string" ? params.chapter : "1"}`}
         className={buttonVariants({ variant: "ghost" })}
       >
         <X className="h-4 w-4" />
