@@ -165,13 +165,12 @@ export const courseRouter = createTRPCRouter({
   }),
 
   getCourseBySlug: protectedProcedure
-    .input(z.object({ slug: z.string(), chapter: z.number() }))
+    .input(z.object({ slug: z.string() }))
     .query(async ({ ctx, input }) => {
       const course = await ctx.db.query.courses.findFirst({
         where: eq(courses.slug, input.slug),
         with: {
           courseChapters: {
-            where: eq(courseChapters.order, input.chapter),
             with: {
               courseChapterSections: {
                 columns: {
