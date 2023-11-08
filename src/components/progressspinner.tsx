@@ -1,17 +1,25 @@
+import { motion } from "framer-motion";
+
 export default function ProgressSpinner({
   progress = 0,
 }: {
   progress: number;
 }) {
-  // Ensure progress is between 0 and 100
-  const strokePercent = Math.min(Math.max(progress, 0), 100);
   const radius = 45;
   const circumference = 2 * Math.PI * radius;
-  const offset = circumference - (strokePercent / 100) * circumference;
+  const strokePercent = Math.min(Math.max(progress, 0), 100);
+
+  // Animation for the progress circle
+  const progressVariants = {
+    initial: { strokeDashoffset: circumference },
+    animate: {
+      strokeDashoffset: circumference - (strokePercent / 100) * circumference,
+    },
+  };
 
   return (
-    <svg fill="none" height="40" width="40" viewBox="0 0 100 100">
-      <circle
+    <svg fill="none" height="32" width="32" viewBox="0 0 100 100">
+      <motion.circle
         cx="50"
         cy="50"
         r={radius}
@@ -21,7 +29,7 @@ export default function ProgressSpinner({
         strokeLinejoin="round"
         className="stroke-secondary"
       />
-      <circle
+      <motion.circle
         className={`progress-circle ${
           progress === 100 ? "stroke-success" : "stroke-blue"
         }`}
@@ -32,17 +40,26 @@ export default function ProgressSpinner({
         strokeLinecap="round"
         strokeLinejoin="round"
         strokeDasharray={circumference}
-        strokeDashoffset={offset}
+        initial="initial"
+        animate="animate"
+        variants={progressVariants}
+        transition={{
+          duration: 0.5, // Duration of the animation
+          ease: "easeInOut",
+        }}
       />
-      <text
+      <motion.text
         x="50"
-        y="50"
-        className="fill-primary text-3xl opacity-60"
+        y="52" // Adjusted for better centering
+        className="fill-primary text-3xl font-semibold"
         alignmentBaseline="middle"
         textAnchor="middle"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.5 }}
       >
         {strokePercent.toFixed(0)}%
-      </text>
+      </motion.text>
     </svg>
   );
 }
