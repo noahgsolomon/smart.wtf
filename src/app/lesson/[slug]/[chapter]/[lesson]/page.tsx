@@ -79,8 +79,6 @@ export default function Page({
       });
     });
 
-    console.log("section", JSON.stringify(section[lessonNumber - 1], null, 2));
-
     const currentBlock = section[lessonNumber - 1]?.blocks.find(
       (b) => b.id === blockId,
     );
@@ -99,6 +97,7 @@ export default function Page({
     console.log("nextBlock", nextBlock?.id);
 
     if (isNotLastBlockInSubsection && nextBlock) {
+      console.log("YESSS");
       setTimeout(() => {
         router.push(`#${nextBlock.id}`);
       }, 100);
