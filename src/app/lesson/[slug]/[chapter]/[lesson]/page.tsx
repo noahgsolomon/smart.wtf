@@ -92,12 +92,7 @@ export default function Page({
     const isNotLastBlockInSubsection =
       currentBlockOrder < (section[lessonNumber - 1]?.blocks.length ?? 0);
 
-    console.log(isNotLastBlockInSubsection && nextBlock);
-
-    console.log("nextBlock", nextBlock?.id);
-
     if (isNotLastBlockInSubsection && nextBlock) {
-      console.log("YESSS");
       setTimeout(() => {
         document.getElementById(nextBlock.id.toString())!.scrollIntoView({
           behavior: "smooth",

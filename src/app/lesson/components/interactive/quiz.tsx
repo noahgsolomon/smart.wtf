@@ -117,31 +117,21 @@ export default function Quiz({
       const currentBlock = section[subSection - 1]?.blocks.find(
         (b) => b.id === blockId,
       );
-      const currentBlockOrder = currentBlock?.order ?? 0;
 
-      const totalBlocksInPreviousSections = section
-        .slice(0, subSection - 1)
-        .reduce(
-          (total, currentSection) => total + currentSection.blocks.length,
-          0,
-        );
-      const globalCurrentBlockOrder =
-        totalBlocksInPreviousSections + currentBlockOrder;
-
-      console.log("currentBlockOrder", currentBlockOrder);
-      console.log(
-        "section[subSection - 1]?.blocks.length ?? 0",
-        section[subSection - 1]?.blocks.length ?? 0,
+      const nextBlock = section[subSection - 1]?.blocks.find(
+        (b) => b.order === currentBlock?.order! + 1,
       );
+
+      const currentBlockOrder = currentBlock?.order!;
 
       const isNotLastBlockInSubsection =
         currentBlockOrder < (section[subSection - 1]?.blocks.length ?? 0);
 
-      console.log(globalCurrentBlockOrder + 1);
-
-      if (isNotLastBlockInSubsection) {
+      if (isNotLastBlockInSubsection && nextBlock) {
         setTimeout(() => {
-          router.push(`#${globalCurrentBlockOrder + 1}`);
+          document.getElementById(nextBlock.id.toString())!.scrollIntoView({
+            behavior: "smooth",
+          });
         }, 100);
       }
     } else {
