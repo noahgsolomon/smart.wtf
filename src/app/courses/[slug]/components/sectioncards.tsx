@@ -5,7 +5,6 @@ import { Lock } from "lucide-react";
 import Image from "next/image";
 import { type api } from "@/trpc/server";
 import Link from "next/link";
-import { motion } from "framer-motion";
 
 export default function SectionCards({
   chapter,
@@ -24,25 +23,11 @@ export default function SectionCards({
 }) {
   const course = courseData.course!;
 
-  const cardVariants = {
-    offscreen: {
-      opacity: 0,
-    },
-    onscreen: (index: number) => ({
-      opacity: 1,
-      transition: {
-        type: "spring",
-        bounce: 0.4,
-        delay: index * 0.1,
-      },
-    }),
-  };
-
   return (
     <div className="flex flex-col gap-4">
       {course.courseChapters[chapter - 1]?.courseChapterSections
         .sort((a, b) => a.order - b.order)
-        .map((section, index) => (
+        .map((section) => (
           <div
             key={section.id}
             className={`relative max-w-[350px] justify-center rounded-lg border border-border bg-card shadow-sm transition-all hover:scale-[101%] active:scale-[99%] sm:max-w-none lg:w-[800px] ${
