@@ -1,4 +1,5 @@
 import {
+  courseChapterSections,
   courseChapters,
   courseLikes,
   courses,
@@ -233,6 +234,72 @@ export const courseRouter = createTRPCRouter({
         ); // Log any errors
         throw error; // Rethrow the error to handle it according to your error handling policy
       }
+    }),
+
+  getNextSection: protectedProcedure
+    .input(z.object({ sectionId: z.number() }))
+    .query(async ({ ctx, input }) => {
+      const currentSection = await ctx.db.query.courseChapterSections.findFirst(
+        {
+          where: eq(courseChapterSections.id, input.sectionId),
+          columns: {
+            id: true,
+            order: true,
+            chapterId: true,
+            description: true,
+            name: true,
+            imageUrl: true,
+            implemented: true,
+          },
+        },
+      );
+
+      if (!currentSection) {
+        return { nextSection: null };
+      }
+
+      const nextSection = await ctx.db.query.courseChapterSections.findFirst({
+        where: and(
+          eq(courseChapterSections.chapterId, currentSection.chapterId),
+          eq(courseChapterSections.order, currentSection.order + 1),
+        ),
+        columns: {
+          id: true,
+          order: true,
+          chapterId: true,
+          description: true,
+          name: true,
+          imageUrl: true,
+          implemented: true,
+        },
+      });
+
+      if (!nextSection) {
+        const nextChapterSection =
+          await ctx.db.query.courseChapterSections.findFirst({
+            where: and(
+              eq(courseChapterSections.chapterId, currentSection.chapterId + 1),
+              eq(courseChapterSections.order, 1),
+            ),
+            columns: {
+              id: true,
+              order: true,
+              chapterId: true,
+              description: true,
+              name: true,
+              imageUrl: true,
+              implemented: true,
+            },
+          });
+
+        if (!nextChapterSection) {
+          return { nextSection: null };
+        }
+
+        return { nextSection: nextChapterSection };
+      }
+
+      return { nextSection: nextSection };
     }),
 
   setSubsectionCompleted: protectedProcedure
