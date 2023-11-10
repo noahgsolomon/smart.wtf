@@ -11,6 +11,7 @@ import CalculusOverview from "./components/calculusoverview";
 import Courses from "./components/courses/courses";
 import { Suspense } from "react";
 import { CourseSkeleton } from "./components/courses/courseskeleton";
+import { cn } from "@/lib/utils";
 
 const Dashboard = async () => {
   const user = (await api.user.user.query()).user;
@@ -28,10 +29,13 @@ const Dashboard = async () => {
               <div>
                 <Link
                   href="/chat"
-                  className={buttonVariants({
-                    variant: "outline",
-                    className: "flex flex-row gap-2 py-6",
-                  })}
+                  className={cn(
+                    buttonVariants({
+                      variant: "outline",
+                      className: "flex flex-row gap-2 py-6",
+                    }),
+                    "flex max-w-[350px] flex-row transition-all ",
+                  )}
                 >
                   <Avatar className="h-[40px] w-[40px] border border-border">
                     <AvatarImage
