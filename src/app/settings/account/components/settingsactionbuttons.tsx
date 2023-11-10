@@ -1,4 +1,4 @@
-import { Button, buttonVariants } from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogClose,
@@ -30,7 +30,7 @@ const SettingsActionButtons = () => {
     setDeleting(true);
     try {
       deleteUser.mutateAsync(undefined, {
-        onError: (data) => {
+        onError: () => {
           toast.error("an error occurred");
         },
       });
