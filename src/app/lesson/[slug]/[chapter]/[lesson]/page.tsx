@@ -256,15 +256,15 @@ export default function Page({
                               />
                             </Link>
                           ) : (
-                            <a
-                              href={`/courses/${params.slug}?chapter=${params.chapter}`}
+                            <Link
+                              href={`/lesson/${params.slug}/${params.chapter}/${params.lesson}/completed`}
                             >
                               <LessonButtons
                                 params={params}
                                 section={section}
                                 subSection={lessonNumber}
                               />
-                            </a>
+                            </Link>
                           )}
                         </>
                       )}
