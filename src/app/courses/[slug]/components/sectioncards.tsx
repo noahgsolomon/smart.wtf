@@ -43,15 +43,9 @@ export default function SectionCards({
       {course.courseChapters[chapter - 1]?.courseChapterSections
         .sort((a, b) => a.order - b.order)
         .map((section, index) => (
-          <motion.div
-            initial="offscreen"
-            animate="onscreen"
-            variants={cardVariants}
-            custom={index}
-            whileHover={{ scale: 1.01 }}
-            whileTap={{ scale: 0.99 }}
+          <div
             key={section.id}
-            className={`relative max-w-[350px] justify-center rounded-lg border border-border bg-card shadow-sm transition-all sm:max-w-none lg:w-[800px] ${
+            className={`relative max-w-[350px] justify-center rounded-lg border border-border bg-card shadow-sm transition-all hover:scale-[101%] active:scale-[99%] sm:max-w-none lg:w-[800px] ${
               section.implemented
                 ? "cursor-pointer hover:-translate-y-0.5 hover:shadow-md"
                 : "cursor-not-allowed"
@@ -96,7 +90,7 @@ export default function SectionCards({
                 href={`/lesson/${course.slug}/${chapter}/${section.id}?l=1`}
               ></Link>
             )}
-          </motion.div>
+          </div>
         ))}
     </div>
   );

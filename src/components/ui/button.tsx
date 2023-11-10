@@ -4,23 +4,24 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50",
+  "transition-all inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50 hover:scale-[102%] active:scale-[98%]",
   {
     variants: {
       variant: {
         default:
-          "bg-primary text-primary-foreground shadow hover:bg-primary/90",
+          "transition-all bg-primary text-primary-foreground shadow hover:bg-primary/90",
         destructive:
-          "bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90",
+          "transition-all bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90",
         outline:
-          "border border-input bg-transparent shadow-sm hover:bg-accent hover:text-accent-foreground",
+          "transition-all border border-input bg-transparent shadow-sm hover:bg-accent hover:text-accent-foreground",
         secondary:
-          "bg-accent text-secondary-foreground hover:bg-primary/10 dark:hover:bg-accent/80",
-        ghost: "hover:bg-accent hover:text-accent-foreground",
-        link: "text-primary underline-offset-4 hover:underline",
-        success: "bg-success text-primary shadow-sm hover:bg-success/90",
+          "transition-all bg-accent text-secondary-foreground hover:bg-primary/10 dark:hover:bg-accent/80",
+        ghost: "transition-all hover:bg-accent hover:text-accent-foreground",
+        link: "transition-all text-primary underline-offset-4 hover:underline",
+        success:
+          "transition-all bg-success text-primary shadow-sm hover:bg-success/90",
         glowing:
-          "bg-accent text-accent-foreground shadow-lg shadow-secondary hover:shadow-secondary hover:shadow-lg hover:bg-accent/90",
+          "transition-all bg-accent text-accent-foreground shadow-lg shadow-secondary hover:shadow-secondary hover:shadow-lg hover:bg-accent/90",
       },
       size: {
         default: "h-9 px-4 py-2",

@@ -4,10 +4,10 @@ import { Label } from "@/components/ui/label";
 import { useToast } from "@/components/ui/use-toast";
 import { trpc } from "@/trpc/client";
 import { useState } from "react";
+import toast from "react-hot-toast";
 
 const SettingsInput = () => {
   const userDB = trpc.user.user.useQuery();
-  const { toast } = useToast();
 
   const [username, setUsername] = useState("");
   const [name, setName] = useState("");
@@ -17,11 +17,7 @@ const SettingsInput = () => {
 
   const handleUsernameSubmit = () => {
     if (username.length < 3 || username.length > 20) {
-      toast({
-        title: "Error",
-        description: "Username must be between 3 and 20 characters",
-        variant: "destructive",
-      });
+      toast.error("Username must be between 3 and 20 characters");
       return;
     }
 
@@ -29,11 +25,9 @@ const SettingsInput = () => {
       { username },
       {
         onSuccess: async (data) => {
-          toast({
-            title: data.status === "OK" ? "Sucess!" : "Error",
-            description: data.message,
-            variant: data.status === "OK" ? "success" : "destructive",
-          });
+          data.status === "OK"
+            ? toast.success("Username updated")
+            : toast.error("Username is taken");
           setUsername("");
           if (data.status === "OK") {
             await userDB.refetch();
@@ -45,22 +39,16 @@ const SettingsInput = () => {
 
   const handleNameSubmit = () => {
     if (name.length < 3 || name.length > 75) {
-      toast({
-        title: "Error",
-        description: "Name must be between 3 and 75 characters",
-        variant: "destructive",
-      });
+      toast.error("Name must be between 3 and 75 characters");
       return;
     }
     nameUpload.mutate(
       { name },
       {
         onSuccess: async (data) => {
-          toast({
-            title: data.status === "OK" ? "Sucess!" : "Error",
-            description: data.message,
-            variant: data.status === "OK" ? "success" : "destructive",
-          });
+          data.status === "OK"
+            ? toast.success("Name updated")
+            : toast.error("An error occurred");
           setName("");
           if (data.status === "OK") {
             await userDB.refetch();

@@ -9,14 +9,13 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { useToast } from "@/components/ui/use-toast";
 import { trpc } from "@/trpc/client";
 import { useClerk } from "@clerk/nextjs";
 import { Loader2 } from "lucide-react";
 import { useState } from "react";
+import toast from "react-hot-toast";
 
 const SettingsActionButtons = () => {
-  const { toast } = useToast();
   const clerk = useClerk();
 
   const [deleting, setDeleting] = useState(false);
@@ -30,45 +29,29 @@ const SettingsActionButtons = () => {
   const deleteHandler = async () => {
     setDeleting(true);
     try {
-      deleteUser
-        .mutateAsync(undefined, {
-          onError: (data) => {
-            toast({
-              title: "Error",
-              description: data.message,
-              variant: "destructive",
-            });
-          },
-        })
+      deleteUser.mutateAsync(undefined, {
+        onError: (data) => {
+          toast.error("an error occurred");
+        },
+      });
       await clerk.user?.delete();
       await logOutHandler();
     } catch (e) {
-      toast({
-        title: "Error",
-        description: "error message",
-        variant: "destructive",
-      });
+      toast.error("an error occurred");
     }
   };
 
   return (
     <div className="mt-4 flex">
       <div className="flex flex-col">
-        <Button
-          className="mt-4 shadow-none"
-          variant={"outline"}
-          onClick={logOutHandler}
-        >
+        <Button className="mt-4" variant={"outline"} onClick={logOutHandler}>
           log out
         </Button>
         <Dialog>
-          <DialogTrigger
-            className={buttonVariants({
-              variant: "destructive",
-              className: "mt-4 shadow-none",
-            })}
-          >
-            delete account
+          <DialogTrigger disabled={true}>
+            <Button disabled={true} className="mt-4 " variant={"destructive"}>
+              delete account
+            </Button>
           </DialogTrigger>
           <DialogContent>
             <DialogHeader>
