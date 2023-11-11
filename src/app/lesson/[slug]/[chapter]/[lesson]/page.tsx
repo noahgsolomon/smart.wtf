@@ -260,6 +260,7 @@ export default function Page({
                             );
                             return (
                               <Understanding
+                                key={component.understanding?.id ?? 1}
                                 subSection={lessonNumber}
                                 blockId={block.id}
                                 questionString={
