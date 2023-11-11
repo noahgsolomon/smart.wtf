@@ -16,6 +16,7 @@ import rehypeHighlight from "rehype-highlight";
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
+import Understanding from "@/app/lesson/components/interactive/understanding";
 
 export default function Page({
   params,
@@ -156,76 +157,128 @@ export default function Page({
                     </Markdown>
                   );
                   const interactive =
-                    block.interactiveComponents.length > 0 ? (
-                      block.interactiveComponents.map((component) => {
-                        if (component.type === "QUIZ") {
-                          const explanation = (
-                            <Markdown
-                              components={{
-                                img: ({ ...props }) => (
-                                  <Image
-                                    src={
-                                      props.src ??
-                                      "https://images.codefoli.com/smartwtf.png"
-                                    }
-                                    alt={props.alt ?? "smartwtf"}
-                                    layout="responsive"
-                                  />
-                                ),
-                              }}
-                            >
-                              {component.quizzes?.explanationMarkdown ??
-                                "## no explanation right now, sorry :("}
-                            </Markdown>
-                          );
-                          const question = (
-                            <Markdown
-                              components={{
-                                img: ({ ...props }) => (
-                                  <Image
-                                    src={
-                                      props.src ??
-                                      "https://images.codefoli.com/smartwtf.png"
-                                    }
-                                    alt={props.alt ?? "smartwtf"}
-                                    layout="responsive"
-                                  />
-                                ),
-                              }}
-                            >
-                              {component.quizzes?.questionMarkdown ??
-                                "## no question right now, sorry :("}
-                            </Markdown>
-                          );
-                          return (
-                            <Quiz
-                              subSection={lessonNumber}
-                              params={params}
-                              blockId={block.id}
-                              completed={block.userCompletedBlocks.length > 0}
-                              key={component.quizzes?.id ?? 1}
-                              content={question}
-                              explanation={explanation}
-                              options={[
-                                component.quizzes?.optionOne ?? "",
-                                component.quizzes?.optionTwo ?? "",
-                                component.quizzes?.optionThree ?? "",
-                                component.quizzes?.optionFour ?? "",
-                              ]}
-                              answer={component.quizzes?.correctOption ?? "ONE"}
-                            />
-                          );
-                        }
-                      })
-                    ) : block.order <
-                        (section[lessonNumber - 1]?.blocks.length ?? 0) &&
-                      block.userCompletedBlocks.length === 0 ? (
-                      <Button
-                        onClick={() => handleContinue({ blockId: block.id })}
-                      >
-                        Continue
-                      </Button>
-                    ) : null;
+                    block.interactiveComponents.length > 0
+                      ? block.interactiveComponents.map((component) => {
+                          if (component.type === "QUIZ") {
+                            const explanation = (
+                              <Markdown
+                                components={{
+                                  img: ({ ...props }) => (
+                                    <Image
+                                      src={
+                                        props.src ??
+                                        "https://images.codefoli.com/smartwtf.png"
+                                      }
+                                      alt={props.alt ?? "smartwtf"}
+                                      layout="responsive"
+                                    />
+                                  ),
+                                }}
+                              >
+                                {component.quizzes?.explanationMarkdown ??
+                                  "## no explanation right now, sorry :("}
+                              </Markdown>
+                            );
+                            const question = (
+                              <Markdown
+                                components={{
+                                  img: ({ ...props }) => (
+                                    <Image
+                                      src={
+                                        props.src ??
+                                        "https://images.codefoli.com/smartwtf.png"
+                                      }
+                                      alt={props.alt ?? "smartwtf"}
+                                      layout="responsive"
+                                    />
+                                  ),
+                                }}
+                              >
+                                {component.quizzes?.questionMarkdown ??
+                                  "## no question right now, sorry :("}
+                              </Markdown>
+                            );
+                            return (
+                              <Quiz
+                                subSection={lessonNumber}
+                                params={params}
+                                blockId={block.id}
+                                completed={block.userCompletedBlocks.length > 0}
+                                key={component.quizzes?.id ?? 1}
+                                content={question}
+                                explanation={explanation}
+                                options={[
+                                  component.quizzes?.optionOne ?? "",
+                                  component.quizzes?.optionTwo ?? "",
+                                  component.quizzes?.optionThree ?? "",
+                                  component.quizzes?.optionFour ?? "",
+                                ]}
+                                answer={
+                                  component.quizzes?.correctOption ?? "ONE"
+                                }
+                              />
+                            );
+                          }
+                          if (component.type === "UNDERSTANDING") {
+                            const explanation = (
+                              <Markdown
+                                components={{
+                                  img: ({ ...props }) => (
+                                    <Image
+                                      src={
+                                        props.src ??
+                                        "https://images.codefoli.com/smartwtf.png"
+                                      }
+                                      alt={props.alt ?? "smartwtf"}
+                                      layout="responsive"
+                                    />
+                                  ),
+                                }}
+                              >
+                                {component.understanding?.explanationMarkdown ??
+                                  "## no explanation right now, sorry :("}
+                              </Markdown>
+                            );
+                            const question = (
+                              <Markdown
+                                components={{
+                                  img: ({ ...props }) => (
+                                    <Image
+                                      src={
+                                        props.src ??
+                                        "https://images.codefoli.com/smartwtf.png"
+                                      }
+                                      alt={props.alt ?? "smartwtf"}
+                                      layout="responsive"
+                                    />
+                                  ),
+                                }}
+                              >
+                                {component.understanding?.questionMarkdown ??
+                                  "## no question right now, sorry :("}
+                              </Markdown>
+                            );
+                            return (
+                              <Understanding
+                                subSection={lessonNumber}
+                                blockId={block.id}
+                                questionString={
+                                  component.understanding?.questionMarkdown ??
+                                  "## no question right now, sorry :("
+                                }
+                                explanationString={
+                                  component.understanding
+                                    ?.explanationMarkdown ??
+                                  "## no explanation right now, sorry :("
+                                }
+                                completed={block.userCompletedBlocks.length > 0}
+                                question={question}
+                                explanation={explanation}
+                              />
+                            );
+                          }
+                        })
+                      : null;
 
                   const blockVisible =
                     index - 1 < 0
@@ -245,7 +298,9 @@ export default function Page({
                       <div>{markdown}</div>
                       {interactive}
                       {section[lessonNumber - 1]?.blocks.length ===
-                        block.order && (
+                        block.order &&
+                      (block.interactiveComponents?.length === 0 ||
+                        block.userCompletedBlocks.length > 0) ? (
                         <>
                           {section.length > lessonNumber ? (
                             <Link href={`?l=${lessonNumber + 1}`}>
@@ -267,7 +322,7 @@ export default function Page({
                             </Link>
                           )}
                         </>
-                      )}
+                      ) : null}
                     </div>
                   );
                 })}
