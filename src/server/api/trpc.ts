@@ -21,8 +21,6 @@ interface CreateContextOptions {
 }
 
 export const createInnerTRPCContext = (opts: CreateContextOptions) => {
-  const user = auth();
-  console.log(user.userId);
   return {
     headers: opts.headers,
     db,

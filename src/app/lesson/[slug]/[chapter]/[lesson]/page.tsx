@@ -15,7 +15,6 @@ import { useSectionContext } from "@/app/lesson/sectioncontext";
 import rehypeHighlight from "rehype-highlight";
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
-import { Button } from "@/components/ui/button";
 import Understanding from "@/app/lesson/components/interactive/understanding";
 
 export default function Page({
@@ -49,57 +48,6 @@ export default function Page({
       console.log("loading");
     }
   }, [setSection, sectionQuery.isLoading, sectionQuery.data?.section]);
-
-  const mutateBlock = trpc.course.setBlockCompleted.useMutation();
-
-  const handleContinue = ({ blockId }: { blockId: number }) => {
-    mutateBlock.mutate({
-      blockId,
-    });
-
-    setSection((prev) => {
-      return prev.map((section, index) => {
-        if (index === lessonNumber - 1) {
-          const updatedBlocks = section.blocks.map((block) => {
-            if (block.id === blockId) {
-              const updatedUserCompletedBlocks = [
-                ...block.userCompletedBlocks,
-                { blockId: blockId },
-              ];
-              return {
-                ...block,
-                userCompletedBlocks: updatedUserCompletedBlocks,
-              };
-            }
-            return block;
-          });
-          return { ...section, blocks: updatedBlocks };
-        }
-        return section;
-      });
-    });
-
-    const currentBlock = section[lessonNumber - 1]?.blocks.find(
-      (b) => b.id === blockId,
-    );
-
-    const nextBlock = section[lessonNumber - 1]?.blocks.find(
-      (b) => b.order === currentBlock?.order! + 1,
-    );
-
-    const currentBlockOrder = currentBlock?.order!;
-
-    const isNotLastBlockInSubsection =
-      currentBlockOrder < (section[lessonNumber - 1]?.blocks.length ?? 0);
-
-    if (isNotLastBlockInSubsection && nextBlock) {
-      setTimeout(() => {
-        document.getElementById(nextBlock.id.toString())!.scrollIntoView({
-          behavior: "smooth",
-        });
-      }, 100);
-    }
-  };
 
   return (
     <>
@@ -260,6 +208,7 @@ export default function Page({
                             );
                             return (
                               <Understanding
+                                key={component.understanding?.id ?? 1}
                                 subSection={lessonNumber}
                                 blockId={block.id}
                                 questionString={
@@ -312,6 +261,7 @@ export default function Page({
                             </Link>
                           ) : (
                             <Link
+                              key={params.lesson}
                               href={`/lesson/${params.slug}/${params.chapter}/${params.lesson}/completed`}
                             >
                               <LessonButtons

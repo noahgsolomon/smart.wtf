@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/tooltip";
 import { trpc } from "@/trpc/client";
 import { Lightbulb, Loader2 } from "lucide-react";
-import { ReactNode, useEffect, useState } from "react";
+import { type ReactNode, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { useSectionContext } from "../../sectioncontext";
 
@@ -20,7 +20,6 @@ export default function Understanding({
   blockId,
   questionString,
   explanation,
-  explanationString,
   completed,
 }: {
   blockId: number;
