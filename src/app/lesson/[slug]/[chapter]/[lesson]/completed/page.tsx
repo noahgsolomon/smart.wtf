@@ -16,6 +16,7 @@ import fireball from "public/fireball.gif";
 import { trpc } from "@/trpc/client";
 import { buttonVariants } from "@/components/ui/button";
 import { Button } from "@/components/ui/button";
+import { Lock } from "lucide-react";
 
 const broTalk = [
   "good shit",
@@ -200,6 +201,16 @@ export default function Page({
           <div
             className={`relative max-w-[350px] cursor-pointer justify-center rounded-lg border border-border bg-card shadow-sm transition-all hover:-translate-y-0.5 hover:scale-[101%] hover:shadow-md active:scale-[99%] sm:max-w-none lg:w-[800px]`}
           >
+            {!nextSection.nextSection.implemented ? (
+              <div className="absolute bottom-0 left-0 right-0 top-0 z-10 flex items-center justify-center rounded-lg bg-black/30 dark:bg-black/50">
+                <Lock className="h-4 w-4" />
+              </div>
+            ) : (
+              <a
+                className="absolute inset-0 z-20"
+                href={`/lesson/${params.slug}/${params.chapter}/${nextSection.nextSection.id}?l=1`}
+              ></a>
+            )}
             <div className="flex flex-col justify-between sm:flex-row">
               <div className="flex flex-col gap-2 px-4 py-2 sm:flex-row">
                 <div>
@@ -222,10 +233,6 @@ export default function Page({
                 />
               </div>
             </div>
-            <a
-              className="absolute inset-0 z-20"
-              href={`/lesson/${params.slug}/${params.chapter}/${nextSection.nextSection.id}?l=1`}
-            ></a>
           </div>
           <div className="flex flex-row justify-center gap-4 pt-8">
             <a
@@ -242,7 +249,9 @@ export default function Page({
                 Continue
               </a>
             ) : (
-              <Button>{"Next section not yet created :("}</Button>
+              <Button variant={"secondary"}>
+                {"Next lesson not yet created"}
+              </Button>
             )}
           </div>
         </>
