@@ -46,7 +46,6 @@ export async function POST(req: UnderstandRequest) {
       ],
       function_call: { name: "question_answer" },
       model: "gpt-4-1106-preview",
-      response_format: { type: "json_object" },
     });
 
     const responseBody = JSON.parse(
