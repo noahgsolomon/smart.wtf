@@ -24,7 +24,7 @@ export type Section = {
     order: number;
     markdown: string;
     interactiveComponents: {
-      type: "QUIZ" | "QUESTION";
+      type: "QUIZ" | "UNDERSTANDING";
       quizzes: {
         id: number;
         questionMarkdown: string;
@@ -35,9 +35,10 @@ export type Section = {
         correctOption: "ONE" | "TWO" | "THREE" | "FOUR";
         explanationMarkdown: string;
       } | null;
-      questions: {
+      understanding: {
         id: number;
         questionMarkdown: string;
+        explanationMarkdown: string;
       } | null;
     }[];
     userCompletedBlocks: {
