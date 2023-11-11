@@ -209,7 +209,7 @@ export const courseRouter = createTRPCRouter({
                   columns: {
                     type: true,
                   },
-                  with: { quizzes: true, questions: true },
+                  with: { quizzes: true, understanding: true },
                 },
                 userCompletedBlocks: {
                   where: eq(userCompletedBlocks.userId, ctx.user_id),
