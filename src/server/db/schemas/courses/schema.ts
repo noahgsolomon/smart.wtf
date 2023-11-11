@@ -153,9 +153,12 @@ export const blocksRelations = relations(blocks, ({ one, many }) => ({
 export const interactiveComponents = mysqlTable("interactive_components", {
   id: int("id").primaryKey().autoincrement(),
   blockId: int("block_id").notNull(),
-  type: varchar("type", { length: 50, enum: ["QUIZ", "QUESTION"] }).notNull(),
+  type: varchar("type", {
+    length: 50,
+    enum: ["QUIZ", "UNDERSTANDING"],
+  }).notNull(),
   quizId: int("quiz_id"),
-  questionId: int("question_id"),
+  understandingId: int("understanding_id"),
 });
 
 export const interactiveComponentsRelations = relations(
@@ -169,9 +172,9 @@ export const interactiveComponentsRelations = relations(
       fields: [interactiveComponents.quizId],
       references: [quizzes.id],
     }),
-    questions: one(questions, {
-      fields: [interactiveComponents.questionId],
-      references: [questions.id],
+    understanding: one(understanding, {
+      fields: [interactiveComponents.understandingId],
+      references: [understanding.id],
     }),
   }),
 );
@@ -190,9 +193,10 @@ export const quizzes = mysqlTable("quizzes", {
   explanationMarkdown: text("explanation_markdown").notNull(),
 });
 
-export const questions = mysqlTable("questions", {
+export const understanding = mysqlTable("understanding", {
   id: int("id").primaryKey().autoincrement(),
   questionMarkdown: text("question_markdown").notNull(),
+  explanationMarkdown: text("explanation_markdown").notNull(),
 });
 
 // export const courseChapterSection
