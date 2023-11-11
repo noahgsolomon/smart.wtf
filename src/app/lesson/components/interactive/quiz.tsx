@@ -139,7 +139,11 @@ export default function Quiz({
   return (
     <div className="p-4">
       <div className="card-container">
-        <div className={`card ${isFlipped ? "is-flipped" : ""}`}>
+        <div
+          className={`rounded-lg border ${
+            completed ? "border-success" : "border-border"
+          } card ${isFlipped ? "is-flipped" : ""}`}
+        >
           {side === "QUESTION" ? (
             <div className="front">
               <div>{content}</div>
