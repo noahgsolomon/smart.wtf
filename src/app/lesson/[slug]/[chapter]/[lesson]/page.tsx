@@ -17,6 +17,7 @@ import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import Understanding from "@/app/lesson/components/interactive/understanding";
+import useSound from "use-sound";
 
 export default function Page({
   params,
@@ -37,6 +38,7 @@ export default function Page({
   });
 
   const { section, setSection } = useSectionContext();
+  const [play] = useSound("/click.mp3");
 
   useEffect(() => {
     if (!sectionQuery.isLoading) {
@@ -53,6 +55,7 @@ export default function Page({
   const mutateBlock = trpc.course.setBlockCompleted.useMutation();
 
   const handleContinue = ({ blockId }: { blockId: number }) => {
+    play();
     mutateBlock.mutate({
       blockId,
     });

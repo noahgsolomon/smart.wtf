@@ -1,6 +1,5 @@
 import { api } from "@/trpc/server";
 import { redirect } from "next/navigation";
-import ChapterButtons from "./chapterbuttons";
 import SectionCards from "./sectioncards";
 import ChapterTitle from "./chaptertitle";
 

@@ -17,6 +17,7 @@ import { trpc } from "@/trpc/client";
 import { buttonVariants } from "@/components/ui/button";
 import { Button } from "@/components/ui/button";
 import { Lock } from "lucide-react";
+import useSound from "use-sound";
 
 const broTalk = [
   "good shit",
@@ -37,6 +38,8 @@ export default function Page({
   });
   const nextSection = nextSectionQuery.data;
   const upNextControls = useAnimation();
+
+  const [play] = useSound("/click.mp3");
 
   const progress = useMotionValue(0);
   const controls = useAnimation();
@@ -253,6 +256,7 @@ export default function Page({
               </a>
               {nextSection.nextSection.implemented ? (
                 <a
+                  onClick={() => play()}
                   href={`/lesson/${params.slug}/${params.chapter}/${nextSection.nextSection.id}?l=1`}
                   className={buttonVariants({ className: "z-10" })}
                 >

@@ -85,15 +85,6 @@ export default function LessonHeading({ section }: { section: Section[] }) {
       <div className="flex flex-row items-center gap-2">
         <ThemeButton className="hidden md:block" />
         <ChatButton query={`prev=${pathname}`} lesson={true} />
-        {/* <div className="cursor-pointer transition-all hover:scale-105">
-          <Image
-            className="m-1"
-            width={30}
-            height={30}
-            src={blazing}
-            alt="streak"
-          />
-        </div> */}
       </div>
     </div>
   );
