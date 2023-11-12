@@ -68,6 +68,37 @@ export default function Quiz({
     }
   }, [completed, answer]);
 
+  const revealedAnswer = () => {
+    if (!completed) {
+      mutateBlock.mutate({
+        blockId,
+      });
+
+      setSection((prev) => {
+        return prev.map((section, index) => {
+          if (index === subSection - 1) {
+            const updatedBlocks = section.blocks.map((block) => {
+              if (block.id === blockId) {
+                const updatedUserCompletedBlocks = [
+                  ...block.userCompletedBlocks,
+                  { blockId: blockId },
+                ];
+                return {
+                  ...block,
+                  userCompletedBlocks: updatedUserCompletedBlocks,
+                };
+              }
+              return block;
+            });
+            return { ...section, blocks: updatedBlocks };
+          }
+          return section;
+        });
+      });
+    }
+    toggleFlip();
+  };
+
   const toggleFlip = () => {
     setIsFlipped(!isFlipped);
     setSide(side === "QUESTION" ? "ANSWER" : "QUESTION");
@@ -238,9 +269,7 @@ export default function Quiz({
                     <Button
                       type="button"
                       variant={"secondary"}
-                      onClick={() => {
-                        toggleFlip();
-                      }}
+                      onClick={revealedAnswer}
                     >
                       Show Explanation
                     </Button>

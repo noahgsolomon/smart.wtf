@@ -79,27 +79,6 @@ export default function Understanding({
           return section;
         });
       });
-
-      const currentBlock = section[subSection - 1]?.blocks.find(
-        (b) => b.id === blockId,
-      );
-
-      const nextBlock = section[subSection - 1]?.blocks.find(
-        (b) => b.order === currentBlock?.order! + 1,
-      );
-
-      const currentBlockOrder = currentBlock?.order!;
-
-      const isNotLastBlockInSubsection =
-        currentBlockOrder < (section[subSection - 1]?.blocks.length ?? 0);
-
-      if (isNotLastBlockInSubsection && nextBlock) {
-        setTimeout(() => {
-          document.getElementById(nextBlock.id.toString())!.scrollIntoView({
-            behavior: "smooth",
-          });
-        }, 100);
-      }
     }
     toggleFlip();
   };
