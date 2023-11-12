@@ -83,6 +83,7 @@
     "three": "^0.158.0",
     "to-vfile": "^8.0.0",
     "typed.js": "^2.0.16",
+    "use-sound": "^4.0.1",
     "zod": "^3.22.4"
   },
   "devDependencies": {
