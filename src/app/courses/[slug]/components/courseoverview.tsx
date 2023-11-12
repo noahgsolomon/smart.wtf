@@ -2,6 +2,7 @@ import { api } from "@/trpc/server";
 import { redirect } from "next/navigation";
 import ChapterButtons from "./chapterbuttons";
 import SectionCards from "./sectioncards";
+import ChapterTitle from "./chaptertitle";
 
 export default async function CourseOverview({
   params,
@@ -10,8 +11,6 @@ export default async function CourseOverview({
   params: { slug: string; chapter: string };
   searchParams: { chapter: string };
 }) {
-  console.log("search params", searchParams);
-
   if (!searchParams.chapter) {
     redirect(`?chapter=1`);
   }
@@ -45,17 +44,11 @@ export default async function CourseOverview({
   return (
     <div className="flex flex-col items-center justify-center gap-16 px-10 pb-8">
       <div className="flex flex-col items-center justify-center gap-8">
-        <div className="flex flex-col text-center text-3xl">
-          <p className="font-bold">Chapter {chapterNum}:</p>
-          <h1 className="font-bold">
-            {course?.courseChapters[chapter - 1]?.name}
-          </h1>
-        </div>
-        <ChapterButtons
+        <ChapterTitle
+          title={course?.courseChapters[chapter - 1]?.name ?? ""}
           chapterNum={chapterNum}
-          chapterCount={course.chapters!}
+          chapters={course.chapters!}
         />
-        {/* Section Links */}
         <SectionCards
           chapter={chapter}
           chapterProgress={chapterProgress}
