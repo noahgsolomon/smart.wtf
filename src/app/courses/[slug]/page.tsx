@@ -1,6 +1,5 @@
 import { Suspense } from "react";
 import CourseOverview from "./components/courseoverview";
-import CourseOverviewSkeleton from "./components/courseoverviewskeleton";
 
 export default function Page({
   params,
@@ -11,7 +10,7 @@ export default function Page({
 }) {
   return (
     <div>
-      <Suspense fallback={<CourseOverviewSkeleton />}>
+      <Suspense fallback={<></>}>
         <CourseOverview searchParams={searchParams} params={params} />
       </Suspense>
     </div>
