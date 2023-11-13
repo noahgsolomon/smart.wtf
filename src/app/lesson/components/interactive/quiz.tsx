@@ -17,6 +17,7 @@ import { useForm } from "react-hook-form";
 import { trpc } from "@/trpc/client";
 import { useSectionContext } from "../../sectioncontext";
 import toast, { Toaster } from "react-hot-toast";
+import useSound from "use-sound";
 
 export default function Quiz({
   subSection,
@@ -57,6 +58,9 @@ export default function Quiz({
   const [isFlipped, setIsFlipped] = useState(false);
 
   const mutateBlock = trpc.course.setBlockCompleted.useMutation();
+
+  const [correctSound] = useSound("/correct.mp3");
+  const [incorrectSound] = useSound("/incorrect.mp3");
 
   const form = useForm<z.infer<typeof FormSchema>>();
 
@@ -114,6 +118,7 @@ export default function Quiz({
       return prev;
     });
     if (data.answer === answer) {
+      correctSound();
       mutateBlock.mutate({
         blockId,
       });
@@ -163,6 +168,7 @@ export default function Quiz({
         }, 100);
       }
     } else {
+      incorrectSound();
       incorrect();
     }
   }

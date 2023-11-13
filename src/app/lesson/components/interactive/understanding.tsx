@@ -13,6 +13,7 @@ import { Lightbulb, Loader2 } from "lucide-react";
 import { type ReactNode, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { useSectionContext } from "../../sectioncontext";
+import useSound from "use-sound";
 
 export default function Understanding({
   question,
@@ -37,8 +38,11 @@ export default function Understanding({
   const [side, setSide] = useState<"front" | "back">(
     completed ? "back" : "front",
   );
+  const [incorrectSound] = useSound("/incorrect.mp3");
 
   const [loading, setLoading] = useState(false);
+
+  const [correctSound] = useSound("/correct.mp3");
 
   const { section, setSection } = useSectionContext();
 
@@ -114,6 +118,7 @@ export default function Understanding({
       setCorrect(dataBody.correct);
       console.log(dataBody.correct);
       if (dataBody.correct) {
+        correctSound();
         mutateBlock.mutate({
           blockId,
         });
@@ -162,6 +167,7 @@ export default function Understanding({
           }, 100);
         }
       } else {
+        incorrectSound();
         toast.error("incorrect!");
       }
       setLoading(false);
@@ -224,7 +230,9 @@ export default function Understanding({
                 <Button
                   variant={submitError ? "destructive" : "default"}
                   onClick={handleSubmit}
-                  disabled={submitError || loading}
+                  disabled={
+                    submitError || loading || userExplanation.length === 0
+                  }
                 >
                   {loading ? (
                     <Loader2 className="h-4 w-4 animate-spin" />
