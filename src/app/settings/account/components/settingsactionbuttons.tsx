@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -9,36 +11,17 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { trpc } from "@/trpc/client";
 import { useClerk } from "@clerk/nextjs";
 import { Loader2 } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
-import toast from "react-hot-toast";
 
 const SettingsActionButtons = () => {
   const clerk = useClerk();
-
-  const [deleting, setDeleting] = useState(false);
+  const router = useRouter();
 
   const logOutHandler = async () => {
-    await clerk.signOut();
-  };
-
-  const deleteUser = trpc.user.delete.useMutation();
-
-  const deleteHandler = async () => {
-    setDeleting(true);
-    try {
-      deleteUser.mutateAsync(undefined, {
-        onError: () => {
-          toast.error("an error occurred");
-        },
-      });
-      await clerk.user?.delete();
-      await logOutHandler();
-    } catch (e) {
-      toast.error("an error occurred");
-    }
+    await clerk.signOut(() => router.push("/"));
   };
 
   return (
@@ -72,17 +55,11 @@ const SettingsActionButtons = () => {
                 </Button>
               </DialogClose>
               <Button
-                onClick={deleteHandler}
                 type="submit"
-                disabled={deleting}
                 className="shadow-none"
                 variant={"destructive"}
               >
-                {deleting ? (
-                  <Loader2 className="h-4 w-4 animate-spin" />
-                ) : (
-                  "Delete"
-                )}
+                Delete
               </Button>
             </DialogFooter>
           </DialogContent>
