@@ -12,9 +12,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { useClerk } from "@clerk/nextjs";
-import { Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
 
 const SettingsActionButtons = () => {
   const clerk = useClerk();
