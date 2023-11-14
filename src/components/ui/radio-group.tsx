@@ -35,7 +35,7 @@ const RadioGroupItem = React.forwardRef<
     <RadioGroupPrimitive.Item
       ref={ref}
       className={cn(
-        " h-5 w-5 rounded-full text-primary shadow  transition-all hover:bg-primary/10 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50",
+        "border-bordr h-5 w-5 rounded-full border text-primary shadow transition-all  hover:bg-primary/10 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50",
         `${
           correct
             ? "bg-success hover:bg-success/60"
