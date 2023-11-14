@@ -68,7 +68,7 @@ export const courseLikesRelations = relations(courseLikes, ({ one }) => ({
 
 export const courseChapters = mysqlTable("course_chapters", {
   id: int("id").primaryKey().autoincrement(),
-  courseId: int("course_id").notNull(),
+  courseId: int("course_id").notNull().default(0),
   order: int("order").notNull(),
   name: varchar("name", { length: 200 }).notNull(),
 });
@@ -88,6 +88,7 @@ export const courseChaptersRelations = relations(
 export const courseChapterSections = mysqlTable("course_chapter_sections", {
   id: int("id").primaryKey().autoincrement(),
   chapterId: int("chapter_id").notNull(),
+  courseId: int("course_id").notNull().default(0),
   order: int("order").notNull(),
   name: varchar("name", { length: 200 }).notNull(),
   description: varchar("description", { length: 500 }).notNull(),
@@ -98,6 +99,10 @@ export const courseChapterSections = mysqlTable("course_chapter_sections", {
 export const courseChapterSectionsRelations = relations(
   courseChapterSections,
   ({ one, many }) => ({
+    course: one(courses, {
+      fields: [courseChapterSections.courseId],
+      references: [courses.id],
+    }),
     courseChapters: one(courseChapters, {
       fields: [courseChapterSections.chapterId],
       references: [courseChapters.id],
@@ -199,4 +204,35 @@ export const understanding = mysqlTable("understanding", {
   explanationMarkdown: text("explanation_markdown").notNull(),
 });
 
+export const latestActivity = mysqlTable("latest_activity", {
+  id: int("id").primaryKey().autoincrement(),
+  userId: int("user_id").notNull(),
+  courseId: int("course_id").notNull(),
+  sectionId: int("section_id").notNull(),
+  subSectionId: int("sub_section_id").notNull(),
+  blockId: int("block_id").notNull(),
+});
+
+export const latestActivityRelations = relations(latestActivity, ({ one }) => ({
+  users: one(users, {
+    fields: [latestActivity.userId],
+    references: [users.id],
+  }),
+  courses: one(courses, {
+    fields: [latestActivity.courseId],
+    references: [courses.id],
+  }),
+  courseChapterSections: one(courseChapterSections, {
+    fields: [latestActivity.sectionId],
+    references: [courseChapterSections.id],
+  }),
+  subSections: one(subSections, {
+    fields: [latestActivity.subSectionId],
+    references: [subSections.id],
+  }),
+  blocks: one(blocks, {
+    fields: [latestActivity.blockId],
+    references: [blocks.id],
+  }),
+}));
 // export const courseChapterSection
