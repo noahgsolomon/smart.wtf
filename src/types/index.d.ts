@@ -18,6 +18,12 @@ export type Section = {
   order: number;
   sectionId: number;
   time: number;
+  courseChapterSections: {
+    id: number;
+    course: {
+      id: number;
+    };
+  };
   blocks: {
     id: number;
     subSectionId: number;
