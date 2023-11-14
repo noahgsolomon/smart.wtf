@@ -18,12 +18,16 @@ import useSound from "use-sound";
 export default function Understanding({
   question,
   subSection,
+  sectionId,
+  blockOrder,
   blockId,
   questionString,
   explanation,
   completed,
 }: {
   blockId: number;
+  blockOrder: number;
+  sectionId: number;
   subSection: number;
   question: ReactNode;
   questionString: string;
@@ -64,6 +68,10 @@ export default function Understanding({
       mutateBlock.mutate({
         blockId,
         courseId: section[0]?.courseChapterSections.course.id!,
+        blockOrder,
+        sectionId,
+        subSectionId: section[subSection - 1]?.id!,
+        subSectionOrder: subSection,
       });
 
       setSection((prev) => {
@@ -128,6 +136,10 @@ export default function Understanding({
         mutateBlock.mutate({
           blockId,
           courseId: section[0]?.courseChapterSections.course.id!,
+          blockOrder,
+          sectionId,
+          subSectionId: section[subSection - 1]?.id!,
+          subSectionOrder: subSection,
         });
 
         setSection((prev) => {
