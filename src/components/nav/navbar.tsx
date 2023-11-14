@@ -10,7 +10,7 @@ import FreeTrialBanner from "./freetrialbanner";
 import { usePathname } from "next/navigation";
 import { trpc } from "@/trpc/client";
 import ChatButton from "./chatbutton";
-import UserButton from "./userbutton";
+import UserButton from "./UserButton";
 
 const NavBar = () => {
   const { userId } = useAuth();
