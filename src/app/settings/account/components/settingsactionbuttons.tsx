@@ -23,9 +23,9 @@ const SettingsActionButtons = () => {
     <div className="mt-4 flex">
       <div className="flex flex-col">
         <Button
-          className="mt-4"
-          variant={"outline"}
           onClick={() => clerk.signOut(() => router.push("/"))}
+          variant={"outline"}
+          className={"mt-4"}
         >
           log out
         </Button>
