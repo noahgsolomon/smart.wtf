@@ -39,6 +39,7 @@ export default function Understanding({
     completed ? "back" : "front",
   );
   const [incorrectSound] = useSound("/incorrect.mp3");
+  const [flipSound] = useSound("/flip.mp3");
 
   const [loading, setLoading] = useState(false);
 
@@ -52,6 +53,7 @@ export default function Understanding({
   const [correct, setCorrect] = useState<null | boolean>(null);
 
   const toggleFlip = () => {
+    flipSound();
     setIsFlipped(!isFlipped);
     setSide((prev) => (prev === "front" ? "back" : "front"));
   };
@@ -250,8 +252,7 @@ export default function Understanding({
                 <Button
                   variant={"secondary"}
                   onClick={() => {
-                    setIsFlipped(false);
-                    setSide("front");
+                    toggleFlip();
                   }}
                 >
                   Back to problem
