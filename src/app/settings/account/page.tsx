@@ -1,3 +1,5 @@
+"use client";
+
 import Settings from "./components/settings";
 
 const Page = () => {
