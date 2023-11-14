@@ -21,7 +21,7 @@ export default function LessonButtons({
   const subSectionMutate = trpc.course.setSubsectionCompleted.useMutation();
   const { setSection } = useSectionContext();
 
-  const handleContinue = ({ finish }: { finish?: boolean }) => {
+  const handleContinue = ({ finish = false }: { finish?: boolean }) => {
     if (finish) {
       finishAudio();
     } else {
@@ -30,6 +30,7 @@ export default function LessonButtons({
     subSectionMutate.mutate({
       sectionId: parseInt(params.lesson),
       order: subSection,
+      finish,
     });
     setSection((prev) => {
       const newSections = JSON.parse(JSON.stringify(prev));
