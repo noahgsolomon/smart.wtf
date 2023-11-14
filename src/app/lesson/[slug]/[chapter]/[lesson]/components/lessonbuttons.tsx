@@ -9,16 +9,20 @@ import useSound from "use-sound";
 export default function LessonButtons({
   subSection,
   section,
+  blockOrder,
+  blockId,
   params,
 }: {
   section: Section[];
+  blockOrder: number;
+  blockId: number;
   subSection: number;
   params: { lesson: string; slug: string; chapter: string };
 }) {
   const [play] = useSound("/click.mp3");
   const [finishAudio] = useSound("/finish.mp3");
 
-  const subSectionMutate = trpc.course.setSubsectionCompleted.useMutation();
+  const mutateBlock = trpc.course.setBlockCompleted.useMutation();
   const { setSection } = useSectionContext();
 
   const handleContinue = ({ finish = false }: { finish?: boolean }) => {
@@ -27,22 +31,27 @@ export default function LessonButtons({
     } else {
       play();
     }
-    subSectionMutate.mutate({
-      sectionId: parseInt(params.lesson),
-      order: subSection,
-      finish,
+    mutateBlock.mutate({
+      blockId,
+      courseId: section[0]?.courseChapterSections.course.id!,
+      blockOrder,
+      sectionId: section[subSection - 1]?.courseChapterSections.id!,
+      subSectionId: section[subSection - 1]?.id!,
+      subSectionOrder: subSection,
     });
     setSection((prev) => {
-      const newSections = JSON.parse(JSON.stringify(prev));
-      const currentSubSection = newSections[subSection - 1];
-      if (currentSubSection?.blocks) {
-        for (const block of currentSubSection.blocks) {
-          if (block.userCompletedBlocks.length === 0) {
-            block.userCompletedBlocks.push({ blockId: block.id });
-          }
-        }
+      const newSection = JSON.parse(JSON.stringify(prev));
+      if (
+        newSection[subSection - 1]?.blocks[blockOrder - 1]?.userCompletedBlocks
+          .length === 0
+      ) {
+        newSection[subSection - 1]?.blocks[
+          blockOrder - 1
+        ]?.userCompletedBlocks.push({
+          blockId: blockId,
+        });
       }
-      return newSections;
+      return newSection;
     });
   };
 
