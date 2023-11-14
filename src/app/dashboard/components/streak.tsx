@@ -11,12 +11,6 @@ import blazing from "public/blazing.png";
 const Streak = () => {
   return (
     <div className="relative">
-      <div className="absolute bottom-0 left-0 right-0 top-0 z-10 flex items-center justify-center rounded-lg bg-black/30 dark:bg-black/50">
-        <div className="flex flex-col items-center">
-          <Lock className="h-4 w-4" />
-          Coming Soon
-        </div>
-      </div>
       <TooltipProvider delayDuration={0}>
         <Tooltip>
           <TooltipTrigger>
