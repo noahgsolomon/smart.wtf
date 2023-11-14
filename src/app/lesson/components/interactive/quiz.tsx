@@ -67,6 +67,8 @@ export default function Quiz({
 
   const [side, setSide] = useState<"QUESTION" | "ANSWER">("QUESTION");
 
+  const { section, setSection } = useSectionContext();
+
   useEffect(() => {
     if (completed) {
       setGuessed((prev) => [...prev, answer]);
@@ -77,6 +79,7 @@ export default function Quiz({
     if (!completed) {
       mutateBlock.mutate({
         blockId,
+        courseId: section[0]?.courseChapterSections.course.id!,
       });
 
       setSection((prev) => {
@@ -110,8 +113,6 @@ export default function Quiz({
     setSide(side === "QUESTION" ? "ANSWER" : "QUESTION");
   };
 
-  const { section, setSection } = useSectionContext();
-
   function onSubmit(data: z.infer<typeof FormSchema>) {
     setGuessed((prev) => {
       if (!prev.includes(data.answer)) {
@@ -123,6 +124,7 @@ export default function Quiz({
       correctSound();
       mutateBlock.mutate({
         blockId,
+        courseId: section[0]?.courseChapterSections.course.id!,
       });
 
       setSection((prev) => {
