@@ -8,10 +8,6 @@ import LatestActivity from "./components/latestactivity";
 const Dashboard = async () => {
   const user = (await api.user.user.query()).user;
 
-  const latest = await api.course.getLatestActivity.query();
-
-  console.log(latest);
-
   return (
     <>
       <main className="mx-5 mt-20 md:mx-20 lg:mx-36">
