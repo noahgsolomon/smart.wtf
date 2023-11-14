@@ -61,6 +61,7 @@ export default function Quiz({
 
   const [correctSound] = useSound("/correct.mp3");
   const [incorrectSound] = useSound("/incorrect.mp3");
+  const [flipSound] = useSound("/flip.mp3");
 
   const form = useForm<z.infer<typeof FormSchema>>();
 
@@ -104,6 +105,7 @@ export default function Quiz({
   };
 
   const toggleFlip = () => {
+    flipSound();
     setIsFlipped(!isFlipped);
     setSide(side === "QUESTION" ? "ANSWER" : "QUESTION");
   };
