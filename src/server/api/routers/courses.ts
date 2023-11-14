@@ -2,6 +2,7 @@ import {
   courseChapterSections,
   courseChapters,
   courseLikes,
+  courseProgress,
   courses,
   latestActivity,
   subSections,
@@ -10,8 +11,10 @@ import { createTRPCRouter, protectedProcedure } from "../trpc";
 import { and, eq } from "drizzle-orm";
 import { z } from "zod";
 import { userCompletedBlocks } from "@/server/db/schemas/users/schema";
+import { db } from "@/server/db";
 
 export const courseRouter = createTRPCRouter({
+  //getting progress for each section in chapter
   getChapterProgress: protectedProcedure
     .input(
       z.object({
@@ -20,6 +23,7 @@ export const courseRouter = createTRPCRouter({
       }),
     )
     .query(async ({ input, ctx }) => {
+      // Get the chapter that the user is trying to get the progress of.
       const chapter = await ctx.db.query.courseChapters.findFirst({
         where: and(
           eq(courseChapters.courseId, input.courseId),
@@ -53,13 +57,16 @@ export const courseRouter = createTRPCRouter({
         return { status: "ERROR", data: [] };
       }
 
-      // Assuming sectionsPercentagesCompleted is already declared.
       const sectionsPercentagesCompleted = [];
 
+      // Calculate the completion percentage for each section.
       for (const section of chapter.courseChapterSections ?? []) {
         const subSectionsPercentagesCompleted = [];
+
+        // Calculate the completion percentage for each subsection.
         for (const subSection of section.subSections ?? []) {
           let completedBlockCount = 0;
+          // Count the number of blocks that the user has completed.
           for (const block of subSection.blocks ?? []) {
             if (block.userCompletedBlocks.length !== 0) {
               completedBlockCount++;
@@ -90,7 +97,6 @@ export const courseRouter = createTRPCRouter({
       }
 
       // Do something with sectionsPercentagesCompleted, like returning it or logging it.
-
       return { status: "OK", data: sectionsPercentagesCompleted };
     }),
   isCourseStarted: protectedProcedure
@@ -100,49 +106,18 @@ export const courseRouter = createTRPCRouter({
       }),
     )
     .query(async ({ input, ctx }) => {
-      const course = await ctx.db.query.courses.findFirst({
-        where: eq(courses.id, input.courseId),
+      // Get the course that the user is trying to get the progress of.
+      const course = await ctx.db.query.courseProgress.findFirst({
+        where: and(
+          eq(courseProgress.userId, ctx.user_id),
+          eq(courseProgress.courseId, input.courseId),
+        ),
         columns: { id: true },
-        with: {
-          courseChapters: {
-            columns: { id: true },
-            where: eq(courseChapters.order, 1),
-            with: {
-              courseChapterSections: {
-                columns: { id: true },
-                where: eq(subSections.order, 1),
-                with: {
-                  subSections: {
-                    columns: { id: true },
-                    with: {
-                      blocks: {
-                        columns: { id: true },
-                        with: {
-                          userCompletedBlocks: {
-                            columns: { id: true },
-                            where: eq(userCompletedBlocks.userId, ctx.user_id),
-                          },
-                        },
-                      },
-                    },
-                  },
-                },
-              },
-            },
-          },
-        },
       });
-      for (const section of course?.courseChapters[0]?.courseChapterSections ??
-        []) {
-        for (const block of section?.subSections[0]?.blocks ?? []) {
-          if (block.userCompletedBlocks.length !== 0) {
-            return { isCourseStarted: true };
-          }
-        }
-      }
-
-      return { isCourseStarted: false };
+      return { isCourseStarted: !!course };
     }),
+
+  // Get the course that the user is trying to get the progress of.
   getCourses: protectedProcedure.query(async ({ ctx }) => {
     const courses = await ctx.db.query.courses.findMany({
       with: {
@@ -169,6 +144,7 @@ export const courseRouter = createTRPCRouter({
   getCourseBySlug: protectedProcedure
     .input(z.object({ slug: z.string() }))
     .query(async ({ ctx, input }) => {
+      // Get the course based on the slug.
       const course = await ctx.db.query.courses.findFirst({
         where: eq(courses.slug, input.slug),
         with: {
@@ -204,6 +180,12 @@ export const courseRouter = createTRPCRouter({
         const section = await ctx.db.query.subSections.findMany({
           where: eq(subSections.sectionId, input.sectionId),
           with: {
+            courseChapterSections: {
+              columns: { id: true },
+              with: {
+                course: { columns: { id: true } },
+              },
+            },
             blocks: {
               with: {
                 interactiveComponents: {
@@ -313,6 +295,7 @@ export const courseRouter = createTRPCRouter({
     )
     .mutation(async ({ ctx, input }) => {
       try {
+        // Get the subsection that the user is trying to mark as completed.
         const subsection = await ctx.db.query.subSections.findFirst({
           where: and(
             eq(subSections.sectionId, input.sectionId),
@@ -337,19 +320,23 @@ export const courseRouter = createTRPCRouter({
           },
         });
 
+        // If the subsection doesn't exist, return an error.
         if (!subsection) {
           return { status: "ERROR" };
         }
 
         for (const block of subsection.blocks) {
+          // If the user has already completed this block, skip it.
           if (block.userCompletedBlocks.length !== 0) {
             continue;
           }
+          // Otherwise, mark the block as completed.
           await ctx.db.insert(userCompletedBlocks).values({
             userId: ctx.user_id,
             blockId: block.id,
           });
         }
+        // If the user has finished the section, mark the next section as the latest activity.
         if (input.finish === true) {
           const nextSection =
             await ctx.db.query.courseChapterSections.findFirst({
@@ -372,15 +359,14 @@ export const courseRouter = createTRPCRouter({
                 },
               },
             });
+
+          // If there is no next section, mark the next chapter as the latest activity.
           if (!nextSection) {
             const nextChapterSection =
               await ctx.db.query.courseChapterSections.findFirst({
-                where: and(
-                  eq(
-                    courseChapterSections.order,
-                    subsection.courseChapterSections.order + 1,
-                  ),
-                  eq(courseChapterSections.order, 1),
+                where: eq(
+                  courseChapterSections.order,
+                  subsection.courseChapterSections.order + 1,
                 ),
                 columns: {
                   id: true,
@@ -398,6 +384,7 @@ export const courseRouter = createTRPCRouter({
             if (!nextChapterSection) {
               return { status: "OK" };
             }
+
             await ctx.db
               .delete(latestActivity)
               .where(eq(latestActivity.userId, ctx.user_id));
@@ -409,6 +396,7 @@ export const courseRouter = createTRPCRouter({
               blockId: nextChapterSection.subSections[0]?.blocks[0]?.id!,
             });
           } else {
+            // If there is a next section, mark it as the latest activity.
             await ctx.db
               .delete(latestActivity)
               .where(eq(latestActivity.userId, ctx.user_id));
@@ -420,6 +408,7 @@ export const courseRouter = createTRPCRouter({
               blockId: nextSection?.subSections[0]?.blocks[0]?.id!,
             });
           }
+          // If the user has not finished the section, mark the next subsection as the latest activity.
         } else {
           const nextSubsection = await ctx.db.query.subSections.findFirst({
             where: and(
@@ -469,7 +458,7 @@ export const courseRouter = createTRPCRouter({
       with: {
         subSections: true,
         courseChapterSections: {
-          columns: { imageUrl: true, name: true },
+          columns: { imageUrl: true, name: true, lessonNumber: true },
           with: {
             courseChapters: true,
             subSections: {
@@ -485,6 +474,7 @@ export const courseRouter = createTRPCRouter({
               columns: {
                 slug: true,
                 name: true,
+                lessons: true,
               },
             },
           },
@@ -527,12 +517,26 @@ export const courseRouter = createTRPCRouter({
   }),
 
   setBlockCompleted: protectedProcedure
-    .input(z.object({ blockId: z.number() }))
+    .input(z.object({ blockId: z.number(), courseId: z.number() }))
     .mutation(async ({ ctx, input }) => {
       await ctx.db.insert(userCompletedBlocks).values({
         userId: ctx.user_id,
         blockId: input.blockId,
       });
+      const starting = await ctx.db.query.courseProgress.findFirst({
+        where: and(
+          eq(courseProgress.userId, ctx.user_id),
+          eq(courseProgress.courseId, input.courseId),
+        ),
+      });
+      if (!starting) {
+        await ctx.db.insert(courseProgress).values({
+          userId: ctx.user_id,
+          courseId: input.courseId,
+          progress: "STARTED",
+          startedAt: new Date(),
+        });
+      }
     }),
 
   addLike: protectedProcedure
