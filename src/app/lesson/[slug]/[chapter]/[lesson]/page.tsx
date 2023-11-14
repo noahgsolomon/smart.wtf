@@ -55,11 +55,23 @@ export default function Page({
 
   const mutateBlock = trpc.course.setBlockCompleted.useMutation();
 
-  const handleContinue = ({ blockId }: { blockId: number }) => {
+  const handleContinue = ({
+    blockId,
+    blockOrder,
+    sectionId,
+  }: {
+    blockId: number;
+    blockOrder: number;
+    sectionId: number;
+  }) => {
     play();
     mutateBlock.mutate({
       blockId,
       courseId: section[0]?.courseChapterSections.course.id!,
+      blockOrder,
+      sectionId,
+      subSectionId: section[lessonNumber - 1]?.id!,
+      subSectionOrder: lessonNumber,
     });
 
     setSection((prev) => {
@@ -205,8 +217,13 @@ export default function Page({
                             );
                             return (
                               <Quiz
+                                sectionId={
+                                  section[lessonNumber - 1]
+                                    ?.courseChapterSections.id!
+                                }
                                 subSection={lessonNumber}
                                 params={params}
+                                blockOrder={block.order}
                                 blockId={block.id}
                                 completed={block.userCompletedBlocks.length > 0}
                                 key={component.quizzes?.id ?? 1}
@@ -265,9 +282,14 @@ export default function Page({
                             );
                             return (
                               <Understanding
+                                sectionId={
+                                  section[lessonNumber - 1]
+                                    ?.courseChapterSections.id!
+                                }
                                 key={component.understanding?.id ?? 1}
                                 subSection={lessonNumber}
                                 blockId={block.id}
+                                blockOrder={block.order}
                                 questionString={
                                   component.understanding?.questionMarkdown ??
                                   "## no question right now, sorry :("
@@ -311,6 +333,8 @@ export default function Page({
                           {section.length > lessonNumber ? (
                             <Link href={`?l=${lessonNumber + 1}`}>
                               <LessonButtons
+                                blockOrder={block.order}
+                                blockId={block.id}
                                 params={params}
                                 section={section}
                                 subSection={lessonNumber}
@@ -321,6 +345,8 @@ export default function Page({
                               href={`/lesson/${params.slug}/${params.chapter}/${params.lesson}/completed`}
                             >
                               <LessonButtons
+                                blockOrder={block.order}
+                                blockId={block.id}
                                 params={params}
                                 section={section}
                                 subSection={lessonNumber}
@@ -333,7 +359,15 @@ export default function Page({
                         block.userCompletedBlocks.length === 0 &&
                         block.interactiveComponents.length === 0 ? (
                         <Button
-                          onClick={() => handleContinue({ blockId: block.id })}
+                          onClick={() =>
+                            handleContinue({
+                              blockId: block.id,
+                              blockOrder: block.order,
+                              sectionId:
+                                section[lessonNumber - 1]?.courseChapterSections
+                                  .id!,
+                            })
+                          }
                         >
                           Continue
                         </Button>
