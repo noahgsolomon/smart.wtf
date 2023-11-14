@@ -38,6 +38,7 @@ export default function Page({
   });
 
   const { section, setSection } = useSectionContext();
+
   const [play] = useSound("/click.mp3");
 
   useEffect(() => {
@@ -58,6 +59,7 @@ export default function Page({
     play();
     mutateBlock.mutate({
       blockId,
+      courseId: section[0]?.courseChapterSections.course.id!,
     });
 
     setSection((prev) => {
