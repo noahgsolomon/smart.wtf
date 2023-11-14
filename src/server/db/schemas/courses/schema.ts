@@ -1,5 +1,7 @@
 import {
   boolean,
+  datetime,
+  index,
   int,
   mysqlTable,
   text,
@@ -26,6 +28,7 @@ export const courses = mysqlTable(
       .default("EASY"),
     slug: varchar("slug", { length: 100 }).notNull().default("").unique(),
     chapters: int("chapters").notNull().default(0),
+    lessons: int("lessons").notNull().default(0),
   },
   (t) => ({
     slugIdx: uniqueIndex("slug_idx").on(t.slug),
@@ -85,16 +88,24 @@ export const courseChaptersRelations = relations(
   }),
 );
 
-export const courseChapterSections = mysqlTable("course_chapter_sections", {
-  id: int("id").primaryKey().autoincrement(),
-  chapterId: int("chapter_id").notNull(),
-  courseId: int("course_id").notNull().default(0),
-  order: int("order").notNull(),
-  name: varchar("name", { length: 200 }).notNull(),
-  description: varchar("description", { length: 500 }).notNull(),
-  imageUrl: varchar("image_url", { length: 200 }).notNull(),
-  implemented: boolean("implemented").notNull().default(false),
-});
+export const courseChapterSections = mysqlTable(
+  "course_chapter_sections",
+  {
+    id: int("id").primaryKey().autoincrement(),
+    chapterId: int("chapter_id").notNull(),
+    courseId: int("course_id").notNull().default(0),
+    order: int("order").notNull(),
+    name: varchar("name", { length: 200 }).notNull(),
+    description: varchar("description", { length: 500 }).notNull(),
+    imageUrl: varchar("image_url", { length: 200 }).notNull(),
+    implemented: boolean("implemented").notNull().default(false),
+    lessonNumber: int("lesson_number").notNull().default(0),
+  },
+  (t) => ({
+    unq: unique().on(t.chapterId, t.order), //change
+    chapterOrderIdx: uniqueIndex("chapter_order_idx").on(t.chapterId, t.order), //change
+  }),
+);
 
 export const courseChapterSectionsRelations = relations(
   courseChapterSections,
@@ -122,6 +133,7 @@ export const subSections = mysqlTable(
   },
   (t) => ({
     unq: unique().on(t.sectionId, t.order),
+    sectionIdx: index("section_idx").on(t.sectionId), //change
   }),
 );
 
@@ -235,4 +247,33 @@ export const latestActivityRelations = relations(latestActivity, ({ one }) => ({
     references: [blocks.id],
   }),
 }));
-// export const courseChapterSection
+
+export const courseProgress = mysqlTable(
+  "course_progress",
+  {
+    id: int("id").primaryKey().autoincrement(),
+    userId: int("user_id").notNull(),
+    courseId: int("course_id").notNull(),
+    progress: varchar("progress", {
+      length: 50,
+      enum: ["STARTED", "COMPLETED"],
+    }),
+    startedAt: datetime("started_at"),
+    completedAt: datetime("completed_at"),
+  },
+  (t) => ({
+    unq: unique().on(t.userId, t.courseId),
+    courseUserIdx: uniqueIndex("course_user_idx").on(t.userId, t.courseId),
+  }),
+);
+
+export const courseProgressRelations = relations(courseProgress, ({ one }) => ({
+  users: one(users, {
+    fields: [courseProgress.userId],
+    references: [users.id],
+  }),
+  courses: one(courses, {
+    fields: [courseProgress.courseId],
+    references: [courses.id],
+  }),
+}));

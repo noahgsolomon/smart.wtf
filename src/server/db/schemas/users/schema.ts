@@ -2,6 +2,7 @@ import { relations } from "drizzle-orm";
 import {
   boolean,
   datetime,
+  index,
   int,
   mysqlTable,
   unique,
@@ -54,6 +55,7 @@ export const userCompletedBlocks = mysqlTable(
   (t) => ({
     unq: unique().on(t.userId, t.blockId),
     userBlockIdx: uniqueIndex("user_block_idx").on(t.userId, t.blockId),
+    userIdx: index("user_idx").on(t.userId), //change
   }),
 );
 
