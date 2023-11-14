@@ -11,7 +11,6 @@ export default function LessonButtons({
   section,
   blockOrder,
   blockId,
-  params,
 }: {
   section: Section[];
   blockOrder: number;
