@@ -60,8 +60,10 @@ export default function Understanding({
 
   const revealedAnswer = () => {
     if (!completed) {
+      console.log(section[0]?.courseChapterSections.course.id!);
       mutateBlock.mutate({
         blockId,
+        courseId: section[0]?.courseChapterSections.course.id!,
       });
 
       setSection((prev) => {
@@ -121,8 +123,11 @@ export default function Understanding({
       console.log(dataBody.correct);
       if (dataBody.correct) {
         correctSound();
+        console.log(section[0]?.courseChapterSections.course.id!);
+
         mutateBlock.mutate({
           blockId,
+          courseId: section[0]?.courseChapterSections.course.id!,
         });
 
         setSection((prev) => {
