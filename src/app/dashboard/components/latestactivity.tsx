@@ -9,6 +9,7 @@ import Image from "next/image";
 import Link from "next/link";
 import LatestActivitySkeleton from "./latestactivityskeleton";
 import useSound from "use-sound";
+import RecommendedLesson from "./recommendedlesson";
 
 export default function LatestActivity() {
   const latestQuery = trpc.course.getLatestActivity.useQuery();
@@ -21,9 +22,13 @@ export default function LatestActivity() {
     return <LatestActivitySkeleton />;
   }
 
+  if (!latest.latest.id) {
+    return <RecommendedLesson />;
+  }
+
   return (
     <div className="flex flex-col gap-2">
-      <h4>Pick up where you left off</h4>
+      <h4>Recommended Lessons</h4>
       <div className="flex">
         <div className="flex flex-col gap-4 rounded-lg border border-border bg-card p-4">
           <div className="">
@@ -47,7 +52,8 @@ export default function LatestActivity() {
               {latest.latest.courseChapterSections?.name ?? "Lesson"}
             </p>
             <p className="text-sm opacity-80">
-              Lesson x of 40 {"(unimplemented)"}
+              Lesson {latest.latest.courseChapterSections?.lessonNumber} of{" "}
+              {latest.latest.courseChapterSections?.course.lessons}
             </p>
           </div>
           <Progress
