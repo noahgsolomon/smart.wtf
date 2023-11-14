@@ -1,6 +1,6 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import {
   Dialog,
   DialogClose,
@@ -11,6 +11,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { cn } from "@/lib/utils";
 import { useClerk } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
 
@@ -18,21 +19,22 @@ const SettingsActionButtons = () => {
   const clerk = useClerk();
   const router = useRouter();
 
-  const logOutHandler = async () => {
-    await clerk.signOut(() => router.push("/"));
-  };
-
   return (
     <div className="mt-4 flex">
       <div className="flex flex-col">
-        <Button className="mt-4" variant={"outline"} onClick={logOutHandler}>
+        <Button
+          className="mt-4"
+          variant={"outline"}
+          onClick={() => clerk.signOut(() => router.push("/"))}
+        >
           log out
         </Button>
         <Dialog>
-          <DialogTrigger disabled={true}>
-            <Button disabled={true} className="mt-4 " variant={"destructive"}>
-              delete account
-            </Button>
+          <DialogTrigger
+            className={cn(buttonVariants({ variant: "destructive" }), "mt-4")}
+            disabled={true}
+          >
+            delete account
           </DialogTrigger>
           <DialogContent>
             <DialogHeader>
@@ -43,14 +45,15 @@ const SettingsActionButtons = () => {
               </DialogDescription>
             </DialogHeader>
             <DialogFooter className="justify-start gap-2">
-              <DialogClose asChild>
-                <Button
-                  className="shadow-none"
-                  type="button"
-                  variant="secondary"
-                >
-                  Close
-                </Button>
+              <DialogClose
+                type="button"
+                className={cn(
+                  buttonVariants({ variant: "secondary" }),
+                  "shadow-none",
+                )}
+                asChild
+              >
+                Close
               </DialogClose>
               <Button
                 type="submit"
