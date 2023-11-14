@@ -20,9 +20,10 @@ const NavBar = () => {
   let user;
   let daysSinceAccountCreation = 0;
   const trialLength = 7;
+  const userQuery = trpc.user.user.useQuery();
 
   if (userId) {
-    user = trpc.user.user.useQuery().data;
+    user = userQuery.data;
     const createdAt = user?.user?.created_at;
 
     if (createdAt) {
