@@ -7,10 +7,10 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 import SmartWtfLogo from "../svg/smartwtf";
 import FreeTrialBanner from "./freetrialbanner";
-import UserButton from "./userbutton";
-import ChatButton from "./chatbutton";
 import { usePathname } from "next/navigation";
 import { trpc } from "@/trpc/client";
+import ChatButton from "./chatbutton";
+import UserButton from "./userbutton";
 
 const NavBar = () => {
   const { userId } = useAuth();
