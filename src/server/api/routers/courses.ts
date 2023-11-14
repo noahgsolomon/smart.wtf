@@ -3,12 +3,14 @@ import {
   courseChapters,
   courseLikes,
   courses,
+  latestActivity,
   subSections,
 } from "@/server/db/schemas/courses/schema";
 import { createTRPCRouter, protectedProcedure } from "../trpc";
 import { and, eq } from "drizzle-orm";
 import { z } from "zod";
 import { userCompletedBlocks } from "@/server/db/schemas/users/schema";
+import { db } from "@/server/db";
 
 export const courseRouter = createTRPCRouter({
   getChapterProgress: protectedProcedure
@@ -303,7 +305,13 @@ export const courseRouter = createTRPCRouter({
     }),
 
   setSubsectionCompleted: protectedProcedure
-    .input(z.object({ sectionId: z.number(), order: z.number() }))
+    .input(
+      z.object({
+        sectionId: z.number(),
+        order: z.number(),
+        finish: z.boolean(),
+      }),
+    )
     .mutation(async ({ ctx, input }) => {
       try {
         const subsection = await ctx.db.query.subSections.findFirst({
@@ -313,6 +321,11 @@ export const courseRouter = createTRPCRouter({
           ),
           columns: { id: true },
           with: {
+            courseChapterSections: {
+              with: {
+                course: { columns: { id: true } },
+              },
+            },
             blocks: {
               columns: { id: true },
               with: {
@@ -338,11 +351,181 @@ export const courseRouter = createTRPCRouter({
             blockId: block.id,
           });
         }
+        if (input.finish === true) {
+          const nextSection =
+            await ctx.db.query.courseChapterSections.findFirst({
+              where: and(
+                eq(
+                  courseChapterSections.chapterId,
+                  subsection.courseChapterSections.chapterId,
+                ),
+                eq(
+                  courseChapterSections.order,
+                  subsection.courseChapterSections.order + 1,
+                ),
+              ),
+              with: {
+                subSections: {
+                  columns: { id: true },
+                  with: {
+                    blocks: true,
+                  },
+                },
+              },
+            });
+          if (!nextSection) {
+            const nextChapterSection =
+              await ctx.db.query.courseChapterSections.findFirst({
+                where: and(
+                  eq(
+                    courseChapterSections.order,
+                    subsection.courseChapterSections.order + 1,
+                  ),
+                  eq(courseChapterSections.order, 1),
+                ),
+                columns: {
+                  id: true,
+                },
+                with: {
+                  course: { columns: { id: true } },
+                  subSections: {
+                    columns: { id: true },
+                    with: {
+                      blocks: true,
+                    },
+                  },
+                },
+              });
+            if (!nextChapterSection) {
+              return { status: "OK" };
+            }
+            await ctx.db
+              .delete(latestActivity)
+              .where(eq(latestActivity.userId, ctx.user_id));
+            await ctx.db.insert(latestActivity).values({
+              userId: ctx.user_id!,
+              courseId: nextChapterSection.course?.id!,
+              sectionId: nextChapterSection.id!,
+              subSectionId: nextChapterSection.subSections[0]?.id!,
+              blockId: nextChapterSection.subSections[0]?.blocks[0]?.id!,
+            });
+          } else {
+            await ctx.db
+              .delete(latestActivity)
+              .where(eq(latestActivity.userId, ctx.user_id));
+            await ctx.db.insert(latestActivity).values({
+              userId: ctx.user_id!,
+              courseId: subsection.courseChapterSections.course?.id!,
+              sectionId: nextSection?.id!,
+              subSectionId: nextSection?.subSections[0]?.id!,
+              blockId: nextSection?.subSections[0]?.blocks[0]?.id!,
+            });
+          }
+        } else {
+          const nextSubsection = await ctx.db.query.subSections.findFirst({
+            where: and(
+              eq(subSections.sectionId, input.sectionId),
+              eq(subSections.order, input.order + 1),
+            ),
+            columns: { id: true },
+            with: {
+              courseChapterSections: {
+                with: { course: { columns: { id: true } } },
+                columns: { id: true },
+              },
+              blocks: {
+                columns: { id: true },
+                with: {
+                  userCompletedBlocks: {
+                    columns: { id: true },
+                    where: eq(userCompletedBlocks.userId, ctx.user_id),
+                  },
+                },
+              },
+            },
+          });
+          if (!nextSubsection) {
+            return { status: "OK" };
+          }
+          await ctx.db
+            .delete(latestActivity)
+            .where(eq(latestActivity.userId, ctx.user_id));
+          await ctx.db.insert(latestActivity).values({
+            userId: ctx.user_id!,
+            courseId: nextSubsection.courseChapterSections.course?.id!,
+            sectionId: subsection.courseChapterSections.id!,
+            subSectionId: nextSubsection?.id!,
+            blockId: nextSubsection?.blocks[0]?.id!,
+          });
+        }
         return { status: "OK" };
       } catch (error) {
         return { status: "ERROR", error: error };
       }
     }),
+
+  getLatestActivity: protectedProcedure.query(async ({ ctx }) => {
+    const latestActivityVal = await ctx.db.query.latestActivity.findFirst({
+      where: eq(latestActivity.userId, ctx.user_id),
+      with: {
+        subSections: true,
+        courseChapterSections: {
+          columns: { imageUrl: true, name: true },
+          with: {
+            courseChapters: true,
+            subSections: {
+              with: {
+                blocks: {
+                  with: {
+                    userCompletedBlocks: true,
+                  },
+                },
+              },
+            },
+            course: {
+              columns: {
+                slug: true,
+                name: true,
+              },
+            },
+          },
+        },
+      },
+    });
+
+    const subSectionsPercentagesCompleted = [];
+    for (const subSection of latestActivityVal?.courseChapterSections
+      .subSections ?? []) {
+      let completedBlockCount = 0;
+      for (const block of subSection.blocks ?? []) {
+        if (block.userCompletedBlocks.length !== 0) {
+          completedBlockCount++;
+        }
+      }
+      // Guard against division by zero if there are no blocks.
+      const totalBlocks = subSection.blocks.length || 1;
+      const percentageCompleted =
+        totalBlocks > 0 ? (completedBlockCount / totalBlocks) * 100 : 0;
+
+      subSectionsPercentagesCompleted.push({
+        subSectionId: subSection.id,
+        percentageCompleted: percentageCompleted,
+      });
+    }
+
+    const averagePercentageCompleted =
+      subSectionsPercentagesCompleted.reduce(
+        (acc, curr) => acc + curr.percentageCompleted,
+        0,
+      ) / (subSectionsPercentagesCompleted.length || 1);
+
+    return {
+      latest: {
+        ...latestActivityVal,
+        percentageCompleted: averagePercentageCompleted,
+      },
+    };
+  }),
 
   setBlockCompleted: protectedProcedure
     .input(z.object({ blockId: z.number() }))
