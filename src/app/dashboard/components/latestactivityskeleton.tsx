@@ -3,7 +3,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 export default function LatestActivitySkeleton() {
   return (
     <div className="z-10 flex flex-col gap-2">
-      <h4>Pick up where you left off</h4>
+      <Skeleton className="h-[20px] w-[200px]" />
       <div className="flex ">
         <div className="flex flex-col gap-4 rounded-lg border border-border bg-card p-4">
           <div>
