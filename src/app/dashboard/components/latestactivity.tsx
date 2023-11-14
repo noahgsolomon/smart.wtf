@@ -29,7 +29,7 @@ export default function LatestActivity() {
           <div className="">
             <Image
               src={
-                latest!.latest.courseChapterSections?.imageUrl ??
+                latest.latest.courseChapterSections?.imageUrl ??
                 "https://images.codefoli.com/systems-design-1-1.png"
               }
               alt="lesson"

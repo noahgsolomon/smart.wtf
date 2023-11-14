@@ -10,7 +10,6 @@ import { createTRPCRouter, protectedProcedure } from "../trpc";
 import { and, eq } from "drizzle-orm";
 import { z } from "zod";
 import { userCompletedBlocks } from "@/server/db/schemas/users/schema";
-import { db } from "@/server/db";
 
 export const courseRouter = createTRPCRouter({
   getChapterProgress: protectedProcedure

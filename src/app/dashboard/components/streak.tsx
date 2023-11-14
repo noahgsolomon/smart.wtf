@@ -4,7 +4,6 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { Lock } from "lucide-react";
 import Image from "next/image";
 import blazing from "public/blazing.png";
 
