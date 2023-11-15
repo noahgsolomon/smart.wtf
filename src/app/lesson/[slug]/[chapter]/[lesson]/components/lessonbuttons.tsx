@@ -4,14 +4,23 @@ import { useSectionContext } from "@/app/lesson/sectioncontext";
 import { Button } from "@/components/ui/button";
 import { trpc } from "@/trpc/client";
 import { type Section } from "@/types";
+import { useRouter } from "next/navigation";
 import useSound from "use-sound";
 
 export default function LessonButtons({
+  redirect,
+  chapterId,
+  chapterOrder,
+  sectionOrder,
   subSection,
   section,
   blockOrder,
   blockId,
 }: {
+  redirect: string;
+  chapterId: number;
+  chapterOrder: number;
+  sectionOrder: number;
   section: Section[];
   blockOrder: number;
   blockId: number;
@@ -20,6 +29,7 @@ export default function LessonButtons({
 }) {
   const [play] = useSound("/click.mp3");
   const [finishAudio] = useSound("/finish.mp3");
+  const router = useRouter();
 
   const mutateBlock = trpc.course.setBlockCompleted.useMutation();
   const { setSection } = useSectionContext();
@@ -37,6 +47,9 @@ export default function LessonButtons({
       sectionId: section[subSection - 1]?.courseChapterSections.id!,
       subSectionId: section[subSection - 1]?.id!,
       subSectionOrder: subSection,
+      chapterId,
+      chapterOrder,
+      sectionOrder,
     });
     setSection((prev) => {
       const newSection = JSON.parse(JSON.stringify(prev));
@@ -52,6 +65,7 @@ export default function LessonButtons({
       }
       return newSection;
     });
+    router.push(redirect);
   };
 
   return (
