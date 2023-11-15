@@ -19,7 +19,12 @@ export type Section = {
   sectionId: number;
   time: number;
   courseChapterSections: {
+    order: number;
     id: number;
+    courseChapters: {
+      order: number;
+      id: number;
+    };
     course: {
       id: number;
     };
