@@ -25,10 +25,6 @@ export default async function CourseOverview({
 
   const course = courseData.course;
 
-  console.log(JSON.stringify(course, null, 2));
-
-  console.log("course", JSON.stringify(course, null, 2));
-
   if (course === null) {
     redirect("/404");
   }
