@@ -72,6 +72,9 @@ export default function Page({
       sectionId,
       subSectionId: section[lessonNumber - 1]?.id!,
       subSectionOrder: lessonNumber,
+      chapterId: section[0]?.courseChapterSections.courseChapters.id!,
+      chapterOrder: section[0]?.courseChapterSections.courseChapters.order!,
+      sectionOrder: section[0]?.courseChapterSections.order!,
     });
 
     setSection((prev) => {
@@ -217,6 +220,17 @@ export default function Page({
                             );
                             return (
                               <Quiz
+                                chapterId={
+                                  section[0]?.courseChapterSections
+                                    .courseChapters.id!
+                                }
+                                chapterOrder={
+                                  section[0]?.courseChapterSections
+                                    .courseChapters.order!
+                                }
+                                sectionOrder={
+                                  section[0]?.courseChapterSections.order!
+                                }
                                 sectionId={
                                   section[lessonNumber - 1]
                                     ?.courseChapterSections.id!
@@ -282,6 +296,17 @@ export default function Page({
                             );
                             return (
                               <Understanding
+                                chapterId={
+                                  section[0]?.courseChapterSections
+                                    .courseChapters.id!
+                                }
+                                chapterOrder={
+                                  section[0]?.courseChapterSections
+                                    .courseChapters.order!
+                                }
+                                sectionOrder={
+                                  section[0]?.courseChapterSections.order!
+                                }
                                 sectionId={
                                   section[lessonNumber - 1]
                                     ?.courseChapterSections.id!
@@ -331,27 +356,45 @@ export default function Page({
                         block.userCompletedBlocks.length > 0) ? (
                         <>
                           {section.length > lessonNumber ? (
-                            <Link href={`?l=${lessonNumber + 1}`}>
-                              <LessonButtons
-                                blockOrder={block.order}
-                                blockId={block.id}
-                                params={params}
-                                section={section}
-                                subSection={lessonNumber}
-                              />
-                            </Link>
+                            <LessonButtons
+                              redirect={`?l=${lessonNumber + 1}`}
+                              chapterId={
+                                section[0]?.courseChapterSections.courseChapters
+                                  .id!
+                              }
+                              chapterOrder={
+                                section[0]?.courseChapterSections.courseChapters
+                                  .order!
+                              }
+                              sectionOrder={
+                                section[0]?.courseChapterSections.order!
+                              }
+                              blockOrder={block.order}
+                              blockId={block.id}
+                              params={params}
+                              section={section}
+                              subSection={lessonNumber}
+                            />
                           ) : (
-                            <Link
-                              href={`/lesson/${params.slug}/${params.chapter}/${params.lesson}/completed`}
-                            >
-                              <LessonButtons
-                                blockOrder={block.order}
-                                blockId={block.id}
-                                params={params}
-                                section={section}
-                                subSection={lessonNumber}
-                              />
-                            </Link>
+                            <LessonButtons
+                              redirect={`/lesson/${params.slug}/${params.chapter}/${params.lesson}/completed`}
+                              chapterId={
+                                section[0]?.courseChapterSections.courseChapters
+                                  .id!
+                              }
+                              chapterOrder={
+                                section[0]?.courseChapterSections.courseChapters
+                                  .order!
+                              }
+                              sectionOrder={
+                                section[0]?.courseChapterSections.order!
+                              }
+                              blockOrder={block.order}
+                              blockId={block.id}
+                              params={params}
+                              section={section}
+                              subSection={lessonNumber}
+                            />
                           )}
                         </>
                       ) : block.order <
