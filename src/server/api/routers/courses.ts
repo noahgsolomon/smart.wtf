@@ -181,8 +181,9 @@ export const courseRouter = createTRPCRouter({
           where: eq(subSections.sectionId, input.sectionId),
           with: {
             courseChapterSections: {
-              columns: { id: true },
+              columns: { id: true, order: true },
               with: {
+                courseChapters: { columns: { id: true, order: true } },
                 course: { columns: { id: true } },
               },
             },
@@ -415,13 +416,14 @@ export const courseRouter = createTRPCRouter({
         courseId: z.number(),
         blockOrder: z.number(),
         sectionId: z.number(),
+        sectionOrder: z.number(),
         subSectionOrder: z.number(),
         subSectionId: z.number(),
+        chapterId: z.number(),
+        chapterOrder: z.number(),
       }),
     )
     .mutation(async ({ ctx, input }) => {
-      console.log("hit");
-      console.log(JSON.stringify(input, null, 2));
       await ctx.db.insert(userCompletedBlocks).values({
         userId: ctx.user_id,
         blockId: input.blockId,
@@ -448,7 +450,6 @@ export const courseRouter = createTRPCRouter({
         ),
         columns: { id: true },
       });
-      console.log(nextBlock);
       if (nextBlock) {
         await ctx.db
           .delete(latestActivity)
@@ -488,118 +489,93 @@ export const courseRouter = createTRPCRouter({
             subSectionId: nextSubsection.id,
             blockId: nextSubsection.blocks[0]?.id ?? 0,
           });
+          return { status: "OK" };
         } else {
+          console.log("next section");
+          console.log("section order", input.sectionOrder);
+          const nextSection =
+            await ctx.db.query.courseChapterSections.findFirst({
+              where: and(
+                eq(courseChapterSections.order, input.sectionOrder + 1),
+                eq(courseChapterSections.chapterId, input.chapterId),
+              ),
+              columns: { id: true, implemented: true },
+              with: {
+                subSections: {
+                  columns: { id: true },
+                  with: { blocks: { columns: { id: true } } },
+                },
+              },
+            });
+
+          console.log(JSON.stringify(nextSection, null, 2));
+
+          if (nextSection) {
+            if (!nextSection.implemented) {
+              return { status: "OK", message: "next section not implemented" };
+            }
+            await ctx.db
+              .delete(latestActivity)
+              .where(eq(latestActivity.userId, ctx.user_id));
+
+            await ctx.db.insert(latestActivity).values({
+              userId: ctx.user_id!,
+              courseId: input.courseId,
+              sectionId: nextSection.id,
+              subSectionId: nextSection.subSections[0]?.id!,
+              blockId: nextSection.subSections[0]?.blocks[0]?.id!,
+            });
+
+            return { status: "OK" };
+          } else {
+            const nextChapter = await ctx.db.query.courseChapters.findFirst({
+              where: and(
+                eq(courseChapters.order, input.chapterOrder + 1),
+                eq(courseChapters.courseId, input.courseId),
+              ),
+              columns: { id: true },
+              with: {
+                courseChapterSections: {
+                  columns: { id: true, implemented: true },
+                  with: {
+                    subSections: {
+                      columns: { id: true },
+                      with: { blocks: { columns: { id: true } } },
+                    },
+                  },
+                },
+              },
+            });
+
+            if (nextChapter) {
+              if (!nextChapter.courseChapterSections[0]?.implemented) {
+                return {
+                  status: "OK",
+                  message: "next chapters section not implemented",
+                };
+              }
+              await ctx.db
+                .delete(latestActivity)
+                .where(eq(latestActivity.userId, ctx.user_id));
+
+              await ctx.db.insert(latestActivity).values({
+                userId: ctx.user_id!,
+                courseId: input.courseId,
+                sectionId: nextChapter.courseChapterSections[0]?.id!,
+                subSectionId:
+                  nextChapter.courseChapterSections[0]?.subSections[0]?.id!,
+                blockId:
+                  nextChapter.courseChapterSections[0]?.subSections[0]
+                    ?.blocks[0]?.id!,
+              });
+
+              return { status: "OK" };
+            } else {
+              return { status: "OK" };
+            }
+          }
         }
       }
-      // // If the user has finished the section, mark the next section as the latest activity.
-      // if (input.finish === true) {
-      //   const nextSection = await ctx.db.query.courseChapterSections.findFirst({
-      //     where: and(
-      //       eq(
-      //         courseChapterSections.chapterId,
-      //         subsection.courseChapterSections.chapterId,
-      //       ),
-      //       eq(
-      //         courseChapterSections.order,
-      //         subsection.courseChapterSections.order + 1,
-      //       ),
-      //     ),
-      //     with: {
-      //       subSections: {
-      //         columns: { id: true },
-      //         with: {
-      //           blocks: true,
-      //         },
-      //       },
-      //     },
-      //   });
-
-      //   // If there is no next section, mark the next chapter as the latest activity.
-      //   if (!nextSection) {
-      //     const nextChapterSection =
-      //       await ctx.db.query.courseChapterSections.findFirst({
-      //         where: eq(
-      //           courseChapterSections.order,
-      //           subsection.courseChapterSections.order + 1,
-      //         ),
-      //         columns: {
-      //           id: true,
-      //         },
-      //         with: {
-      //           course: { columns: { id: true } },
-      //           subSections: {
-      //             columns: { id: true },
-      //             with: {
-      //               blocks: true,
-      //             },
-      //           },
-      //         },
-      //       });
-      //     if (!nextChapterSection) {
-      //       return { status: "OK" };
-      //     }
-
-      //     await ctx.db
-      //       .delete(latestActivity)
-      //       .where(eq(latestActivity.userId, ctx.user_id));
-      //     await ctx.db.insert(latestActivity).values({
-      //       userId: ctx.user_id!,
-      //       courseId: nextChapterSection.course?.id!,
-      //       sectionId: nextChapterSection.id!,
-      //       subSectionId: nextChapterSection.subSections[0]?.id!,
-      //       blockId: nextChapterSection.subSections[0]?.blocks[0]?.id!,
-      //     });
-      //   } else {
-      //     // If there is a next section, mark it as the latest activity.
-      //     await ctx.db
-      //       .delete(latestActivity)
-      //       .where(eq(latestActivity.userId, ctx.user_id));
-      //     await ctx.db.insert(latestActivity).values({
-      //       userId: ctx.user_id!,
-      //       courseId: subsection.courseChapterSections.course?.id!,
-      //       sectionId: nextSection?.id!,
-      //       subSectionId: nextSection?.subSections[0]?.id!,
-      //       blockId: nextSection?.subSections[0]?.blocks[0]?.id!,
-      //     });
-      //   }
-      //   // If the user has not finished the section, mark the next subsection as the latest activity.
-      // } else {
-      //   const nextSubsection = await ctx.db.query.subSections.findFirst({
-      //     where: and(
-      //       eq(subSections.sectionId, input.sectionId),
-      //       eq(subSections.order, input.order + 1),
-      //     ),
-      //     columns: { id: true },
-      //     with: {
-      //       courseChapterSections: {
-      //         with: { course: { columns: { id: true } } },
-      //         columns: { id: true },
-      //       },
-      //       blocks: {
-      //         columns: { id: true },
-      //         with: {
-      //           userCompletedBlocks: {
-      //             columns: { id: true },
-      //             where: eq(userCompletedBlocks.userId, ctx.user_id),
-      //           },
-      //         },
-      //       },
-      //     },
-      //   });
-      //   if (!nextSubsection) {
-      //     return { status: "OK" };
-      //   }
-      //   await ctx.db
-      //     .delete(latestActivity)
-      //     .where(eq(latestActivity.userId, ctx.user_id));
-      //   await ctx.db.insert(latestActivity).values({
-      //     userId: ctx.user_id!,
-      //     courseId: nextSubsection.courseChapterSections.course?.id!,
-      //     sectionId: subsection.courseChapterSections.id!,
-      //     subSectionId: nextSubsection?.id!,
-      //     blockId: nextSubsection?.blocks[0]?.id!,
-      //   });
-      // }
     }),
 
   addLike: protectedProcedure
