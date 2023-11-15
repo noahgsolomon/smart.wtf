@@ -16,6 +16,9 @@ import { useSectionContext } from "../../sectioncontext";
 import useSound from "use-sound";
 
 export default function Understanding({
+  chapterId,
+  chapterOrder,
+  sectionOrder,
   question,
   subSection,
   sectionId,
@@ -25,6 +28,9 @@ export default function Understanding({
   explanation,
   completed,
 }: {
+  chapterId: number;
+  chapterOrder: number;
+  sectionOrder: number;
   blockId: number;
   blockOrder: number;
   sectionId: number;
@@ -72,6 +78,9 @@ export default function Understanding({
         sectionId,
         subSectionId: section[subSection - 1]?.id!,
         subSectionOrder: subSection,
+        chapterId,
+        chapterOrder,
+        sectionOrder,
       });
 
       setSection((prev) => {
@@ -140,6 +149,9 @@ export default function Understanding({
           sectionId,
           subSectionId: section[subSection - 1]?.id!,
           subSectionOrder: subSection,
+          chapterId,
+          chapterOrder,
+          sectionOrder,
         });
 
         setSection((prev) => {

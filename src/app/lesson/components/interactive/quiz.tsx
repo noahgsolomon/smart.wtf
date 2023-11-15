@@ -20,6 +20,9 @@ import toast, { Toaster } from "react-hot-toast";
 import useSound from "use-sound";
 
 export default function Quiz({
+  chapterId,
+  chapterOrder,
+  sectionOrder,
   sectionId,
   subSection,
   blockOrder,
@@ -31,6 +34,9 @@ export default function Quiz({
   completed,
   params,
 }: {
+  chapterId: number;
+  chapterOrder: number;
+  sectionOrder: number;
   sectionId: number;
   subSection: number;
   blockOrder: number;
@@ -88,6 +94,9 @@ export default function Quiz({
         sectionId,
         subSectionId: section[subSection - 1]?.id!,
         subSectionOrder: subSection,
+        chapterId,
+        chapterOrder,
+        sectionOrder,
       });
 
       setSection((prev) => {
@@ -137,6 +146,9 @@ export default function Quiz({
         sectionId,
         subSectionId: section[subSection - 1]?.id!,
         subSectionOrder: subSection,
+        chapterId,
+        chapterOrder,
+        sectionOrder,
       });
 
       setSection((prev) => {
