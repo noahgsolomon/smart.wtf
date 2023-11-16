@@ -31,12 +31,13 @@ export default function LatestActivity() {
       <h4>Recommended Lessons</h4>
       <div className="flex">
         <div className="flex flex-col gap-4 rounded-lg border border-border bg-card p-4">
-          <div className="">
+          <div>
             <Image
               src={
                 latest.latest.courseChapterSections?.imageUrl ??
                 "https://images.codefoli.com/systems-design-1-1.png"
               }
+              priority={true}
               alt="lesson"
               width={400}
               className="rounded-lg "
