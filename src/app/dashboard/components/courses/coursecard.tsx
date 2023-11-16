@@ -37,9 +37,9 @@ const CourseCard = async ({
         clicked={course.courseLikes.length > 0}
       /> */}
       <Link href={"/courses/" + course.slug}>
-        <div className="group cursor-pointer overflow-hidden rounded-lg border border-border bg-card shadow-sm transition-all hover:border-primary hover:shadow-md ">
+        <div className="group cursor-pointer overflow-hidden rounded-lg border border-border bg-card transition-all hover:scale-[101%] active:scale-[99%]">
           <div className="relative overflow-hidden border-b border-border">
-            <div className="transition-all group-hover:scale-[105%]">
+            <div className="transition-all duration-300 group-hover:scale-[105%]">
               <Image
                 src={course.imageUrl}
                 width={325}
