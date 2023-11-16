@@ -1,6 +1,6 @@
 import { createTRPCRouter, protectedProcedure } from "@/server/api/trpc";
-import { users } from "@/server/db/schemas/users/schema";
-import { eq } from "drizzle-orm";
+import { streak, users } from "@/server/db/schemas/users/schema";
+import { and, asc, eq } from "drizzle-orm";
 import { currentUser } from "@clerk/nextjs";
 import { absoluteUrl } from "@/lib/utils";
 import { getUserSubscriptionPlan, stripe } from "@/lib/stripe";
@@ -21,6 +21,22 @@ function generateRandomString(length: number) {
 }
 
 export const userRouter = createTRPCRouter({
+  streak: protectedProcedure.query(async ({ ctx }) => {
+    const currentYear = new Date().getFullYear().toString();
+    const streakDb = await ctx.db.query.streak.findMany({
+      where: and(eq(streak.userId, ctx.user_id), eq(streak.year, currentYear)),
+      orderBy: (streak, { asc }) => [asc(streak.date)],
+      columns: {
+        activity: true,
+        date: true,
+      },
+    });
+
+    console.log(JSON.stringify(streakDb, null, 2));
+
+    return { streak: streakDb };
+  }),
+
   // Mutation to check if a user exists in the database and create a new user if not
   exists: protectedProcedure.mutation(async ({ ctx }) => {
     const clerkUser = await currentUser();
