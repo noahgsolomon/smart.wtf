@@ -83,6 +83,7 @@ export const streak = mysqlTable(
     year: varchar("year", { length: 4 }).notNull(),
     count: int("count").notNull().default(0),
     activity: varchar("activity", { length: 100 }).notNull(),
+    dailyEngagementCount: int("daily_engagement_count").notNull().default(0),
   },
   (t) => ({
     unq: unique().on(t.userId, t.date),
