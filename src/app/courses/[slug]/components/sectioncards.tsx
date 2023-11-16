@@ -7,6 +7,7 @@ import { type api } from "@/trpc/server";
 import Link from "next/link";
 
 import { motion } from "framer-motion";
+import { useState } from "react";
 
 export default function SectionCards({
   chapter,
@@ -39,6 +40,25 @@ export default function SectionCards({
     }),
   };
 
+  // const imageVariants = {
+  //   normal: {
+  //     position: "absolute" as const,
+  //     top: 0,
+  //     right: 0,
+  //     width: "350px",
+  //     height: "200px",
+  //   },
+  //   expanded: {
+  //     width: "100%",
+  //     height: "100%",
+  //     position: "absolute" as const,
+  //     top: 0,
+  //     right: 0,
+  //     zIndex: 10,
+  //     transition: { duration: 0.3 },
+  //   },
+  // };
+
   return (
     <div className="flex flex-col gap-4">
       {course.courseChapters[chapter - 1]?.courseChapterSections
@@ -49,13 +69,9 @@ export default function SectionCards({
             animate="onscreen"
             variants={cardVariants}
             custom={index}
-            whileHover={{ scale: 1.01 }}
-            whileTap={{ scale: 0.99 }}
             key={section.id}
-            className={`relative max-w-[350px] justify-center rounded-lg border border-border bg-card shadow-sm transition-all sm:max-w-none lg:w-[800px] ${
-              section.implemented
-                ? "cursor-pointer hover:-translate-y-0.5 hover:shadow-md"
-                : "cursor-not-allowed"
+            className={`group relative max-w-[350px] justify-center overflow-hidden rounded-lg border border-border bg-card transition-all hover:scale-[101%] active:scale-[99%] sm:max-w-none lg:w-[800px] ${
+              section.implemented ? "cursor-pointer" : "cursor-not-allowed"
             }`}
           >
             {!section.implemented && (
@@ -63,6 +79,19 @@ export default function SectionCards({
                 <Lock className="h-4 w-4" />
               </div>
             )}
+            {/* {clicked === index && (
+              <div className="absolute inset-0 z-20 flex items-center justify-center rounded-lg">
+                <motion.img
+                  src={section.imageUrl}
+                  alt={section.name}
+                  variants={imageVariants}
+                  initial="normal"
+                  animate="expanded"
+                  exit="normal"
+                  className="rounded-lg object-cover"
+                />
+              </div>
+            )} */}
             <div className="flex flex-col justify-between sm:flex-row">
               <div className="flex flex-col gap-2 px-4 py-2 sm:flex-row">
                 <div>
@@ -80,9 +109,9 @@ export default function SectionCards({
                   }
                 />
               </div>
-              <div>
+              <div className="overflow-hidden">
                 <Image
-                  className="rounded-b-lg border-t border-t-border sm:w-[250px] sm:rounded-r-lg sm:rounded-bl-none sm:border-l sm:border-t-0 sm:border-border lg:w-[350px]"
+                  className="rounded-b-lg border-t border-t-border duration-300 group-hover:scale-[105%] sm:w-[250px] sm:rounded-r-lg sm:rounded-bl-none sm:border-l sm:border-t-0 sm:border-border lg:w-[350px]"
                   width={350}
                   priority={true}
                   height={200}
