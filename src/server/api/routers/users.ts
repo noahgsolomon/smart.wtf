@@ -1,6 +1,6 @@
 import { createTRPCRouter, protectedProcedure } from "@/server/api/trpc";
 import { streak, users } from "@/server/db/schemas/users/schema";
-import { and, asc, eq } from "drizzle-orm";
+import { and, eq } from "drizzle-orm";
 import { currentUser } from "@clerk/nextjs";
 import { absoluteUrl } from "@/lib/utils";
 import { getUserSubscriptionPlan, stripe } from "@/lib/stripe";

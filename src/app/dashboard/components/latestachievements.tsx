@@ -10,7 +10,6 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import ai from "public/ai.png";
-import { Lock } from "lucide-react";
 
 const LatestAchievements = () => {
   return (

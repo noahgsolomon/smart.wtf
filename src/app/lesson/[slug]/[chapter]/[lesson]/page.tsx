@@ -7,7 +7,6 @@ import remarkGfm from "remark-gfm";
 import slug from "rehype-slug";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import LessonButtons from "./components/lessonbuttons";
-import Link from "next/link";
 import Markdown from "react-markdown";
 import Quiz from "@/app/lesson/components/interactive/quiz";
 import LessonHeading from "@/app/lesson/components/lessonheading";

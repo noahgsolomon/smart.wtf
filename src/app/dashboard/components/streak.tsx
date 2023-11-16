@@ -23,7 +23,7 @@ const Streak = () => {
 
   useEffect(() => {
     setStreak(streakQuery.data?.streak ?? []);
-  }, [streakQuery.isFetched]);
+  }, [streakQuery.isFetched, streakQuery.data?.streak]);
 
   useEffect(() => {
     if (currentDateRef.current) {
@@ -63,7 +63,10 @@ const Streak = () => {
       <ul className="flex flex-col gap-x-[0.1rem] gap-y-[0.2rem] pr-2">
         {Object.keys(groupedDates).map((key) => {
           return (
-            <div className="flex flex-row  gap-x-[0.1rem] gap-y-[0.15rem]">
+            <div
+              key={key}
+              className="flex flex-row  gap-x-[0.1rem] gap-y-[0.15rem]"
+            >
               {groupedDates[parseInt(key)]?.map((date, index) => {
                 const streakDate = streak.find(
                   (streakDate) =>
