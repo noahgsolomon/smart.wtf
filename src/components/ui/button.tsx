@@ -4,24 +4,21 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "transition-all inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50 hover:scale-[102%] active:scale-[98%]",
+  "shadow-none transition-all inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50 hover:scale-[101%] active:scale-[99%]",
   {
     variants: {
       variant: {
         default:
-          "transition-all bg-primary text-primary-foreground shadow hover:bg-primary/90",
+          "transition-all bg-primary text-primary-foreground hover:bg-primary/90",
         destructive:
-          "transition-all bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90",
+          "transition-all bg-destructive text-destructive-foreground hover:bg-destructive/90",
         outline:
-          "transition-all border border-input bg-transparent shadow-sm hover:bg-accent hover:text-accent-foreground",
+          "transition-all border border-input bg-transparent hover:bg-accent hover:text-accent-foreground",
         secondary:
           "transition-all bg-accent text-secondary-foreground hover:bg-primary/10 dark:hover:bg-accent/80",
         ghost: "transition-all hover:bg-accent hover:text-accent-foreground",
         link: "transition-all text-primary underline-offset-4 hover:underline",
-        success:
-          "transition-all bg-success text-primary shadow-sm hover:bg-success/90",
-        glowing:
-          "transition-all bg-accent text-accent-foreground shadow-lg shadow-secondary hover:shadow-secondary hover:shadow-lg hover:bg-accent/90",
+        success: "transition-all bg-success text-primary hover:bg-success/90",
       },
       size: {
         default: "h-9 px-4 py-2",
