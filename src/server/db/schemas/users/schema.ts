@@ -1,6 +1,7 @@
 import { relations } from "drizzle-orm";
 import {
   boolean,
+  date,
   datetime,
   index,
   int,
@@ -70,5 +71,22 @@ export const userCompletedBlocksRelations = relations(
       fields: [userCompletedBlocks.blockId],
       references: [blocks.id],
     }),
+  }),
+);
+
+export const streak = mysqlTable(
+  "streak",
+  {
+    id: int("id").primaryKey().autoincrement(),
+    userId: int("user_id").notNull(),
+    date: date("date", { mode: "date" }).notNull(),
+    year: varchar("year", { length: 4 }).notNull(),
+    count: int("count").notNull().default(0),
+    activity: varchar("activity", { length: 100 }).notNull(),
+  },
+  (t) => ({
+    unq: unique().on(t.userId, t.date),
+    userYearIdx: index("user_year_idx").on(t.userId, t.year),
+    userDateIdx: uniqueIndex("user_date_idx").on(t.userId, t.date),
   }),
 );
