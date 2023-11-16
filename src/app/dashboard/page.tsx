@@ -4,6 +4,8 @@ import Courses from "./components/courses/courses";
 import { Suspense } from "react";
 import { CourseSkeleton } from "./components/courses/courseskeleton";
 import LatestActivity from "./components/latestactivity";
+import Streak from "./components/streak";
+import LatestAchievements from "./components/latestachievements";
 
 const Dashboard = async () => {
   const user = (await api.user.user.query()).user;
@@ -45,16 +47,15 @@ const Dashboard = async () => {
                   Chat with Professor Quantum
                   <MessageSquare className="h-4 w-4" />
                 </Link>
-              </div>
-
-              <div className="flex max-w-[700px] flex-col gap-2 md:w-[60%]">
-                <Streak />
-                <LatestAchievements />
               </div> */}
+
+            <div className="flex max-w-[700px] flex-col gap-2 md:w-[60%]">
+              <Streak />
+            </div>
           </div>
         </section>
         <section className="py-10">
-          <div className="flex flex-col gap-12 rounded-lg border border-border p-8">
+          <div className="flex flex-col gap-12">
             <Suspense fallback={<CourseSkeleton />}>
               <Courses />
             </Suspense>
