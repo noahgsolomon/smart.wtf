@@ -29,6 +29,8 @@ export const userRouter = createTRPCRouter({
       columns: {
         activity: true,
         date: true,
+        dailyEngagementCount: true,
+        count: true,
       },
     });
 
