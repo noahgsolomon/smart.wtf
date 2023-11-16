@@ -445,7 +445,6 @@ export const courseRouter = createTRPCRouter({
       }
 
       const currentDate = new Date();
-      currentDate.setHours(0, 0, 0, 0);
 
       const streakDb = await ctx.db.query.streak.findFirst({
         where: and(
@@ -471,6 +470,7 @@ export const courseRouter = createTRPCRouter({
             date: currentDate,
             year: currentDate.getFullYear().toString(),
             count: prevStreakDb.count + 1,
+            dailyEngagementCount: 1,
             activity: input.slug.replace("-", " ") + " course",
           });
           streakCount = prevStreakDb.count + 1;
@@ -481,13 +481,19 @@ export const courseRouter = createTRPCRouter({
             year: currentDate.getFullYear().toString(),
             count: 1,
             activity: input.slug.replace("-", " ") + " course",
+            dailyEngagementCount: 1,
           });
           streakCount = 1;
         }
       } else {
         streakCount = streakDb.count;
+        await ctx.db
+          .update(streak)
+          .set({
+            dailyEngagementCount: streakDb.dailyEngagementCount + 1,
+          })
+          .where(eq(streak.id, streakDb.id));
       }
-
       const nextBlock = await ctx.db.query.blocks.findFirst({
         where: and(
           eq(blocks.subSectionId, input.subSectionId),
@@ -495,6 +501,7 @@ export const courseRouter = createTRPCRouter({
         ),
         columns: { id: true },
       });
+
       if (nextBlock) {
         await ctx.db
           .delete(latestActivity)
