@@ -16,7 +16,13 @@ const SettingsInput = () => {
 
   const handleUsernameSubmit = () => {
     if (username.length < 3 || username.length > 20) {
-      toast.error("Username must be between 3 and 20 characters");
+      toast.error("Username must be between 3 and 20 characters", {
+        style: {
+          borderRadius: "var(--radius)",
+          background: "hsl(var(--toast))",
+          color: "hsl(var(--primary))",
+        },
+      });
       return;
     }
 
@@ -25,8 +31,20 @@ const SettingsInput = () => {
       {
         onSuccess: async (data) => {
           data.status === "OK"
-            ? toast.success("Username updated")
-            : toast.error("Username is taken");
+            ? toast.success("Username updated", {
+                style: {
+                  borderRadius: "var(--radius)",
+                  background: "hsl(var(--toast))",
+                  color: "hsl(var(--primary))",
+                },
+              })
+            : toast.error("Username is taken", {
+                style: {
+                  borderRadius: "var(--radius)",
+                  background: "hsl(var(--toast))",
+                  color: "hsl(var(--primary))",
+                },
+              });
           setUsername("");
           if (data.status === "OK") {
             await userDB.refetch();
@@ -38,7 +56,13 @@ const SettingsInput = () => {
 
   const handleNameSubmit = () => {
     if (name.length < 3 || name.length > 75) {
-      toast.error("Name must be between 3 and 75 characters");
+      toast.error("Name must be between 3 and 75 characters", {
+        style: {
+          borderRadius: "var(--radius)",
+          background: "hsl(var(--toast))",
+          color: "hsl(var(--primary))",
+        },
+      });
       return;
     }
     nameUpload.mutate(
@@ -46,8 +70,20 @@ const SettingsInput = () => {
       {
         onSuccess: async (data) => {
           data.status === "OK"
-            ? toast.success("Name updated")
-            : toast.error("An error occurred");
+            ? toast.success("Name updated", {
+                style: {
+                  borderRadius: "var(--radius)",
+                  background: "hsl(var(--toast))",
+                  color: "hsl(var(--primary))",
+                },
+              })
+            : toast.error("An error occurred", {
+                style: {
+                  borderRadius: "var(--radius)",
+                  background: "hsl(var(--toast))",
+                  color: "hsl(var(--primary))",
+                },
+              });
           setName("");
           if (data.status === "OK") {
             await userDB.refetch();
