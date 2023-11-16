@@ -14,16 +14,35 @@ import { useEffect, useRef, useState } from "react";
 type StreakData = {
   date: Date;
   activity: string;
+  dailyEngagementCount: number;
+  count: number;
+};
+
+const roundToNearestTen = (num: number) => {
+  num += 5;
+  return Math.min(Math.floor(num / 10) * 10, 100);
 };
 
 const Streak = () => {
   const streakQuery = trpc.user.streak.useQuery();
   const [streak, setStreak] = useState<StreakData[]>([]);
+  const [currentStreakCount, setCurrentStreakCount] = useState(0);
   const currentDateRef = useRef<HTMLLIElement>(null);
 
   useEffect(() => {
     setStreak(streakQuery.data?.streak ?? []);
   }, [streakQuery.isFetched, streakQuery.data?.streak]);
+
+  useEffect(() => {
+    const todayStreak = streak.find(
+      (streakDate) => streakDate.date.getDate() === new Date().getDate(),
+    );
+
+    if (todayStreak) {
+      console.log(todayStreak);
+      setCurrentStreakCount(todayStreak.count);
+    }
+  }, [streak]);
 
   useEffect(() => {
     if (currentDateRef.current) {
@@ -72,8 +91,9 @@ const Streak = () => {
                   (streakDate) =>
                     streakDate.date.toDateString() === date.toDateString(),
                 );
-                const isToday =
-                  date.toDateString() === new Date().toDateString();
+                const isToday = date === new Date();
+
+                const dailyEngagementCount = streakDate?.dailyEngagementCount;
 
                 return (
                   <Tooltip key={index}>
@@ -83,13 +103,18 @@ const Streak = () => {
                         data-level="0"
                         className={`rounded-sm  p-[0.4rem] ${
                           streakDate
-                            ? "bg-success opacity-80"
+                            ? `bg-success opacity-${roundToNearestTen(
+                                (dailyEngagementCount ?? 0) + 40,
+                              )}`
                             : "bg-primary opacity-20"
                         } transition-all hover:opacity-30`}
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
                       <p>{date.toLocaleDateString()}</p>
+                      {streakDate && (
+                        <p>{streakDate.dailyEngagementCount} blocks</p>
+                      )}
                       <p>{streakDate ? streakDate.activity : "no activity"}</p>
                     </TooltipContent>
                   </Tooltip>
@@ -105,7 +130,7 @@ const Streak = () => {
   return (
     <div className="relative">
       <TooltipProvider delayDuration={0}>
-        <div className="absolute left-1 top-1 z-50 pb-4">
+        <div className="absolute left-1 top-1 z-20 pb-4">
           <Tooltip>
             <TooltipTrigger>
               <div className="flex cursor-pointer items-end gap-2 transition-all hover:scale-105">
@@ -119,6 +144,20 @@ const Streak = () => {
               </div>
             </TooltipTrigger>
             <TooltipContent>Let's get that streak going!</TooltipContent>
+          </Tooltip>
+        </div>
+        <div className="absolute right-2 top-2 z-20 pb-4">
+          <Tooltip>
+            <TooltipTrigger>
+              <div className="flex cursor-pointer items-end gap-2 transition-all hover:scale-105">
+                <div className="rounded-lg border border-border bg-primary">
+                  <p className="px-2 py-1 text-secondary">
+                    🔥 {currentStreakCount}
+                  </p>
+                </div>
+              </div>
+            </TooltipTrigger>
+            <TooltipContent>Your current streak</TooltipContent>
           </Tooltip>
         </div>
 
