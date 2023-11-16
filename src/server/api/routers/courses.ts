@@ -11,7 +11,7 @@ import {
 import { createTRPCRouter, protectedProcedure } from "../trpc";
 import { and, eq } from "drizzle-orm";
 import { z } from "zod";
-import { userCompletedBlocks } from "@/server/db/schemas/users/schema";
+import { streak, userCompletedBlocks } from "@/server/db/schemas/users/schema";
 
 export const courseRouter = createTRPCRouter({
   //getting progress for each section in chapter
@@ -421,6 +421,7 @@ export const courseRouter = createTRPCRouter({
         subSectionId: z.number(),
         chapterId: z.number(),
         chapterOrder: z.number(),
+        slug: z.string(),
       }),
     )
     .mutation(async ({ ctx, input }) => {
@@ -443,6 +444,50 @@ export const courseRouter = createTRPCRouter({
         });
       }
 
+      const currentDate = new Date();
+      currentDate.setHours(0, 0, 0, 0);
+
+      const streakDb = await ctx.db.query.streak.findFirst({
+        where: and(
+          eq(streak.userId, ctx.user_id),
+          eq(streak.date, currentDate),
+        ),
+      });
+
+      let firstCommitToday = false;
+      let streakCount = 0;
+
+      if (!streakDb) {
+        firstCommitToday = true;
+        const prevStreakDb = await ctx.db.query.streak.findFirst({
+          where: and(
+            eq(streak.userId, ctx.user_id),
+            eq(streak.date, new Date(currentDate.getTime() - 86400000)),
+          ),
+        });
+        if (prevStreakDb) {
+          await ctx.db.insert(streak).values({
+            userId: ctx.user_id,
+            date: currentDate,
+            year: currentDate.getFullYear().toString(),
+            count: prevStreakDb.count + 1,
+            activity: input.slug.replace("-", " ") + " course",
+          });
+          streakCount = prevStreakDb.count + 1;
+        } else {
+          await ctx.db.insert(streak).values({
+            userId: ctx.user_id,
+            date: currentDate,
+            year: currentDate.getFullYear().toString(),
+            count: 1,
+            activity: input.slug.replace("-", " ") + " course",
+          });
+          streakCount = 1;
+        }
+      } else {
+        streakCount = streakDb.count;
+      }
+
       const nextBlock = await ctx.db.query.blocks.findFirst({
         where: and(
           eq(blocks.subSectionId, input.subSectionId),
@@ -462,7 +507,7 @@ export const courseRouter = createTRPCRouter({
           subSectionId: input.subSectionId,
           blockId: nextBlock.id,
         });
-        return { status: "OK" };
+        return { status: "OK", data: { firstCommitToday, streakCount } };
       } else {
         const nextSubsection = await ctx.db.query.subSections.findFirst({
           where: and(
@@ -477,7 +522,6 @@ export const courseRouter = createTRPCRouter({
           },
         });
         if (nextSubsection) {
-          console.log("next subsection");
           await ctx.db
             .delete(latestActivity)
             .where(eq(latestActivity.userId, ctx.user_id));
@@ -489,10 +533,8 @@ export const courseRouter = createTRPCRouter({
             subSectionId: nextSubsection.id,
             blockId: nextSubsection.blocks[0]?.id ?? 0,
           });
-          return { status: "OK" };
+          return { status: "OK", data: { firstCommitToday, streakCount } };
         } else {
-          console.log("next section");
-          console.log("section order", input.sectionOrder);
           const nextSection =
             await ctx.db.query.courseChapterSections.findFirst({
               where: and(
@@ -512,7 +554,11 @@ export const courseRouter = createTRPCRouter({
 
           if (nextSection) {
             if (!nextSection.implemented) {
-              return { status: "OK", message: "next section not implemented" };
+              return {
+                status: "OK",
+                message: "next section not implemented",
+                data: { firstCommitToday, streakCount },
+              };
             }
             await ctx.db
               .delete(latestActivity)
@@ -526,7 +572,7 @@ export const courseRouter = createTRPCRouter({
               blockId: nextSection.subSections[0]?.blocks[0]?.id!,
             });
 
-            return { status: "OK" };
+            return { status: "OK", data: { firstCommitToday, streakCount } };
           } else {
             const nextChapter = await ctx.db.query.courseChapters.findFirst({
               where: and(
@@ -552,6 +598,7 @@ export const courseRouter = createTRPCRouter({
                 return {
                   status: "OK",
                   message: "next chapters section not implemented",
+                  data: { firstCommitToday, streakCount },
                 };
               }
               await ctx.db
@@ -569,9 +616,9 @@ export const courseRouter = createTRPCRouter({
                     ?.blocks[0]?.id!,
               });
 
-              return { status: "OK" };
+              return { status: "OK", data: { firstCommitToday, streakCount } };
             } else {
-              return { status: "OK" };
+              return { status: "OK", data: { firstCommitToday, streakCount } };
             }
           }
         }
