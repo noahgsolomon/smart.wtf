@@ -52,8 +52,23 @@ export default function Quiz({
     answer: z.enum(["ONE", "TWO", "THREE", "FOUR"]),
   });
 
-  const correct = () => toast.success("correct!");
-  const incorrect = () => toast.error("incorrect!");
+  const correct = () =>
+    toast.success("correct!", {
+      style: {
+        borderRadius: "var(--radius)",
+        background: "hsl(var(--toast))",
+        color: "hsl(var(--primary))",
+      },
+    });
+
+  const incorrect = () =>
+    toast.error("incorrect!", {
+      style: {
+        borderRadius: "var(--radius)",
+        background: "hsl(var(--toast))",
+        color: "hsl(var(--primary))",
+      },
+    });
 
   const [guessed, setGuessed] = useState<("ONE" | "TWO" | "THREE" | "FOUR")[]>(
     [],
@@ -67,7 +82,22 @@ export default function Quiz({
 
   const [isFlipped, setIsFlipped] = useState(false);
 
-  const mutateBlock = trpc.course.setBlockCompleted.useMutation();
+  const mutateBlock = trpc.course.setBlockCompleted.useMutation({
+    onSuccess: (response) => {
+      console.log("successss");
+      console.log(JSON.stringify(response.data, null, 2));
+      if (response.data.firstCommitToday) {
+        toast(`You're on a ${response.data.streakCount} day streak`, {
+          icon: "🔥",
+          style: {
+            borderRadius: "var(--radius)",
+            background: "hsl(var(--toast))",
+            color: "hsl(var(--primary))",
+          },
+        });
+      }
+    },
+  });
 
   const [correctSound] = useSound("/correct.mp3");
   const [incorrectSound] = useSound("/incorrect.mp3");
@@ -97,6 +127,7 @@ export default function Quiz({
         chapterId,
         chapterOrder,
         sectionOrder,
+        slug: params.slug,
       });
 
       setSection((prev) => {
@@ -149,6 +180,7 @@ export default function Quiz({
         chapterId,
         chapterOrder,
         sectionOrder,
+        slug: params.slug,
       });
 
       setSection((prev) => {

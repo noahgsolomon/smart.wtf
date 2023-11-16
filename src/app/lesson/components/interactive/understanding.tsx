@@ -27,6 +27,7 @@ export default function Understanding({
   questionString,
   explanation,
   completed,
+  params,
 }: {
   chapterId: number;
   chapterOrder: number;
@@ -40,11 +41,26 @@ export default function Understanding({
   explanation: ReactNode;
   explanationString: string;
   completed: boolean;
+  params: { slug: string; chapter: string; lesson: string };
 }) {
   const [userExplanation, setUserExplanation] = useState("");
   const maxExplanationLength = 250;
-  const mutateBlock = trpc.course.setBlockCompleted.useMutation();
-
+  const mutateBlock = trpc.course.setBlockCompleted.useMutation({
+    onSuccess: (response) => {
+      console.log("successss");
+      console.log(JSON.stringify(response.data, null, 2));
+      if (response.data.firstCommitToday) {
+        toast(`You're on a ${response.data.streakCount} day streak`, {
+          icon: "🔥",
+          style: {
+            borderRadius: "var(--radius)",
+            background: "hsl(var(--toast))",
+            color: "hsl(var(--primary))",
+          },
+        });
+      }
+    },
+  });
   const [side, setSide] = useState<"front" | "back">(
     completed ? "back" : "front",
   );
@@ -81,6 +97,7 @@ export default function Understanding({
         chapterId,
         chapterOrder,
         sectionOrder,
+        slug: params.slug,
       });
 
       setSection((prev) => {
@@ -111,7 +128,13 @@ export default function Understanding({
   const handleSubmit = async () => {
     setLoading(true);
     if (userExplanation.length === 0) {
-      toast.error("Please provide an explanation.");
+      toast.error("Please provide an explanation.", {
+        style: {
+          borderRadius: "var(--radius)",
+          background: "hsl(var(--toast))",
+          color: "hsl(var(--primary))",
+        },
+      });
       setSubmitError(true);
       setTimeout(() => {
         setSubmitError(false);
@@ -152,6 +175,7 @@ export default function Understanding({
           chapterId,
           chapterOrder,
           sectionOrder,
+          slug: params.slug,
         });
 
         setSection((prev) => {
@@ -176,7 +200,13 @@ export default function Understanding({
           });
         });
 
-        toast.success("correct!");
+        toast.success("correct!", {
+          style: {
+            borderRadius: "var(--radius)",
+            background: "hsl(var(--toast))",
+            color: "hsl(var(--primary))",
+          },
+        });
         const currentBlock = section[subSection - 1]?.blocks.find(
           (b) => b.id === blockId,
         );
@@ -199,7 +229,13 @@ export default function Understanding({
         }
       } else {
         incorrectSound();
-        toast.error("incorrect!");
+        toast.error("incorrect!", {
+          style: {
+            borderRadius: "var(--radius)",
+            background: "hsl(var(--toast))",
+            color: "hsl(var(--primary))",
+          },
+        });
       }
       setLoading(false);
     } catch (error) {

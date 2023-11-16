@@ -18,6 +18,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import Understanding from "@/app/lesson/components/interactive/understanding";
 import useSound from "use-sound";
+import toast, { Toaster } from "react-hot-toast";
 
 export default function Page({
   params,
@@ -53,7 +54,22 @@ export default function Page({
     }
   }, [setSection, sectionQuery.isLoading, sectionQuery.data?.section]);
 
-  const mutateBlock = trpc.course.setBlockCompleted.useMutation();
+  const mutateBlock = trpc.course.setBlockCompleted.useMutation({
+    onSuccess: (response) => {
+      console.log("successss");
+      console.log(JSON.stringify(response.data, null, 2));
+      if (response.data.firstCommitToday) {
+        toast(`You're on a ${response.data.streakCount} day streak`, {
+          icon: "🔥",
+          style: {
+            borderRadius: "var(--radius)",
+            background: "hsl(var(--toast))",
+            color: "hsl(var(--primary))",
+          },
+        });
+      }
+    },
+  });
 
   const handleContinue = ({
     blockId,
@@ -75,6 +91,7 @@ export default function Page({
       chapterId: section[0]?.courseChapterSections.courseChapters.id!,
       chapterOrder: section[0]?.courseChapterSections.courseChapters.order!,
       sectionOrder: section[0]?.courseChapterSections.order!,
+      slug: params.slug,
     });
 
     setSection((prev) => {
@@ -296,6 +313,7 @@ export default function Page({
                             );
                             return (
                               <Understanding
+                                params={params}
                                 chapterId={
                                   section[0]?.courseChapterSections
                                     .courseChapters.id!
@@ -422,6 +440,7 @@ export default function Page({
           </div>
         </motion.div>
       </AnimatePresence>
+      <Toaster />
     </>
   );
 }

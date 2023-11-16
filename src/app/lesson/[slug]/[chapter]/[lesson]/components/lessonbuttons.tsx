@@ -16,6 +16,7 @@ export default function LessonButtons({
   section,
   blockOrder,
   blockId,
+  params,
 }: {
   redirect: string;
   chapterId: number;
@@ -50,6 +51,7 @@ export default function LessonButtons({
       chapterId,
       chapterOrder,
       sectionOrder,
+      slug: params.slug,
     });
     setSection((prev) => {
       const newSection = JSON.parse(JSON.stringify(prev));
