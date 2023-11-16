@@ -18,10 +18,7 @@ const LatestAchievements = () => {
       <h3>Latest Achievements</h3>
       <div className="flex">
         <TooltipProvider>
-          <div className="relative flex flex-row gap-4 rounded-lg border border-border bg-card p-2 shadow-md">
-            <div className="absolute bottom-0 left-0 right-0 top-0 z-10 flex items-center justify-center rounded-lg bg-black/30 dark:bg-black/50">
-              <Lock className="h-4 w-4" />
-            </div>
+          <div className="relative flex flex-row gap-4 rounded-lg border border-border bg-card p-2">
             <Tooltip>
               <TooltipTrigger>
                 <div className="flex cursor-pointer items-center overflow-hidden rounded-full border border-border bg-common transition-all hover:scale-105">
