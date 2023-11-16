@@ -16,7 +16,13 @@ const AvatarUpload = () => {
     const file = event.target.files?.item(0);
     if (file) {
       await clerk.user?.setProfileImage({ file });
-      toast.success("Profile image updated");
+      toast.success("Profile image updated", {
+        style: {
+          borderRadius: "var(--radius)",
+          background: "hsl(var(--toast))",
+          color: "hsl(var(--primary))",
+        },
+      });
     }
   };
 
@@ -40,9 +46,21 @@ const AvatarUpload = () => {
       const file = event.dataTransfer.items[0].getAsFile();
       if (file && (file.type === "image/png" || file.type === "image/jpeg")) {
         await clerk.user?.setProfileImage({ file });
-        toast.success("Profile image updated");
+        toast.success("Profile image updated", {
+          style: {
+            borderRadius: "var(--radius)",
+            background: "hsl(var(--toast))",
+            color: "hsl(var(--primary))",
+          },
+        });
       } else {
-        toast.error("invalid file type");
+        toast.error("invalid file type", {
+          style: {
+            borderRadius: "var(--radius)",
+            background: "hsl(var(--toast))",
+            color: "hsl(var(--primary))",
+          },
+        });
       }
     }
   };
