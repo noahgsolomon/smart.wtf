@@ -445,16 +445,22 @@ export const courseRouter = createTRPCRouter({
       }
 
       const currentDate = new Date();
+      const year = currentDate.getUTCFullYear();
+      const month = currentDate.getUTCMonth();
+      const day = currentDate.getUTCDate();
+
+      const dateOnly = new Date(Date.UTC(year, month, day));
+
+      console.log("dateonly ", dateOnly);
 
       const streakDb = await ctx.db.query.streak.findFirst({
-        where: and(
-          eq(streak.userId, ctx.user_id),
-          eq(streak.date, currentDate),
-        ),
+        where: and(eq(streak.userId, ctx.user_id), eq(streak.date, dateOnly)),
       });
 
       let firstCommitToday = false;
       let streakCount = 0;
+
+      console.log("streakDb", JSON.stringify(streakDb, null, 2));
 
       if (!streakDb) {
         firstCommitToday = true;
@@ -464,6 +470,7 @@ export const courseRouter = createTRPCRouter({
             eq(streak.date, new Date(currentDate.getTime() - 86400000)),
           ),
         });
+        console.log("prevStreakDb", JSON.stringify(prevStreakDb, null, 2));
         if (prevStreakDb) {
           await ctx.db.insert(streak).values({
             userId: ctx.user_id,
@@ -475,6 +482,7 @@ export const courseRouter = createTRPCRouter({
           });
           streakCount = prevStreakDb.count + 1;
         } else {
+          console.log("inserting new streak 1 day");
           await ctx.db.insert(streak).values({
             userId: ctx.user_id,
             date: currentDate,
@@ -486,6 +494,7 @@ export const courseRouter = createTRPCRouter({
           streakCount = 1;
         }
       } else {
+        console.log("updating count for today");
         streakCount = streakDb.count;
         await ctx.db
           .update(streak)
@@ -494,6 +503,7 @@ export const courseRouter = createTRPCRouter({
           })
           .where(eq(streak.id, streakDb.id));
       }
+
       const nextBlock = await ctx.db.query.blocks.findFirst({
         where: and(
           eq(blocks.subSectionId, input.subSectionId),
