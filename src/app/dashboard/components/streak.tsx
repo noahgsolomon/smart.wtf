@@ -34,9 +34,25 @@ const Streak = () => {
   }, [streakQuery.isFetched, streakQuery.data?.streak]);
 
   useEffect(() => {
-    const todayStreak = streak.find(
-      (streakDate) => streakDate.date.getDate() === new Date().getDate(),
-    );
+    const todayStreak = streak.find((streakDate) => {
+      const today = new Date();
+      const todayDate = new Date(
+        today.getFullYear(),
+        today.getMonth(),
+        today.getDate(),
+      ).toUTCString();
+
+      const streakDateUTC = new Date(
+        streakDate.date.getFullYear(),
+        streakDate.date.getMonth(),
+        streakDate.date.getDate(),
+      ).toUTCString();
+
+      console.log(streakDateUTC, todayDate);
+      return streakDateUTC === todayDate;
+    });
+
+    console.log(todayStreak);
 
     if (todayStreak) {
       console.log(todayStreak);
@@ -87,11 +103,33 @@ const Streak = () => {
               className="flex flex-row  gap-x-[0.1rem] gap-y-[0.15rem]"
             >
               {groupedDates[parseInt(key)]?.map((date, index) => {
-                const streakDate = streak.find(
-                  (streakDate) =>
-                    streakDate.date.toDateString() === date.toDateString(),
-                );
-                const isToday = date === new Date();
+                const streakDate = streak.find((streakDate) => {
+                  return (
+                    new Date(
+                      streakDate.date.getUTCFullYear(),
+                      streakDate.date.getUTCMonth(),
+                      streakDate.date.getUTCDate(),
+                    ).toUTCString() ===
+                    new Date(
+                      date.getUTCFullYear(),
+                      date.getUTCMonth(),
+                      date.getUTCDate(),
+                    ).toUTCString()
+                  );
+                });
+
+                const today = new Date();
+                const todayDate = new Date(
+                  today.getUTCFullYear(),
+                  today.getUTCMonth(),
+                  today.getUTCDate(),
+                ).toUTCString();
+                const isToday =
+                  new Date(
+                    date.getUTCFullYear(),
+                    date.getUTCMonth(),
+                    date.getUTCDate(),
+                  ).toUTCString() === todayDate;
 
                 const dailyEngagementCount = streakDate?.dailyEngagementCount;
 
@@ -111,7 +149,7 @@ const Streak = () => {
                       ></li>
                     </TooltipTrigger>
                     <TooltipContent>
-                      <p>{date.toLocaleDateString()}</p>
+                      <p>{new Date().toLocaleDateString()}</p>
                       {streakDate && (
                         <p>{streakDate.dailyEngagementCount} blocks</p>
                       )}
