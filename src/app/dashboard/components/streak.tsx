@@ -37,15 +37,15 @@ const Streak = () => {
     const todayStreak = streak.find((streakDate) => {
       const today = new Date();
       const todayDate = new Date(
-        today.getFullYear(),
-        today.getMonth(),
-        today.getDate(),
+        today.getUTCFullYear(),
+        today.getUTCMonth(),
+        today.getUTCDate(),
       ).toUTCString();
 
       const streakDateUTC = new Date(
-        streakDate.date.getFullYear(),
-        streakDate.date.getMonth(),
-        streakDate.date.getDate(),
+        streakDate.date.getUTCFullYear(),
+        streakDate.date.getUTCMonth(),
+        streakDate.date.getUTCDate(),
       ).toUTCString();
 
       console.log(streakDateUTC, todayDate);
