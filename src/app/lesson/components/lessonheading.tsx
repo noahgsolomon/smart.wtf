@@ -12,7 +12,6 @@ import {
   HoverCardTrigger,
 } from "@/components/ui/hover-card";
 import ThemeButton from "@/components/nav/theme";
-import ChatButton from "@/components/nav/chatbutton";
 import { cn } from "@/lib/utils";
 import { type Section } from "@/types";
 
@@ -27,7 +26,7 @@ export default function LessonHeading({ section }: { section: Section[] }) {
     }, 0) ?? 1;
 
   return (
-    <div className="fixed left-0 right-0 top-0 z-20 flex w-screen flex-row items-center justify-between border-b border-border bg-background  px-2 py-2 shadow-sm md:px-10">
+    <div className="fixed left-0 right-0 top-0 z-20 flex w-screen flex-row items-center justify-between border-b border-border bg-card  px-2 py-2 shadow-sm md:px-10">
       <a
         href={`/courses/${
           typeof params.slug === "string" ? params.slug : "unknown"
@@ -84,7 +83,6 @@ export default function LessonHeading({ section }: { section: Section[] }) {
 
       <div className="flex flex-row items-center gap-2">
         <ThemeButton className="hidden md:block" />
-        <ChatButton query={`prev=${pathname}`} lesson={true} />
       </div>
     </div>
   );

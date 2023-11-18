@@ -9,7 +9,6 @@ import SmartWtfLogo from "../svg/smartwtf";
 import FreeTrialBanner from "./freetrialbanner";
 import { usePathname } from "next/navigation";
 import { trpc } from "@/trpc/client";
-import ChatButton from "./chatbutton";
 import UserButton from "./UserButton";
 
 const NavBar = () => {
@@ -40,7 +39,7 @@ const NavBar = () => {
   return (
     <>
       {!path.startsWith("/lesson") ? (
-        <header className="border-sm fixed left-0 right-0 top-0 z-20 border-b border-border backdrop-blur-lg">
+        <header className="border-sm fixed left-0 right-0 top-0 z-20 border-b border-border bg-card shadow-sm">
           {user && !user?.user?.subscribed && (
             <FreeTrialBanner
               className="border-b border-border py-2"
@@ -94,8 +93,6 @@ const NavBar = () => {
                       UPGRADE
                     </Link>
                   )}
-                  {/* <WtfButton /> */}
-                  <ChatButton query={`prev=${path}`} />
                   <UserButton />
                 </>
               ) : (
