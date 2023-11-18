@@ -1,6 +1,6 @@
 "use client";
 
-import { redirect } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import { trpc } from "@/trpc/client";
 import { useEffect } from "react";
 import remarkGfm from "remark-gfm";
@@ -24,11 +24,33 @@ export default function Page({
   searchParams,
 }: {
   params: { slug: string; chapter: string; lesson: string };
-  searchParams: { l: string };
+  searchParams: { l: string; b: string };
 }) {
-  if (!searchParams.l) {
-    redirect(`?l=1`);
-  }
+  const router = useRouter();
+
+  useEffect(() => {
+    let attempts = 0;
+    const maxAttempts = 30;
+
+    const navigateAndScroll = () => {
+      if (searchParams.b && searchParams.l) {
+        const element = document.getElementById(searchParams.b);
+        if (element) {
+          element.scrollIntoView();
+        } else if (attempts < maxAttempts) {
+          setTimeout(navigateAndScroll, 100);
+          attempts++;
+        }
+      }
+    };
+
+    if (!searchParams.l) {
+      router.push(`?l=1`);
+    } else {
+      navigateAndScroll();
+    }
+  }, [searchParams, router]);
+
   const lessonNumber = parseInt(searchParams.l ?? "1");
 
   const sectionQuery = trpc.course.getCourseSection.useQuery({

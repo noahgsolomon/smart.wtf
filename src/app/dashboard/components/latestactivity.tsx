@@ -68,7 +68,7 @@ export default function LatestActivity() {
               .slug}/${latest.latest.courseChapterSections?.courseChapters
               .order}/${latest.latest.sectionId}?l=${
               latest.latest.subSections?.order ?? 1
-            }`}
+            }&b=${latest.latest.blockId}`}
             className={cn(buttonVariants(), `transition-all`)}
           >
             Continue where you left off{" "}
