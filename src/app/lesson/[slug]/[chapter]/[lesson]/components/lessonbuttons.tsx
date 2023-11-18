@@ -28,8 +28,8 @@ export default function LessonButtons({
   subSection: number;
   params: { lesson: string; slug: string; chapter: string };
 }) {
-  const [play] = useSound("/click.mp3");
-  const [finishAudio] = useSound("/finish.mp3");
+  const [play] = useSound("/click.mp3", { volume: 0.5 });
+  const [finishAudio] = useSound("/finish.mp3", { volume: 0.5 });
   const router = useRouter();
 
   const mutateBlock = trpc.course.setBlockCompleted.useMutation();

@@ -39,9 +39,10 @@ export default function Page({
   const nextSection = nextSectionQuery.data;
   const upNextControls = useAnimation();
 
-  const [play] = useSound("/click.mp3");
+  const [play] = useSound("/click.mp3", { volume: 0.5 });
 
   const progress = useMotionValue(0);
+  const streak = 0;
   const controls = useAnimation();
   const [isCheckmarkComplete, setIsCheckmarkComplete] = useState(false);
   const [showUpNext, setShowUpNext] = useState(false);

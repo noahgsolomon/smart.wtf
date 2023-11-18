@@ -64,12 +64,12 @@ export default function Understanding({
   const [side, setSide] = useState<"front" | "back">(
     completed ? "back" : "front",
   );
-  const [incorrectSound] = useSound("/incorrect.mp3");
-  const [flipSound] = useSound("/flip.mp3");
+  const [incorrectSound] = useSound("/incorrect.mp3", { volume: 0.5 });
+  const [flipSound] = useSound("/flip.mp3", { volume: 0.5 });
 
   const [loading, setLoading] = useState(false);
 
-  const [correctSound] = useSound("/correct.mp3");
+  const [correctSound] = useSound("/correct.mp3", { volume: 0.5 });
 
   const { section, setSection } = useSectionContext();
 

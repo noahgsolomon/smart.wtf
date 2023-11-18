@@ -61,7 +61,7 @@ export default function Page({
 
   const { section, setSection } = useSectionContext();
 
-  const [play] = useSound("/click.mp3");
+  const [play] = useSound("/click.mp3", { volume: 0.5 });
 
   useEffect(() => {
     if (!sectionQuery.isLoading) {

@@ -9,7 +9,7 @@ import Link from "next/link";
 import useSound from "use-sound";
 
 export default function RecommendedLesson() {
-  const [click] = useSound("/click.mp3");
+  const [click] = useSound("/click.mp3", { volume: 0.5 });
 
   return (
     <div className="flex flex-col gap-2">

@@ -16,7 +16,7 @@ export default function LatestActivity() {
 
   const latest = latestQuery.data;
 
-  const [click] = useSound("/click.mp3");
+  const [click] = useSound("/click.mp3", { volume: 0.5 });
 
   if (latestQuery.isLoading || !latest) {
     return <LatestActivitySkeleton />;

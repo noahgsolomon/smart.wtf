@@ -99,9 +99,9 @@ export default function Quiz({
     },
   });
 
-  const [correctSound] = useSound("/correct.mp3");
-  const [incorrectSound] = useSound("/incorrect.mp3");
-  const [flipSound] = useSound("/flip.mp3");
+  const [correctSound] = useSound("/correct.mp3", { volume: 0.5 });
+  const [incorrectSound] = useSound("/incorrect.mp3", { volume: 0.5 });
+  const [flipSound] = useSound("/flip.mp3", { volume: 0.5 });
 
   const form = useForm<z.infer<typeof FormSchema>>();
 
