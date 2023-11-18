@@ -38,6 +38,22 @@ export const userRouter = createTRPCRouter({
 
     return { streak: streakDb };
   }),
+  currentStreak: protectedProcedure.query(async ({ ctx }) => {
+    const currentDate = new Date();
+    const year = currentDate.getUTCFullYear();
+    const month = currentDate.getUTCMonth();
+    const day = currentDate.getUTCDate();
+
+    const dateOnly = new Date(Date.UTC(year, month, day));
+
+    const streakDb = await ctx.db.query.streak.findFirst({
+      where: and(eq(streak.userId, ctx.user_id), eq(streak.date, dateOnly)),
+    });
+
+    const currentStreak = streakDb?.count ?? 0;
+
+    return { streak: currentStreak };
+  }),
 
   // Mutation to check if a user exists in the database and create a new user if not
   exists: protectedProcedure.mutation(async ({ ctx }) => {

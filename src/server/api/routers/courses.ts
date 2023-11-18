@@ -451,8 +451,6 @@ export const courseRouter = createTRPCRouter({
 
       const dateOnly = new Date(Date.UTC(year, month, day));
 
-      console.log("dateonly ", dateOnly);
-
       const streakDb = await ctx.db.query.streak.findFirst({
         where: and(eq(streak.userId, ctx.user_id), eq(streak.date, dateOnly)),
       });

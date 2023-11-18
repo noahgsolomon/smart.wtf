@@ -42,7 +42,7 @@ export default function Page({
   const [play] = useSound("/click.mp3", { volume: 0.5 });
 
   const progress = useMotionValue(0);
-  const streak = 0;
+  const streakQuery = trpc.user.currentStreak.useQuery();
   const controls = useAnimation();
   const [isCheckmarkComplete, setIsCheckmarkComplete] = useState(false);
   const [showUpNext, setShowUpNext] = useState(false);
@@ -129,7 +129,7 @@ export default function Page({
   const rounded = useTransform(count, (latest) => Math.round(latest));
   useEffect(() => {
     if (isCheckmarkComplete) {
-      const controls = animate(count, 100);
+      const controls = animate(count, streakQuery.data?.streak ?? 1);
       return controls.stop;
     }
   }, [isCheckmarkComplete, count]);
