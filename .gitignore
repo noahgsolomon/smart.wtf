@@ -8,6 +8,7 @@ package-lock.json
 
 # testing
 /coverage
+query.sql
 x
 /src/env.mjs 
 # next.js
