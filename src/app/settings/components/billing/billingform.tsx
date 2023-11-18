@@ -42,7 +42,7 @@ const BillingForm = ({ subscriptionPlan }: BillingFormProps) => {
         createStripeSession();
       }}
     >
-      <Card className="p-4">
+      <Card className="p-4 shadow-none">
         <CardHeader className="pb-20">
           <CardTitle>Subscription Plan</CardTitle>
           <CardDescription>

@@ -11,7 +11,7 @@ const Loading = () => {
     <div className="mx-10 mt-40 flex w-full flex-col">
       <h3 className="mb-2 text-3xl font-bold">Settings</h3>
       <p className="mb-4 opacity-60 ">Manage account settings</p>
-      <Card>
+      <Card className="shadow-none">
         <CardHeader className="gap-8">
           <Skeleton className="h-40 w-40 rounded-full" />
           <Skeleton className="h-6 w-2/5" />
