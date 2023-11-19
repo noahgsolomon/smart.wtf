@@ -211,7 +211,7 @@ export default function Page({
             initial="hidden"
             className="z-10 flex h-[80vh] w-screen flex-col items-center justify-center"
           >
-            <h1 className="pb-4 text-xl">Up Next</h1>
+            <h1 className="z-20 pb-4 text-3xl ">Up Next</h1>
             <div
               className={`relative max-w-[350px] cursor-pointer justify-center rounded-lg border border-border bg-card shadow-sm transition-all hover:-translate-y-0.5 hover:scale-[101%] hover:shadow-md active:scale-[99%] sm:max-w-none lg:w-[800px]`}
             >

@@ -54,7 +54,7 @@ export default function LessonHeading({ section }: { section: Section[] }) {
                         ? "ring-2 ring-lightBlue"
                         : "",
                     )}
-                    indicatorClassName="rounded-r-lg bg-blue"
+                    indicatorClassName="rounded-r-lg"
                     value={
                       (s.blocks
                         .map((b) => (b.userCompletedBlocks.length > 0 ? 1 : 0))
