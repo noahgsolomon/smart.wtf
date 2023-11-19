@@ -461,11 +461,17 @@ export const courseRouter = createTRPCRouter({
       console.log("streakDb", JSON.stringify(streakDb, null, 2));
 
       if (!streakDb) {
+        const year = currentDate.getUTCFullYear();
+        const month = currentDate.getUTCMonth();
+        const day = currentDate.getUTCDate();
+        const prevDateOnly = new Date(Date.UTC(year, month, day));
+        prevDateOnly.setDate(prevDateOnly.getDate() - 1);
+        console.log("prevDateOnly", prevDateOnly);
         firstCommitToday = true;
         const prevStreakDb = await ctx.db.query.streak.findFirst({
           where: and(
             eq(streak.userId, ctx.user_id),
-            eq(streak.date, new Date(currentDate.getTime() - 86400000)),
+            eq(streak.date, prevDateOnly),
           ),
         });
         console.log("prevStreakDb", JSON.stringify(prevStreakDb, null, 2));
