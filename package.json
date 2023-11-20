@@ -46,6 +46,7 @@
     "framer-motion": "^10.16.4",
     "geist": "^1.0.0",
     "install": "^0.13.0",
+    "locomotive-scroll": "beta",
     "lucide-react": "^0.285.0",
     "markdown-to-jsx": "^7.3.2",
     "mysql2": "^3.6.1",
