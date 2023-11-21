@@ -56,6 +56,7 @@ export default function Sort({
   const [randomOrderedOptions, setRandomOrderedOptions] = useState(
     options.sort(() => Math.random() - 0.5),
   );
+  console.log(options);
   const sensors = useSensors(
     useSensor(PointerSensor),
     useSensor(KeyboardSensor, {
@@ -66,7 +67,6 @@ export default function Sort({
   const mutateBlock = trpc.course.setBlockCompleted.useMutation({
     onSuccess: (response) => {
       console.log("successss");
-      console.log(JSON.stringify(response.data, null, 2));
       if (response.data.firstCommitToday) {
         toast(`You're on a ${response.data.streakCount} day streak`, {
           icon: "🔥",
@@ -96,7 +96,6 @@ export default function Sort({
 
   const revealedAnswer = () => {
     if (!completed) {
-      console.log(section[0]?.courseChapterSections.course.id!);
       mutateBlock.mutate({
         blockId,
         courseId: section[0]?.courseChapterSections.course.id!,
@@ -138,9 +137,11 @@ export default function Sort({
   const handleSubmit = async () => {
     setLoading(true);
     try {
-      if (randomOrderedOptions.join("") === options.join("")) {
+      console.log(randomOrderedOptions === options);
+      console.log(randomOrderedOptions);
+      console.log(options);
+      if (randomOrderedOptions === options) {
         correctSound();
-        console.log(section[0]?.courseChapterSections.course.id!);
 
         mutateBlock.mutate({
           blockId,
@@ -269,7 +270,7 @@ export default function Sort({
                 <Button
                   type="button"
                   variant={"secondary"}
-                  onClick={toggleFlip}
+                  onClick={revealedAnswer}
                 >
                   Show Explanation
                 </Button>

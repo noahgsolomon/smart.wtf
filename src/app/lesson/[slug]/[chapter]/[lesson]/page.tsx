@@ -218,7 +218,6 @@ export default function Page({
                   const interactive =
                     block.interactiveComponents.length > 0
                       ? block.interactiveComponents.map((component) => {
-                          console.log(JSON.stringify(component, null, 2));
                           if (component.type === "QUIZ") {
                             const explanation = (
                               <Markdown
