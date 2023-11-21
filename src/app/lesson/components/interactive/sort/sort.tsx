@@ -8,7 +8,7 @@ import {
   PointerSensor,
   useSensor,
   useSensors,
-  DragEndEvent,
+  type DragEndEvent,
 } from "@dnd-kit/core";
 import {
   arrayMove,
@@ -33,7 +33,6 @@ export default function Sort({
   sectionId,
   blockOrder,
   blockId,
-  questionString,
   explanation,
   completed,
   params,
@@ -58,7 +57,7 @@ export default function Sort({
     let shuffledOptions: string[] = [...options.map((option) => option.option)];
 
     for (let i = shuffledOptions.length - 1; i > 0; i--) {
-      let j = Math.floor(Math.random() * (i + 1));
+      const j = Math.floor(Math.random() * (i + 1));
       [shuffledOptions[i], shuffledOptions[j]] = [
         shuffledOptions[j]!,
         shuffledOptions[i]!,
@@ -143,7 +142,7 @@ export default function Sort({
     toggleFlip();
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = () => {
     setLoading(true);
     try {
       if (

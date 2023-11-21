@@ -5,7 +5,6 @@ import { Suspense } from "react";
 import { CourseSkeleton } from "./components/courses/courseskeleton";
 import LatestActivity from "./components/latestactivity";
 import Streak from "./components/streak";
-import Sort from "../lesson/components/interactive/sort/sort";
 
 const Dashboard = async () => {
   const user = (await api.user.user.query()).user;
