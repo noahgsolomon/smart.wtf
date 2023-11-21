@@ -35,7 +35,7 @@ const RadioGroupItem = React.forwardRef<
     <RadioGroupPrimitive.Item
       ref={ref}
       className={cn(
-        "border-bordr h-5 w-5 rounded-full border text-primary shadow transition-all  hover:bg-primary/10 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50",
+        "h-5 w-5 rounded-full border border-border text-primary outline-none  transition-all hover:bg-primary/10 disabled:cursor-not-allowed disabled:opacity-50",
         `${
           correct
             ? "bg-success hover:bg-success/60"
@@ -47,7 +47,7 @@ const RadioGroupItem = React.forwardRef<
       )}
       {...props}
     >
-      <RadioGroupPrimitive.Indicator className="flex items-center justify-center">
+      <RadioGroupPrimitive.Indicator className="ring-none flex items-center justify-center">
         {!correct && !incorrect && (
           <CircleDot className="h-3.5 w-3.5 fill-primary" />
         )}
