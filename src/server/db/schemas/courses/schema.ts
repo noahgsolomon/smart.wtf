@@ -288,5 +288,7 @@ export const sorting = mysqlTable("sorting", {
   id: int("id").primaryKey().autoincrement(),
   questionMarkdown: text("question_markdown").notNull(),
   explanationMarkdown: text("explanation_markdown").notNull(),
-  options: json("options").$type<string[]>().notNull(),
+  options: json("options")
+    .$type<{ order: number; option: string }[]>()
+    .notNull(),
 });

@@ -55,7 +55,10 @@ export type Section = {
         id: number;
         questionMarkdown: string;
         explanationMarkdown: string;
-        options: string[];
+        options: {
+          order: number;
+          option: string;
+        }[];
       } | null;
     }[];
     userCompletedBlocks: {
