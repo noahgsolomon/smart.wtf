@@ -48,14 +48,10 @@ const Streak = () => {
         streakDate.date.getUTCDate(),
       ).toUTCString();
 
-      console.log(streakDateUTC, todayDate);
       return streakDateUTC === todayDate;
     });
 
-    console.log(todayStreak);
-
     if (todayStreak) {
-      console.log(todayStreak);
       setCurrentStreakCount(todayStreak.count);
     }
   }, [streak]);
@@ -168,7 +164,7 @@ const Streak = () => {
   return (
     <div className="relative">
       <TooltipProvider delayDuration={0}>
-        <div className="absolute left-1 top-1 z-20 pb-4">
+        <div className="absolute left-1 top-1 z-[15] pb-4">
           <Tooltip>
             <TooltipTrigger>
               <div className="flex cursor-pointer items-end gap-2 transition-all hover:scale-105">
@@ -184,7 +180,7 @@ const Streak = () => {
             <TooltipContent>Let's get that streak going!</TooltipContent>
           </Tooltip>
         </div>
-        <div className="absolute right-2 top-2 z-20 pb-4">
+        <div className="absolute right-2 top-2 z-[15] pb-4">
           <Tooltip>
             <TooltipTrigger>
               <div className="flex cursor-pointer items-end gap-2 transition-all hover:scale-105">
