@@ -8,6 +8,7 @@ import {
   PointerSensor,
   useSensor,
   useSensors,
+  DragEndEvent,
 } from "@dnd-kit/core";
 import {
   arrayMove,
@@ -51,12 +52,21 @@ export default function Sort({
   explanationString: string;
   completed: boolean;
   params: { slug: string; chapter: string; lesson: string };
-  options: string[];
+  options: { order: number; option: string }[];
 }) {
-  const [randomOrderedOptions, setRandomOrderedOptions] = useState(
-    options.sort(() => Math.random() - 0.5),
-  );
-  console.log(options);
+  const [randomOrderedOptions, setRandomOrderedOptions] = useState(() => {
+    let shuffledOptions: string[] = [...options.map((option) => option.option)];
+
+    for (let i = shuffledOptions.length - 1; i > 0; i--) {
+      let j = Math.floor(Math.random() * (i + 1));
+      [shuffledOptions[i], shuffledOptions[j]] = [
+        shuffledOptions[j]!,
+        shuffledOptions[i]!,
+      ];
+    }
+
+    return shuffledOptions;
+  });
   const sensors = useSensors(
     useSensor(PointerSensor),
     useSensor(KeyboardSensor, {
@@ -66,7 +76,6 @@ export default function Sort({
 
   const mutateBlock = trpc.course.setBlockCompleted.useMutation({
     onSuccess: (response) => {
-      console.log("successss");
       if (response.data.firstCommitToday) {
         toast(`You're on a ${response.data.streakCount} day streak`, {
           icon: "🔥",
@@ -137,10 +146,13 @@ export default function Sort({
   const handleSubmit = async () => {
     setLoading(true);
     try {
-      console.log(randomOrderedOptions === options);
-      console.log(randomOrderedOptions);
-      console.log(options);
-      if (randomOrderedOptions === options) {
+      if (
+        randomOrderedOptions.join("") ===
+        options
+          .sort((a, b) => a.order - b.order)
+          .map((option) => option.option)
+          .join("")
+      ) {
         correctSound();
 
         mutateBlock.mutate({
@@ -250,7 +262,7 @@ export default function Sort({
                       {randomOrderedOptions.map((option, index) => (
                         <SortableItem
                           order={index + 1}
-                          key={option}
+                          key={index}
                           option={option}
                           completed={completed}
                         />
@@ -296,13 +308,13 @@ export default function Sort({
     </div>
   );
 
-  function handleDragEnd(event: any) {
+  function handleDragEnd(event: DragEndEvent) {
     const { active, over } = event;
 
-    if (active.id !== over.id) {
+    if (active.id !== over?.id) {
       setRandomOrderedOptions((option) => {
-        const oldIndex = option.indexOf(active.id);
-        const newIndex = option.indexOf(over.id);
+        const oldIndex = option.indexOf(active?.id + "");
+        const newIndex = option.indexOf(over?.id + "");
 
         return arrayMove(option, oldIndex, newIndex);
       });
