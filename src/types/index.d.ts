@@ -35,7 +35,7 @@ export type Section = {
     order: number;
     markdown: string;
     interactiveComponents: {
-      type: "QUIZ" | "UNDERSTANDING";
+      type: "QUIZ" | "UNDERSTANDING" | "SORTING";
       quizzes: {
         id: number;
         questionMarkdown: string;
@@ -50,6 +50,12 @@ export type Section = {
         id: number;
         questionMarkdown: string;
         explanationMarkdown: string;
+      } | null;
+      sorting: {
+        id: number;
+        questionMarkdown: string;
+        explanationMarkdown: string;
+        options: string[];
       } | null;
     }[];
     userCompletedBlocks: {
