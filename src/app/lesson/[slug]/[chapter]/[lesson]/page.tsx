@@ -18,6 +18,7 @@ import { Button } from "@/components/ui/button";
 import Understanding from "@/app/lesson/components/interactive/understanding";
 import useSound from "use-sound";
 import toast, { Toaster } from "react-hot-toast";
+import Sort from "@/app/lesson/components/interactive/sort/sort";
 
 export default function Page({
   params,
@@ -217,6 +218,7 @@ export default function Page({
                   const interactive =
                     block.interactiveComponents.length > 0
                       ? block.interactiveComponents.map((component) => {
+                          console.log(JSON.stringify(component, null, 2));
                           if (component.type === "QUIZ") {
                             const explanation = (
                               <Markdown
@@ -334,6 +336,84 @@ export default function Page({
                             );
                             return (
                               <Understanding
+                                params={params}
+                                chapterId={
+                                  section[0]?.courseChapterSections
+                                    .courseChapters.id!
+                                }
+                                chapterOrder={
+                                  section[0]?.courseChapterSections
+                                    .courseChapters.order!
+                                }
+                                sectionOrder={
+                                  section[0]?.courseChapterSections.order!
+                                }
+                                sectionId={
+                                  section[lessonNumber - 1]
+                                    ?.courseChapterSections.id!
+                                }
+                                key={component.understanding?.id ?? 1}
+                                subSection={lessonNumber}
+                                blockId={block.id}
+                                blockOrder={block.order}
+                                questionString={
+                                  component.understanding?.questionMarkdown ??
+                                  "## no question right now, sorry :("
+                                }
+                                explanationString={
+                                  component.understanding
+                                    ?.explanationMarkdown ??
+                                  "## no explanation right now, sorry :("
+                                }
+                                completed={block.userCompletedBlocks.length > 0}
+                                question={question}
+                                explanation={explanation}
+                              />
+                            );
+                          }
+                          if (component.type === "SORTING") {
+                            const explanation = (
+                              <Markdown
+                                components={{
+                                  img: ({ ...props }) => (
+                                    <Image
+                                      src={
+                                        props.src ??
+                                        "https://images.codefoli.com/smartwtf.png"
+                                      }
+                                      alt={props.alt ?? "smartwtf"}
+                                      layout="responsive"
+                                    />
+                                  ),
+                                }}
+                              >
+                                {component.sorting?.explanationMarkdown ??
+                                  "## no explanation right now, sorry :("}
+                              </Markdown>
+                            );
+                            const question = (
+                              <Markdown
+                                components={{
+                                  img: ({ ...props }) => (
+                                    <Image
+                                      src={
+                                        props.src ??
+                                        "https://images.codefoli.com/smartwtf.png"
+                                      }
+                                      alt={props.alt ?? "smartwtf"}
+                                      layout="responsive"
+                                    />
+                                  ),
+                                }}
+                              >
+                                {component.sorting?.questionMarkdown ??
+                                  "## no question right now, sorry :("}
+                              </Markdown>
+                            );
+
+                            return (
+                              <Sort
+                                options={component.sorting?.options ?? []}
                                 params={params}
                                 chapterId={
                                   section[0]?.courseChapterSections
