@@ -3,6 +3,7 @@ import {
   datetime,
   index,
   int,
+  json,
   mysqlTable,
   text,
   unique,
@@ -172,10 +173,11 @@ export const interactiveComponents = mysqlTable("interactive_components", {
   blockId: int("block_id").notNull(),
   type: varchar("type", {
     length: 50,
-    enum: ["QUIZ", "UNDERSTANDING"],
+    enum: ["QUIZ", "UNDERSTANDING", "SORTING"],
   }).notNull(),
   quizId: int("quiz_id"),
   understandingId: int("understanding_id"),
+  sortingId: int("sorting_id"),
 });
 
 export const interactiveComponentsRelations = relations(
@@ -192,6 +194,10 @@ export const interactiveComponentsRelations = relations(
     understanding: one(understanding, {
       fields: [interactiveComponents.understandingId],
       references: [understanding.id],
+    }),
+    sorting: one(sorting, {
+      fields: [interactiveComponents.sortingId],
+      references: [sorting.id],
     }),
   }),
 );
@@ -277,3 +283,10 @@ export const courseProgressRelations = relations(courseProgress, ({ one }) => ({
     references: [courses.id],
   }),
 }));
+
+export const sorting = mysqlTable("sorting", {
+  id: int("id").primaryKey().autoincrement(),
+  questionMarkdown: text("question_markdown").notNull(),
+  explanationMarkdown: text("explanation_markdown").notNull(),
+  options: json("options").$type<string[]>().notNull(),
+});
