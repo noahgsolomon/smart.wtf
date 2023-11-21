@@ -1,6 +1,6 @@
 "use client";
 
-import { ReactNode, useState } from "react";
+import { type ReactNode, useState } from "react";
 import {
   DndContext,
   closestCenter,
@@ -54,7 +54,9 @@ export default function Sort({
   options: { order: number; option: string }[];
 }) {
   const [randomOrderedOptions, setRandomOrderedOptions] = useState(() => {
-    let shuffledOptions: string[] = [...options.map((option) => option.option)];
+    const shuffledOptions: string[] = [
+      ...options.map((option) => option.option),
+    ];
 
     for (let i = shuffledOptions.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
