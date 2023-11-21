@@ -1,6 +1,6 @@
 "use client";
 
-import { redirect, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { trpc } from "@/trpc/client";
 import { useEffect } from "react";
 import remarkGfm from "remark-gfm";

@@ -16,7 +16,6 @@ import { cn } from "@/lib/utils";
 import { type Section } from "@/types";
 
 export default function LessonHeading({ section }: { section: Section[] }) {
-  const pathname = usePathname();
   const params = useParams();
   const searchParams = useSearchParams();
 

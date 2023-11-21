@@ -132,7 +132,7 @@ export default function Page({
       const controls = animate(count, streakQuery.data?.streak ?? 1);
       return controls.stop;
     }
-  }, [isCheckmarkComplete, count]);
+  }, [isCheckmarkComplete, count, streakQuery.data?.streak]);
 
   const completed = showCompleted && (
     <motion.div

@@ -1,8 +1,4 @@
-import { CalendarCheck, Lock, LockIcon } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
-import smartwtfmember from "public/smartwtfmember.png";
-import ai from "public/ai.png";
-import quiz from "public/quiz.png";
+import { Lock } from "lucide-react";
 import Image from "next/image";
 import goldfish from "public/goldfish.png";
 
