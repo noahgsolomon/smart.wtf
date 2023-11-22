@@ -24,7 +24,7 @@ export function SortableItem({
     touchAction: "none",
   };
 
-  const handleDragStart = (e) => {
+  const handleDragStart = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
     // Disable page scroll
     document.body.style.overflow = "hidden";
