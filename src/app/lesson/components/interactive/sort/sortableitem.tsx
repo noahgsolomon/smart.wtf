@@ -21,6 +21,18 @@ export function SortableItem({
   const style = {
     transform: CSS.Transform.toString(transform),
     transition,
+    touchAction: "none",
+  };
+
+  const handleDragStart = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    // Disable page scroll
+    document.body.style.overflow = "hidden";
+  };
+
+  const handleDragEnd = () => {
+    // Re-enable page scroll
+    document.body.style.overflow = "";
   };
 
   return (
@@ -32,6 +44,9 @@ export function SortableItem({
         className={cn(`w-full ${completed ? "opacity-50" : ""}`, className)}
         {...attributes}
         {...listeners}
+        onDragStart={handleDragStart}
+        onDragEnd={handleDragEnd}
+        // Prevent page scroll on touch devices
       >
         <div className="group rounded-lg border border-border bg-card p-4 transition-all active:scale-[101%] active:shadow-sm">
           <div className="flex items-center justify-between">
