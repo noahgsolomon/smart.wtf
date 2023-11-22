@@ -282,15 +282,8 @@ export default function Page({
                                 key={component.quizzes?.id ?? 1}
                                 content={question}
                                 explanation={explanation}
-                                options={[
-                                  component.quizzes?.optionOne ?? "",
-                                  component.quizzes?.optionTwo ?? "",
-                                  component.quizzes?.optionThree ?? "",
-                                  component.quizzes?.optionFour ?? "",
-                                ]}
-                                answer={
-                                  component.quizzes?.correctOption ?? "ONE"
-                                }
+                                options={component.quizzes?.options ?? []}
+                                answer={component.quizzes?.correctOption ?? 1}
                               />
                             );
                           }
