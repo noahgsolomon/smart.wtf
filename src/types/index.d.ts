@@ -39,11 +39,8 @@ export type Section = {
       quizzes: {
         id: number;
         questionMarkdown: string;
-        optionOne: string;
-        optionTwo: string;
-        optionThree: string;
-        optionFour: string;
-        correctOption: "ONE" | "TWO" | "THREE" | "FOUR";
+        options: { option: string; order: number }[];
+        correctOption: number;
         explanationMarkdown: string;
       } | null;
       understanding: {
