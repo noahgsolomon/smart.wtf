@@ -40,7 +40,7 @@ const NavBar = () => {
     <>
       {!path.startsWith("/lesson") ? (
         <header className="border-sm fixed left-0 right-0 top-0 z-20 border-b border-border bg-card shadow-sm">
-          {user && !user?.user?.subscribed && (
+          {/* {user && !user?.user?.subscribed && (
             <FreeTrialBanner
               className="border-b border-border py-2"
               progress={
@@ -55,7 +55,7 @@ const NavBar = () => {
                 (daysSinceAccountCreation > 7 ? 7 : daysSinceAccountCreation)
               }
             />
-          )}
+          )} */}
           <div className="flex justify-between px-[5%] py-1">
             <div>
               <Link href={"/"}>
@@ -85,14 +85,14 @@ const NavBar = () => {
               <ThemeButton />
               {userId ? (
                 <>
-                  {user?.user && !user?.user?.subscribed && (
+                  {/* {user?.user && !user?.user?.subscribed && (
                     <Link
                       href={"/pricing"}
                       className={buttonVariants({ variant: "outline" })}
                     >
                       UPGRADE
                     </Link>
-                  )}
+                  )} */}
                   <UserButton />
                 </>
               ) : (
