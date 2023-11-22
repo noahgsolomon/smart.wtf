@@ -40,6 +40,16 @@ const NavBar = () => {
     <>
       {!path.startsWith("/lesson") ? (
         <header className="border-sm fixed left-0 right-0 top-0 z-20 border-b border-border bg-card shadow-sm">
+          <div
+            className={
+              "flex flex-row items-center justify-center gap-4 border-b border-border pt-1"
+            }
+          >
+            <p className="py-1  text-sm">
+              We are expecting to be in <span className="font-bold">Beta</span>{" "}
+              in January
+            </p>
+          </div>
           {/* {user && !user?.user?.subscribed && (
             <FreeTrialBanner
               className="border-b border-border py-2"
