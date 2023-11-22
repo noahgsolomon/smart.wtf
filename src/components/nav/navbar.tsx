@@ -6,9 +6,7 @@ import { useAuth } from "@clerk/nextjs";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import SmartWtfLogo from "../svg/smartwtf";
-import FreeTrialBanner from "./freetrialbanner";
 import { usePathname } from "next/navigation";
-import { trpc } from "@/trpc/client";
 import UserButton from "./UserButton";
 
 const NavBar = () => {
@@ -16,25 +14,25 @@ const NavBar = () => {
 
   const path = usePathname();
 
-  let user;
-  let daysSinceAccountCreation = 0;
-  const trialLength = 7;
-  const userQuery = trpc.user.user.useQuery();
+  // let user;
+  // let daysSinceAccountCreation = 0;
+  // trial length
+  // const userQuery = trpc.user.user.useQuery();
 
-  if (userId) {
-    user = userQuery.data;
-    const createdAt = user?.user?.created_at;
+  // if (userId) {
+  // user = userQuery.data;
+  // const createdAt = user?.user?.created_at;
 
-    if (createdAt) {
-      const accountCreationDate = new Date(createdAt).getTime();
-      const currentDate = new Date().getTime();
+  // if (createdAt) {
+  //   const accountCreationDate = new Date(createdAt).getTime();
+  //   const currentDate = new Date().getTime();
 
-      const timeDifference = currentDate - accountCreationDate;
-      daysSinceAccountCreation = Math.floor(
-        timeDifference / (1000 * 60 * 60 * 24),
-      );
-    }
-  }
+  //   const timeDifference = currentDate - accountCreationDate;
+  //   daysSinceAccountCreation = Math.floor(
+  //     timeDifference / (1000 * 60 * 60 * 24),
+  //   );
+  // }
+  // }
 
   return (
     <>
