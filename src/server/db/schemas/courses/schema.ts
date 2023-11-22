@@ -205,14 +205,15 @@ export const interactiveComponentsRelations = relations(
 export const quizzes = mysqlTable("quizzes", {
   id: int("id").primaryKey().autoincrement(),
   questionMarkdown: text("question_markdown").notNull(),
-  optionOne: varchar("option_one", { length: 500 }).notNull(),
-  optionTwo: varchar("option_two", { length: 500 }).notNull(),
-  optionThree: varchar("option_three", { length: 500 }).notNull(),
-  optionFour: varchar("option_four", { length: 500 }).notNull(),
-  correctOption: varchar("correct_option", {
-    length: 25,
-    enum: ["ONE", "TWO", "THREE", "FOUR"],
-  }).notNull(),
+  options: json("options")
+    .$type<
+      {
+        options: string;
+        order: number;
+      }[]
+    >()
+    .notNull(),
+  correctOption: int("correct_option").notNull(),
   explanationMarkdown: text("explanation_markdown").notNull(),
 });
 
