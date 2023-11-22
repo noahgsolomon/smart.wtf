@@ -3,17 +3,7 @@
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Button } from "@/components/ui/button";
 
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
 import { type ReactElement, useState, useEffect } from "react";
-import { z } from "zod";
-import { useForm } from "react-hook-form";
 import { trpc } from "@/trpc/client";
 import { useSectionContext } from "../../sectioncontext";
 import toast, { Toaster } from "react-hot-toast";
@@ -43,15 +33,11 @@ export default function Quiz({
   blockId: number;
   content: ReactElement;
   explanation: ReactElement;
-  options: string[];
-  answer: "ONE" | "TWO" | "THREE" | "FOUR";
+  options: { order: number; option: string }[];
+  answer: number;
   completed?: boolean;
   params: { slug: string; chapter: string; lesson: string };
 }) {
-  const FormSchema = z.object({
-    answer: z.enum(["ONE", "TWO", "THREE", "FOUR"]),
-  });
-
   const correct = () =>
     toast.success("correct!", {
       style: {
@@ -70,9 +56,7 @@ export default function Quiz({
       },
     });
 
-  const [guessed, setGuessed] = useState<("ONE" | "TWO" | "THREE" | "FOUR")[]>(
-    [],
-  );
+  const [guessed, setGuessed] = useState<number[]>([]);
 
   const sectionQuery = trpc.course.getCourseSection.useQuery({
     sectionId: parseInt(
@@ -81,11 +65,10 @@ export default function Quiz({
   });
 
   const [isFlipped, setIsFlipped] = useState(false);
+  const [currentGuess, setCurrentGuess] = useState<number | null>(null);
 
   const mutateBlock = trpc.course.setBlockCompleted.useMutation({
     onSuccess: (response) => {
-      console.log("successss");
-      console.log(JSON.stringify(response.data, null, 2));
       if (response.data.firstCommitToday) {
         toast(`You're on a ${response.data.streakCount} day streak`, {
           icon: "🔥",
@@ -102,8 +85,6 @@ export default function Quiz({
   const [correctSound] = useSound("/correct.mp3", { volume: 0.5 });
   const [incorrectSound] = useSound("/incorrect.mp3", { volume: 0.5 });
   const [flipSound] = useSound("/flip.mp3", { volume: 0.5 });
-
-  const form = useForm<z.infer<typeof FormSchema>>();
 
   const [side, setSide] = useState<"QUESTION" | "ANSWER">("QUESTION");
 
@@ -161,14 +142,17 @@ export default function Quiz({
     setSide(side === "QUESTION" ? "ANSWER" : "QUESTION");
   };
 
-  function onSubmit(data: z.infer<typeof FormSchema>) {
+  function onSubmit({ guess }: { guess: number | null }) {
+    if (guess === null) {
+      return;
+    }
     setGuessed((prev) => {
-      if (!prev.includes(data.answer)) {
-        return [...prev, data.answer];
+      if (!prev.includes(guess)) {
+        return [...prev, guess];
       }
       return prev;
     });
-    if (data.answer === answer) {
+    if (guess === answer) {
       correctSound();
       mutateBlock.mutate({
         blockId,
@@ -244,104 +228,57 @@ export default function Quiz({
           {side === "QUESTION" ? (
             <div className="front">
               <div>{content}</div>
-              <Form {...form}>
-                <form
-                  onSubmit={form.handleSubmit(onSubmit)}
-                  className="w-2/3 space-y-6"
-                >
-                  <FormField
-                    control={form.control}
-                    name="answer"
-                    render={({ field }) => (
-                      <FormItem className="space-y-3">
-                        <FormControl>
-                          <RadioGroup
-                            onValueChange={field.onChange}
-                            defaultValue={field.value}
-                            className="flex flex-col space-y-1"
-                          >
-                            {options.map((option, index) => {
-                              return (
-                                <FormItem
-                                  key={index}
-                                  className="flex items-center space-x-3 space-y-0"
-                                >
-                                  <FormControl>
-                                    <RadioGroupItem
-                                      disabled={
-                                        guessed.includes(
-                                          index === 0
-                                            ? "ONE"
-                                            : index === 1
-                                            ? "TWO"
-                                            : index === 2
-                                            ? "THREE"
-                                            : "FOUR",
-                                        ) || guessed.includes(answer)
-                                      }
-                                      correct={
-                                        index === 0
-                                          ? answer === "ONE" &&
-                                            guessed.includes("ONE")
-                                          : index === 1
-                                          ? answer === "TWO" &&
-                                            guessed.includes("TWO")
-                                          : index === 2
-                                          ? answer === "THREE" &&
-                                            guessed.includes("THREE")
-                                          : answer === "FOUR" &&
-                                            guessed.includes("FOUR")
-                                      }
-                                      incorrect={
-                                        index === 0
-                                          ? answer !== "ONE" &&
-                                            guessed.includes("ONE")
-                                          : index === 1
-                                          ? answer !== "TWO" &&
-                                            guessed.includes("TWO")
-                                          : index === 2
-                                          ? answer !== "THREE" &&
-                                            guessed.includes("THREE")
-                                          : answer !== "FOUR" &&
-                                            guessed.includes("FOUR")
-                                      }
-                                      value={
-                                        index === 0
-                                          ? "ONE"
-                                          : index === 1
-                                          ? "TWO"
-                                          : index === 2
-                                          ? "THREE"
-                                          : "FOUR"
-                                      }
-                                    />
-                                  </FormControl>
-                                  <FormLabel className="text-lg">
-                                    {option}
-                                  </FormLabel>
-                                </FormItem>
-                              );
-                            })}
-                          </RadioGroup>
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
+              <div>
+                <div className="w-2/3 space-y-6">
+                  <div>
+                    <div className="space-y-3">
+                      <div>
+                        <RadioGroup className="flex flex-col space-y-1">
+                          {options.map((option, index) => {
+                            return (
+                              <div
+                                key={index}
+                                className="flex items-center space-x-3"
+                              >
+                                <div>
+                                  <RadioGroupItem
+                                    onClick={() => setCurrentGuess(index + 1)}
+                                    disabled={
+                                      guessed.includes(index + 1) ||
+                                      guessed.includes(answer)
+                                    }
+                                    correct={
+                                      answer == index + 1 &&
+                                      guessed.includes(index + 1)
+                                    }
+                                    incorrect={
+                                      answer != index + 1 &&
+                                      guessed.includes(index + 1)
+                                    }
+                                    value={(index + 1).toString()}
+                                  />
+                                </div>
+                                <div className="text-lg">{option.option}</div>
+                              </div>
+                            );
+                          })}
+                        </RadioGroup>
+                      </div>
+                      <div />
+                    </div>
+                  </div>
                   <div className="flex flex-row gap-2 py-6">
                     {!guessed.includes(answer) ? (
-                      <Button type="submit">Check</Button>
+                      <Button onClick={() => onSubmit({ guess: currentGuess })}>
+                        Check
+                      </Button>
                     ) : null}
-                    <Button
-                      type="button"
-                      variant={"secondary"}
-                      onClick={revealedAnswer}
-                    >
+                    <Button variant={"secondary"} onClick={revealedAnswer}>
                       Show Explanation
                     </Button>
                   </div>
-                </form>
-              </Form>
+                </div>
+              </div>
             </div>
           ) : (
             <div className="back">
