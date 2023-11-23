@@ -16,11 +16,8 @@ const NavBar = () => {
 
   // let user;
   // let daysSinceAccountCreation = 0;
-<<<<<<< HEAD
   // trial length
-=======
   // const trialLength = 7;
->>>>>>> main
   // const userQuery = trpc.user.user.useQuery();
 
   // if (userId) {
@@ -28,7 +25,6 @@ const NavBar = () => {
   // const createdAt = user?.user?.created_at;
 
   // if (createdAt) {
-<<<<<<< HEAD
   //   const accountCreationDate = new Date(createdAt).getTime();
   //   const currentDate = new Date().getTime();
 
@@ -36,7 +32,6 @@ const NavBar = () => {
   //   daysSinceAccountCreation = Math.floor(
   //     timeDifference / (1000 * 60 * 60 * 24),
   //   );
-=======
   // const accountCreationDate = new Date(createdAt).getTime();
   // const currentDate = new Date().getTime();
 
@@ -44,7 +39,6 @@ const NavBar = () => {
   // daysSinceAccountCreation = Math.floor(
   //   timeDifference / (1000 * 60 * 60 * 24),
   // );
->>>>>>> main
   // }
   // }
 
