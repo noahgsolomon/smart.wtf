@@ -1,5 +1,4 @@
 import { api } from "@/trpc/server";
-import CalculusOverview from "./components/calculusoverview";
 import Courses from "./components/courses/courses";
 import { Suspense } from "react";
 import { CourseSkeleton } from "./components/courses/courseskeleton";

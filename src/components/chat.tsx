@@ -3,10 +3,10 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { ArrowUp, Send, X } from "lucide-react";
+import { ArrowUp, X } from "lucide-react";
 import { useChat } from "ai/react";
 import { motion } from "framer-motion";
-import { Dispatch, SetStateAction, useState } from "react";
+import { type Dispatch, type SetStateAction, useState } from "react";
 import { cn } from "@/lib/utils";
 
 const Chat = ({
