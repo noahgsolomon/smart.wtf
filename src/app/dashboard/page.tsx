@@ -1,5 +1,4 @@
 import { api } from "@/trpc/server";
-import CalculusOverview from "./components/calculusoverview";
 import Courses from "./components/courses/courses";
 import { Suspense } from "react";
 import { CourseSkeleton } from "./components/courses/courseskeleton";
@@ -58,12 +57,6 @@ const Dashboard = async () => {
             <Suspense fallback={<CourseSkeleton />}>
               <Courses />
             </Suspense>
-            <div>
-              <h1>Your Files</h1>
-              <div className="flex flex-wrap gap-8 py-4">
-                <CalculusOverview />
-              </div>
-            </div>
           </div>
         </section>
       </main>

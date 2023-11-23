@@ -7,6 +7,7 @@ import { headers } from "next/headers";
 import { type Metadata } from "next";
 import ProgressBarProvider from "./progressbar";
 import { GeistSans } from "geist/font";
+import ChatButton from "@/components/chatbutton";
 
 export const metadata: Metadata = {
   appleWebApp: true,
@@ -44,6 +45,7 @@ export default function RootLayout({
                 <NavBar />
                 {children}
                 {modal}
+                <ChatButton />
               </ProgressBarProvider>
             </Providers>
           </ClerkProvider>
