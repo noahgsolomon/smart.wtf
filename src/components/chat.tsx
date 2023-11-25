@@ -20,7 +20,7 @@ const Chat = ({
   const [isVisible, setIsVisible] = useState(true);
 
   const variants = {
-    hidden: { opacity: 0, x: 50, y: 50 },
+    hidden: { opacity: 0, x: 10, y: 10 },
     visible: { opacity: 1, x: 0, y: 0 },
   };
 
@@ -35,7 +35,7 @@ const Chat = ({
       animate={isVisible ? "visible" : "exit"}
       exit="hidden"
       variants={variants}
-      transition={{ duration: 0.3, ease: "easeOut" }}
+      transition={{ duration: 0.2, ease: "easeOut" }}
       className={cn(
         "max-w-[400px] rounded-lg border border-border bg-card p-4",
         className,
