@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { ArrowUp, X } from "lucide-react";
 import { useChat } from "ai/react";
 import { motion } from "framer-motion";
-import { type Dispatch, type SetStateAction, useState } from "react";
+import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { useChatContext } from "@/app/context/chat/ChatContext";
 

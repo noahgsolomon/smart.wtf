@@ -94,7 +94,7 @@ export default function Page({
     },
   });
 
-  const { chat, setChat, open, setOpen } = useChatContext();
+  const { chat, setChat } = useChatContext();
 
   console.log(chat);
   let chatContext = "";
