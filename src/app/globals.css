@@ -335,7 +335,7 @@ h6 {
 /* The front and back sides of the card */
 .front,
 .back {
-  @apply p-4 gap-2 flex flex-col rounded-lg border border-border shadow-sm w-full h-full bg-card
+  @apply p-4 gap-2 flex flex-col rounded-lg border border-border w-full h-full bg-card
   /* Hide the back side of the card when facing away */
 }
 
