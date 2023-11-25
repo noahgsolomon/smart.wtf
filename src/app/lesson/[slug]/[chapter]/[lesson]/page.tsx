@@ -177,7 +177,7 @@ export default function Page({
           key={lessonNumber}
           className="flex justify-center px-0 pb-4 pt-28 md:px-4"
         >
-          <div className="prose prose-slate relative px-8 py-2 dark:prose-invert">
+          <div className="prose prose-slate relative px-8 py-2 pb-24 dark:prose-invert">
             <div>
               {section[lessonNumber - 1]?.blocks
                 .sort((a, b) => a.order - b.order)
@@ -455,7 +455,7 @@ export default function Page({
                     <div
                       id={block.id.toString()}
                       key={index}
-                      className={`${block.order > 1 ? "pt-16" : ""} ${
+                      className={`${block.order > 1 ? "pt-4" : ""} ${
                         blockVisible ? "" : "hidden"
                       }`}
                     >
