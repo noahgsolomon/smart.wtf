@@ -47,7 +47,6 @@ export default function RootLayout({
                   <NavBar />
                   {children}
                   {modal}
-                  <ChatButton />
                 </ChatProvider>
               </ProgressBarProvider>
             </Providers>

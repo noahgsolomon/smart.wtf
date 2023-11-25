@@ -8,6 +8,7 @@ import { cn } from "@/lib/utils";
 import SmartWtfLogo from "../svg/smartwtf";
 import { usePathname } from "next/navigation";
 import UserButton from "./UserButton";
+import ChatButton from "../chatbutton";
 
 const NavBar = () => {
   const { userId } = useAuth();
@@ -131,6 +132,7 @@ const NavBar = () => {
           </div>
         </header>
       ) : null}
+      {userId && <ChatButton />}
     </>
   );
 };
