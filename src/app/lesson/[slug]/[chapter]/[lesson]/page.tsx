@@ -19,6 +19,7 @@ import Understanding from "@/app/lesson/components/interactive/understanding";
 import useSound from "use-sound";
 import toast, { Toaster } from "react-hot-toast";
 import Sort from "@/app/lesson/components/interactive/sort/sort";
+import { useChatContext } from "@/app/context/chat/ChatContext";
 
 export default function Page({
   params,
@@ -92,6 +93,11 @@ export default function Page({
       }
     },
   });
+
+  const { chat, setChat, open, setOpen } = useChatContext();
+
+  console.log(chat);
+  let chatContext = "";
 
   const handleContinue = ({
     blockId,
@@ -182,6 +188,10 @@ export default function Page({
               {section[lessonNumber - 1]?.blocks
                 .sort((a, b) => a.order - b.order)
                 .map((block, index) => {
+                  chatContext += "\n\n" + block.markdown;
+                  if (index === section[lessonNumber - 1]?.blocks.length! - 1) {
+                    setChat(chatContext);
+                  }
                   const markdown = (
                     <Markdown
                       components={{
@@ -459,7 +469,24 @@ export default function Page({
                         blockVisible ? "" : "hidden"
                       }`}
                     >
-                      <div>{markdown}</div>
+                      <div className="flex flex-col pb-4">
+                        {markdown}
+
+                        {/* <div className="flex justify-end">
+                          <TooltipProvider delayDuration={0}>
+                            <Tooltip>
+                              <TooltipTrigger>
+                                <Button variant={"ghost"}>
+                                  <Bot className="h-4 w-4 opacity-50" />
+                                </Button>
+                              </TooltipTrigger>
+                              <TooltipContent>
+                                Let Professor Quantum explain this block
+                              </TooltipContent>
+                            </Tooltip>
+                          </TooltipProvider>
+                        </div> */}
+                      </div>
                       {interactive}
                       {section[lessonNumber - 1]?.blocks.length ===
                         block.order &&

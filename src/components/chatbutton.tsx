@@ -1,22 +1,22 @@
 "use client";
 
 import { Sparkles } from "lucide-react";
-import { useState } from "react";
 import Chat from "./chat";
 import { motion } from "framer-motion";
+import { useChatContext } from "@/app/context/chat/ChatContext";
 
 export default function ChatButton() {
-  const [open, setOpen] = useState(false);
-
   const buttonVariants = {
     hidden: { opacity: 0 },
     visible: { opacity: 1 },
   };
 
+  const { open, setOpen } = useChatContext();
+
   return (
     <div className="fixed bottom-4 right-4 z-30">
       {open ? (
-        <Chat setOpen={setOpen} />
+        <Chat />
       ) : (
         <motion.div
           initial="hidden"

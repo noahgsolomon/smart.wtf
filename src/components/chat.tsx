@@ -8,16 +8,13 @@ import { useChat } from "ai/react";
 import { motion } from "framer-motion";
 import { type Dispatch, type SetStateAction, useState } from "react";
 import { cn } from "@/lib/utils";
+import { useChatContext } from "@/app/context/chat/ChatContext";
 
-const Chat = ({
-  setOpen,
-  className,
-}: {
-  setOpen: Dispatch<SetStateAction<boolean>>;
-  className?: string;
-}) => {
+const Chat = ({ className }: { className?: string }) => {
   const { messages, input, handleInputChange, handleSubmit } = useChat();
   const [isVisible, setIsVisible] = useState(true);
+
+  const { setOpen } = useChatContext();
 
   const variants = {
     hidden: { opacity: 0, x: 10, y: 10 },
@@ -64,8 +61,8 @@ const Chat = ({
         <div className={`flex h-[300px] flex-col gap-2 overflow-y-auto py-4`}>
           <div className="flex justify-start ">
             <p className="max-w-[60%] overflow-hidden rounded-lg border border-border bg-popover px-2 py-1 text-sm ">
-              Pose a question, drop a link, or upload a PDF. I&apos;ll either
-              answer or craft a lesson from it. Ready for a knowledge quest?
+              Pose a question or topic of interest. I'll either answer or craft
+              a lesson from it. Ready for a knowledge quest?
             </p>
           </div>
           {messages.map((m) => (
