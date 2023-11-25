@@ -12,11 +12,14 @@ const SignUpPage = () => {
             headerTitle: "text-primary",
             headerSubtitle: "text-primary opacity-60",
             socialButtonsBlockButton:
-              "active:bg-secondary focus:ring-0 rounded-lg py-3 border border-secondary hover:bg-secondary",
+              "ring-0 dark:border dark:border-secondary dark:hover:bg-secondary outline-none",
+            socialButtonsIconButton:
+              "ring-0 dark:border dark:border-secondary dark:hover:bg-secondary outline-none",
             socialButtonsBlockButtonText: "text-secondary-foreground",
             footerActionText: "text-primary opacity-40",
             footerActionLink:
               "transition-all text-blue hover:opacity-80 outline-none",
+            socialButtonsBlockButtonArrow: "text-primary",
           },
         }}
       />
