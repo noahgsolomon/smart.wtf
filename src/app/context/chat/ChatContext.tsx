@@ -1,7 +1,7 @@
 "use client";
 
 import { trpc } from "@/trpc/client";
-import { Message } from "@/types";
+import { type Message } from "@/types";
 import React, {
   createContext,
   useContext,
@@ -65,7 +65,7 @@ export const ChatProvider = ({ children }: ChatProviderProps) => {
     setTimeout(() => {
       setReady(true);
     }, 1000);
-  }, [open]);
+  }, [open, messageQuery.data?.messages, messages.length]);
 
   return (
     <ChatContext.Provider

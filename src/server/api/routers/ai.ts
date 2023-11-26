@@ -1,6 +1,6 @@
 import { createTRPCRouter, protectedProcedure } from "@/server/api/trpc";
 import { userThread } from "@/server/db/schemas/ai/schema";
-import { Message } from "@/types";
+import { type Message } from "@/types";
 import { eq } from "drizzle-orm";
 import { OpenAI } from "openai";
 import { z } from "zod";
@@ -75,13 +75,10 @@ export const aiRouter = createTRPCRouter({
       }),
     )
     .mutation(async ({ input }) => {
-      const message = await client.beta.threads.messages.create(
-        input.threadId,
-        {
-          content: input.text,
-          role: "user",
-        },
-      );
+      await client.beta.threads.messages.create(input.threadId, {
+        content: input.text,
+        role: "user",
+      });
 
       let run = await client.beta.threads.runs.create(input.threadId, {
         assistant_id: input.assistantId,

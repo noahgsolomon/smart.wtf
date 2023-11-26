@@ -7,7 +7,6 @@ import { headers } from "next/headers";
 import { type Metadata } from "next";
 import ProgressBarProvider from "./progressbar";
 import { GeistSans } from "geist/font";
-import ChatButton from "@/components/chatbutton";
 import { ChatProvider } from "./context/chat/ChatContext";
 
 export const metadata: Metadata = {

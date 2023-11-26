@@ -4,7 +4,6 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ArrowUp, X } from "lucide-react";
-import { useChat } from "ai/react";
 import { motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
