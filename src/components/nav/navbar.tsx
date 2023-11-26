@@ -9,9 +9,12 @@ import SmartWtfLogo from "../svg/smartwtf";
 import { usePathname } from "next/navigation";
 import UserButton from "./UserButton";
 import ChatButton from "../chatbutton";
+import { useChatContext } from "@/app/context/chat/ChatContext";
 
 const NavBar = () => {
   const { userId } = useAuth();
+
+  const { ready } = useChatContext();
 
   const path = usePathname();
 
@@ -132,7 +135,7 @@ const NavBar = () => {
           </div>
         </header>
       ) : null}
-      {userId && <ChatButton />}
+      {userId && ready && <ChatButton />}
     </>
   );
 };
