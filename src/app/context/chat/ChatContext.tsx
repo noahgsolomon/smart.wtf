@@ -13,14 +13,17 @@ import React, {
 } from "react";
 
 type ChatContextType = {
-  chat: string;
   threadId: string;
   assistantId: string;
-  setChat: Dispatch<SetStateAction<string>>;
   open: boolean;
   setOpen: Dispatch<SetStateAction<boolean>>;
   messages: Message[];
   setMessages: Dispatch<SetStateAction<Message[]>>;
+  ready: boolean;
+  loading: boolean;
+  setLoading: Dispatch<SetStateAction<boolean>>;
+  lesson: string;
+  setLesson: Dispatch<SetStateAction<string>>;
 };
 
 const ChatContext = createContext<ChatContextType | undefined>(undefined);
@@ -38,9 +41,11 @@ type ChatProviderProps = {
 };
 
 export const ChatProvider = ({ children }: ChatProviderProps) => {
-  const [chat, setChat] = useState<string>("");
   const [open, setOpen] = useState<boolean>(false);
   const userThreadQuery = trpc.ai.getThread.useQuery();
+  const [ready, setReady] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [lesson, setLesson] = useState<string>("you are not in a lesson");
 
   const threadId = userThreadQuery.data?.threadId!;
 
@@ -57,21 +62,25 @@ export const ChatProvider = ({ children }: ChatProviderProps) => {
     if (messages.length === 0 && open) {
       setMessages(messageQuery.data?.messages!);
     }
+    setTimeout(() => {
+      setReady(true);
+    }, 1000);
   }, [open]);
-
-  console.log(messages);
 
   return (
     <ChatContext.Provider
       value={{
-        chat,
-        setChat,
+        loading,
+        setLoading,
+        lesson,
+        setLesson,
         open,
         setOpen,
         assistantId,
         threadId,
         messages,
         setMessages,
+        ready,
       }}
     >
       {children}
