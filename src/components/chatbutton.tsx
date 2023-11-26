@@ -4,6 +4,7 @@ import { Sparkles } from "lucide-react";
 import Chat from "./chat";
 import { motion } from "framer-motion";
 import { useChatContext } from "@/app/context/chat/ChatContext";
+import { trpc } from "@/trpc/client";
 
 export default function ChatButton() {
   const buttonVariants = {
@@ -11,7 +12,7 @@ export default function ChatButton() {
     visible: { opacity: 1 },
   };
 
-  const { open, setOpen } = useChatContext();
+  const { open, setOpen, threadId, assistantId } = useChatContext();
 
   return (
     <div className="fixed bottom-4 right-4 z-30">
