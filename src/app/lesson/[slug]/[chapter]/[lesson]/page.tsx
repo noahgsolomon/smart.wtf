@@ -94,9 +94,10 @@ export default function Page({
     },
   });
 
-  const { chat, setChat } = useChatContext();
+  const { setLesson, lesson } = useChatContext();
 
-  console.log(chat);
+  console.log(lesson);
+
   let chatContext = "";
 
   const handleContinue = ({
@@ -190,7 +191,7 @@ export default function Page({
                 .map((block, index) => {
                   chatContext += "\n\n" + block.markdown;
                   if (index === section[lessonNumber - 1]?.blocks.length! - 1) {
-                    setChat(chatContext);
+                    setLesson(chatContext);
                   }
                   const markdown = (
                     <Markdown
