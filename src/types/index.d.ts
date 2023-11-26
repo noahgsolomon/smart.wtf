@@ -12,6 +12,11 @@ export type UserSubscriptionPlan = SubscriptionPlan &
     subscribed: boolean;
   };
 
+export type Message = {
+  role: "assistant" | "user";
+  text: string;
+};
+
 export type Section = {
   id: number;
   name: string;
