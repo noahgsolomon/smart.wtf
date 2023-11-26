@@ -6,15 +6,27 @@ import { Input } from "@/components/ui/input";
 import { ArrowUp, X } from "lucide-react";
 import { useChat } from "ai/react";
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 import { useChatContext } from "@/app/context/chat/ChatContext";
+import { trpc } from "@/trpc/client";
 
 const Chat = ({ className }: { className?: string }) => {
-  const { messages, input, handleInputChange, handleSubmit } = useChat();
   const [isVisible, setIsVisible] = useState(true);
 
+  const [input, setInput] = useState("");
+
   const { setOpen } = useChatContext();
+
+  const {
+    messages,
+    setMessages,
+    loading,
+    setLoading,
+    assistantId,
+    threadId,
+    lesson,
+  } = useChatContext();
 
   const variants = {
     hidden: { opacity: 0, x: 10, y: 10 },
@@ -24,6 +36,56 @@ const Chat = ({ className }: { className?: string }) => {
   const handleClose = () => {
     setIsVisible(false);
     setTimeout(() => setOpen(false), 300);
+  };
+
+  const chatContainerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (chatContainerRef.current) {
+      chatContainerRef.current.scrollTop =
+        chatContainerRef.current.scrollHeight;
+    }
+  }, [messages]);
+
+  const [dots, setDots] = useState(".");
+
+  useEffect(() => {
+    if (loading) {
+      const interval = setInterval(() => {
+        setDots((dots) => {
+          if (dots === ".") {
+            return "..";
+          } else if (dots === "...") {
+            return ".";
+          } else {
+            return "...";
+          }
+        });
+      }, 500);
+      return () => clearInterval(interval);
+    }
+  }, [loading]);
+
+  const sendMessageMutation = trpc.ai.sendMessage.useMutation();
+
+  const handleSubmit = () => {
+    setInput("");
+    setMessages((messages) => [...messages, { text: input, role: "user" }]);
+    setLoading(true);
+    sendMessageMutation.mutate(
+      { assistantId, threadId, text: input, lesson },
+      {
+        onSuccess: (data) => {
+          console.log("success");
+          setLoading(false);
+          setMessages((messages) => [...messages, ...data.messages]);
+        },
+        onError: (error) => {
+          console.log(error);
+          setLoading(false);
+        },
+      },
+    );
   };
 
   return (
@@ -58,45 +120,56 @@ const Chat = ({ className }: { className?: string }) => {
           </button>
         </div>
 
-        <div className={`flex h-[300px] flex-col gap-2 overflow-y-auto py-4`}>
+        <div
+          ref={chatContainerRef}
+          className={`flex h-[300px] flex-col gap-2 overflow-y-auto py-4`}
+        >
           <div className="flex justify-start ">
-            <p className="max-w-[60%] overflow-hidden rounded-lg border border-border bg-popover px-2 py-1 text-sm ">
+            <p className="max-w-[60%] overflow-hidden rounded-lg border border-border bg-secondary px-2 py-1 text-sm ">
               Pose a question or topic of interest. I'll either answer or craft
               a lesson from it. Ready for a knowledge quest?
             </p>
           </div>
-          {messages.map((m) => (
-            <div key={m.id}>
+          {messages.map((m, index) => (
+            <div key={index}>
               {m.role === "user" ? (
                 <div className="flex justify-end ">
                   <p className="max-w-[60%] overflow-hidden rounded-lg border border-border bg-primary px-2 py-1 text-sm text-secondary ">
-                    {m.content}
+                    {m.text}
                   </p>
                 </div>
               ) : (
                 <div className="flex justify-start ">
-                  <p className="max-w-[60%] overflow-hidden rounded-lg border border-border bg-popover px-2 py-1 text-sm ">
-                    {m.content}
+                  <p className="max-w-[60%] overflow-hidden rounded-lg border border-border bg-secondary px-2 py-1 text-sm ">
+                    {m.text}
                   </p>
+                </div>
+              )}
+              {index + 1 === messages.length && loading && (
+                <div className="flex justify-start">
+                  <p className="text-xl font-bold opacity-60">{dots}</p>
                 </div>
               )}
             </div>
           ))}
         </div>
-        <form
-          onSubmit={handleSubmit}
-          className="flex flex-row gap-2 border-t border-border py-4"
-        >
+        <div className="flex flex-row gap-2 border-t border-border py-4">
           <div className="relative w-full">
             <Input
               className="focus:ring-lighBlue rounded-full pl-3 pr-10 shadow-none transition-all focus:outline-none focus:ring-1" // Adjust padding to make space for the button
               value={input}
-              onChange={handleInputChange}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  handleSubmit();
+                }
+              }}
+              onChange={(e) => setInput(e.target.value)}
               placeholder="enter message here..."
             />
             <Button
               disabled={input.length === 0}
-              type="submit"
+              type="button"
+              onClick={handleSubmit}
               className={`${
                 input.length > 0 ? "bg-blue hover:bg-blue hover:opacity-80" : ""
               } absolute inset-y-1 right-1 flex h-auto min-h-0 items-center justify-center rounded-full p-2`} // Adjust vertical positioning and button height
@@ -104,7 +177,7 @@ const Chat = ({ className }: { className?: string }) => {
               <ArrowUp className="h-4 w-4" />
             </Button>
           </div>
-        </form>
+        </div>
       </div>
     </motion.div>
   );
