@@ -26,6 +26,7 @@ const NavBar = () => {
 
   // if (userId) {
   // user = userQuery.data;
+
   // const createdAt = user?.user?.created_at;
 
   // if (createdAt) {
