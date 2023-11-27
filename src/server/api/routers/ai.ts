@@ -146,6 +146,7 @@ export const aiRouter = createTRPCRouter({
       const runStep = await client.beta.threads.runs.steps.list(
         input.threadId,
         run.id,
+
         {
           order: "asc",
         },
