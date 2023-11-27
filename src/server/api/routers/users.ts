@@ -90,6 +90,7 @@ export const userRouter = createTRPCRouter({
 
   // Query to retrieve the current user's details
   user: protectedProcedure.query(async ({ ctx }) => {
+    console.log("right before error");
     const user = await ctx.db.query.users.findFirst({
       where: eq(users.id, ctx.user_id),
     });
