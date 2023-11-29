@@ -51,7 +51,7 @@ const Chat = ({ className }: { className?: string }) => {
       assistantId,
       threadId: newThreadId,
     });
-    setMessages(newMessageQuery.data?.messages || []);
+    setMessages(newMessageQuery.data?.messages ?? []);
   };
 
   const chatContainerRef = useRef<HTMLDivElement>(null);
