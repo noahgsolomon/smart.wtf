@@ -9,12 +9,26 @@ const client = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
+const assistantId = "asst_Z1KwKAyaA4lKWtKEiutE2ORK";
+
 export const aiRouter = createTRPCRouter({
+  newThread: protectedProcedure.mutation(async ({ ctx }) => {
+    await ctx.db.delete(userThread).where(eq(userThread.userId, ctx.user_id));
+
+    const thread = await client.beta.threads.create({});
+
+    await ctx.db.insert(userThread).values({
+      userId: ctx.user_id,
+      threadId: thread.id,
+      assistantId,
+    });
+
+    return { threadId: thread.id, assistantId };
+  }),
   getThread: protectedProcedure.query(async ({ ctx }) => {
     const thread = await ctx.db.query.userThread.findFirst({
       where: eq(userThread.userId, ctx.user_id),
     });
-    const assistantId = "asst_Z1KwKAyaA4lKWtKEiutE2ORK";
 
     if (!thread) {
       const thread = await client.beta.threads.create({});
