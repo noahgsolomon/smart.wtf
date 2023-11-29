@@ -14,6 +14,7 @@ import React, {
 
 type ChatContextType = {
   threadId: string;
+  setThreadId: Dispatch<SetStateAction<string>>;
   assistantId: string;
   open: boolean;
   setOpen: Dispatch<SetStateAction<boolean>>;
@@ -47,7 +48,7 @@ export const ChatProvider = ({ children }: ChatProviderProps) => {
   const [loading, setLoading] = useState<boolean>(false);
   const [lesson, setLesson] = useState<string>("you are not in a lesson");
 
-  const threadId = userThreadQuery.data?.threadId!;
+  const [threadId, setThreadId] = useState(userThreadQuery.data?.threadId!);
 
   const assistantId = "asst_Z1KwKAyaA4lKWtKEiutE2ORK";
 
@@ -59,13 +60,19 @@ export const ChatProvider = ({ children }: ChatProviderProps) => {
   });
 
   useEffect(() => {
-    if (messages.length === 0 && open) {
+    if (userThreadQuery.data?.threadId) {
+      setThreadId(userThreadQuery.data.threadId);
+    }
+  }, [userThreadQuery.data]);
+
+  useEffect(() => {
+    if (messages?.length === 0 && open) {
       setMessages(messageQuery.data?.messages!);
     }
     setTimeout(() => {
       setReady(true);
     }, 1000);
-  }, [open, messageQuery.data?.messages, messages.length]);
+  }, [open, messageQuery.data?.messages, messages?.length]);
 
   return (
     <ChatContext.Provider
@@ -77,6 +84,7 @@ export const ChatProvider = ({ children }: ChatProviderProps) => {
         open,
         setOpen,
         assistantId,
+        setThreadId,
         threadId,
         messages,
         setMessages,
