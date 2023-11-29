@@ -25,6 +25,7 @@ const Chat = ({ className }: { className?: string }) => {
     assistantId,
     threadId,
     lesson,
+    setThreadId,
   } = useChatContext();
 
   const variants = {
@@ -37,7 +38,27 @@ const Chat = ({ className }: { className?: string }) => {
     setTimeout(() => setOpen(false), 300);
   };
 
+  const newThreadMutation = trpc.ai.newThread.useMutation({
+    onSuccess: ({ threadId }) => {
+      setThreadId(threadId);
+      setMessages([]);
+      fetchMessagesForNewThread(threadId);
+    },
+  });
+
+  const fetchMessagesForNewThread = (newThreadId: string) => {
+    const newMessageQuery = trpc.ai.getMessages.useQuery({
+      assistantId,
+      threadId: newThreadId,
+    });
+    setMessages(newMessageQuery.data?.messages || []);
+  };
+
   const chatContainerRef = useRef<HTMLDivElement>(null);
+
+  const handleNewThread = () => {
+    newThreadMutation.mutate();
+  };
 
   useEffect(() => {
     if (chatContainerRef.current) {
@@ -69,7 +90,11 @@ const Chat = ({ className }: { className?: string }) => {
 
   const handleSubmit = () => {
     setInput("");
-    setMessages((messages) => [...messages, { text: input, role: "user" }]);
+    if (messages?.length > 0) {
+      setMessages((messages) => [...messages, { text: input, role: "user" }]);
+    } else {
+      setMessages([{ text: input, role: "user" }]);
+    }
     setLoading(true);
     sendMessageMutation.mutate(
       { assistantId, threadId, text: input, lesson },
@@ -111,12 +136,24 @@ const Chat = ({ className }: { className?: string }) => {
             </Avatar>
             <p>Professor Quantum</p>
           </div>
-          <button
-            onClick={handleClose}
-            className="rounded-full border border-border bg-secondary p-2 transition-all hover:opacity-80"
-          >
-            <X className="h-4 w-4" />
-          </button>
+          <div className="flex flex-row gap-1">
+            {messages?.length > 0 && (
+              <Button
+                variant={"ghost"}
+                className="rounded-full"
+                onClick={handleNewThread}
+                disabled={loading}
+              >
+                Clear
+              </Button>
+            )}
+            <button
+              onClick={handleClose}
+              className="rounded-full border border-border bg-secondary p-2 transition-all hover:opacity-80"
+            >
+              <X className="h-4 w-4" />
+            </button>
+          </div>
         </div>
 
         <div
@@ -129,7 +166,7 @@ const Chat = ({ className }: { className?: string }) => {
               a lesson from it. Ready for a knowledge quest?
             </p>
           </div>
-          {messages.map((m, index) => (
+          {messages?.map((m, index) => (
             <div key={index}>
               {m.role === "user" ? (
                 <div className="flex justify-end ">
