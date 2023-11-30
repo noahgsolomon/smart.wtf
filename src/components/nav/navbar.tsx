@@ -1,7 +1,7 @@
 "use client";
 
 import ThemeButton from "./theme";
-import { buttonVariants } from "../ui/button";
+import { Button, buttonVariants } from "../ui/button";
 import { useAuth } from "@clerk/nextjs";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
@@ -10,6 +10,7 @@ import { usePathname } from "next/navigation";
 import UserButton from "./UserButton";
 import ChatButton from "../chatbutton";
 import { useChatContext } from "@/app/context/chat/ChatContext";
+import { BookMarked, StickyNote } from "lucide-react";
 
 const NavBar = () => {
   const { userId } = useAuth();
@@ -77,7 +78,7 @@ const NavBar = () => {
               }
             />
           )} */}
-          <div className="flex justify-between px-[5%] py-1">
+          <div className="flex items-center justify-between px-[5%] py-1">
             <div>
               <Link href={"/"}>
                 <SmartWtfLogo
@@ -88,6 +89,16 @@ const NavBar = () => {
                 />
               </Link>
             </div>
+            {/* <div className="flex flex-row gap-4">
+              <Button className="flex flex-row gap-1" variant={"link"}>
+                <StickyNote className="h-4 w-4" />
+                Notes
+              </Button>
+              <Button className="flex flex-row gap-1" variant={"link"}>
+                <BookMarked className={"h-4 w-4"} />
+                Courses
+              </Button>
+            </div> */}
             {/* {user && !user?.user?.subscribed && (
           <FreeTrialBanner
             className="hidden w-full md:flex"
