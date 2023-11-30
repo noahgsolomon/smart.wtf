@@ -9,6 +9,10 @@ import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 import { useChatContext } from "@/app/context/chat/ChatContext";
 import { trpc } from "@/trpc/client";
+import Markdown from "react-markdown";
+import Image from "next/image";
+import remarkGfm from "remark-gfm";
+import rehypeHighlight from "rehype-highlight";
 
 const Chat = ({ className }: { className?: string }) => {
   const [isVisible, setIsVisible] = useState(true);
@@ -120,7 +124,7 @@ const Chat = ({ className }: { className?: string }) => {
       variants={variants}
       transition={{ duration: 0.2, ease: "easeOut" }}
       className={cn(
-        "max-w-[400px] rounded-lg border border-border bg-card p-4",
+        "max-w-[400px] rounded-lg border border-border bg-card p-4 md:max-w-[500px]",
         className,
       )}
     >
@@ -158,7 +162,7 @@ const Chat = ({ className }: { className?: string }) => {
 
         <div
           ref={chatContainerRef}
-          className={`flex h-[300px] flex-col gap-2 overflow-y-auto py-4`}
+          className={`flex h-[300px] flex-col gap-2 overflow-y-auto py-4 md:h-[500px]`}
         >
           <div className="flex justify-start ">
             <p className="max-w-[60%] overflow-hidden rounded-lg border border-border bg-secondary px-2 py-1 text-sm ">
@@ -176,9 +180,42 @@ const Chat = ({ className }: { className?: string }) => {
                 </div>
               ) : (
                 <div className="flex justify-start ">
-                  <p className="max-w-[60%] overflow-hidden rounded-lg border border-border bg-secondary px-2 py-1 text-sm ">
-                    {m.text}
-                  </p>
+                  <div className="max-w-[75%] overflow-hidden rounded-lg border border-border bg-secondary px-2 py-1 text-sm ">
+                    <Markdown
+                      components={{
+                        code: ({ node, className, children, ...props }) => {
+                          const match = /language-(\w+)/.exec(className || "");
+                          return match ? (
+                            <div>
+                              <p className="code-language">{match[1]}</p>
+                              <pre className={className}>
+                                <code>{children}</code>
+                              </pre>
+                            </div>
+                          ) : (
+                            <code className={className} {...props}>
+                              {children}
+                            </code>
+                          );
+                        },
+                        img: ({ ...props }) => (
+                          <Image
+                            className="rounded-lg"
+                            src={props.src ?? ""}
+                            alt={props.alt ?? "smartwtf"}
+                            priority={true}
+                            layout="responsive"
+                            width={1792 / 4}
+                            height={1024 / 4}
+                          />
+                        ),
+                      }}
+                      remarkPlugins={[remarkGfm]}
+                      rehypePlugins={[rehypeHighlight]}
+                    >
+                      {m.text}
+                    </Markdown>
+                  </div>
                 </div>
               )}
               {index + 1 === messages.length && loading && (

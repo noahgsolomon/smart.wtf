@@ -343,3 +343,68 @@ h6 {
 .back {
   transform: rotateY(180deg);
 }
+
+/* General styling for the code block */
+.hljs {
+  @apply font-mono
+}
+
+pre {
+  @apply overflow-x-auto bg-card p-2 rounded-lg border border-border
+}
+
+.code-language {
+  font-weight: bold;
+  color: #555;
+  background-color: #eee;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.9em;
+  margin-bottom: 5px;
+  display: inline-block;
+}
+
+/* Keyword styling (like def, if, else, return) */
+.hljs-keyword {
+  color: #a626a4;
+  /* Purple */
+  font-weight: bold;
+}
+
+/* Function names */
+.hljs-title.function_ {
+  color: #e45649;
+  /* Reddish */
+}
+
+/* Parameters and variables */
+.hljs-params {
+  color: #50a14f;
+  /* Green */
+}
+
+/* Number styling */
+.hljs-number {
+  color: #986801;
+  /* Brown */
+}
+
+/* Comments */
+.hljs-comment {
+  color: #a0a1a7;
+  /* Light gray */
+  font-style: italic;
+}
+
+/* Built-in functions and strings */
+.hljs-built_in,
+.hljs-string {
+  color: #0184bb;
+  /* Blue */
+}
+
+/* Substitutions in strings */
+.hljs-subst {
+  color: #c18401;
+  /* Orange */
+}
