@@ -183,8 +183,8 @@ const Chat = ({ className }: { className?: string }) => {
                   <div className="max-w-[75%] overflow-hidden rounded-lg border border-border bg-secondary px-2 py-1 text-sm ">
                     <Markdown
                       components={{
-                        code: ({ node, className, children, ...props }) => {
-                          const match = /language-(\w+)/.exec(className || "");
+                        code: ({ className, children, ...props }) => {
+                          const match = /language-(\w+)/.exec(className ?? "");
                           return match ? (
                             <div>
                               <p className="code-language">{match[1]}</p>
