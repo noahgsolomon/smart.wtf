@@ -16,6 +16,7 @@ x
 /out/
 .next/
 
+
 # production
 /build
 
@@ -39,3 +40,5 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 src/env.mjs
+
+some.mjs

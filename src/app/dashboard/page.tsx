@@ -4,13 +4,14 @@ import { Suspense } from "react";
 import { CourseSkeleton } from "./components/courses/courseskeleton";
 import LatestActivity from "./components/latestactivity";
 import Streak from "./components/streak";
+import Notes from "./components/notes/notes";
 
 const Dashboard = async () => {
   const user = (await api.user.user.query()).user;
 
   return (
     <>
-      <main className="mx-5 mt-20 md:mx-20 lg:mx-36">
+      <main className="mx-5 mt-20 md:mx-10 lg:mx-36">
         <section className="py-10">
           <div className="flex flex-col justify-between gap-8">
             <div className="flex flex-row items-center gap-2">
@@ -56,6 +57,13 @@ const Dashboard = async () => {
           <div className="flex flex-col gap-12">
             <Suspense fallback={<CourseSkeleton />}>
               <Courses />
+            </Suspense>
+          </div>
+        </section>
+        <section className="py-10">
+          <div className="flex flex-col gap-12">
+            <Suspense fallback={<CourseSkeleton />}>
+              <Notes />
             </Suspense>
           </div>
         </section>
