@@ -1,6 +1,6 @@
 import NotesCard from "./notescard";
 
-const Notes = async () => {
+const Notes = () => {
   return (
     <div>
       <h1>Notes</h1>

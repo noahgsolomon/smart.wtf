@@ -1,12 +1,12 @@
 import { Badge } from "@/components/ui/badge";
 import Image from "next/image";
 import Link from "next/link";
-import { NoteCategories } from "@/types";
+import { type NoteCategories } from "@/types";
 import something from "public/something.png";
 import { CalculatorIcon, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-const NotesCard = async ({
+const NotesCard = ({
   note,
 }: {
   note: {

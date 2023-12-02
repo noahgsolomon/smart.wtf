@@ -1,7 +1,7 @@
 "use client";
 
 import ThemeButton from "./theme";
-import { Button, buttonVariants } from "../ui/button";
+import { buttonVariants } from "../ui/button";
 import { useAuth } from "@clerk/nextjs";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
@@ -10,7 +10,6 @@ import { usePathname } from "next/navigation";
 import UserButton from "./UserButton";
 import ChatButton from "../chatbutton";
 import { useChatContext } from "@/app/context/chat/ChatContext";
-import { BookMarked, StickyNote } from "lucide-react";
 
 const NavBar = () => {
   const { userId } = useAuth();
