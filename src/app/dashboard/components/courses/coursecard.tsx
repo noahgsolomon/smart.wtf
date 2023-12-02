@@ -67,8 +67,8 @@ const CourseCard = async ({
             <div className="flex flex-col justify-between gap-2">
               <h2 className="text-2xl">{course.name}</h2>
               <div className="flex">
-                <div className="flex flex-row items-center gap-1 rounded-lg bg-secondary p-1 text-xs font-bold text-opacity-60">
-                  <Suspense fallback={<div></div>}>
+                <Suspense fallback={<div></div>}>
+                  <Badge className="flex flex-row gap-2" variant={"secondary"}>
                     <Circle
                       className={cn(
                         "h-2 w-2 text-secondary",
@@ -79,11 +79,9 @@ const CourseCard = async ({
                         }`,
                       )}
                     />
-                    <p>
-                      {isStarted.isCourseStarted ? "STARTED" : "NOT STARTED"}
-                    </p>
-                  </Suspense>
-                </div>
+                    {isStarted.isCourseStarted ? "STARTED" : "NOT STARTED"}
+                  </Badge>
+                </Suspense>
               </div>
             </div>
             <div className="max-w-[35ch] text-xs opacity-60">
