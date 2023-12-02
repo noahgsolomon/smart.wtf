@@ -17,6 +17,30 @@ export type Message = {
   text: string;
 };
 
+export type NoteCategories =
+  | "ENGLISH"
+  | "MATH"
+  | "SCIENCE"
+  | "HISTORY"
+  | "ARTS"
+  | "MUSIC"
+  | "LITERATURE"
+  | "PHILOSOPHY"
+  | "GEOGRAPHY"
+  | "SOCIAL STUDIES"
+  | "PHYSICAL EDUCATION"
+  | "COMPUTER SCIENCE"
+  | "ECONOMICS"
+  | "BUSINESS STUDIES"
+  | "PSYCHOLOGY"
+  | "LAW"
+  | "POLITICAL SCIENCE"
+  | "ENVIRONMENTAL SCIENCE"
+  | "ENGINEERING"
+  | "MEDICINE"
+  | "AGRICULTURE"
+  | "ASTRONOMY";
+
 export type Section = {
   id: number;
   name: string;
