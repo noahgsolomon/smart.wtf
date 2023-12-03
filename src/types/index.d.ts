@@ -17,6 +17,25 @@ export type Message = {
   text: string;
 };
 
+export type Note = {
+  id: number;
+  description: string | null;
+  user_id: number;
+  imageUrl: string | null;
+  markdown: string;
+  agents_markdown: string;
+  title: string;
+  category: string;
+  agent_id: number;
+  minutes: number;
+  agents: {
+    id: number;
+    name: string;
+    assistantId: string;
+    pfp: string;
+  };
+};
+
 export type NoteCategories =
   | "ENGLISH"
   | "MATH"
