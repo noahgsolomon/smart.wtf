@@ -11,8 +11,6 @@ export const notesRouter = createTRPCRouter({
       },
     });
 
-    console.log("NOTESSSSSSEIUEWNuiewnfuiewfuweniu ", notesFetch);
-
     return { notes: notesFetch };
   }),
 });
