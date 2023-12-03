@@ -7,7 +7,13 @@
 const nextConfig = {
   pageExtensions: ["js", "jsx", "mdx", "ts", "tsx"],
   images: {
-    domains: ["img.icons8.con", "img.clerk.com", "images.codefoli.com"],
+    domains: [
+      "img.icons8.con",
+      "img.clerk.com",
+      "images.codefoli.com",
+      "oaidalleapiprodscus.blob.core.windows.net",
+      "images.smart.wtf",
+    ],
   },
 };
 
