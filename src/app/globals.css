@@ -408,3 +408,7 @@ pre {
   color: #c18401;
   /* Orange */
 }
+
+.katex-html {
+  @apply hidden
+}
