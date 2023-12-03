@@ -232,7 +232,7 @@ const Chat = ({ className }: { className?: string }) => {
               className="focus:ring-lighBlue rounded-full pl-3 pr-10 shadow-none transition-all focus:outline-none focus:ring-1" // Adjust padding to make space for the button
               value={input}
               onKeyDown={(e) => {
-                if (e.key === "Enter") {
+                if (e.key === "Enter" && input.length > 0 && !loading) {
                   handleSubmit();
                 }
               }}
@@ -240,7 +240,7 @@ const Chat = ({ className }: { className?: string }) => {
               placeholder="enter message here..."
             />
             <Button
-              disabled={input.length === 0}
+              disabled={input.length === 0 || loading}
               type="button"
               onClick={handleSubmit}
               className={`${
