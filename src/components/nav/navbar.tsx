@@ -49,7 +49,7 @@ const NavBar = () => {
 
   return (
     <>
-      {!path.startsWith("/lesson") ? (
+      {!path.startsWith("/lesson") && !path.startsWith("/notes") ? (
         <header className="border-sm fixed left-0 right-0 top-0 z-20 border-b border-border bg-card shadow-sm">
           {/* <div
             className={
