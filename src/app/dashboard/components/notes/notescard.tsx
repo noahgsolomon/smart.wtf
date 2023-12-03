@@ -13,7 +13,7 @@ type SingleNoteType = NotesApiResponse["notes"][number];
 const NotesCard = ({ note }: { note: SingleNoteType }) => {
   return (
     <div className="relative">
-      <Link href={"#"}>
+      <Link href={`/notes/${note.id}`}>
         <div className="group cursor-pointer overflow-hidden rounded-lg border border-border bg-card transition-all hover:scale-[101%] active:scale-[99%]">
           <div className="relative overflow-hidden border-b border-border">
             <Image
@@ -51,9 +51,6 @@ const NotesCard = ({ note }: { note: SingleNoteType }) => {
                   </div>
                 </Badge>
               </div>
-            </div>
-            <div className="max-w-[35ch] text-xs opacity-60">
-              {note.description}
             </div>
           </div>
         </div>
