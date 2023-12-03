@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import NotesHeading from "../components/notesheading";
 import { useNoteContext } from "../context/notescontext";
 import { trpc } from "@/trpc/client";
-import { Note } from "@/types";
+import { type Note } from "@/types";
 import Image from "next/image";
 
 type UserNote = {
@@ -21,7 +21,7 @@ export default function Page({ params }: { params: { noteId: string } }) {
   });
   const retrieveUserNotesQuery = trpc.notes.getUserNotesMeta.useQuery();
 
-  const { openNotes, setOpenNotes, setUserNotes, userNotes } = useNoteContext();
+  const { openNotes, setOpenNotes, setUserNotes } = useNoteContext();
   const [note, setNote] = useState<Note | null>(null);
 
   console.log(openNotes);
@@ -44,6 +44,7 @@ export default function Page({ params }: { params: { noteId: string } }) {
       }
     }
   }, [
+    setOpenNotes,
     retrieveNoteQuery.data,
     retrieveNoteQuery.isSuccess,
     params.noteId,
@@ -61,7 +62,11 @@ export default function Page({ params }: { params: { noteId: string } }) {
         })),
       );
     }
-  }, [retrieveUserNotesQuery.data, retrieveUserNotesQuery.isSuccess]);
+  }, [
+    retrieveUserNotesQuery.data,
+    retrieveUserNotesQuery.isSuccess,
+    setUserNotes,
+  ]);
 
   return (
     <>

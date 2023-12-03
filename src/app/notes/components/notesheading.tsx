@@ -21,7 +21,7 @@ export default function NotesHeading({
 }: {
   currentNote: { id: number };
 }) {
-  const { openNotes, setOpenNotes, setUserNotes, userNotes } = useNoteContext();
+  const { openNotes, setOpenNotes, userNotes } = useNoteContext();
   const router = useRouter();
 
   return (
@@ -73,6 +73,7 @@ export default function NotesHeading({
           <div className="flex flex-row items-center gap-2">
             {openNotes.map((note) => (
               <Button
+                key={note.id}
                 variant={note.id === currentNote.id ? "secondary" : "ghost"}
                 className="group flex flex-row justify-between gap-2"
                 onClick={() => {
