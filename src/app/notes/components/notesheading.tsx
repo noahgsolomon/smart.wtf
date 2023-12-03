@@ -70,38 +70,70 @@ export default function NotesHeading({
               )}
             </DropdownMenuContent>
           </DropdownMenu>
-          <div className="flex flex-row items-center gap-2">
-            {openNotes.map((note) => (
-              <Button
-                key={note.id}
-                variant={note.id === currentNote.id ? "secondary" : "ghost"}
-                className="group flex flex-row justify-between gap-2"
-                onClick={() => {
-                  router.push(`/notes/${note.id}`);
-                }}
-              >
-                <Image
-                  src={note.pfp}
-                  alt={note.pfp}
-                  width={24}
-                  height={24}
-                  className="rounded-full border border-border bg-secondary/90"
-                />
-                <p className="font-bold">{note.title}</p>
-                {openNotes.length > 1 && note.id !== currentNote.id && (
-                  <div
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setOpenNotes(
-                        openNotes.filter((openNote) => openNote.id !== note.id),
-                      );
+          <div className="flex flex-row items-center gap-1">
+            {openNotes.map((note, index) => (
+              <Fragment key={note.id}>
+                {openNotes.length > 1 && note.id !== currentNote.id ? (
+                  <Button
+                    key={note.id}
+                    variant={note.id === currentNote.id ? "secondary" : "ghost"}
+                    className="group flex flex-row justify-between gap-2 border border-border"
+                    onClick={() => {
+                      router.push(`/notes/${note.id}`);
                     }}
-                    className="z-10"
                   >
-                    <X className="h-4 w-4 text-primary opacity-0 transition-all hover:text-destructive group-hover:opacity-100" />
-                  </div>
+                    <Image
+                      src={note.pfp}
+                      alt={note.pfp}
+                      width={24}
+                      height={24}
+                      className="rounded-full border border-border bg-secondary/90"
+                    />
+                    <p className="hidden font-bold sm:block">{note.title}</p>
+                    <div
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setOpenNotes(
+                          openNotes.filter(
+                            (openNote) => openNote.id !== note.id,
+                          ),
+                        );
+                      }}
+                      className="z-10"
+                    >
+                      <X className="h-4 w-4 text-primary transition-all hover:text-destructive group-hover:opacity-100 sm:opacity-0" />
+                    </div>
+                  </Button>
+                ) : (
+                  <>
+                    {index < 5 ? (
+                      <Button
+                        key={note.id}
+                        variant={
+                          note.id === currentNote.id ? "secondary" : "ghost"
+                        }
+                        className="group flex flex-row justify-between gap-2"
+                        onClick={() => {
+                          router.push(`/notes/${note.id}`);
+                        }}
+                      >
+                        <Image
+                          src={note.pfp}
+                          alt={note.pfp}
+                          width={24}
+                          height={24}
+                          className="rounded-full border border-border bg-secondary/90"
+                        />
+                        <p className="hidden font-bold sm:block">
+                          {note.title}
+                        </p>
+                      </Button>
+                    ) : (
+                      <></>
+                    )}
+                  </>
                 )}
-              </Button>
+              </Fragment>
             ))}
           </div>
         </div>
