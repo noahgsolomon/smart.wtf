@@ -6,6 +6,16 @@ import { useNoteContext } from "../context/notescontext";
 import { trpc } from "@/trpc/client";
 import { type Note } from "@/types";
 import Image from "next/image";
+import { Clock } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import Markdown from "react-markdown";
+import remarkMath from "remark-math";
+import rehypeHighlight from "rehype-highlight";
+import remarkGfm from "remark-gfm";
+import rehypeKatex from "rehype-katex";
+import slug from "rehype-slug";
+import rehypeAutolinkHeadings from "rehype-autolink-headings";
 
 type UserNote = {
   id: number;
@@ -23,6 +33,7 @@ export default function Page({ params }: { params: { noteId: string } }) {
 
   const { openNotes, setOpenNotes, setUserNotes } = useNoteContext();
   const [note, setNote] = useState<Note | null>(null);
+  const [readingMode, setReadingMode] = useState<"normal" | "agent">("normal");
 
   console.log(openNotes);
 
@@ -82,14 +93,39 @@ export default function Page({ params }: { params: { noteId: string } }) {
           />
         </div>
         <div className="flex justify-center px-0 pb-4 pt-8 md:px-4">
-          <div className="prose prose-slate relative px-8 py-2 pb-24 dark:prose-invert">
-            <div>
-              <h1>{note?.title}</h1>
-              <p className="text-xs opacity-60">
-                {note?.minutes} min read • {note?.category}
-              </p>
+          <div className="relative px-8 py-2 pb-24">
+            <div className="flex flex-col gap-2">
+              <h1 className="text-5xl">{note?.title}</h1>
+              <div className="flex flex-row gap-2">
+                <p className="flex flex-row items-center gap-1 text-sm opacity-60">
+                  <Clock className="h-3 w-3" />
+                  {note?.minutes} min read
+                </p>
+                {/*@ts-ignore*/}
+                <Badge variant={note?.category.toLowerCase()}>
+                  {note?.category}
+                </Badge>
+              </div>
+              <div className="flex">
+                <div className="flex flex-row overflow-hidden rounded-lg border border-border">
+                  <Button
+                    className="rounded-br-none rounded-tr-none"
+                    onClick={() => setReadingMode("normal")}
+                    variant={readingMode === "normal" ? "default" : "ghost"}
+                  >
+                    Normal
+                  </Button>
+                  <Button
+                    onClick={() => setReadingMode("agent")}
+                    className="rounded-bl-none rounded-tl-none"
+                    variant={readingMode === "agent" ? "default" : "ghost"}
+                  >
+                    {note?.agents.name}
+                  </Button>
+                </div>
+              </div>
             </div>
-            <div className="absolute -top-[125px] left-0">
+            <div className="absolute -top-[125px] left-8 ">
               <Image
                 src={note?.agents.pfp!}
                 alt="agent"
@@ -97,6 +133,41 @@ export default function Page({ params }: { params: { noteId: string } }) {
                 height={100}
                 className="rounded-full border border-border bg-secondary/90"
               />
+            </div>
+            <div className="prose prose-slate pt-12 dark:prose-invert">
+              <Markdown
+                components={{
+                  img: ({ ...props }) => (
+                    <Image
+                      className="rounded-lg"
+                      src={
+                        props.src ?? "https://images.codefoli.com/smartwtf.png"
+                      }
+                      alt={props.alt ?? "smartwtf"}
+                      priority={true}
+                      layout="responsive"
+                      width={1792}
+                      height={1024}
+                    />
+                  ),
+                }}
+                remarkPlugins={[remarkGfm, remarkMath]}
+                rehypePlugins={[
+                  rehypeKatex,
+                  slug,
+                  [
+                    rehypeAutolinkHeadings,
+                    {
+                      behavior: "wrap",
+                    },
+                  ],
+                  rehypeHighlight,
+                ]}
+              >
+                {readingMode === "normal"
+                  ? note?.markdown
+                  : note?.agents_markdown}
+              </Markdown>
             </div>
           </div>
         </div>
