@@ -9,6 +9,7 @@ export const notes = mysqlTable(
     id: int("id").primaryKey().autoincrement(),
     user_id: int("user_id").notNull(),
     markdown: text("markdown").notNull(),
+    agents_markdown: text("agents_markdown").notNull(),
     title: varchar("title", { length: 100 }).notNull(),
     category: varchar("category", { length: 100 }).notNull(),
     imageUrl: varchar("image_url", { length: 1000 }),
