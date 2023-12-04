@@ -3,7 +3,10 @@
  * for Docker builds.
  */
 /** @type {import("next").NextConfig} */
-const withPWA = require("next-pwa")({ dest: "public" });
+const withPWA = require("next-pwa")({
+  dest: "public",
+  disable: process.env.NODE_ENV !== "PROD",
+});
 
 const nextConfig = {
   pageExtensions: ["js", "jsx", "mdx", "ts", "tsx"],

@@ -124,7 +124,7 @@ const Chat = ({ className }: { className?: string }) => {
       variants={variants}
       transition={{ duration: 0.2, ease: "easeOut" }}
       className={cn(
-        "max-w-[400px] rounded-lg border border-border bg-card p-4 md:max-w-[500px]",
+        "max-w-[300px] rounded-lg border border-border bg-card p-4 sm:max-w-[400px] md:max-w-[500px]",
         className,
       )}
     >

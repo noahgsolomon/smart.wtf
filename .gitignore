@@ -20,6 +20,11 @@ x
 # production
 /build
 
+/public/sw.*
+/public/sw.js.map
+/public/workbox-*.js
+
+
 # misc
 .DS_Store
 *.pem
@@ -42,3 +47,4 @@ next-env.d.ts
 src/env.mjs
 
 some.mjs
+public/workbox-e34f44db.js.map
