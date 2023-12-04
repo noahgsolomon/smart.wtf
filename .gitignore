@@ -9,7 +9,7 @@ package-lock.json
 # testing
 /coverage
 query.sql
-x
+
 /src/env.mjs 
 # next.js
 /.next/
@@ -21,6 +21,7 @@ x
 /build
 
 /public/sw.*
+/public/sw.js
 /public/sw.js.map
 /public/workbox-*.js
 
@@ -48,3 +49,4 @@ src/env.mjs
 
 some.mjs
 public/workbox-e34f44db.js.map
+public/sw.js
