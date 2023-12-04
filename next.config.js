@@ -10,6 +10,12 @@ const withPWA = require("next-pwa")({
 
 const nextConfig = {
   pageExtensions: ["js", "jsx", "mdx", "ts", "tsx"],
+  remotePatterns: [
+    {
+      protocol: "https",
+      hostname: "**",
+    },
+  ],
   images: {
     domains: [
       "img.icons8.con",

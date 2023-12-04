@@ -6,7 +6,7 @@ import { useNoteContext } from "../context/notescontext";
 import { trpc } from "@/trpc/client";
 import { type Note } from "@/types";
 import Image from "next/image";
-import { Clock } from "lucide-react";
+import { ArrowRight, ArrowRightCircle, Clock, PlusCircle } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import Markdown from "react-markdown";
@@ -155,22 +155,6 @@ export default function Page({ params }: { params: { noteId: string } }) {
                 </div>
                 <div className="prose prose-slate pt-12 dark:prose-invert">
                   <Markdown
-                    components={{
-                      img: ({ ...props }) => (
-                        <Image
-                          className="rounded-lg"
-                          src={
-                            props.src ??
-                            "https://images.codefoli.com/smartwtf.png"
-                          }
-                          alt={props.alt ?? "smartwtf"}
-                          priority={true}
-                          layout="responsive"
-                          width={1792}
-                          height={1024}
-                        />
-                      ),
-                    }}
                     remarkPlugins={[remarkGfm, remarkMath]}
                     rehypePlugins={[
                       rehypeKatex,
@@ -188,6 +172,17 @@ export default function Page({ params }: { params: { noteId: string } }) {
                       ? note?.markdown
                       : note?.agents_markdown}
                   </Markdown>
+                </div>
+                <div className="flex flex-row items-center gap-2 pt-8">
+                  <Button className="flex flex-row gap-1" variant={"outline"}>
+                    Generate More
+                    <PlusCircle className="h-4 w-4" />
+                  </Button>
+                  <p>or</p>
+                  <Button variant={"secondary"} className="flex flex-row gap-1">
+                    Create Note: Gradient Vectors
+                    <ArrowRightCircle className="h-4 w-4" />
+                  </Button>
                 </div>
               </div>
             </div>
