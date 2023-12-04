@@ -11,6 +11,7 @@ import { ChatProvider } from "./context/chat/ChatContext";
 
 export const metadata: Metadata = {
   appleWebApp: true,
+  manifest: "/manifest.json",
   icons: ["https://images.codefoli.com/wtfcoin.png"],
   openGraph: {
     url: "https://smart.wtf",
