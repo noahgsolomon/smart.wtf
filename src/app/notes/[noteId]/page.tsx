@@ -7,13 +7,7 @@ import { trpc } from "@/trpc/client";
 import { type Note } from "@/types";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
-import {
-  ArrowRightCircle,
-  Clock,
-  Info,
-  Loader2,
-  PlusCircle,
-} from "lucide-react";
+import { Clock, Info, Loader2 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import Markdown from "react-markdown";
@@ -24,6 +18,7 @@ import rehypeKatex from "rehype-katex";
 import slug from "rehype-slug";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import { AnimatePresence, motion } from "framer-motion";
+import { DropdownMenuArrow } from "@radix-ui/react-dropdown-menu";
 
 type UserNote = {
   id: number;
@@ -312,23 +307,20 @@ export default function Page({ params }: { params: { noteId: string } }) {
                       : note?.agents_markdown}
                   </Markdown>
                 </div>
-                <div className="flex flex-row items-center gap-2 pt-8">
-                  <Button
-                    className="flex flex-row gap-1 py-5"
-                    variant={"outline"}
-                  >
-                    Generate More
-                    <PlusCircle className="h-4 w-4" />
-                  </Button>
-                  <p>or</p>
-                  <Button
-                    variant={"secondary"}
-                    className="flex flex-row gap-1  py-5"
-                  >
-                    Create Note: Gradient Vectors
-                    <ArrowRightCircle className="h-4 w-4" />
-                  </Button>
-                </div>
+                {!regenerating && (
+                  <div className="flex flex-row items-center gap-2 pt-8">
+                    <Button className="flex flex-row gap-1 py-5">
+                      Continue
+                    </Button>
+                    <p>or</p>
+                    <Button
+                      variant={"secondary"}
+                      className="flex flex-row gap-1  py-5"
+                    >
+                      Move on to Gradient Vectors
+                    </Button>
+                  </div>
+                )}
               </div>
             </div>
           </div>
