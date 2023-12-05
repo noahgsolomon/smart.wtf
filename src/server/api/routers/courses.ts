@@ -458,15 +458,12 @@ export const courseRouter = createTRPCRouter({
       let firstCommitToday = false;
       let streakCount = 0;
 
-      console.log("streakDb", JSON.stringify(streakDb, null, 2));
-
       if (!streakDb) {
         const year = currentDate.getUTCFullYear();
         const month = currentDate.getUTCMonth();
         const day = currentDate.getUTCDate();
         const prevDateOnly = new Date(Date.UTC(year, month, day));
         prevDateOnly.setDate(prevDateOnly.getDate() - 1);
-        console.log("prevDateOnly", prevDateOnly);
         firstCommitToday = true;
         const prevStreakDb = await ctx.db.query.streak.findFirst({
           where: and(
@@ -474,7 +471,6 @@ export const courseRouter = createTRPCRouter({
             eq(streak.date, prevDateOnly),
           ),
         });
-        console.log("prevStreakDb", JSON.stringify(prevStreakDb, null, 2));
         if (prevStreakDb) {
           await ctx.db.insert(streak).values({
             userId: ctx.user_id,
@@ -486,7 +482,6 @@ export const courseRouter = createTRPCRouter({
           });
           streakCount = prevStreakDb.count + 1;
         } else {
-          console.log("inserting new streak 1 day");
           await ctx.db.insert(streak).values({
             userId: ctx.user_id,
             date: currentDate,
@@ -498,7 +493,6 @@ export const courseRouter = createTRPCRouter({
           streakCount = 1;
         }
       } else {
-        console.log("updating count for today");
         streakCount = streakDb.count;
         await ctx.db
           .update(streak)
@@ -570,8 +564,6 @@ export const courseRouter = createTRPCRouter({
                 },
               },
             });
-
-          console.log(JSON.stringify(nextSection, null, 2));
 
           if (nextSection) {
             if (!nextSection.implemented) {
