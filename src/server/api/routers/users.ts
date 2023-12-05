@@ -34,8 +34,6 @@ export const userRouter = createTRPCRouter({
       },
     });
 
-    console.log(JSON.stringify(streakDb, null, 2));
-
     return { streak: streakDb };
   }),
   currentStreak: protectedProcedure.query(async ({ ctx }) => {
@@ -90,7 +88,6 @@ export const userRouter = createTRPCRouter({
 
   // Query to retrieve the current user's details
   user: protectedProcedure.query(async ({ ctx }) => {
-    console.log("right before error");
     const user = await ctx.db.query.users.findFirst({
       where: eq(users.id, ctx.user_id),
     });

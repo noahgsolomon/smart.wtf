@@ -62,8 +62,6 @@ export const aiRouter = createTRPCRouter({
 
       const messages: Message[] = [];
 
-      console.log(thread);
-
       for (const message of thread.data) {
         messages.push({
           role: message.role,
@@ -102,25 +100,15 @@ export const aiRouter = createTRPCRouter({
         await new Promise((resolve) => setTimeout(resolve, 1000));
 
         run = await client.beta.threads.runs.retrieve(input.threadId, run.id);
-        console.log(run);
         if (run.status === "requires_action") {
-          console.log("Run requires action:", run);
-
           if (run.required_action?.type === "submit_tool_outputs") {
-            console.log(
-              "Required action is submit_tool_outputs:",
-              run.required_action,
-            );
-
             const functionName =
               run.required_action.submit_tool_outputs.tool_calls[0]?.function
                 .name;
-            console.log("Function name of the first tool call:", functionName);
 
             if (functionName === "get_lesson") {
               const toolCallId =
                 run.required_action.submit_tool_outputs.tool_calls[0]?.id;
-              console.log("Tool Call ID:", toolCallId);
 
               const tool_outputs = [
                 {
@@ -128,10 +116,6 @@ export const aiRouter = createTRPCRouter({
                   output: input.lesson,
                 },
               ];
-              console.log(
-                "Prepared tool_outputs for submission:",
-                tool_outputs,
-              );
 
               try {
                 await client.beta.threads.runs.submitToolOutputs(
@@ -139,21 +123,9 @@ export const aiRouter = createTRPCRouter({
                   run.id,
                   { tool_outputs },
                 );
-                console.log("Tool outputs submitted successfully");
-              } catch (error) {
-                console.error("Error submitting tool outputs:", error);
-              }
-            } else {
-              console.log("Function name does not match 'get_lesson'");
+              } catch (error) {}
             }
-          } else {
-            console.log(
-              "Run required action type is not 'submit_tool_outputs'",
-              run.required_action?.type,
-            );
           }
-        } else {
-          console.log("Run status is not 'requires_action'", run.status);
         }
       }
 

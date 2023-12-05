@@ -8,10 +8,10 @@ import { type Note } from "@/types";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 import {
-  ArrowRight,
   ArrowRightCircle,
   Clock,
   Info,
+  Loader2,
   PlusCircle,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
@@ -37,18 +37,32 @@ export default function Page({ params }: { params: { noteId: string } }) {
   const retrieveNoteQuery = trpc.notes.getNote.useQuery({
     id: parseInt(params.noteId),
   });
+
+  const updateImagesMutation = trpc.notes.updateImages.useMutation({
+    onSuccess: ({ markdown }) => {
+      setMarkdown(markdown);
+    },
+  });
+
+  const [, setFinishedImages] = useState<string[]>([]);
+
+  const [regenerating, setRegenerating] = useState(false);
+
+  const updateNoteMutation = trpc.notes.updateNote.useMutation();
+
   const retrieveUserNotesQuery = trpc.notes.getUserNotesMeta.useQuery();
 
   const { openNotes, setOpenNotes, setUserNotes } = useNoteContext();
   const [note, setNote] = useState<Note | null>(null);
   const [readingMode, setReadingMode] = useState<"normal" | "agent">("normal");
 
-  console.log(openNotes);
+  const [markdown, setMarkdown] = useState("");
 
   useEffect(() => {
     const note = retrieveNoteQuery.data?.note;
     if (note) {
       setNote(note);
+      setMarkdown(note.markdown);
 
       const noteId = parseInt(params.noteId);
       if (!openNotes.some((openNote) => openNote.id === noteId)) {
@@ -95,6 +109,68 @@ export default function Page({ params }: { params: { noteId: string } }) {
     initial: { opacity: 0 },
     animate: { opacity: 1, transition: { duration: 0.3 } },
     exit: { opacity: 0, transition: { duration: 0.3 } },
+  };
+
+  const handleRegenerate = async () => {
+    setRegenerating(true);
+    let accumulatedMarkdown = "";
+    setFinishedImages([]);
+    setMarkdown("");
+    const accumulatedImages: string[] = [];
+
+    await fetch("/api/ai/regenerate", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ id: note?.id, title: note?.title }),
+    }).then(async (res: any) => {
+      const reader = res.body?.getReader();
+
+      while (true) {
+        const { done, value } = await reader?.read();
+
+        if (done) {
+          updateNoteMutation.mutate({
+            id: note?.id!,
+            markdown: accumulatedMarkdown,
+          });
+          break;
+        }
+
+        const decoded = new TextDecoder("utf-8").decode(value);
+
+        setMarkdown((prev) => prev + decoded);
+        accumulatedMarkdown += decoded;
+
+        const images = (accumulatedMarkdown.match(/image-\d-asset/g) ?? [])
+          .map((asset: string) => {
+            // Match the search query text in square brackets immediately before the asset placeholder
+            const regex = new RegExp(`\\!\\[(.*?)\\]\\(${asset}\\)`, "g");
+            const match = regex.exec(accumulatedMarkdown);
+            if (match && match[1] && !accumulatedImages.includes(asset)) {
+              setFinishedImages((prev) => [...prev, asset]);
+              accumulatedImages.push(asset);
+              const searchQuery = match[1]; // Use the captured group which contains the search query
+              return { asset, searchQuery };
+            }
+            return null;
+          })
+          .filter((item) => item !== null) as {
+          asset: string;
+          searchQuery: string;
+        }[];
+
+        if (images.length > 0) {
+          console.log(images);
+          updateImagesMutation.mutate({
+            images: images,
+            markdown: accumulatedMarkdown,
+          });
+        }
+      }
+      setRegenerating(false);
+    });
   };
 
   return (
@@ -161,17 +237,33 @@ export default function Page({ params }: { params: { noteId: string } }) {
                     </div>
                   </div>
                   <div className="flex flex-row items-center gap-1 text-sm text-primary/50">
-                    <Info className="h-3 w-3 " />
-                    <p>
-                      note: we're not always right, click{" "}
-                      <Button
-                        variant={"link"}
-                        className="text-primay/80 m-0 p-0 font-bold"
-                      >
-                        here
-                      </Button>{" "}
-                      to regenerate
-                    </p>
+                    {regenerating ? (
+                      <div className="flex flex-col gap-2">
+                        <div className="flex flex-row items-center gap-1">
+                          <Loader2 className="h-4 w-4 animate-spin" />
+                          Regenerating...
+                        </div>
+                        <p>
+                          This should take a few minutes. Please stay on this
+                          screen.
+                        </p>
+                      </div>
+                    ) : (
+                      <>
+                        <Info className="h-3 w-3 " />
+                        <p>
+                          note: we're not always right, click{" "}
+                          <Button
+                            variant={"link"}
+                            className="text-primay/80 m-0 p-0 font-bold"
+                            onClick={handleRegenerate}
+                          >
+                            here
+                          </Button>{" "}
+                          to regenerate
+                        </p>
+                      </>
+                    )}
                   </div>
                 </div>
                 <div className="absolute -top-[125px] left-8 ">
@@ -216,7 +308,7 @@ export default function Page({ params }: { params: { noteId: string } }) {
                     ]}
                   >
                     {readingMode === "normal"
-                      ? note?.markdown
+                      ? markdown
                       : note?.agents_markdown}
                   </Markdown>
                 </div>
