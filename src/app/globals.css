@@ -346,67 +346,89 @@ h6 {
 
 /* General styling for the code block */
 .hljs {
-  @apply font-mono
+  @apply overflow-x-auto font-mono !important
 }
 
 pre {
-  @apply overflow-x-auto bg-card p-2 rounded-lg border border-border
+  @apply max-w-full overflow-x-auto bg-card p-2 rounded-lg border border-border !important;
+}
+
+code {
+  @apply whitespace-pre-wrap text-primary !important;
+  /* This will wrap the text inside the code block */
+}
+
+.katex-mathml {
+  @apply text-xl
+}
+
+annotation {
+  @apply text-xl
+}
+
+mi {
+  @apply text-xl
+}
+
+.katex {
+  @apply text-xl
 }
 
 .code-language {
-  font-weight: bold;
-  color: #555;
-  background-color: #eee;
-  padding: 2px 6px;
-  border-radius: 4px;
-  font-size: 0.9em;
-  margin-bottom: 5px;
-  display: inline-block;
+  @apply font-bold text-[#555] bg-[#eee] px-2 py-1 rounded-lg text-sm mb-2 inline-block !important;
 }
 
 /* Keyword styling (like def, if, else, return) */
 .hljs-keyword {
-  color: #a626a4;
+  @apply text-[#a626a4] font-bold !important;
   /* Purple */
-  font-weight: bold;
 }
 
 /* Function names */
 .hljs-title.function_ {
-  color: #e45649;
+  @apply text-[#e45649] !important;
   /* Reddish */
 }
 
 /* Parameters and variables */
 .hljs-params {
-  color: #50a14f;
+  @apply text-[#50a14f] !important;
   /* Green */
 }
 
 /* Number styling */
 .hljs-number {
-  color: #986801;
+  @apply text-[#986801] !important;
   /* Brown */
 }
 
 /* Comments */
 .hljs-comment {
-  color: #a0a1a7;
+  @apply text-[#a0a1a7] italic !important;
   /* Light gray */
-  font-style: italic;
 }
 
 /* Built-in functions and strings */
 .hljs-built_in,
 .hljs-string {
-  color: #0184bb;
+  @apply text-[#0184bb] !important;
   /* Blue */
 }
 
 /* Substitutions in strings */
 .hljs-subst {
-  color: #c18401;
+  @apply text-[#c18401] !important;
   /* Orange */
+}
+
+.hljs-variable {
+  @apply text-[#4078f2] !important;
+  /* Blue */
+}
+
+.hljs-built_in {
+  @apply text-[#4cf240] !important;
+  /* Blue */
 }
 
 .katex-html {
