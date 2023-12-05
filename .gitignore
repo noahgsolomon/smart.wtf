@@ -48,5 +48,6 @@ next-env.d.ts
 src/env.mjs
 
 some.mjs
+imagegen.mjs
 public/workbox-e34f44db.js.map
 public/sw.js
