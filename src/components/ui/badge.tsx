@@ -47,7 +47,7 @@ const badgeVariants = cva(
         physicalEducation:
           "border-transparent bg-deep-purple-500 text-white shadow hover:bg-deep-purple-400",
         computerScience:
-          "border-transparent bg-light-blue-500 text-white shadow hover:bg-light-blue-400",
+          "border-transparent bg-lightBlue text-white shadow hover:bg-lightBlue",
         economics:
           "border-transparent bg-orange-500 text-white shadow hover:bg-orange-400",
         businessStudies:
