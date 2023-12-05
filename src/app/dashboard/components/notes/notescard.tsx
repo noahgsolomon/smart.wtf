@@ -12,9 +12,9 @@ type SingleNoteType = NotesApiResponse["notes"][number];
 
 const NotesCard = ({ note }: { note: SingleNoteType }) => {
   return (
-    <div className="relative">
+    <div className=" relative">
       <Link href={`/notes/${note.id}`}>
-        <div className="group cursor-pointer overflow-hidden rounded-lg border border-border bg-card transition-all hover:scale-[101%] active:scale-[99%]">
+        <div className=" group min-h-[450px] cursor-pointer overflow-hidden rounded-lg border border-border bg-card transition-all hover:scale-[101%] active:scale-[99%]">
           <div className="relative overflow-hidden border-b border-border">
             <Image
               width={50}
@@ -37,11 +37,21 @@ const NotesCard = ({ note }: { note: SingleNoteType }) => {
           <div className="flex min-h-[100px] flex-col justify-between gap-2 p-4">
             <div className="flex flex-col justify-between gap-2">
               <div className="flex flex-row items-center gap-2">
-                <h2 className="text-2xl">{note.title}</h2>
+                <h2 className="max-w-[15ch] text-2xl">{note.title}</h2>
               </div>
               <div className="flex flex-wrap items-center gap-2">
-                {/*@ts-ignore*/}
-                <Badge variant={note.category.toLocaleLowerCase()}>
+                <Badge
+                  /*@ts-ignore */
+                  variant={note.category
+                    .toLowerCase()
+                    .split(" ")
+                    .map((word, index) =>
+                      index === 0
+                        ? word
+                        : word.charAt(0).toUpperCase() + word.slice(1),
+                    )
+                    .join("")}
+                >
                   <p>{note.category}</p>
                 </Badge>
                 <Badge variant={"time"}>
