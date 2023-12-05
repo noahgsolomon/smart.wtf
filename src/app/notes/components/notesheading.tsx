@@ -89,7 +89,13 @@ export default function NotesHeading({
                       height={24}
                       className="rounded-full border border-border bg-secondary/90"
                     />
-                    <p className="hidden font-bold sm:block">{note.title}</p>
+                    <p
+                      className={`hidden font-bold ${
+                        openNotes.length > 2 ? "" : "sm:block"
+                      }`}
+                    >
+                      {note.title}
+                    </p>
                     <div
                       onClick={(e) => {
                         e.stopPropagation();
@@ -124,7 +130,11 @@ export default function NotesHeading({
                           height={24}
                           className="rounded-full border border-border bg-secondary/90"
                         />
-                        <p className="hidden font-bold sm:block">
+                        <p
+                          className={`hidden font-bold ${
+                            openNotes.length > 2 ? "" : "sm:block"
+                          }`}
+                        >
                           {note.title}
                         </p>
                       </Button>
