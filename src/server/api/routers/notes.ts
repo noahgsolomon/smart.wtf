@@ -66,7 +66,7 @@ export const notesRouter = createTRPCRouter({
         markdown: z.string(),
       }),
     )
-    .mutation(async ({ ctx, input: { images, markdown } }) => {
+    .mutation(async ({ input: { images, markdown } }) => {
       if (!images) throw new Error("No images provided");
 
       let markdownContent = markdown;

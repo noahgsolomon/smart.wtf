@@ -9,43 +9,6 @@ const configuration = new Configuration({
 
 const client = new OpenAIApi(configuration);
 
-const fetchImages = async (
-  images: { asset: string; searchQuery: string }[],
-  markdown: string,
-) => {
-  let markdownContent = markdown;
-
-  if (!images) return markdownContent;
-
-  for (const image of images) {
-    const imageFetch = await fetch(
-      `https://www.googleapis.com/customsearch/v1?q=${encodeURI(
-        image.searchQuery,
-      )}&cx=${process.env.GOOGLE_CX}&searchType=image&key=${
-        process.env.GOOGLE_API_KEY
-      }&num=1`,
-      {
-        method: "GET",
-        headers: { "Content-Type": "application/json" },
-      },
-    );
-
-    const imageResponse = await imageFetch.json();
-
-    markdownContent = markdownContent.replace(
-      image.asset,
-      imageResponse.items[0].link,
-    );
-
-    markdownContent = markdownContent.replace(
-      image.asset.replace("-asset", "-alt"),
-      image.searchQuery,
-    );
-  }
-
-  return markdownContent;
-};
-
 const markdownResponse = async (title: string) => {
   const responseFetch = await client.createChatCompletion({
     model: "gpt-4-1106-preview",
@@ -76,8 +39,6 @@ const markdownResponse = async (title: string) => {
       },
     ],
   });
-
-  // let responseMessage = responseFetch.choices[0]?.message?.content ?? "{}";
 
   const stream = OpenAIStream(responseFetch);
 

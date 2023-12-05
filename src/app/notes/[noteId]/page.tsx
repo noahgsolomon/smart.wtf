@@ -44,7 +44,7 @@ export default function Page({ params }: { params: { noteId: string } }) {
     },
   });
 
-  const [finishedImages, setFinishedImages] = useState<string[]>([]);
+  const [, setFinishedImages] = useState<string[]>([]);
 
   const [regenerating, setRegenerating] = useState(false);
 
@@ -116,7 +116,7 @@ export default function Page({ params }: { params: { noteId: string } }) {
     let accumulatedMarkdown = "";
     setFinishedImages([]);
     setMarkdown("");
-    let accumulatedImages: string[] = [];
+    const accumulatedImages: string[] = [];
 
     await fetch("/api/ai/regenerate", {
       method: "POST",
