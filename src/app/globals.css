@@ -434,3 +434,7 @@ mi {
 .katex-html {
   @apply hidden
 }
+
+mtext {
+  @apply prose prose-slate text-lg mx-auto overflow-x-auto
+}
