@@ -6,7 +6,14 @@ import { useNoteContext } from "../context/notescontext";
 import { trpc } from "@/trpc/client";
 import { type Note } from "@/types";
 import Image from "next/image";
-import { ArrowRight, ArrowRightCircle, Clock, PlusCircle } from "lucide-react";
+import { cn } from "@/lib/utils";
+import {
+  ArrowRight,
+  ArrowRightCircle,
+  Clock,
+  Info,
+  PlusCircle,
+} from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import Markdown from "react-markdown";
@@ -120,8 +127,18 @@ export default function Page({ params }: { params: { noteId: string } }) {
                       <Clock className="h-3 w-3" />
                       {note?.minutes} min read
                     </p>
-                    {/*@ts-ignore*/}
-                    <Badge variant={note?.category.toLowerCase()}>
+                    <Badge
+                      /*@ts-ignore*/
+                      variant={note?.category
+                        .toLowerCase()
+                        .split(" ")
+                        .map((word, index) =>
+                          index === 0
+                            ? word
+                            : word.charAt(0).toUpperCase() + word.slice(1),
+                        )
+                        .join("")}
+                    >
                       {note?.category}
                     </Badge>
                   </div>
@@ -143,6 +160,19 @@ export default function Page({ params }: { params: { noteId: string } }) {
                       </Button>
                     </div>
                   </div>
+                  <div className="flex flex-row items-center gap-1 text-sm text-primary/50">
+                    <Info className="h-3 w-3 " />
+                    <p>
+                      note: we're not always right, click{" "}
+                      <Button
+                        variant={"link"}
+                        className="text-primay/80 m-0 p-0 font-bold"
+                      >
+                        here
+                      </Button>{" "}
+                      to regenerate
+                    </p>
+                  </div>
                 </div>
                 <div className="absolute -top-[125px] left-8 ">
                   <Image
@@ -155,6 +185,23 @@ export default function Page({ params }: { params: { noteId: string } }) {
                 </div>
                 <div className="prose prose-slate pt-12 dark:prose-invert">
                   <Markdown
+                    components={{
+                      code: ({ className, children, ...props }) => {
+                        const match = /language-(\w+)/.exec(className ?? "");
+                        return match ? (
+                          <div>
+                            <p className="code-language">{match[1]}</p>
+                            <pre className={cn(className)}>
+                              <code>{children}</code>
+                            </pre>
+                          </div>
+                        ) : (
+                          <code className={className} {...props}>
+                            {children}
+                          </code>
+                        );
+                      },
+                    }}
                     remarkPlugins={[remarkGfm, remarkMath]}
                     rehypePlugins={[
                       rehypeKatex,
@@ -174,12 +221,18 @@ export default function Page({ params }: { params: { noteId: string } }) {
                   </Markdown>
                 </div>
                 <div className="flex flex-row items-center gap-2 pt-8">
-                  <Button className="flex flex-row gap-1" variant={"outline"}>
+                  <Button
+                    className="flex flex-row gap-1 py-5"
+                    variant={"outline"}
+                  >
                     Generate More
                     <PlusCircle className="h-4 w-4" />
                   </Button>
                   <p>or</p>
-                  <Button variant={"secondary"} className="flex flex-row gap-1">
+                  <Button
+                    variant={"secondary"}
+                    className="flex flex-row gap-1  py-5"
+                  >
                     Create Note: Gradient Vectors
                     <ArrowRightCircle className="h-4 w-4" />
                   </Button>
