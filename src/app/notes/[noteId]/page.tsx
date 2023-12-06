@@ -19,6 +19,7 @@ import slug from "rehype-slug";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import { AnimatePresence, motion } from "framer-motion";
 import { useRegenerate } from "./useRegenerate";
+import { useContinue } from "./useContinue";
 
 type UserNote = {
   id: number;
@@ -42,6 +43,12 @@ export default function Page({ params }: { params: { noteId: string } }) {
   const [markdown, setMarkdown] = useState("");
 
   const { handleRegenerate, regenerating } = useRegenerate({
+    note: { id: note?.id!, title: note?.title! },
+    markdown: markdown,
+    setMarkdown: setMarkdown,
+  });
+
+  const { continuing, handleContinue } = useContinue({
     note: { id: note?.id!, title: note?.title! },
     markdown: markdown,
     setMarkdown: setMarkdown,
@@ -239,9 +246,12 @@ export default function Page({ params }: { params: { noteId: string } }) {
                       : note?.agents_markdown}
                   </Markdown>
                 </div>
-                {!regenerating && (
+                {!regenerating && !continuing && (
                   <div className="flex flex-row items-center gap-2 pt-8">
-                    <Button className="flex flex-row gap-1 py-5">
+                    <Button
+                      onClick={handleContinue}
+                      className="flex flex-row gap-1 py-5"
+                    >
                       Continue
                     </Button>
                     <p>or</p>
