@@ -18,7 +18,7 @@ import rehypeKatex from "rehype-katex";
 import slug from "rehype-slug";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import { AnimatePresence, motion } from "framer-motion";
-import { DropdownMenuArrow } from "@radix-ui/react-dropdown-menu";
+import { useRegenerate } from "./useRegenerate";
 
 type UserNote = {
   id: number;
@@ -33,18 +33,6 @@ export default function Page({ params }: { params: { noteId: string } }) {
     id: parseInt(params.noteId),
   });
 
-  const updateImagesMutation = trpc.notes.updateImages.useMutation({
-    onSuccess: ({ markdown }) => {
-      setMarkdown(markdown);
-    },
-  });
-
-  const [, setFinishedImages] = useState<string[]>([]);
-
-  const [regenerating, setRegenerating] = useState(false);
-
-  const updateNoteMutation = trpc.notes.updateNote.useMutation();
-
   const retrieveUserNotesQuery = trpc.notes.getUserNotesMeta.useQuery();
 
   const { openNotes, setOpenNotes, setUserNotes } = useNoteContext();
@@ -52,6 +40,12 @@ export default function Page({ params }: { params: { noteId: string } }) {
   const [readingMode, setReadingMode] = useState<"normal" | "agent">("normal");
 
   const [markdown, setMarkdown] = useState("");
+
+  const { handleRegenerate, regenerating } = useRegenerate({
+    note: { id: note?.id!, title: note?.title! },
+    markdown: markdown,
+    setMarkdown: setMarkdown,
+  });
 
   useEffect(() => {
     const note = retrieveNoteQuery.data?.note;
@@ -104,68 +98,6 @@ export default function Page({ params }: { params: { noteId: string } }) {
     initial: { opacity: 0 },
     animate: { opacity: 1, transition: { duration: 0.3 } },
     exit: { opacity: 0, transition: { duration: 0.3 } },
-  };
-
-  const handleRegenerate = async () => {
-    setRegenerating(true);
-    let accumulatedMarkdown = "";
-    setFinishedImages([]);
-    setMarkdown("");
-    const accumulatedImages: string[] = [];
-
-    await fetch("/api/ai/regenerate", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ id: note?.id, title: note?.title }),
-    }).then(async (res: any) => {
-      const reader = res.body?.getReader();
-
-      while (true) {
-        const { done, value } = await reader?.read();
-
-        if (done) {
-          updateNoteMutation.mutate({
-            id: note?.id!,
-            markdown: accumulatedMarkdown,
-          });
-          break;
-        }
-
-        const decoded = new TextDecoder("utf-8").decode(value);
-
-        setMarkdown((prev) => prev + decoded);
-        accumulatedMarkdown += decoded;
-
-        const images = (accumulatedMarkdown.match(/image-\d-asset/g) ?? [])
-          .map((asset: string) => {
-            // Match the search query text in square brackets immediately before the asset placeholder
-            const regex = new RegExp(`\\!\\[(.*?)\\]\\(${asset}\\)`, "g");
-            const match = regex.exec(accumulatedMarkdown);
-            if (match && match[1] && !accumulatedImages.includes(asset)) {
-              setFinishedImages((prev) => [...prev, asset]);
-              accumulatedImages.push(asset);
-              const searchQuery = match[1]; // Use the captured group which contains the search query
-              return { asset, searchQuery };
-            }
-            return null;
-          })
-          .filter((item) => item !== null) as {
-          asset: string;
-          searchQuery: string;
-        }[];
-
-        if (images.length > 0) {
-          console.log(images);
-          updateImagesMutation.mutate({
-            images: images,
-            markdown: accumulatedMarkdown,
-          });
-        }
-      }
-      setRegenerating(false);
-    });
   };
 
   return (
