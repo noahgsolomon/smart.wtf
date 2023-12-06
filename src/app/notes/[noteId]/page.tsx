@@ -125,7 +125,6 @@ export default function Page({ params }: { params: { noteId: string } }) {
       const reader = res.body?.getReader();
 
       const processBuffer = () => {
-        console.log(buffer);
         if (buffer.length > 0) {
           const nextChar = buffer.charAt(0);
           buffer = buffer.slice(1);
@@ -134,18 +133,35 @@ export default function Page({ params }: { params: { noteId: string } }) {
 
           const images = (accumulatedMarkdown.match(/image-\d-asset/g) ?? [])
             .map((asset: string) => {
+              console.log("Processing asset:", asset); // Log the current asset being processed
+
               const regex = new RegExp(`\\!\\[(.*?)\\]\\(${asset}\\)`, "g");
               const match = regex.exec(accumulatedMarkdown);
-              if (match && match[1] && !accumulatedImages.includes(asset)) {
-                accumulatedImages.push(asset);
-                return { asset, searchQuery: match[1] };
+
+              if (match) {
+                console.log("Match found:", match); // Log the match details
+
+                if (match[1] && !accumulatedImages.includes(asset)) {
+                  accumulatedImages.push(asset);
+                  console.log("Adding new image to accumulatedImages:", asset); // Log when a new image is added
+                  return { asset, searchQuery: match[1] };
+                }
+              } else {
+                console.log("No match found for asset:", asset); // Log when no match is found
               }
+
               return null;
             })
-            .filter((item) => item !== null) as {
+            .filter((item) => {
+              const filterResult = item !== null;
+              console.log("Filtering item:", item, "Result:", filterResult); // Log each item's filtering result
+              return filterResult;
+            }) as {
             asset: string;
             searchQuery: string;
           }[];
+
+          console.log("Final image array:", images); // Log the final array of images
 
           if (images.length > 0) {
             updateImagesMutation.mutate({

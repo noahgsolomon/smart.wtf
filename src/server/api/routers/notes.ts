@@ -72,6 +72,7 @@ export const notesRouter = createTRPCRouter({
       let markdownContent = markdown;
 
       for (const image of images) {
+        console.log(image);
         const imageFetch = await fetch(
           `https://www.googleapis.com/customsearch/v1?q=${encodeURI(
             image.searchQuery,
@@ -87,7 +88,6 @@ export const notesRouter = createTRPCRouter({
         const imageResponse = await imageFetch.json();
 
         if (!imageResponse.items || imageResponse.items.length === 0) {
-          console.log(imageResponse);
           throw new Error("Image not found");
         }
 
