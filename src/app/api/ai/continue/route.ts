@@ -9,14 +9,19 @@ const configuration = new Configuration({
 
 const client = new OpenAIApi(configuration);
 
-const markdownResponse = async (title: string, markdown: string) => {
+const markdownResponse = async (
+  title: string,
+  markdown: string,
+  agentPrompt: string,
+  agent: boolean,
+) => {
   const responseFetch = await client.createChatCompletion({
     model: "gpt-4-1106-preview",
-    temperature: 0.3,
+    temperature: agent ? 1.2 : 0.3,
     stream: true,
     messages: [
       {
-        content: `Continue the markdown document on the specified topic, aiming for an additional 1,000 words. The document should not repeat what is already present in the previous content, and should focus on something new that is a logical next step for the material that has been previously discussed.
+        content: `${agentPrompt} Continue the markdown document on the specified topic, aiming for an additional 1,000 words. The document should not repeat what is already present in the previous content, and should focus on something new that is a logical next step for the material that has been previously discussed.
 
         It is mandatory to include at least one image to enhance the understanding of the topic. Please add placeholders for images where relevant with the format ![Search Query Text](image-N-asset), where N represents the order of the image (the first image would be image-1-asset, and so on). Provide their search queries in the square brackets but do not include the searchQueries visibly in the text; they should only be in the alt text of the image placeholders. If you believe an SVG format is best suited for an image, include 'filetype:svg' in its search query. Under the image, in italics, write a little description of the image.
 
@@ -48,9 +53,9 @@ const markdownResponse = async (title: string, markdown: string) => {
 };
 
 export async function POST(request: Request) {
-  const { title, markdown } = await request.json();
+  const { title, markdown, agentPrompt, agent } = await request.json();
 
-  const stream = await markdownResponse(title, markdown);
+  const stream = await markdownResponse(title, markdown, agentPrompt, agent);
 
   return stream;
 }

@@ -9,14 +9,18 @@ const configuration = new Configuration({
 
 const client = new OpenAIApi(configuration);
 
-const markdownResponse = async (title: string) => {
+const markdownResponse = async (
+  title: string,
+  agentPrompt: string,
+  agent: boolean,
+) => {
   const responseFetch = await client.createChatCompletion({
     model: "gpt-4-1106-preview",
-    temperature: 0.3,
+    temperature: agent ? 1.2 : 0.3,
     stream: true,
     messages: [
       {
-        content: `Create an extensive markdown document on the specified topic, aiming for over 1,000 words. The document should be structured with clarity using markdown features such as headers, bullet points, and emphasis.
+        content: `${agentPrompt} Create an extensive markdown document on the specified topic, aiming for over 1,000 words. The document should be structured with clarity using markdown features such as headers, bullet points, and emphasis.
 
         It is mandatory to include at least one image to enhance the understanding of the topic. Please add placeholders for images where relevant with the format ![Search Query Text](image-N-asset), where N represents the order of the image (the first image would be image-1-asset, and so on). Provide their search queries in the square brackets but do not include the searchQueries visibly in the text; they should only be in the alt text of the image placeholders. If you believe an SVG format is best suited for an image, include 'filetype:svg' in its search query. Under the image, in italics, write a little description of the image.
 
@@ -46,11 +50,9 @@ const markdownResponse = async (title: string) => {
 };
 
 export async function POST(request: Request) {
-  const { title, id } = await request.json();
+  const { title, agentPrompt, agent } = await request.json();
 
-  console.log(title, id);
-
-  const stream = await markdownResponse(title);
+  const stream = await markdownResponse(title, agentPrompt, agent);
 
   return stream;
 }
