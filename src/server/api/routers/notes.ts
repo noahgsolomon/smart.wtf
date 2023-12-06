@@ -52,9 +52,18 @@ export const notesRouter = createTRPCRouter({
     }),
 
   updateNote: protectedProcedure
-    .input(z.object({ id: z.number(), markdown: z.string() }))
-    .mutation(async ({ ctx, input: { id, markdown } }) => {
-      await ctx.db.update(notes).set({ markdown }).where(eq(notes.id, id));
+    .input(
+      z.object({ id: z.number(), markdown: z.string(), agent: z.boolean() }),
+    )
+    .mutation(async ({ ctx, input: { id, markdown, agent } }) => {
+      if (agent) {
+        await ctx.db
+          .update(notes)
+          .set({ agents_markdown: markdown })
+          .where(eq(notes.id, id));
+      } else {
+        await ctx.db.update(notes).set({ markdown }).where(eq(notes.id, id));
+      }
     }),
 
   updateImages: protectedProcedure
