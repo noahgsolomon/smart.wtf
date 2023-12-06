@@ -112,6 +112,7 @@ export default function Page({ params }: { params: { noteId: string } }) {
     setFinishedImages([]);
     setMarkdown("");
     let buffer = "";
+    let finished = false;
     const accumulatedImages: string[] = [];
 
     await fetch("/api/ai/regenerate", {
@@ -152,6 +153,13 @@ export default function Page({ params }: { params: { noteId: string } }) {
               markdown: accumulatedMarkdown,
             });
           }
+        } else if (finished) {
+          updateNoteMutation.mutate({
+            id: note?.id!,
+            markdown: accumulatedMarkdown,
+          });
+          setRegenerating(false);
+          clearInterval(intervalId);
         }
       };
 
@@ -160,18 +168,12 @@ export default function Page({ params }: { params: { noteId: string } }) {
       while (true) {
         const { done, value } = await reader?.read();
 
-        if (done && buffer.length === 0) {
-          clearInterval(intervalId);
-          updateNoteMutation.mutate({
-            id: note?.id!,
-            markdown: accumulatedMarkdown,
-          });
-          setRegenerating(false);
+        if (done) {
+          finished = true;
           break;
-        } else if (done) {
-        } else {
-          buffer += new TextDecoder("utf-8").decode(value);
         }
+
+        buffer += new TextDecoder("utf-8").decode(value);
       }
     });
   };
