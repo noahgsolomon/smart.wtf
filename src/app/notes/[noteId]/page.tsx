@@ -41,6 +41,27 @@ export default function Page({ params }: { params: { noteId: string } }) {
   const [readingMode, setReadingMode] = useState<"normal" | "agent">("normal");
 
   const [markdown, setMarkdown] = useState("");
+  const [agentMarkdown, setAgentMarkdown] = useState("");
+
+  const {
+    handleRegenerate: agentHandleRegenerate,
+    regenerating: agentRegenerating,
+  } = useRegenerate({
+    note: { id: note?.id!, title: note?.title! },
+    markdown: agentMarkdown,
+    setMarkdown: setAgentMarkdown,
+    agent: true,
+    agentPrompt: note?.agents.prompt,
+  });
+
+  const { continuing: agentContinuing, handleContinue: agentHandleContinue } =
+    useContinue({
+      note: { id: note?.id!, title: note?.title! },
+      markdown: agentMarkdown,
+      setMarkdown: setAgentMarkdown,
+      agent: true,
+      agentPrompt: note?.agents.prompt,
+    });
 
   const { handleRegenerate, regenerating } = useRegenerate({
     note: { id: note?.id!, title: note?.title! },
@@ -59,6 +80,7 @@ export default function Page({ params }: { params: { noteId: string } }) {
     if (note) {
       setNote(note);
       setMarkdown(note.markdown);
+      setAgentMarkdown(note.agents_markdown);
 
       const noteId = parseInt(params.noteId);
       if (!openNotes.some((openNote) => openNote.id === noteId)) {
@@ -155,7 +177,7 @@ export default function Page({ params }: { params: { noteId: string } }) {
                   <div className="flex">
                     <div className="flex flex-row overflow-hidden rounded-lg border border-border">
                       <Button
-                        className="rounded-br-none rounded-tr-none"
+                        className="rounded-br-none rounded-tr-none hover:scale-100 active:scale-100"
                         onClick={() => setReadingMode("normal")}
                         variant={readingMode === "normal" ? "default" : "ghost"}
                       >
@@ -163,7 +185,7 @@ export default function Page({ params }: { params: { noteId: string } }) {
                       </Button>
                       <Button
                         onClick={() => setReadingMode("agent")}
-                        className="rounded-bl-none rounded-tl-none"
+                        className="rounded-bl-none rounded-tl-none hover:scale-100 active:scale-100"
                         variant={readingMode === "agent" ? "default" : "ghost"}
                       >
                         {note?.agents.name}
@@ -171,7 +193,7 @@ export default function Page({ params }: { params: { noteId: string } }) {
                     </div>
                   </div>
                   <div className="flex flex-row items-center gap-1 text-sm text-primary/50">
-                    {regenerating ? (
+                    {regenerating || agentRegenerating ? (
                       <div className="flex flex-col gap-2">
                         <div className="flex flex-row items-center gap-1">
                           <Loader2 className="h-4 w-4 animate-spin" />
@@ -190,7 +212,11 @@ export default function Page({ params }: { params: { noteId: string } }) {
                           <Button
                             variant={"link"}
                             className="text-primay/80 m-0 p-0 font-bold"
-                            onClick={handleRegenerate}
+                            onClick={
+                              readingMode === "agent"
+                                ? agentHandleRegenerate
+                                : handleRegenerate
+                            }
                           >
                             here
                           </Button>{" "}
@@ -241,28 +267,33 @@ export default function Page({ params }: { params: { noteId: string } }) {
                       rehypeHighlight,
                     ]}
                   >
-                    {readingMode === "normal"
-                      ? markdown
-                      : note?.agents_markdown}
+                    {readingMode === "normal" ? markdown : agentMarkdown}
                   </Markdown>
                 </div>
-                {!regenerating && !continuing && (
-                  <div className="flex flex-row items-center gap-2 pt-8">
-                    <Button
-                      onClick={handleContinue}
-                      className="flex flex-row gap-1 py-5"
-                    >
-                      Continue
-                    </Button>
-                    <p>or</p>
-                    <Button
-                      variant={"secondary"}
-                      className="flex flex-row gap-1  py-5"
-                    >
-                      Move on to Gradient Vectors
-                    </Button>
-                  </div>
-                )}
+                {!regenerating &&
+                  !continuing &&
+                  !agentRegenerating &&
+                  !agentContinuing && (
+                    <div className="flex flex-row items-center gap-2 pt-8">
+                      <Button
+                        onClick={
+                          readingMode === "agent"
+                            ? agentHandleContinue
+                            : handleContinue
+                        }
+                        className="flex flex-row gap-1 py-5"
+                      >
+                        Continue
+                      </Button>
+                      <p>or</p>
+                      <Button
+                        variant={"secondary"}
+                        className="flex flex-row gap-1  py-5"
+                      >
+                        Move on to Gradient Vectors
+                      </Button>
+                    </div>
+                  )}
               </div>
             </div>
           </div>
