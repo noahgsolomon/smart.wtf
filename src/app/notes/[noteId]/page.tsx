@@ -111,8 +111,6 @@ export default function Page({ params }: { params: { noteId: string } }) {
     let accumulatedMarkdown = "";
     setFinishedImages([]);
     setMarkdown("");
-    let buffer = "";
-    let finished = false;
     const accumulatedImages: string[] = [];
 
     await fetch("/api/ai/regenerate", {
@@ -124,73 +122,49 @@ export default function Page({ params }: { params: { noteId: string } }) {
     }).then(async (res: any) => {
       const reader = res.body?.getReader();
 
-      const processBuffer = () => {
-        if (buffer.length > 0) {
-          const nextChar = buffer.charAt(0);
-          buffer = buffer.slice(1);
-          accumulatedMarkdown += nextChar;
-          setMarkdown(accumulatedMarkdown);
-
-          const images = (accumulatedMarkdown.match(/image-\d-asset/g) ?? [])
-            .map((asset: string) => {
-              console.log("Processing asset:", asset); // Log the current asset being processed
-
-              const regex = new RegExp(`\\!\\[(.*?)\\]\\(${asset}\\)`, "g");
-              const match = regex.exec(accumulatedMarkdown);
-
-              if (match) {
-                console.log("Match found:", match); // Log the match details
-
-                if (match[1] && !accumulatedImages.includes(asset)) {
-                  accumulatedImages.push(asset);
-                  console.log("Adding new image to accumulatedImages:", asset); // Log when a new image is added
-                  return { asset, searchQuery: match[1] };
-                }
-              } else {
-                console.log("No match found for asset:", asset); // Log when no match is found
-              }
-
-              return null;
-            })
-            .filter((item) => {
-              const filterResult = item !== null;
-              console.log("Filtering item:", item, "Result:", filterResult); // Log each item's filtering result
-              return filterResult;
-            }) as {
-            asset: string;
-            searchQuery: string;
-          }[];
-
-          console.log("Final image array:", images); // Log the final array of images
-
-          if (images.length > 0) {
-            updateImagesMutation.mutate({
-              images: images,
-              markdown: accumulatedMarkdown,
-            });
-          }
-        } else if (finished) {
-          updateNoteMutation.mutate({
-            id: note?.id!,
-            markdown: accumulatedMarkdown,
-          });
-          setRegenerating(false);
-          clearInterval(intervalId);
-        }
-      };
-
-      const intervalId = setInterval(processBuffer, 25);
-
       while (true) {
         const { done, value } = await reader?.read();
 
         if (done) {
-          finished = true;
+          updateNoteMutation.mutate({
+            id: note?.id!,
+            markdown: accumulatedMarkdown,
+          });
           break;
         }
 
-        buffer += new TextDecoder("utf-8").decode(value);
+        const decoded = new TextDecoder("utf-8").decode(value);
+
+        setMarkdown((prev) => prev + decoded);
+        accumulatedMarkdown += decoded;
+
+        const images = (accumulatedMarkdown.match(/image-\d-asset/g) ?? [])
+          .map((asset: string) => {
+            // Match the search query text in square brackets immediately before the asset placeholder
+            const regex = new RegExp(`\\!\\[(.*?)\\]\\(${asset}\\)`, "g");
+            const match = regex.exec(accumulatedMarkdown);
+            if (match && match[1] && !accumulatedImages.includes(asset)) {
+              setFinishedImages((prev) => [...prev, asset]);
+              accumulatedImages.push(asset);
+              const searchQuery = match[1]; // Use the captured group which contains the search query
+              return { asset, searchQuery };
+            }
+            return null;
+          })
+          .filter((item) => item !== null) as {
+          asset: string;
+          searchQuery: string;
+        }[];
+
+        if (images.length > 0) {
+          console.log(images);
+          updateImagesMutation.mutate({
+            images: images,
+            markdown: accumulatedMarkdown,
+          });
+        }
       }
+      setRegenerating(false);
     });
   };
 
