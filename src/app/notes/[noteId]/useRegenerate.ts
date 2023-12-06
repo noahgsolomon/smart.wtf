@@ -12,7 +12,7 @@ export const useRegenerate = ({
 }) => {
   const [regenerating, setRegenerating] = useState(false);
   const [done, setDone] = useState(false);
-  const [, setFinishedImages] = useState<string[]>([]);
+  const [finishedImages, setFinishedImages] = useState<string[]>([]);
 
   const updateImagesMutation = trpc.notes.updateImages.useMutation({
     onSuccess: ({ markdown }) => {
@@ -32,12 +32,35 @@ export const useRegenerate = ({
     }
   }, [done]);
 
+  useEffect(() => {
+    const images = (markdown.match(/image-\d-asset/g) ?? [])
+      .map((asset: string) => {
+        const regex = new RegExp(`\\!\\[(.*?)\\]\\(${asset}\\)`, "g");
+        const match = regex.exec(markdown);
+        if (match && match[1] && !finishedImages.includes(asset)) {
+          setFinishedImages((prev) => [...prev, asset]);
+          const searchQuery = match[1];
+          return { asset, searchQuery };
+        }
+        return null;
+      })
+      .filter((item) => item !== null) as {
+      asset: string;
+      searchQuery: string;
+    }[];
+
+    if (images.length > 0) {
+      updateImagesMutation.mutate({
+        images: images,
+        markdown,
+      });
+    }
+  }, [markdown]);
+
   const handleRegenerate = async () => {
     setRegenerating(true);
-    let accumulatedMarkdown = "";
     setFinishedImages([]);
     setMarkdown("");
-    const accumulatedImages: string[] = [];
 
     await fetch("/api/ai/regenerate", {
       method: "POST",
@@ -59,32 +82,6 @@ export const useRegenerate = ({
         const decoded = new TextDecoder("utf-8").decode(value);
 
         setMarkdown((prev) => prev + decoded);
-        accumulatedMarkdown += decoded;
-
-        const images = (accumulatedMarkdown.match(/image-\d-asset/g) ?? [])
-          .map((asset: string) => {
-            const regex = new RegExp(`\\!\\[(.*?)\\]\\(${asset}\\)`, "g");
-            const match = regex.exec(accumulatedMarkdown);
-            if (match && match[1] && !accumulatedImages.includes(asset)) {
-              setFinishedImages((prev) => [...prev, asset]);
-              accumulatedImages.push(asset);
-              const searchQuery = match[1];
-              return { asset, searchQuery };
-            }
-            return null;
-          })
-          .filter((item) => item !== null) as {
-          asset: string;
-          searchQuery: string;
-        }[];
-
-        if (images.length > 0) {
-          console.log(images);
-          updateImagesMutation.mutate({
-            images: images,
-            markdown: accumulatedMarkdown,
-          });
-        }
       }
       setRegenerating(false);
     });
