@@ -111,6 +111,7 @@ export default function Page({ params }: { params: { noteId: string } }) {
     let accumulatedMarkdown = "";
     setFinishedImages([]);
     setMarkdown("");
+    let buffer = "";
     const accumulatedImages: string[] = [];
 
     await fetch("/api/ai/regenerate", {
@@ -122,49 +123,56 @@ export default function Page({ params }: { params: { noteId: string } }) {
     }).then(async (res: any) => {
       const reader = res.body?.getReader();
 
+      const processBuffer = () => {
+        console.log(buffer);
+        if (buffer.length > 0) {
+          const nextChar = buffer.charAt(0);
+          buffer = buffer.slice(1);
+          accumulatedMarkdown += nextChar;
+          setMarkdown(accumulatedMarkdown);
+
+          const images = (accumulatedMarkdown.match(/image-\d-asset/g) ?? [])
+            .map((asset: string) => {
+              const regex = new RegExp(`\\!\\[(.*?)\\]\\(${asset}\\)`, "g");
+              const match = regex.exec(accumulatedMarkdown);
+              if (match && match[1] && !accumulatedImages.includes(asset)) {
+                accumulatedImages.push(asset);
+                return { asset, searchQuery: match[1] };
+              }
+              return null;
+            })
+            .filter((item) => item !== null) as {
+            asset: string;
+            searchQuery: string;
+          }[];
+
+          if (images.length > 0) {
+            updateImagesMutation.mutate({
+              images: images,
+              markdown: accumulatedMarkdown,
+            });
+          }
+        }
+      };
+
+      const intervalId = setInterval(processBuffer, 25);
+
       while (true) {
         const { done, value } = await reader?.read();
 
-        if (done) {
+        if (done && buffer.length === 0) {
+          clearInterval(intervalId);
           updateNoteMutation.mutate({
             id: note?.id!,
             markdown: accumulatedMarkdown,
           });
+          setRegenerating(false);
           break;
-        }
-
-        const decoded = new TextDecoder("utf-8").decode(value);
-
-        setMarkdown((prev) => prev + decoded);
-        accumulatedMarkdown += decoded;
-
-        const images = (accumulatedMarkdown.match(/image-\d-asset/g) ?? [])
-          .map((asset: string) => {
-            // Match the search query text in square brackets immediately before the asset placeholder
-            const regex = new RegExp(`\\!\\[(.*?)\\]\\(${asset}\\)`, "g");
-            const match = regex.exec(accumulatedMarkdown);
-            if (match && match[1] && !accumulatedImages.includes(asset)) {
-              setFinishedImages((prev) => [...prev, asset]);
-              accumulatedImages.push(asset);
-              const searchQuery = match[1]; // Use the captured group which contains the search query
-              return { asset, searchQuery };
-            }
-            return null;
-          })
-          .filter((item) => item !== null) as {
-          asset: string;
-          searchQuery: string;
-        }[];
-
-        if (images.length > 0) {
-          console.log(images);
-          updateImagesMutation.mutate({
-            images: images,
-            markdown: accumulatedMarkdown,
-          });
+        } else if (done) {
+        } else {
+          buffer += new TextDecoder("utf-8").decode(value);
         }
       }
-      setRegenerating(false);
     });
   };
 
