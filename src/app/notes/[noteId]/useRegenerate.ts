@@ -5,10 +5,14 @@ export const useRegenerate = ({
   note,
   markdown,
   setMarkdown,
+  agent = false,
+  agentPrompt = "",
 }: {
   note: { id: number; title: string } | undefined;
   markdown: string;
   setMarkdown: React.Dispatch<React.SetStateAction<string>>;
+  agent?: boolean;
+  agentPrompt?: string;
 }) => {
   const [regenerating, setRegenerating] = useState(false);
   const [done, setDone] = useState(false);
@@ -27,6 +31,7 @@ export const useRegenerate = ({
       updateNoteMutation.mutate({
         id: note?.id!,
         markdown,
+        agent,
       });
       setDone(false);
     }
@@ -67,7 +72,12 @@ export const useRegenerate = ({
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ id: note?.id, title: note?.title }),
+      body: JSON.stringify({
+        id: note?.id,
+        title: note?.title,
+        agent,
+        agentPrompt,
+      }),
     }).then(async (res: any) => {
       const reader = res.body?.getReader();
 

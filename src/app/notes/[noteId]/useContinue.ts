@@ -5,10 +5,14 @@ export const useContinue = ({
   note,
   markdown,
   setMarkdown,
+  agent = false,
+  agentPrompt = "",
 }: {
   note: { id: number; title: string } | undefined;
   markdown: string;
   setMarkdown: React.Dispatch<React.SetStateAction<string>>;
+  agent?: boolean;
+  agentPrompt?: string;
 }) => {
   const [continuing, setContinuing] = useState(false);
   const [done, setDone] = useState(false);
@@ -29,6 +33,7 @@ export const useContinue = ({
       updateNoteMutation.mutate({
         id: note?.id!,
         markdown,
+        agent,
       });
       setContinuing(false);
       setDone(false);
@@ -75,6 +80,8 @@ export const useContinue = ({
       body: JSON.stringify({
         title: note?.title,
         markdown,
+        agent,
+        agentPrompt,
       }),
     }).then(async (res: any) => {
       const reader = res.body?.getReader();
