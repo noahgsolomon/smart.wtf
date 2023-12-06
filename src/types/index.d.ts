@@ -29,6 +29,7 @@ export type Note = {
   agent_id: number;
   minutes: number;
   agents: {
+    prompt: string;
     id: number;
     name: string;
     assistantId: string;
