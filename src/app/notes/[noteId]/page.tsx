@@ -140,7 +140,7 @@ export default function Page({ params }: { params: { noteId: string } }) {
           exit="exit"
         >
           <div className="flex flex-col gap-8 pt-[3rem]">
-            <div className="relative h-[250px] w-full overflow-hidden">
+            <div className="relative h-[250px] w-full overflow-hidden md:h-[350px]">
               <Image
                 layout="fill"
                 objectFit="cover"
@@ -150,7 +150,7 @@ export default function Page({ params }: { params: { noteId: string } }) {
               />
             </div>
 
-            <div className="flex justify-center px-0 pb-4 pt-8 md:px-4">
+            <div className=" flex justify-center px-0 pb-4 pt-8 md:px-4">
               <div className="relative px-8 py-2 pb-24">
                 <div className="flex flex-col gap-2">
                   <h1 className="text-5xl">{note?.title}</h1>
