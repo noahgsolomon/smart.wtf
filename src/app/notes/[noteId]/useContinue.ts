@@ -1,5 +1,5 @@
 import { trpc } from "@/trpc/client";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 
 export const useContinue = ({
   note,
