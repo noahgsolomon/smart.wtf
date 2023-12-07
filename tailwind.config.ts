@@ -17,6 +17,10 @@ module.exports = {
     },
     extend: {
       colors: {
+        rick: "hsl(var(--rick))",
+        patrick: "hsl(var(--patrick))",
+        mrburns: "hsl(var(--mrburns))",
+        bender: "hsl(var(--bender))",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",

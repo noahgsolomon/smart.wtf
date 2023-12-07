@@ -13,6 +13,7 @@ const nextConfig = {
   images: {
     domains: [
       "img.icons8.con",
+      "img.icons8.com",
       "img.clerk.com",
       "images.codefoli.com",
       "oaidalleapiprodscus.blob.core.windows.net",
