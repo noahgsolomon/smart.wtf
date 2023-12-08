@@ -141,6 +141,8 @@ export default function Page({ params }: { params: { noteId: string } }) {
     retrieveNoteQuery.isSuccess,
     params.noteId,
     openNotes,
+    imageMutationCalled,
+    createImageMutation,
   ]);
 
   useEffect(() => {

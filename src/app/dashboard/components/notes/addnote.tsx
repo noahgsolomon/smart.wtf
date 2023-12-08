@@ -54,7 +54,7 @@ export default function AddNote() {
         setRecommendedTopics((prev) => [...prev, note]);
       });
     }
-  }, [recommendedNotesQuery.data]);
+  }, [recommendedNotesQuery.data, recommendedTopics.length]);
 
   return (
     <Dialog>
