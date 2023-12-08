@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import NotesHeading from "../components/notesheading";
 import { useNoteContext } from "../context/notescontext";
 import { trpc } from "@/trpc/client";
@@ -35,6 +35,10 @@ export default function Page({ params }: { params: { noteId: string } }) {
   });
 
   const retrieveUserNotesQuery = trpc.notes.getUserNotesMeta.useQuery();
+  const generatedGif = useMemo(
+    () => `/generating${Math.floor(Math.random() * 4)}.gif`,
+    [],
+  );
 
   const { openNotes, setOpenNotes, setUserNotes } = useNoteContext();
   const [note, setNote] = useState<Note | null>(null);
@@ -79,8 +83,12 @@ export default function Page({ params }: { params: { noteId: string } }) {
     const note = retrieveNoteQuery.data?.note;
     if (note) {
       setNote(note);
-      setMarkdown(note.markdown);
-      setAgentMarkdown(note.agents_markdown);
+      setMarkdown(note.markdown ?? "");
+      setAgentMarkdown(note.agents_markdown ?? "");
+
+      if (!note.imageUrl) {
+        console.log("yep");
+      }
 
       const noteId = parseInt(params.noteId);
       if (!openNotes.some((openNote) => openNote.id === noteId)) {
@@ -144,10 +152,16 @@ export default function Page({ params }: { params: { noteId: string } }) {
               <Image
                 layout="fill"
                 objectFit="cover"
-                src={note?.imageUrl!}
+                src={note?.imageUrl ? note.imageUrl : generatedGif}
                 alt={"note image"}
                 className="border-b border-border"
               />
+              <p className="absolute bottom-0 left-0 right-0 top-0 flex flex-row items-center justify-center gap-1">
+                <div className="flex flex-col items-center rounded-lg border border-border bg-secondary p-2 opacity-60">
+                  <p>Crafting image</p>
+                  <Loader2 className="h-8 w-8 animate-spin" />
+                </div>
+              </p>
             </div>
 
             <div className=" flex justify-center px-0 pb-4 pt-8 md:px-4">
@@ -157,7 +171,7 @@ export default function Page({ params }: { params: { noteId: string } }) {
                   <div className="flex flex-row gap-2">
                     <p className="flex flex-row items-center gap-1 text-sm opacity-60">
                       <Clock className="h-3 w-3" />
-                      {note?.minutes} min read
+                      {note?.minutes ?? 0} min read
                     </p>
                     <Badge
                       /*@ts-ignore*/
@@ -197,7 +211,7 @@ export default function Page({ params }: { params: { noteId: string } }) {
                       <div className="flex flex-col gap-2">
                         <div className="flex flex-row items-center gap-1">
                           <Loader2 className="h-4 w-4 animate-spin" />
-                          Regenerating...
+                          Generating...
                         </div>
                         <p>
                           This should take a few minutes. Please stay on this
