@@ -22,12 +22,12 @@ export type Note = {
   description: string | null;
   user_id: number;
   imageUrl: string | null;
-  markdown: string;
-  agents_markdown: string;
+  markdown: string | null;
+  agents_markdown: string | null;
   title: string;
   category: string;
   agent_id: number;
-  minutes: number;
+  minutes: number | null;
   agents: {
     prompt: string;
     id: number;
