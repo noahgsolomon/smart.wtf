@@ -4,25 +4,11 @@ const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
-const response = async () => {
+const response = async (prompt: string) => {
   const detailed8BitPreface =
     "Create an image in a detailed retro 8-bit style. The artwork should have a pixelated texture and should have vibrant coloring and scenery.";
 
-  const prompt = `
-Imagine an enchanted grotto hidden within a deep, twisting cave. The air in this cave carries a sense of ancientness, thick with the smell of earth and water. The cave opens into a vast chamber, the walls shimmering with translucent blues and greens, refracting from the clear underground pool that dominates the space. Here, the crystals seem to shimmer with a life of their own, dancing and changing as water flows between them.
-
-In this image, the pool stands as a representation of fluid dynamics. The water's current creates mesmerizing patterns, forming whirlpools and eddies that move in sync with the intricately carved walls. The walls, in turn, mirror the elegant play of light and shadow, sculpting the dancing water into a ballet of fluid motion. Each drop and ripple carries within it the intricate dance of forces, a tangible representation of the physics that shape the world around us.
-
-Together, the cave with its luminous pool and magical crystal walls reflects the beauty and complexity of fluid dynamics, where physics meets art in a dance as old as time.
-`;
-
-  const fullPrompt = `${detailed8BitPreface} ${prompt} Remember, this is in retro 8-bit style
-
-`;
-
-  /*
-Picture an alien landscape where clusters of glowing crystal formations rise from the ground, each cluster varying in color and size, representing K-means clustering. Beams of light connect the crystals within each group, forming geometric patterns that shift and change as the clusters evolve. Above, a celestial body casts a spectrum of light, bathing the formations in hues that signify different data points coming together. This terrain is a vivid display of the sorting and organizing power of K-means clustering, visualized in an otherworldly setting of crystalline beauty.
-*/
+  const fullPrompt = `${detailed8BitPreface} ${prompt} Remember, this is in retro 8-bit style`;
 
   const responseFetch = await openai.images.generate({
     model: "dall-e-3",
@@ -38,7 +24,7 @@ Picture an alien landscape where clusters of glowing crystal formations rise fro
   return responseFetch.data[0]?.url;
 };
 
-const imageGen = await response();
+const imageGen = await response("");
 
 console.log(imageGen);
 
@@ -408,4 +394,9 @@ In this image, the pool stands as a representation of fluid dynamics. The water'
 
 Together, the cave with its luminous pool and magical crystal walls reflects the beauty and complexity of fluid dynamics, where physics meets art in a dance as old as time.
 
+
+
+Consensus Algorithms in Distributed Systems
+
+Create an image reminiscent of ancient cave paintings, with a modern twist. In a dimly lit cave, a group of stick figures from various backgrounds and cultures stand in a circle. Each figure is holding a smartphone or tablet, and they're all tapping away on their devices, symbolizing the exchange of information and communication in a distributed system. The cave walls, adorned with primitive drawings of animals and shapes, also have digital screens displaying complex mathematical algorithms and diagrams. This blend of ancient and modern elements portrays the evolution of consensus algorithms in a whimsical and thought-provoking manner.
 */
