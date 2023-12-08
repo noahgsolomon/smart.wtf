@@ -447,9 +447,9 @@ mi {
 }
 
 mtext {
-  @apply prose prose-slate text-lg mx-auto overflow-x-auto
+  @apply text-primary text-lg mx-auto overflow-x-auto
 }
 
 mrow {
-  @apply prose prose-slate text-lg mx-auto overflow-x-auto overflow-y-hidden max-w-[300px] sm:max-w-[500px] xl:max-w-[600px]
+  @apply text-primary text-lg mx-auto overflow-x-auto overflow-y-hidden max-w-[300px] sm:max-w-[500px] xl:max-w-[600px]
 }

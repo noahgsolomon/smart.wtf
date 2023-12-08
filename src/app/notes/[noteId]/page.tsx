@@ -39,24 +39,6 @@ export default function Page({ params }: { params: { noteId: string } }) {
     () => `/generating${Math.floor(Math.random() * 4)}.gif`,
     [],
   );
-  /*
-    TODO
-    temporary fix
-    */
-  const regenerateButtonRef = useRef<HTMLButtonElement>(null);
-  /*
-    TODO
-    temporary fix
-    */
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      if (regenerateButtonRef.current) {
-        regenerateButtonRef.current.click();
-      }
-    }, 1000);
-
-    return () => clearTimeout(timer);
-  }, []);
 
   const [imageMutationCalled, setImageMutationCalled] = useState(false);
   const { openNotes, setOpenNotes, setUserNotes } = useNoteContext();
@@ -210,7 +192,7 @@ export default function Page({ params }: { params: { noteId: string } }) {
             <div className=" flex justify-center px-0 pb-4 pt-8 md:px-4">
               <div className="relative px-8 py-2 pb-24">
                 <div className="flex flex-col gap-2">
-                  <h1 className="text-5xl">{note?.title}</h1>
+                  <h1 className="max-w-[15ch] text-5xl">{note?.title}</h1>
                   <div className="flex flex-row gap-2">
                     <p className="flex flex-row items-center gap-1 text-sm opacity-60">
                       <Clock className="h-3 w-3" />
@@ -267,11 +249,6 @@ export default function Page({ params }: { params: { noteId: string } }) {
                         <p>
                           note: we're not always right, click{" "}
                           <Button
-                            /*
-                            TODO
-                            temporary fix
-                            */
-                            ref={regenerateButtonRef}
                             variant={"link"}
                             className="text-primay/80 m-0 p-0 font-bold"
                             onClick={
