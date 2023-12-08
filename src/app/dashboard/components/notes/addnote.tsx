@@ -20,7 +20,7 @@ export default function AddNote() {
   const [noteInput, setNoteInput] = useState("");
   const [agent, setAgent] = useState<
     "rick" | "mrburns" | "patrick" | "bender" | ""
-  >("");
+  >("rick");
   const [recommendedSelect, setRecommendedSelect] = useState(-1);
 
   return (
@@ -131,7 +131,7 @@ export default function AddNote() {
             <div
               className={cn(
                 `relative cursor-pointer overflow-hidden rounded-full border border-border bg-secondary transition-all hover:scale-[102%] active:scale-[98%]`,
-                `${agent === "mrburns" ? "border-mrburns border" : ""}`,
+                `${agent === "mrburns" ? "border border-mrburns" : ""}`,
               )}
               onClick={() => setAgent("mrburns")}
             >
@@ -155,7 +155,7 @@ export default function AddNote() {
             <div
               className={cn(
                 `relative cursor-pointer overflow-hidden rounded-full border border-border bg-secondary transition-all hover:scale-[102%] active:scale-[98%]`,
-                `${agent === "bender" ? "border-bender border" : ""}`,
+                `${agent === "bender" ? "border border-bender" : ""}`,
               )}
               onClick={() => setAgent("bender")}
             >
@@ -179,7 +179,7 @@ export default function AddNote() {
             <div
               className={cn(
                 `relative cursor-pointer overflow-hidden rounded-full border border-border bg-secondary transition-all hover:scale-[102%] active:scale-[98%]`,
-                `${agent === "patrick" ? "border-patrick border" : ""}`,
+                `${agent === "patrick" ? "border border-patrick" : ""}`,
               )}
               onClick={() => setAgent("patrick")}
             >
