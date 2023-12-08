@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import NotesHeading from "../components/notesheading";
 import { useNoteContext } from "../context/notescontext";
 import { trpc } from "@/trpc/client";
@@ -39,7 +39,13 @@ export default function Page({ params }: { params: { noteId: string } }) {
     () => `/generating${Math.floor(Math.random() * 4)}.gif`,
     [],
   );
+  /*
+    TODO
+    temporary fix
+    */
+  const regenerateButtonRef = useRef<HTMLButtonElement>(null);
 
+  const [imageMutationCalled, setImageMutationCalled] = useState(false);
   const { openNotes, setOpenNotes, setUserNotes } = useNoteContext();
   const [note, setNote] = useState<Note | null>(null);
   const [readingMode, setReadingMode] = useState<"normal" | "agent">("normal");
@@ -57,6 +63,17 @@ export default function Page({ params }: { params: { noteId: string } }) {
     agent: true,
     agentPrompt: note?.agents.prompt,
   });
+
+  //TODO fix this
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (regenerateButtonRef.current) {
+        regenerateButtonRef.current.click();
+      }
+    }, 1000);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   const { continuing: agentContinuing, handleContinue: agentHandleContinue } =
     useContinue({
@@ -79,6 +96,14 @@ export default function Page({ params }: { params: { noteId: string } }) {
     setMarkdown: setMarkdown,
   });
 
+  const createImageMutation = trpc.notes.createImage.useMutation({
+    onSuccess: (data) => {
+      setNote((prev) =>
+        prev ? { ...prev, imageUrl: data.imageUrl ?? "" } : null,
+      );
+    },
+  });
+
   useEffect(() => {
     const note = retrieveNoteQuery.data?.note;
     if (note) {
@@ -86,9 +111,17 @@ export default function Page({ params }: { params: { noteId: string } }) {
       setMarkdown(note.markdown ?? "");
       setAgentMarkdown(note.agents_markdown ?? "");
 
-      if (!note.imageUrl) {
-        console.log("yep");
+      if (!note.imageUrl && !imageMutationCalled) {
+        setImageMutationCalled(true);
+        createImageMutation.mutate({
+          id: note.id,
+          title: note.title,
+        });
       }
+
+      // if (!note.markdown ) {
+      //   handleRegenerate();
+      // }
 
       const noteId = parseInt(params.noteId);
       if (!openNotes.some((openNote) => openNote.id === noteId)) {
@@ -156,12 +189,14 @@ export default function Page({ params }: { params: { noteId: string } }) {
                 alt={"note image"}
                 className="border-b border-border"
               />
-              <p className="absolute bottom-0 left-0 right-0 top-0 flex flex-row items-center justify-center gap-1">
-                <div className="flex flex-col items-center rounded-lg border border-border bg-secondary p-2 opacity-60">
-                  <p>Crafting image</p>
-                  <Loader2 className="h-8 w-8 animate-spin" />
+              {!note?.imageUrl && (
+                <div className="absolute bottom-0 left-0 right-0 top-0 flex flex-row items-center justify-center gap-1">
+                  <div className="flex flex-col items-center rounded-lg border border-border bg-secondary p-2 opacity-60">
+                    <p>Crafting image</p>
+                    <Loader2 className="h-8 w-8 animate-spin" />
+                  </div>
                 </div>
-              </p>
+              )}
             </div>
 
             <div className=" flex justify-center px-0 pb-4 pt-8 md:px-4">
@@ -225,6 +260,7 @@ export default function Page({ params }: { params: { noteId: string } }) {
                           note: we're not always right, click{" "}
                           <Button
                             variant={"link"}
+                            ref={regenerateButtonRef} //TODO fix this
                             className="text-primay/80 m-0 p-0 font-bold"
                             onClick={
                               readingMode === "agent"
