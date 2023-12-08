@@ -44,6 +44,19 @@ export default function Page({ params }: { params: { noteId: string } }) {
     temporary fix
     */
   const regenerateButtonRef = useRef<HTMLButtonElement>(null);
+  /*
+    TODO
+    temporary fix
+    */
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (regenerateButtonRef.current) {
+        regenerateButtonRef.current.click();
+      }
+    }, 1000);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   const [imageMutationCalled, setImageMutationCalled] = useState(false);
   const { openNotes, setOpenNotes, setUserNotes } = useNoteContext();
@@ -63,17 +76,6 @@ export default function Page({ params }: { params: { noteId: string } }) {
     agent: true,
     agentPrompt: note?.agents.prompt,
   });
-
-  //TODO fix this
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      if (regenerateButtonRef.current) {
-        regenerateButtonRef.current.click();
-      }
-    }, 1000);
-
-    return () => clearTimeout(timer);
-  }, []);
 
   const { continuing: agentContinuing, handleContinue: agentHandleContinue } =
     useContinue({
@@ -108,8 +110,12 @@ export default function Page({ params }: { params: { noteId: string } }) {
     const note = retrieveNoteQuery.data?.note;
     if (note) {
       setNote(note);
-      setMarkdown(note.markdown ?? "");
-      setAgentMarkdown(note.agents_markdown ?? "");
+      if (note.markdown) {
+        setMarkdown(note.markdown);
+      }
+      if (note.agents_markdown) {
+        setAgentMarkdown(note.agents_markdown);
+      }
 
       if (!note.imageUrl && !imageMutationCalled) {
         setImageMutationCalled(true);
@@ -261,8 +267,12 @@ export default function Page({ params }: { params: { noteId: string } }) {
                         <p>
                           note: we're not always right, click{" "}
                           <Button
+                            /*
+                            TODO
+                            temporary fix
+                            */
+                            ref={regenerateButtonRef}
                             variant={"link"}
-                            ref={regenerateButtonRef} //TODO fix this
                             className="text-primay/80 m-0 p-0 font-bold"
                             onClick={
                               readingMode === "agent"
