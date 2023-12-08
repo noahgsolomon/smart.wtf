@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { Flame, PlusIcon, Wand } from "lucide-react";
+import { Flame, Loader2, PlusIcon, Wand } from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -12,16 +12,49 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
+import { trpc } from "@/trpc/client";
+import { useRouter } from "next/navigation";
 
 export default function AddNote() {
   const [noteInput, setNoteInput] = useState("");
-  const [agent, setAgent] = useState<
-    "rick" | "mrburns" | "patrick" | "bender" | ""
-  >("rick");
+  const [agent, setAgent] = useState<{
+    name: "rick" | "mrburns" | "bender" | "patrick";
+    id: number;
+  }>({ name: "rick", id: 1 });
   const [recommendedSelect, setRecommendedSelect] = useState(-1);
+  const [invalidTopic, setInvalidTopic] = useState(false);
+  const [recommendedTopics, setRecommendedTopics] = useState<string[]>([]);
+  const [generating, setGenerating] = useState(false);
+  const router = useRouter();
+
+  const recommendedNotesQuery = trpc.notes.recommendedNotes.useQuery();
+  const createNoteMutation = trpc.notes.createNote.useMutation({
+    onSuccess: (data) => {
+      if (data) {
+        if (data.valid) {
+          router.push(`/notes/${data.noteId}`);
+        } else {
+          setInvalidTopic(true);
+        }
+      }
+      setGenerating(false);
+    },
+    onError: () => {
+      setGenerating(false);
+    },
+  });
+
+  useEffect(() => {
+    if (recommendedTopics.length === 0) {
+      const recommended = recommendedNotesQuery.data;
+      recommended?.map((note: string) => {
+        setRecommendedTopics((prev) => [...prev, note]);
+      });
+    }
+  }, [recommendedNotesQuery.data]);
 
   return (
     <Dialog>
@@ -31,7 +64,7 @@ export default function AddNote() {
           Generate Note
         </Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent className="rounded-lg sm:max-w-[425px]">
         <DialogHeader>
           <DialogTitle>
             <h3>Generate Note</h3>
@@ -44,56 +77,42 @@ export default function AddNote() {
           <div>
             <p>Recommended for you</p>
             <div className="flex flex-wrap gap-2">
-              <Button
-                className={`transition-all ${
-                  recommendedSelect === 0 ? "border border-primary" : ""
-                }`}
-                onClick={() => setRecommendedSelect(0)}
-                size={"sm"}
-                variant={"secondary"}
-              >
-                Partial Derivatives
-              </Button>
-              <Button
-                className={`transition-all ${
-                  recommendedSelect === 1 ? "border border-primary" : ""
-                }`}
-                onClick={() => setRecommendedSelect(1)}
-                size={"sm"}
-                variant={"secondary"}
-              >
-                Dot Product
-              </Button>
-              <Button
-                className={`transition-all ${
-                  recommendedSelect === 2 ? "border border-primary" : ""
-                }`}
-                onClick={() => setRecommendedSelect(2)}
-                size={"sm"}
-                variant={"secondary"}
-              >
-                Docker
-              </Button>
-              <Button
-                className={`transition-all ${
-                  recommendedSelect === 3 ? "border border-primary" : ""
-                }`}
-                onClick={() => setRecommendedSelect(3)}
-                size={"sm"}
-                variant={"secondary"}
-              >
-                Combinatorics
-              </Button>
+              {recommendedTopics.map((topic, index) => (
+                <Button
+                  key={index}
+                  className={`transition-all ${
+                    recommendedSelect === index ? "border border-primary" : ""
+                  }`}
+                  onClick={() => {
+                    setRecommendedSelect(index);
+                    setInvalidTopic(false);
+                  }}
+                  size={"sm"}
+                  variant={"secondary"}
+                >
+                  {topic}
+                </Button>
+              ))}
+              {recommendedTopics.length === 0 && (
+                <Loader2 className="h-4 w-4 animate-spin" />
+              )}
             </div>
           </div>
-          <div className="flex items-center gap-4 py-4">
+          <div className="flex flex-col justify-center gap-1 py-4">
             <Input
               id="name"
               placeholder="// Multi-Variable Calculus"
               className="col-span-3"
               value={noteInput}
-              onChange={(e) => setNoteInput(e.target.value)}
+              onChange={(e) => {
+                setNoteInput(e.target.value);
+                setRecommendedSelect(-1);
+                setInvalidTopic(false);
+              }}
             />
+            <p className={`hidden text-sm text-destructive`}>
+              'Noah' is not a valid topic
+            </p>
           </div>
         </div>
 
@@ -107,13 +126,13 @@ export default function AddNote() {
             <div
               className={cn(
                 `relative cursor-pointer overflow-hidden rounded-full border border-border bg-secondary transition-all hover:scale-[102%] active:scale-[98%]`,
-                `${agent === "rick" ? "border border-blue" : ""}`,
+                `${agent.name === "rick" ? "border border-blue" : ""}`,
               )}
-              onClick={() => setAgent("rick")}
+              onClick={() => setAgent({ name: "rick", id: 1 })}
             >
               <Image
                 className={`absolute bottom-0 left-0 right-0 top-0 z-0 transition-all ${
-                  agent === "rick" ? "" : "opacity-0"
+                  agent.name === "rick" ? "" : "opacity-0"
                 }`}
                 height={75}
                 width={75}
@@ -131,13 +150,13 @@ export default function AddNote() {
             <div
               className={cn(
                 `relative cursor-pointer overflow-hidden rounded-full border border-border bg-secondary transition-all hover:scale-[102%] active:scale-[98%]`,
-                `${agent === "mrburns" ? "border border-mrburns" : ""}`,
+                `${agent.name === "mrburns" ? "border border-mrburns" : ""}`,
               )}
-              onClick={() => setAgent("mrburns")}
+              onClick={() => setAgent({ name: "mrburns", id: 5 })}
             >
               <Image
                 className={`absolute bottom-0 left-0 right-0 top-0 z-0 transition-all ${
-                  agent === "mrburns" ? "" : "opacity-0"
+                  agent.name === "mrburns" ? "" : "opacity-0"
                 }`}
                 height={75}
                 width={75}
@@ -155,13 +174,13 @@ export default function AddNote() {
             <div
               className={cn(
                 `relative cursor-pointer overflow-hidden rounded-full border border-border bg-secondary transition-all hover:scale-[102%] active:scale-[98%]`,
-                `${agent === "bender" ? "border border-bender" : ""}`,
+                `${agent.name === "bender" ? "border border-bender" : ""}`,
               )}
-              onClick={() => setAgent("bender")}
+              onClick={() => setAgent({ name: "bender", id: 6 })}
             >
               <Image
                 className={`absolute bottom-0 left-0 right-0 top-0 z-0 transition-all ${
-                  agent === "bender" ? "" : "opacity-0"
+                  agent.name === "bender" ? "" : "opacity-0"
                 }`}
                 height={75}
                 width={75}
@@ -179,13 +198,13 @@ export default function AddNote() {
             <div
               className={cn(
                 `relative cursor-pointer overflow-hidden rounded-full border border-border bg-secondary transition-all hover:scale-[102%] active:scale-[98%]`,
-                `${agent === "patrick" ? "border border-patrick" : ""}`,
+                `${agent.name === "patrick" ? "border border-patrick" : ""}`,
               )}
-              onClick={() => setAgent("patrick")}
+              onClick={() => setAgent({ name: "patrick", id: 4 })}
             >
               <Image
                 className={`absolute bottom-0 left-0 right-0 top-0 z-0 transition-all ${
-                  agent === "patrick" ? "" : "opacity-0"
+                  agent.name === "patrick" ? "" : "opacity-0"
                 }`}
                 height={75}
                 width={75}
@@ -206,11 +225,23 @@ export default function AddNote() {
           <Button
             className="flex items-center gap-2"
             disabled={
-              (noteInput === "" && recommendedSelect === -1) || agent === ""
+              (noteInput === "" && recommendedSelect === -1) ||
+              invalidTopic ||
+              generating
             }
+            onClick={() => {
+              setGenerating(true);
+              createNoteMutation.mutate({
+                agentId: agent.id,
+                title:
+                  noteInput === ""
+                    ? recommendedTopics[recommendedSelect]!
+                    : noteInput,
+              });
+            }}
             type="submit"
           >
-            Generate
+            {generating ? "Generating" : "Generate"}
             <Wand className="h-4 w-4" />
           </Button>
         </DialogFooter>
