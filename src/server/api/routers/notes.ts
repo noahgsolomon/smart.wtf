@@ -9,6 +9,55 @@ const openai = new OpenAI({
 });
 
 export const notesRouter = createTRPCRouter({
+  createImage: protectedProcedure
+    .input(z.object({ title: z.string(), id: z.number() }))
+    .mutation(async ({ ctx, input: { title, id } }) => {
+      const imagePrompt = async (title: string) => {
+        try {
+          const response = await openai.chat.completions.create({
+            model: "ft:gpt-3.5-turbo-1106:personal::8TEhcfKm",
+            messages: [
+              {
+                role: "user",
+                content: title,
+              },
+            ],
+          });
+
+          return response.choices[0]?.message.content;
+        } catch (error) {
+          console.error("Error fetching data:", error);
+        }
+      };
+
+      const imageGeneration = async (prompt: string) => {
+        const detailed8BitPreface =
+          "Create an image in a detailed retro 8-bit style. The artwork should have a pixelated texture and should have vibrant coloring and scenery.";
+
+        const fullPrompt = `${detailed8BitPreface} ${prompt} Remember, this is in retro 8-bit style`;
+
+        const responseFetch = await openai.images.generate({
+          model: "dall-e-3",
+          prompt: fullPrompt,
+          n: 1,
+          size: "1792x1024",
+          quality: "hd",
+          style: "vivid",
+          response_format: "url",
+          user: "user-1234",
+        });
+
+        return responseFetch.data[0]?.url;
+      };
+
+      const imageUrl = await imageGeneration((await imagePrompt(title)) ?? "");
+      console.log(imageUrl);
+
+      await ctx.db.update(notes).set({ imageUrl }).where(eq(notes.id, id));
+
+      return { imageUrl };
+    }),
+
   createNote: protectedProcedure
     .input(z.object({ title: z.string(), agentId: z.number() }))
     .mutation(async ({ ctx, input: { title, agentId } }) => {
