@@ -38,7 +38,7 @@ export const useRegenerate = ({
   }, [done]);
 
   useEffect(() => {
-    const images = (markdown.match(/image-\d-asset/g) ?? [])
+    const images = (markdown?.match(/image-\d-asset/g) ?? [])
       .map((asset: string) => {
         const regex = new RegExp(`\\!\\[(.*?)\\]\\(${asset}\\)`, "g");
         const match = regex.exec(markdown);
