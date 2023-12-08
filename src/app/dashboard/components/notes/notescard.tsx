@@ -25,7 +25,10 @@ const NotesCard = ({ note }: { note: SingleNoteType }) => {
             />
             <div className="relative h-[325px] w-[325px] overflow-hidden transition-all duration-300 group-hover:scale-[105%]">
               <Image
-                src={note.imageUrl ?? ""}
+                src={
+                  note.imageUrl ??
+                  `/generating${Math.floor(Math.random() * 4)}.gif`
+                }
                 layout="fill"
                 objectFit="cover"
                 className="rounded-t-lg"
