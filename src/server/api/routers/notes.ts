@@ -107,7 +107,6 @@ export const notesRouter = createTRPCRouter({
     });
 
     try {
-      console.log(userNotes.map((note) => note.title).join(", "));
       const response = await openai.chat.completions.create({
         model: "gpt-3.5-turbo-1106",
         messages: [

@@ -44,6 +44,7 @@ export default function Page({ params }: { params: { noteId: string } }) {
   const { openNotes, setOpenNotes, setUserNotes } = useNoteContext();
   const [note, setNote] = useState<Note | null>(null);
   const [readingMode, setReadingMode] = useState<"normal" | "agent">("normal");
+  const [imageSrc, setImageSrc] = useState<string | null>(null);
 
   const [markdown, setMarkdown] = useState("");
   const [agentMarkdown, setAgentMarkdown] = useState("");
@@ -80,11 +81,31 @@ export default function Page({ params }: { params: { noteId: string } }) {
     setMarkdown: setMarkdown,
   });
 
+  const [hasRegenerated, setHasRegenerated] = useState(false);
+  const [hasAgentRegenerated, setHasAgentRegenerated] = useState(false);
+
+  useEffect(() => {
+    if (note && note.id && note.title && !hasRegenerated && !note.markdown) {
+      setHasRegenerated(true);
+      handleRegenerate();
+    }
+    if (
+      note &&
+      note.id &&
+      note.title &&
+      !hasAgentRegenerated &&
+      !note.agents_markdown
+    ) {
+      setHasAgentRegenerated(true);
+      agentHandleRegenerate();
+    }
+  }, [note, markdown, agentMarkdown, handleRegenerate, agentHandleRegenerate]);
+
   const createImageMutation = trpc.notes.createImage.useMutation({
     onSuccess: (data) => {
-      setNote((prev) =>
-        prev ? { ...prev, imageUrl: data.imageUrl ?? "" } : null,
-      );
+      setImageSrc(data.imageUrl!);
+      console.log("Success:", data);
+      setNote((prev) => (prev ? { ...prev, imageUrl: data.imageUrl! } : null));
     },
   });
 
@@ -105,11 +126,9 @@ export default function Page({ params }: { params: { noteId: string } }) {
           id: note.id,
           title: note.title,
         });
+      } else if (note.imageUrl) {
+        setImageSrc(note.imageUrl);
       }
-
-      // if (!note.markdown ) {
-      //   handleRegenerate();
-      // }
 
       const noteId = parseInt(params.noteId);
       if (!openNotes.some((openNote) => openNote.id === noteId)) {
@@ -172,20 +191,30 @@ export default function Page({ params }: { params: { noteId: string } }) {
         >
           <div className="flex flex-col gap-8 pt-[3rem]">
             <div className="relative h-[250px] w-full overflow-hidden md:h-[350px]">
-              <Image
-                layout="fill"
-                objectFit="cover"
-                src={note?.imageUrl ? note.imageUrl : generatedGif}
-                alt={"note image"}
-                className="border-b border-border"
-              />
-              {!note?.imageUrl && (
-                <div className="absolute bottom-0 left-0 right-0 top-0 flex flex-row items-center justify-center gap-1">
-                  <div className="flex flex-col items-center rounded-lg border border-border bg-secondary p-2 opacity-60">
-                    <p>Crafting image</p>
-                    <Loader2 className="h-8 w-8 animate-spin" />
+              {imageSrc ? (
+                <Image
+                  layout="fill"
+                  objectFit="cover"
+                  src={imageSrc}
+                  alt={"note image"}
+                  className="border-b border-border"
+                />
+              ) : (
+                <>
+                  <Image
+                    layout="fill"
+                    objectFit="cover"
+                    src={generatedGif}
+                    alt={"note image"}
+                    className="border-b border-border"
+                  />
+                  <div className="absolute bottom-0 left-0 right-0 top-0 flex flex-row items-center justify-center gap-1">
+                    <div className="flex flex-col items-center rounded-lg border border-border bg-secondary p-2 opacity-60">
+                      <p>Crafting image</p>
+                      <Loader2 className="h-8 w-8 animate-spin" />
+                    </div>
                   </div>
-                </div>
+                </>
               )}
             </div>
 
