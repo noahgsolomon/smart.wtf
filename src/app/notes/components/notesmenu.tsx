@@ -3,8 +3,7 @@
 import AddNote from "@/app/dashboard/components/notes/addnote";
 import { Input } from "@/components/ui/input";
 import { trpc } from "@/trpc/client";
-import { Note, NoteCategories } from "@/types";
-import { AnimatePresence, motion } from "framer-motion";
+import { type Note, type NoteCategories } from "@/types";
 import {
   ChevronDown,
   ChevronRight,
