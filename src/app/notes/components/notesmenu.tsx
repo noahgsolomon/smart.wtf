@@ -91,7 +91,7 @@ export default function NotesMenu() {
           <AddNote />
         </div>
         <div className="relative ">
-          <Input placeholder="search here" value={""} />
+          <Input className="shadow-none" placeholder="search here" value={""} />
           <Search className="absolute right-2 top-2 h-4 w-4" />
         </div>
         <div className="flex max-h-[400px] flex-col gap-2 overflow-y-auto overflow-x-hidden">
@@ -124,14 +124,106 @@ export default function NotesMenu() {
                         <>
                           <ChevronDown className="h-4 w-4" />
                           <FolderOpen
-                            className={`h-6 w-6 fill-${categoryTailwindFormatted}/50 text-${categoryTailwindFormatted}`}
+                            className={`h-6 w-6 ${
+                              category === "ENGLISH"
+                                ? "fill-english/50 text-english"
+                                : category === "MATH"
+                                ? "fill-math/50 text-math"
+                                : category === "SCIENCE"
+                                ? "fill-science/50 text-science"
+                                : category === "HISTORY"
+                                ? "fill-history/50 text-history"
+                                : category === "ARTS"
+                                ? "fill-arts/50 text-arts"
+                                : category === "MUSIC"
+                                ? "fill-music/50 text-music"
+                                : category === "LITERATURE"
+                                ? "fill-literature/50 text-literature"
+                                : category === "PHILOSOPHY"
+                                ? "fill-philosophy/50 text-philosophy"
+                                : category === "GEOGRAPHY"
+                                ? "fill-geography/50 text-geography"
+                                : category === "SOCIAL STUDIES"
+                                ? "fill-socialStudies/50 text-socialStudies"
+                                : category === "PHYSICAL EDUCATION"
+                                ? "fill-physicalEducation/50 text-physicalEducation"
+                                : category === "COMPUTER SCIENCE"
+                                ? "fill-computerScience/50 text-computerScience"
+                                : category === "ECONOMICS"
+                                ? "fill-economics/50 text-economics"
+                                : category === "BUSINESS STUDIES"
+                                ? "fill-businessStudies/50 text-businessStudies"
+                                : category === "PSYCHOLOGY"
+                                ? "fill-psychology/50 text-psychology"
+                                : category === "LAW"
+                                ? "fill-law/50 text-law"
+                                : category === "POLITICAL SCIENCE"
+                                ? "fill-politicalScience/50 text-politicalScience"
+                                : category === "ENVIRONMENTAL SCIENCE"
+                                ? "fill-environmentalScience/50 text-environmentalScience"
+                                : category === "ENGINEERING"
+                                ? "fill-engineering/50 text-engineering"
+                                : category === "MEDICINE"
+                                ? "fill-medicine/50 text-medicine"
+                                : category === "AGRICULTURE"
+                                ? "fill-agriculture/50 text-agriculture"
+                                : category === "ASTRONOMY"
+                                ? "fill-astronomy/50 text-astronomy"
+                                : ""
+                            }`}
                           />
                         </>
                       ) : (
                         <>
                           <ChevronRight className="h-4 w-4" />
                           <Folder
-                            className={`h-6 w-6 fill-${categoryTailwindFormatted}/50 text-${categoryTailwindFormatted}`}
+                            className={`h-6 w-6 ${
+                              category === "ENGLISH"
+                                ? "fill-english/50 text-english"
+                                : category === "MATH"
+                                ? "fill-math/50 text-math"
+                                : category === "SCIENCE"
+                                ? "fill-science/50 text-science"
+                                : category === "HISTORY"
+                                ? "fill-history/50 text-history"
+                                : category === "ARTS"
+                                ? "fill-arts/50 text-arts"
+                                : category === "MUSIC"
+                                ? "fill-music/50 text-music"
+                                : category === "LITERATURE"
+                                ? "fill-literature/50 text-literature"
+                                : category === "PHILOSOPHY"
+                                ? "fill-philosophy/50 text-philosophy"
+                                : category === "GEOGRAPHY"
+                                ? "fill-geography/50 text-geography"
+                                : category === "SOCIAL STUDIES"
+                                ? "fill-socialStudies/50 text-socialStudies"
+                                : category === "PHYSICAL EDUCATION"
+                                ? "fill-physicalEducation/50 text-physicalEducation"
+                                : category === "COMPUTER SCIENCE"
+                                ? "fill-computerScience/50 text-computerScience"
+                                : category === "ECONOMICS"
+                                ? "fill-economics/50 text-economics"
+                                : category === "BUSINESS STUDIES"
+                                ? "fill-businessStudies/50 text-businessStudies"
+                                : category === "PSYCHOLOGY"
+                                ? "fill-psychology/50 text-psychology"
+                                : category === "LAW"
+                                ? "fill-law/50 text-law"
+                                : category === "POLITICAL SCIENCE"
+                                ? "fill-politicalScience/50 text-politicalScience"
+                                : category === "ENVIRONMENTAL SCIENCE"
+                                ? "fill-environmentalScience/50 text-environmentalScience"
+                                : category === "ENGINEERING"
+                                ? "fill-engineering/50 text-engineering"
+                                : category === "MEDICINE"
+                                ? "fill-medicine/50 text-medicine"
+                                : category === "AGRICULTURE"
+                                ? "fill-agriculture/50 text-agriculture"
+                                : category === "ASTRONOMY"
+                                ? "fill-astronomy/50 text-astronomy"
+                                : ""
+                            }`}
                           />
                         </>
                       )}
@@ -164,7 +256,7 @@ export default function NotesMenu() {
                               href={`/notes/${note.id}`}
                               className="flex cursor-pointer flex-row items-center gap-2 rounded-lg border border-border p-2 transition-all hover:-translate-y-0.5"
                             >
-                              <StickyNote className="text-sticky/80 fill-sticky/40 h-4 w-4" />
+                              <StickyNote className="h-4 w-4 fill-sticky/40 text-sticky/80" />
                               <h5 className="font-bold">
                                 {note.title.length > 20
                                   ? `${note.title.slice(0, 20)}...`
