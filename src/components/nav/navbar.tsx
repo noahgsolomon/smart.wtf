@@ -112,6 +112,31 @@ const NavBar = () => {
             }
           />
         )} */}
+
+            <div className="flex flex-row items-center gap-8">
+              <Link
+                className={cn(
+                  buttonVariants({
+                    variant: "link",
+                  }),
+                  "text-lg font-bold",
+                )}
+                href={""}
+              >
+                Notes
+              </Link>
+              <Link
+                className={cn(
+                  buttonVariants({
+                    variant: "link",
+                  }),
+                  "text-lg font-bold",
+                )}
+                href={""}
+              >
+                Learning Paths
+              </Link>
+            </div>
             <div className="flex items-center justify-end gap-4">
               <ThemeButton />
               {userId ? (
