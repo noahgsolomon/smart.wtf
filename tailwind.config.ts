@@ -17,6 +17,7 @@ module.exports = {
     },
     extend: {
       colors: {
+        sticky: "hsl(var(--sticky))",
         english: "hsl(var(--english))",
         math: "hsl(var(--math))",
         science: "hsl(var(--science))",
