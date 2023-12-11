@@ -27,11 +27,33 @@ html {
     --accent-foreground: 222.2 47.4% 11.2%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
+    --english: 208 100% 65%;
+    --math: 0 100% 65%;
+    --science: 120 100% 65%;
+    --history: 30 100% 65%;
+    --arts: 300 100% 65%;
+    --music: 260 100% 65%;
+    --literature: 280 100% 65%;
+    --philosophy: 60 100% 65%;
+    --geography: 90 100% 65%;
+    --social-studies: 210 100% 65%;
+    --physical-education: 10 100% 65%;
+    --computer-science: 180 100% 65%;
+    --economics: 150 100% 65%;
+    --business-studies: 170 100% 65%;
+    --psychology: 340 100% 65%;
+    --law: 20 100% 65%;
+    --political-science: 40 100% 65%;
+    --environmental-science: 70 100% 65%;
+    --engineering: 200 100% 65%;
+    --medicine: 220 100% 65%;
+    --agriculture: 140 100% 65%;
+    --astronomy: 240 100% 65%;
 
-    --rick: 208, 100%, 50%;
-    --patrick: 350, 100%, 71%;
-    --mrburns: 54, 100%, 50%;
-    --bender: 0, 0%, 50%;
+    --rick: 208 100% 50%;
+    --patrick: 350 100% 71%;
+    --mrburns: 54 100% 50%;
+    --bender: 0 0% 50%;
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
     --ring: 222.2 84% 4.9%;
@@ -105,6 +127,29 @@ html {
     --patrick: 350, 100%, 71%;
     --mrburns: 54, 100%, 50%;
     --bender: 0, 0%, 50%;
+
+    --english: 208 100% 80%;
+    --math: 0 100% 80%;
+    --science: 120 100% 80%;
+    --history: 30 100% 80%;
+    --arts: 300 100% 80%;
+    --music: 260 100% 80%;
+    --literature: 280 100% 80%;
+    --philosophy: 60 100% 80%;
+    --geography: 90 100% 80%;
+    --social-studies: 210 100% 80%;
+    --physical-education: 10 100% 80%;
+    --computer-science: 180 100% 80%;
+    --economics: 150 100% 80%;
+    --business-studies: 170 100% 80%;
+    --psychology: 340 100% 80%;
+    --law: 20 100% 80%;
+    --political-science: 40 100% 80%;
+    --environmental-science: 70 100% 80%;
+    --engineering: 200 100% 80%;
+    --medicine: 220 100% 80%;
+    --agriculture: 140 100% 80%;
+    --astronomy: 240 100% 80%;
 
     /* Lighter shade of blue for dark theme */
     --link-hover: 210 80% 61%;
