@@ -61,7 +61,7 @@ export default function AddNote() {
       <DialogTrigger asChild>
         <Button className="flex flex-row gap-2">
           <PlusIcon className="h-4 w-4" />
-          Generate Note
+          Generate
         </Button>
       </DialogTrigger>
       <DialogContent className="rounded-lg sm:max-w-[425px]">
