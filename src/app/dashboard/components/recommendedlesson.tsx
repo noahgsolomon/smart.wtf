@@ -12,16 +12,15 @@ export default function RecommendedLesson() {
   const [click] = useSound("/click.mp3", { volume: 0.5 });
 
   return (
-    <div className="flex flex-col gap-2">
-      <h4>Recommended lesson</h4>
-      <div className="flex">
-        <div className="flex flex-col gap-4 rounded-lg border border-border bg-card p-4">
-          <div className="">
+    <div className="flex w-full flex-col items-center gap-2 md:w-auto">
+      <div className="flex w-full">
+        <div className="flex w-full flex-col gap-4 rounded-lg border border-border bg-card p-4 md:w-auto">
+          <div className="w-full md:w-[400px]">
             <Image
               src={"https://images.codefoli.com/systems-design-1-1.png"}
               alt="lesson"
-              width={400}
-              className="rounded-lg "
+              width={700}
+              className="w-full rounded-lg"
               height={200}
             />
           </div>
