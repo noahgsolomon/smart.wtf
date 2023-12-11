@@ -6,6 +6,7 @@ import LatestActivity from "./components/latestactivity";
 import Streak from "./components/streak";
 import Notes from "./components/notes/notes";
 import { Folder } from "lucide-react";
+import NotesMenu from "../notes/components/notesmenu";
 
 const Dashboard = async () => {
   const user = (await api.user.user.query()).user;
@@ -65,21 +66,13 @@ const Dashboard = async () => {
           <div className="flex flex-col gap-12">
             <Suspense fallback={<CourseSkeleton />}>
               <Notes />
-              <div className="flex flex-wrap gap-16">
-                <div className="relative">
-                  <Folder className="h-32 w-32  fill-red-100 text-destructive" />
-                  <p className="absolute right-10 top-14 text-lg font-bold">
-                    Math
-                  </p>
-                </div>
-                <Folder className="h-32 w-32 fill-lightBlue text-blue" />
-                <Folder className="h-32 w-32 fill-green-100 text-green-500" />
-                <Folder className="h-32 w-32 fill-purple-100 text-purple-500" />
-              </div>
             </Suspense>
           </div>
         </section>
       </main>
+      <div className="flex flex-row">
+        <NotesMenu />
+      </div>
     </>
   );
 };
