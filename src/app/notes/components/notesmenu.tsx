@@ -2,22 +2,90 @@
 
 import AddNote from "@/app/dashboard/components/notes/addnote";
 import { Input } from "@/components/ui/input";
+import { trpc } from "@/trpc/client";
+import { Note, NoteCategories } from "@/types";
 import { AnimatePresence, motion } from "framer-motion";
-import { ChevronDown, Folder, Hash, Search } from "lucide-react";
+import {
+  ChevronDown,
+  ChevronRight,
+  Folder,
+  FolderOpen,
+  Hash,
+  Search,
+  StickyNote,
+} from "lucide-react";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function NotesMenu() {
-  const [isMathOpen, setIsMathOpen] = useState(false);
-
-  const toggleMath = () => {
-    setIsMathOpen(!isMathOpen);
+  const initialCategories = {
+    ENGLISH: 0,
+    MATH: 0,
+    SCIENCE: 0,
+    HISTORY: 0,
+    ARTS: 0,
+    MUSIC: 0,
+    LITERATURE: 0,
+    PHILOSOPHY: 0,
+    GEOGRAPHY: 0,
+    "SOCIAL STUDIES": 0,
+    "PHYSICAL EDUCATION": 0,
+    "COMPUTER SCIENCE": 0,
+    ECONOMICS: 0,
+    "BUSINESS STUDIES": 0,
+    PSYCHOLOGY: 0,
+    LAW: 0,
+    "POLITICAL SCIENCE": 0,
+    "ENVIRONMENTAL SCIENCE": 0,
+    ENGINEERING: 0,
+    MEDICINE: 0,
+    AGRICULTURE: 0,
+    ASTRONOMY: 0,
   };
 
+  const [categoryOpenState, setCategoryOpenState] = useState<{
+    [key in NoteCategories]: boolean;
+  }>(
+    Object.keys(initialCategories).reduce(
+      (acc, category) => {
+        acc[category as NoteCategories] = false;
+        return acc;
+      },
+      {} as { [key in NoteCategories]: boolean },
+    ),
+  );
+
+  const toggleCategory = (category: NoteCategories) => {
+    setCategoryOpenState((prevState) => ({
+      ...prevState,
+      [category]: !prevState[category],
+    }));
+  };
+
+  const getUserNotesQuery = trpc.notes.getUserNotes.useQuery();
+
+  const [notes, setNotes] = useState<Note[]>([]);
+
+  const [presentCategories, setPresentCategories] =
+    useState<{ [key in NoteCategories]: number }>(initialCategories);
+
+  useEffect(() => {
+    setNotes(getUserNotesQuery.data?.notes ?? []);
+
+    const categoryCounts = { ...presentCategories };
+    for (const note of getUserNotesQuery.data?.notes ?? []) {
+      if (note.category in categoryCounts) {
+        categoryCounts[note.category as NoteCategories]++;
+      }
+    }
+
+    setPresentCategories(categoryCounts);
+  }, [getUserNotesQuery.data?.notes]);
+
   return (
-    <div className="mb-24 ml-24 rounded-lg border border-border bg-card p-4">
+    <div className="min-h-[475px] rounded-lg border border-border bg-card p-4">
       <div className="flex flex-col gap-2">
-        <div className="flex flex-row items-center gap-8 border-b border-border pb-2">
+        <div className="flex flex-row  items-center gap-4 border-b border-border pb-2 md:gap-4 lg:gap-8">
           <h1>Notes</h1>
           <div>|</div>
           <AddNote />
@@ -27,153 +95,99 @@ export default function NotesMenu() {
           <Search className="absolute right-2 top-2 h-4 w-4" />
         </div>
         <div className="flex max-h-[400px] flex-col gap-2 overflow-y-auto overflow-x-hidden">
-          <div>
-            <div
-              onClick={toggleMath}
-              className="group flex cursor-pointer flex-row items-center justify-between rounded-lg border border-border bg-secondary p-2 transition-all hover:bg-secondary/80"
-            >
-              <div className="flex flex-row items-center gap-2">
-                <ChevronDown className="h-4 w-4" />
-                <Folder className="h-6 w-6 fill-math/50 text-math " />
-                Math
-              </div>
-              <div className="flex flex-row items-center gap-2 ">
-                <Hash className="h-4 w-4" />1
-              </div>
-            </div>
-            {isMathOpen && (
-              <div
-                className={`transition-max-height duration-500 ease-in-out ${
-                  isMathOpen ? "max-h-[1000px]" : "max-h-0"
-                }`}
-                style={{ overflow: "hidden" }}
-              >
-                <div className="flex flex-col gap-2 py-2 pl-8">
-                  <div className="flex cursor-pointer flex-row items-center gap-6 rounded-lg border border-border p-1 transition-all hover:-translate-y-0.5">
-                    <Image
-                      className="rounded-lg border border-border"
-                      width={75}
-                      height={75}
-                      src={"https://images.smart.wtf/note-1-image.png"}
-                      alt="note"
-                    />
-                    <h5 className="font-bold">Partial Derivatives</h5>
+          {Object.entries(presentCategories).map(([category, count]) => {
+            if (count === 0) {
+              return null;
+            }
+
+            const categoryTailwindFormatted = category
+              .toLowerCase()
+              .split(" ")
+              .map((word, index) =>
+                index === 0
+                  ? word
+                  : word.charAt(0).toUpperCase() + word.slice(1),
+              )
+              .join("");
+
+            console.log(categoryTailwindFormatted);
+
+            return (
+              <>
+                <div>
+                  <div
+                    onClick={() => toggleCategory(category as NoteCategories)}
+                    className="group flex cursor-pointer flex-row items-center justify-between rounded-lg border border-border bg-secondary p-2 transition-all hover:bg-secondary/80"
+                  >
+                    <div className={` flex flex-row items-center gap-2`}>
+                      {categoryOpenState[category as NoteCategories] ? (
+                        <>
+                          <ChevronDown className="h-4 w-4" />
+                          <FolderOpen
+                            className={`h-6 w-6 fill-${categoryTailwindFormatted}/50 text-${categoryTailwindFormatted}`}
+                          />
+                        </>
+                      ) : (
+                        <>
+                          <ChevronRight className="h-4 w-4" />
+                          <Folder
+                            className={`h-6 w-6 fill-${categoryTailwindFormatted}/50 text-${categoryTailwindFormatted}`}
+                          />
+                        </>
+                      )}
+                      {category
+                        .toLowerCase()
+                        .split(" ")
+                        .map(
+                          (word) =>
+                            word.charAt(0).toUpperCase() + word.slice(1),
+                        )
+                        .join(" ")}
+                    </div>
+                    <div className="flex flex-row items-center gap-2 ">
+                      <Hash className="h-4 w-4" />
+                      {count}
+                    </div>
                   </div>
-                  <div className="flex cursor-pointer flex-row items-center gap-6 rounded-lg border border-border p-1 transition-all hover:-translate-y-0.5">
-                    <Image
-                      className="rounded-lg border border-border"
-                      width={75}
-                      height={75}
-                      src={"https://images.smart.wtf/note-1-image.png"}
-                      alt="note"
-                    />
-                    <h5 className="font-bold">Partial Derivatives</h5>
+                  <div
+                    className={`${
+                      categoryOpenState[category as NoteCategories]
+                        ? ""
+                        : "hidden"
+                    }`}
+                  >
+                    <div className="flex flex-col gap-2 py-2 pl-8">
+                      {notes.map((note) => (
+                        <>
+                          {note.category === category && (
+                            <div className="flex cursor-pointer flex-row items-center gap-2 rounded-lg border border-border p-2 transition-all hover:-translate-y-0.5">
+                              <StickyNote className="text-sticky/80 fill-sticky/40 h-4 w-4" />
+                              <h5 className="font-bold">
+                                {note.title.length > 20
+                                  ? `${note.title.slice(0, 20)}...`
+                                  : note.title}
+                              </h5>{" "}
+                            </div>
+                          )}
+                        </>
+                      ))}
+                    </div>
                   </div>
                 </div>
-              </div>
-            )}
-          </div>
-
-          <div className="group flex cursor-pointer flex-row items-center gap-2 rounded-lg border border-border bg-secondary p-2 transition-all hover:bg-secondary/80">
-            <ChevronDown className=" h-4 w-4" />
-            <Folder className="h-6 w-6 fill-computerScience/50 text-computerScience" />
-            Computer Science
-          </div>
-          <div className="group flex cursor-pointer flex-row items-center gap-2 rounded-lg border border-border bg-secondary p-2 transition-all hover:bg-secondary/80">
-            <ChevronDown className="h-4 w-4" />
-            <Folder className="h-6 w-6 fill-socialStudies/50 text-socialStudies" />
-            Social Studies
-          </div>
-          <div className="group flex cursor-pointer flex-row items-center gap-2 rounded-lg border border-border bg-secondary p-2 transition-all hover:bg-secondary/80">
-            <ChevronDown className="h-4 w-4" />
-            <Folder className="h-6 w-6 fill-geography/50 text-geography" />
-            Geography
-          </div>
-          {/* <div className="group flex cursor-pointer flex-row items-center gap-2 rounded-lg border border-border bg-secondary p-2 transition-all hover:bg-secondary/80">
-            <ChevronDown className="h-4 w-4" />
-            <Folder className="text-philosophy fill-philosophy/50 h-6 w-6" />
-            philosophy
-          </div>
-          <div className="group flex cursor-pointer flex-row items-center gap-2 rounded-lg border border-border bg-secondary p-2 transition-all hover:bg-secondary/80">
-            <ChevronDown className="h-4 w-4" />
-            <Folder className="text-literature fill-literature/50 h-6 w-6" />
-            literature
-          </div>
-          <div className="group flex cursor-pointer flex-row items-center gap-2 rounded-lg border border-border bg-secondary p-2 transition-all hover:bg-secondary/80">
-            <ChevronDown className="h-4 w-4" />
-            <Folder className="text-music fill-music/50 h-6 w-6" />
-            Music
-          </div>
-          <div className="group flex cursor-pointer flex-row items-center gap-2 rounded-lg border border-border bg-secondary p-2 transition-all hover:bg-secondary/80">
-            <ChevronDown className="h-4 w-4" />
-            <Folder className="text-arts fill-arts/50 h-6 w-6" />
-            Arts
-          </div>
-          <div className="group flex cursor-pointer flex-row items-center gap-2 rounded-lg border border-border bg-secondary p-2 transition-all hover:bg-secondary/80">
-            <ChevronDown className="h-4 w-4" />
-            <Folder className="text-history fill-history/50 h-6 w-6" />
-            History
-          </div>
-          <div className="group flex cursor-pointer flex-row items-center gap-2 rounded-lg border border-border bg-secondary p-2 transition-all hover:bg-secondary/80">
-            <ChevronDown className="h-4 w-4" />
-            <Folder className="text-science fill-science/50 h-6 w-6" />
-            Science
-          </div>
-          <div className="group flex cursor-pointer flex-row items-center gap-2 rounded-lg border border-border bg-secondary p-2 transition-all hover:bg-secondary/80">
-            <ChevronDown className="h-4 w-4" />
-            <Folder className="text-physicalEducation fill-physicalEducation/50 h-6 w-6" />
-            physicalEducation
-          </div>
-          <div className="group flex cursor-pointer flex-row items-center gap-2 rounded-lg border border-border bg-secondary p-2 transition-all hover:bg-secondary/80">
-            <ChevronDown className="h-4 w-4" />
-            <Folder className="text-economics fill-economics/50 h-6 w-6" />
-            economics
-          </div>
-          <div className="group flex cursor-pointer flex-row items-center gap-2 rounded-lg border border-border bg-secondary p-2 transition-all hover:bg-secondary/80">
-            <ChevronDown className="h-4 w-4" />
-            <Folder className="text-businessStudies fill-businessStudies/50 h-6 w-6" />
-            businessStudies
-          </div>
-          <div className="group flex cursor-pointer flex-row items-center gap-2 rounded-lg border border-border bg-secondary p-2 transition-all hover:bg-secondary/80">
-            <ChevronDown className="h-4 w-4" />
-            <Folder className="text-psychology fill-psychology/50 h-6 w-6" />
-            psychology
-          </div>
-          <div className="group flex cursor-pointer flex-row items-center gap-2 rounded-lg border border-border bg-secondary p-2 transition-all hover:bg-secondary/80">
-            <ChevronDown className="h-4 w-4" />
-            <Folder className="text-law fill-law/50 h-6 w-6" />
-            law
-          </div>
-          <div className="group flex cursor-pointer flex-row items-center gap-2 rounded-lg border border-border bg-secondary p-2 transition-all hover:bg-secondary/80">
-            <ChevronDown className="h-4 w-4" />
-            <Folder className="text-politicalScience fill-politicalScience/50 h-6 w-6" />
-            politicalScience
-          </div>
-          <div className="group flex cursor-pointer flex-row items-center gap-2 rounded-lg border border-border bg-secondary p-2 transition-all hover:bg-secondary/80">
-            <ChevronDown className="h-4 w-4" />
-            <Folder className="text-environmentalScience fill-environmentalScience/50 h-6 w-6" />
-            environmentalScience
-          </div>
-          <div className="group flex cursor-pointer flex-row items-center gap-2 rounded-lg border border-border bg-secondary p-2 transition-all hover:bg-secondary/80">
-            <ChevronDown className="h-4 w-4" />
-            <Folder className="text-engineering fill-engineering/50 h-6 w-6" />
-            engineering
-          </div>
-          <div className="group flex cursor-pointer flex-row items-center gap-2 rounded-lg border border-border bg-secondary p-2 transition-all hover:bg-secondary/80">
-            <ChevronDown className="h-4 w-4" />
-            <Folder className="text-medicine fill-medicine/50 h-6 w-6" />
-            medicine
-          </div>
-          <div className="group flex cursor-pointer flex-row items-center gap-2 rounded-lg border border-border bg-secondary p-2 transition-all hover:bg-secondary/80">
-            <ChevronDown className="h-4 w-4" />
-            <Folder className="text-agriculture fill-agriculture/50 h-6 w-6" />
-            agriculture
-          </div>
-          <div className="group flex cursor-pointer flex-row items-center gap-2 rounded-lg border border-border bg-secondary p-2 transition-all hover:bg-secondary/80">
-            <ChevronDown className="h-4 w-4" />
-            <Folder className="text-astronomy fill-astronomy/50 h-6 w-6" />
-            astronomy
-          </div> */}
+              </>
+            );
+          })}
+          {notes.length === 0 && (
+            <div className="flex flex-col items-center gap-2">
+              <p className="text-xl">no notes.</p>
+              <Image
+                src={"/sadface.png"}
+                width={48}
+                height={48}
+                alt="sad face"
+              />
+            </div>
+          )}
         </div>
       </div>
     </div>
