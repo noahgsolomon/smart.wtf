@@ -1,11 +1,6 @@
 import { api } from "@/trpc/server";
-import Courses from "./components/courses/courses";
-import { Suspense } from "react";
-import { CourseSkeleton } from "./components/courses/courseskeleton";
 import LatestActivity from "./components/latestactivity";
 import Streak from "./components/streak";
-import Notes from "./components/notes/notes";
-import { Folder } from "lucide-react";
 import NotesMenu from "../notes/components/notesmenu";
 
 const Dashboard = async () => {
@@ -13,9 +8,9 @@ const Dashboard = async () => {
 
   return (
     <>
-      <main className="mx-5 mt-20 md:mx-10 lg:mx-36">
+      <main className="mx-5 mt-20 transition-all lg:mx-24 2xl:mx-80">
         <section className="py-10">
-          <div className="flex flex-col justify-between gap-8">
+          <div className="flex flex-col gap-8">
             <div className="flex flex-row items-center gap-2">
               <h3 className="text-4xl">
                 Welcome back,{" "}
@@ -25,54 +20,31 @@ const Dashboard = async () => {
                 }`}
               </h3>
             </div>
-            <LatestActivity />
 
-            {/* <div>
-                <Link
-                  href="/chat"
-                  className={cn(
-                    buttonVariants({
-                      variant: "outline",
-                      className: "flex flex-row gap-2 py-6",
-                    }),
-                    "flex max-w-[350px] flex-row transition-all ",
-                  )}
-                >
-                  <Avatar className="h-[40px] w-[40px] border border-border">
-                    <AvatarImage
-                      className={`object-cover transition-all`}
-                      src={"https://images.codefoli.com/professorquantum.png"}
-                    />
-                    <AvatarFallback>{"AI"}</AvatarFallback>
-                  </Avatar>
-                  Chat with Professor Quantum
-                  <MessageSquare className="h-4 w-4" />
-                </Link>
-              </div> */}
+            <div className="flex flex-col gap-16 md:gap-4">
+              <div className="flex flex-col gap-16 transition-all md:flex-row md:gap-4">
+                <div className="flex flex-col">
+                  <LatestActivity />
+                </div>
 
-            <div className="flex max-w-[700px] flex-col gap-2 md:w-[60%]">
-              <Streak />
+                <div className="flex flex-col">
+                  <NotesMenu />
+                </div>
+              </div>
+              <div className="flex max-w-[775px] flex-col gap-2">
+                <Streak />
+              </div>
             </div>
           </div>
         </section>
-        <section className="py-10">
+        {/* <section className="py-10">
           <div className="flex flex-col gap-12">
             <Suspense fallback={<CourseSkeleton />}>
               <Courses />
             </Suspense>
           </div>
-        </section>
-        <section className="pb-32 pt-10">
-          <div className="flex flex-col gap-12">
-            <Suspense fallback={<CourseSkeleton />}>
-              <Notes />
-            </Suspense>
-          </div>
-        </section>
+        </section> */}
       </main>
-      <div className="flex flex-row">
-        <NotesMenu />
-      </div>
     </>
   );
 };
