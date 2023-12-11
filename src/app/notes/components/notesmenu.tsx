@@ -14,6 +14,7 @@ import {
   StickyNote,
 } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 export default function NotesMenu() {
@@ -159,14 +160,17 @@ export default function NotesMenu() {
                       {notes.map((note) => (
                         <>
                           {note.category === category && (
-                            <div className="flex cursor-pointer flex-row items-center gap-2 rounded-lg border border-border p-2 transition-all hover:-translate-y-0.5">
+                            <Link
+                              href={`/notes/${note.id}`}
+                              className="flex cursor-pointer flex-row items-center gap-2 rounded-lg border border-border p-2 transition-all hover:-translate-y-0.5"
+                            >
                               <StickyNote className="text-sticky/80 fill-sticky/40 h-4 w-4" />
                               <h5 className="font-bold">
                                 {note.title.length > 20
                                   ? `${note.title.slice(0, 20)}...`
                                   : note.title}
                               </h5>{" "}
-                            </div>
+                            </Link>
                           )}
                         </>
                       ))}
