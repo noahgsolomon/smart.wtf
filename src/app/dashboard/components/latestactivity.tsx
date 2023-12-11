@@ -27,11 +27,10 @@ export default function LatestActivity() {
   }
 
   return (
-    <div className="flex flex-col gap-2">
-      <h4>Recommended Lessons</h4>
-      <div className="flex">
-        <div className="flex flex-col gap-4 rounded-lg border border-border bg-card p-4">
-          <div>
+    <div className="flex w-full flex-col items-center gap-2 md:w-auto">
+      <div className="flex w-full">
+        <div className="flex w-full flex-col gap-4 rounded-lg border border-border bg-card p-4 md:w-auto">
+          <div className="w-full md:w-[400px]">
             <Image
               src={
                 latest.latest.courseChapterSections?.imageUrl ??
@@ -39,11 +38,12 @@ export default function LatestActivity() {
               }
               priority={true}
               alt="lesson"
-              width={400}
-              className="rounded-lg "
+              width={700}
               height={200}
+              className="w-full rounded-lg"
             />
           </div>
+
           <div className="flex flex-col gap-2">
             <h3>
               {latest.latest.courseChapterSections?.course.name ??
