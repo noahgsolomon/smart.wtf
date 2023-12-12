@@ -7,15 +7,21 @@ import { type Note, type NoteCategories } from "@/types";
 import {
   ChevronDown,
   ChevronRight,
+  Clock,
   Folder,
   FolderOpen,
-  Hash,
   Search,
   StickyNote,
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import {
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
+} from "@/components/ui/hover-card";
+import { Badge } from "@/components/ui/badge";
 
 export default function NotesMenu() {
   const initialCategories = {
@@ -237,7 +243,6 @@ export default function NotesMenu() {
                         .join(" ")}
                     </div>
                     <div className="flex flex-row items-center gap-2 ">
-                      <Hash className="h-4 w-4" />
                       {count}
                     </div>
                   </div>
@@ -248,21 +253,75 @@ export default function NotesMenu() {
                         : "hidden"
                     }`}
                   >
-                    <div className="flex flex-col gap-2 py-2 pl-8">
+                    <div className="flex flex-col gap-2 py-2 pl-4">
                       {notes.map((note) => (
                         <>
                           {note.category === category && (
-                            <Link
-                              href={`/notes/${note.id}`}
-                              className="flex cursor-pointer flex-row items-center gap-2 rounded-lg border border-border p-2 transition-all hover:-translate-y-0.5"
-                            >
-                              <StickyNote className="h-4 w-4 fill-sticky/40 text-sticky/80" />
-                              <h5 className="font-bold">
-                                {note.title.length > 20
-                                  ? `${note.title.slice(0, 20)}...`
-                                  : note.title}
-                              </h5>{" "}
-                            </Link>
+                            <HoverCard closeDelay={50} openDelay={100}>
+                              <HoverCardTrigger>
+                                <Link
+                                  href={`/notes/${note.id}`}
+                                  className="flex cursor-pointer flex-row items-center gap-1 rounded-lg border border-border p-2 transition-all hover:-translate-y-0.5"
+                                >
+                                  <StickyNote className="h-4 w-4 fill-sticky/40 text-sticky/80" />
+                                  <p>
+                                    {note.title.length > 30
+                                      ? `${note.title.slice(0, 30)}...`
+                                      : note.title}
+                                  </p>
+                                </Link>
+                              </HoverCardTrigger>
+                              <HoverCardContent>
+                                <Link
+                                  href={`/notes/${note.id}`}
+                                  className="flex flex-col justify-between gap-4 transition-all hover:opacity-80"
+                                >
+                                  <img
+                                    className="rounded-lg border border-border"
+                                    src={
+                                      "https://images.smart.wtf/note-54-image.png"
+                                    }
+                                    alt="image"
+                                    width={300}
+                                    height={300}
+                                  />
+                                  <div className="flex flex-col gap-1 ">
+                                    <div className="flex flex-row items-center gap-2">
+                                      <Image
+                                        alt={note.agents.name}
+                                        src={note.agents.pfp}
+                                        width={40}
+                                        height={40}
+                                        className="rounded-full border border-border"
+                                      />
+                                      <p>{note.title}</p>
+                                    </div>
+                                    <div className="flex flex-row items-center gap-2">
+                                      <div className="flex flex-row gap-1 text-sm text-primary/60">
+                                        <Clock className="h-4 w-4" />
+                                        {note.minutes} min read
+                                      </div>
+                                      <p>|</p>
+                                      <Badge
+                                        /*@ts-ignore*/
+                                        variant={note?.category
+                                          .toLowerCase()
+                                          .split(" ")
+                                          .map((word, index) =>
+                                            index === 0
+                                              ? word
+                                              : word.charAt(0).toUpperCase() +
+                                                word.slice(1),
+                                          )
+                                          .join("")}
+                                      >
+                                        {note?.category}
+                                      </Badge>
+                                    </div>
+                                  </div>
+                                </Link>
+                              </HoverCardContent>
+                            </HoverCard>
                           )}
                         </>
                       ))}
