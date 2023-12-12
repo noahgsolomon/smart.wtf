@@ -11,13 +11,32 @@ const withPWA = require("next-pwa")({
 const nextConfig = {
   pageExtensions: ["js", "jsx", "mdx", "ts", "tsx"],
   images: {
-    domains: [
-      "img.icons8.con",
-      "img.icons8.com",
-      "img.clerk.com",
-      "images.codefoli.com",
-      "oaidalleapiprodscus.blob.core.windows.net",
-      "images.smart.wtf",
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "img.icons8.con",
+        pathname: "**",
+      },
+      {
+        protocol: "https",
+        hostname: "img.clerk.com",
+        pathname: "**",
+      },
+      {
+        protocol: "https",
+        hostname: "images.codefoli.com",
+        pathname: "**",
+      },
+      {
+        protocol: "https",
+        hostname: "oaidalleapiprodscus.blob.core.windows.net",
+        pathname: "**",
+      },
+      {
+        protocol: "https",
+        hostname: "images.smart.wtf",
+        pathname: "**",
+      },
     ],
   },
 };

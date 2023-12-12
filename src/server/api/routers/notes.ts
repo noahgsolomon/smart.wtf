@@ -69,20 +69,21 @@ export const notesRouter = createTRPCRouter({
 
       const s3Client = new S3Client({ region: "us-east-1" });
 
-      await s3Client.send(
+      const s3Response = await s3Client.send(
         new PutObjectCommand({
           Bucket: "smartimagebucket",
           Key: `note-${id}-image.png`,
           Body: imageData,
           ContentType: "image/png",
-          ContentDisposition: "inline",
         }),
       );
+
+      console.log(s3Response);
 
       await ctx.db
         .update(notes)
         .set({
-          imageUrl: `https://images.smart.wtf/notes-${id}-image.png`,
+          imageUrl: `https://images.smart.wtf/note-${id}-image.png`,
         })
         .where(eq(notes.id, id));
 
