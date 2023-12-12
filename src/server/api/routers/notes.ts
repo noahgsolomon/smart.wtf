@@ -3,6 +3,7 @@ import { createTRPCRouter, protectedProcedure } from "../trpc";
 import { notes } from "@/server/db/schemas/notes/schema";
 import { z } from "zod";
 import OpenAI from "openai";
+import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
@@ -53,9 +54,37 @@ export const notesRouter = createTRPCRouter({
       };
 
       const imageUrl = await imageGeneration((await imagePrompt(title)) ?? "");
-      console.log(imageUrl);
 
-      await ctx.db.update(notes).set({ imageUrl }).where(eq(notes.id, id));
+      if (!imageUrl) {
+        throw new Error("Image URL not found in response");
+      }
+
+      const imageResponse = await fetch(imageUrl);
+      if (!imageResponse.ok) {
+        throw new Error("Failed to fetch image from URL");
+      }
+
+      const arrayBuffer = await imageResponse.arrayBuffer();
+      const imageData = Buffer.from(arrayBuffer);
+
+      const s3Client = new S3Client({ region: "us-east-1" });
+
+      await s3Client.send(
+        new PutObjectCommand({
+          Bucket: "smartimagebucket",
+          Key: `note-${id}-image.png`,
+          Body: imageData,
+          ContentType: "image/png",
+          ContentDisposition: "inline",
+        }),
+      );
+
+      await ctx.db
+        .update(notes)
+        .set({
+          imageUrl: `https://images.smart.wtf/notes-${id}-image.png`,
+        })
+        .where(eq(notes.id, id));
 
       return { imageUrl };
     }),
@@ -69,7 +98,7 @@ export const notesRouter = createTRPCRouter({
           messages: [
             {
               role: "system",
-              content: `Evaluate the user's request for a note on the topic: "${title}". Determine whether the topic is appropriate and substantial enough for an academic or educational note. If the topic is inappropriate, offensive, lacks educational value, or is nonsensical, return a JSON object with txhe attribute 'valid' set to false. xIf the topic is appropriate and has enough depth for an in-depth exploration of 1,000+ words, return a JSON object with the following attributes: 'valid' (set to true), 'description' (a brief one-sentence description of the topic), 'title' (the topic discussed), and 'category' (choose from ENGLISH, MATH, SCIENCE, HISTORY, ARTS, MUSIC, LITERATURE, PHILOSOPHY, GEOGRAPHY, SOCIAL STUDIES, PHYSICAL EDUCATION, COMPUTER SCIENCE, ECONOMICS, BUSINESS STUDIES, PSYCHOLOGY, LAW, POLITICAL SCIENCE, ENVIRONMENTAL SCIENCE, ENGINEERING, MEDICINE, AGRICULTURE, ASTRONOMY).`,
+              content: `Assess the user's request for an academic or educational note on the topic '${title}'. Verify if the topic is suitable for an educational context. The criteria for a valid topic include appropriateness, educational value, and the potential for an in-depth exploration of at least 1,000 words. If the topic fails to meet these criteria (i.e., it is inappropriate, offensive, lacks educational value, or is nonsensical), return a JSON object with 'valid': false. For valid topics, return a JSON object with 'valid': true, a concise 'description' of the topic, the 'title' of the topic, and the appropriate 'category'. The category must be one of the following: ENGLISH, MATH, SCIENCE, HISTORY, ARTS, MUSIC, LITERATURE, PHILOSOPHY, GEOGRAPHY, SOCIAL STUDIES, PHYSICAL EDUCATION, COMPUTER SCIENCE, ECONOMICS, BUSINESS STUDIES, PSYCHOLOGY, LAW, POLITICAL SCIENCE, ENVIRONMENTAL SCIENCE, ENGINEERING, MEDICINE, AGRICULTURE, ASTRONOMY. Ensure the category is an exact match from these options.`,
             },
           ],
 
