@@ -276,11 +276,9 @@ export default function NotesMenu() {
                                   href={`/notes/${note.id}`}
                                   className="flex flex-col justify-between gap-4 transition-all hover:opacity-80"
                                 >
-                                  <img
+                                  <Image
                                     className="rounded-lg border border-border"
-                                    src={
-                                      "https://images.smart.wtf/note-54-image.png"
-                                    }
+                                    src={note.imageUrl ?? "/generating1.gif"}
                                     alt="image"
                                     width={300}
                                     height={300}

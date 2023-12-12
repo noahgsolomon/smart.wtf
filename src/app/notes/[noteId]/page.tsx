@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import NotesHeading from "../components/notesheading";
 import { useNoteContext } from "../context/notescontext";
 import { trpc } from "@/trpc/client";
