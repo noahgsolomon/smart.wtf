@@ -28,6 +28,7 @@ export type Note = {
   category: string;
   agent_id: number;
   minutes: number | null;
+  nextTopic: string;
   agents: {
     prompt: string;
     id: number;
