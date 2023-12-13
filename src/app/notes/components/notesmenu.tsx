@@ -274,32 +274,34 @@ export default function NotesMenu() {
                               <HoverCardContent>
                                 <Link
                                   href={`/notes/${note.id}`}
-                                  className="flex flex-col justify-between gap-4 transition-all hover:opacity-80"
+                                  className="flex flex-col justify-between gap-4 transition-all hover:-translate-y-0.5"
                                 >
-                                  <Image
-                                    className="rounded-lg border border-border"
-                                    src={note.imageUrl ?? "/generating1.gif"}
-                                    alt="image"
-                                    width={300}
-                                    height={300}
-                                  />
+                                  <div className="relative">
+                                    <Image
+                                      className="rounded-lg border border-border"
+                                      src={note.imageUrl ?? "/generating1.gif"}
+                                      alt="image"
+                                      width={300}
+                                      height={300}
+                                    />
+                                    <Image
+                                      alt={note.agents.name}
+                                      src={note.agents.pfp}
+                                      width={40}
+                                      height={40}
+                                      className="absolute bottom-1 left-1 z-10 rounded-full border border-border bg-secondary"
+                                    />
+                                  </div>
+
                                   <div className="flex flex-col gap-1 ">
-                                    <div className="flex flex-row items-center gap-2">
-                                      <Image
-                                        alt={note.agents.name}
-                                        src={note.agents.pfp}
-                                        width={40}
-                                        height={40}
-                                        className="rounded-full border border-border"
-                                      />
-                                      <p>{note.title}</p>
+                                    <p className="text-lg">{note.title}</p>
+
+                                    <div className="flex flex-row items-center gap-1 text-sm text-primary/80">
+                                      <Clock className="h-4 w-4" />
+                                      <span>{note.minutes} minute read.</span>
                                     </div>
-                                    <div className="flex flex-row items-center gap-2">
-                                      <div className="flex flex-row gap-1 text-sm text-primary/60">
-                                        <Clock className="h-4 w-4" />
-                                        {note.minutes} min read
-                                      </div>
-                                      <p>|</p>
+
+                                    <div className="flex">
                                       <Badge
                                         /*@ts-ignore*/
                                         variant={note?.category
@@ -316,6 +318,10 @@ export default function NotesMenu() {
                                         {note?.category}
                                       </Badge>
                                     </div>
+
+                                    <p className="text-xs text-primary/60">
+                                      {note.description}
+                                    </p>
                                   </div>
                                 </Link>
                               </HoverCardContent>
