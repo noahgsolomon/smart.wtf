@@ -85,19 +85,23 @@ export default function Page({ params }: { params: { noteId: string } }) {
   const [hasAgentRegenerated, setHasAgentRegenerated] = useState(false);
 
   useEffect(() => {
-    if (note && note.id && note.title && !hasRegenerated && !note.markdown) {
-      setHasRegenerated(true);
-      handleRegenerate();
-    }
-    if (
-      note &&
-      note.id &&
-      note.title &&
-      !hasAgentRegenerated &&
-      !note.agents_markdown
-    ) {
-      setHasAgentRegenerated(true);
-      agentHandleRegenerate();
+    if (note?.markdown) {
+      console.log("setting markdown");
+    } else {
+      if (note && note.id && note.title && !hasRegenerated && !note.markdown) {
+        setHasRegenerated(true);
+        handleRegenerate();
+      }
+      if (
+        note &&
+        note.id &&
+        note.title &&
+        !hasAgentRegenerated &&
+        !note.agents_markdown
+      ) {
+        setHasAgentRegenerated(true);
+        agentHandleRegenerate();
+      }
     }
   }, [note, markdown, agentMarkdown, handleRegenerate, agentHandleRegenerate]);
 
@@ -110,9 +114,11 @@ export default function Page({ params }: { params: { noteId: string } }) {
   });
 
   useEffect(() => {
+    if (regenerating || continuing) return;
     const note = retrieveNoteQuery.data?.note;
     if (note) {
       setNote(note);
+
       if (note.markdown) {
         setMarkdown(note.markdown);
       }
@@ -190,7 +196,7 @@ export default function Page({ params }: { params: { noteId: string } }) {
           exit="exit"
         >
           <div className="flex flex-col gap-8 pt-[3rem]">
-            <div className="relative h-[250px] w-full overflow-hidden md:h-[350px]">
+            <div className="relative h-[250px] w-full overflow-hidden md:h-[350px] lg:h-[400px]">
               {imageSrc ? (
                 <Image
                   layout="fill"
