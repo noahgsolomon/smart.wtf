@@ -20,6 +20,7 @@ import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import { AnimatePresence, motion } from "framer-motion";
 import { useRegenerate } from "./useRegenerate";
 import { useContinue } from "./useContinue";
+import { useRouter } from "next/navigation";
 
 type UserNote = {
   id: number;
@@ -48,6 +49,24 @@ export default function Page({ params }: { params: { noteId: string } }) {
 
   const [markdown, setMarkdown] = useState("");
   const [agentMarkdown, setAgentMarkdown] = useState("");
+
+  const [generating, setGenerating] = useState(false);
+
+  const router = useRouter();
+
+  const createNoteMutation = trpc.notes.createNote.useMutation({
+    onSuccess: (data) => {
+      if (data) {
+        if (data.valid) {
+          router.push(`/notes/${data.noteId}`);
+        }
+      }
+      setGenerating(false);
+    },
+    onError: () => {
+      setGenerating(false);
+    },
+  });
 
   const {
     handleRegenerate: agentHandleRegenerate,
@@ -350,6 +369,7 @@ export default function Page({ params }: { params: { noteId: string } }) {
                   !agentContinuing && (
                     <div className="flex flex-row items-center gap-2 pt-8">
                       <Button
+                        disabled={generating}
                         onClick={
                           readingMode === "agent"
                             ? agentHandleContinue
@@ -360,11 +380,20 @@ export default function Page({ params }: { params: { noteId: string } }) {
                         Continue
                       </Button>
                       <p>or</p>
+
                       <Button
+                        disabled={generating}
                         variant={"secondary"}
                         className="flex flex-row gap-1  py-5"
+                        onClick={() => {
+                          setGenerating(true);
+                          createNoteMutation.mutate({
+                            agentId: note?.agent_id ?? 1,
+                            title: note?.nextTopic!,
+                          });
+                        }}
                       >
-                        Move on to Gradient Vectors
+                        {generating ? "Generating" : note?.nextTopic}
                       </Button>
                     </div>
                   )}
