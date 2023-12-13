@@ -16,6 +16,7 @@ export const notes = mysqlTable(
     agent_id: int("agent_id").notNull(),
     minutes: int("minutes").default(0),
     description: varchar("description", { length: 1000 }),
+    nextTopic: varchar("next_topic", { length: 250 }).default("").notNull(),
   },
   (t) => ({
     userIdx: index("user_idx").on(t.user_id),
