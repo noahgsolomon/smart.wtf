@@ -1,5 +1,6 @@
 import { trpc } from "@/trpc/client";
 import { useEffect, useState } from "react";
+import { calculateReadingTime } from "./useRegenerate";
 
 export const useContinue = ({
   note,
@@ -7,10 +8,12 @@ export const useContinue = ({
   setMarkdown,
   agent = false,
   agentPrompt = "",
+  otherMarkdown = "",
 }: {
   note: { id: number; title: string } | undefined;
   markdown: string;
   setMarkdown: React.Dispatch<React.SetStateAction<string>>;
+  otherMarkdown: string;
   agent?: boolean;
   agentPrompt?: string;
 }) => {
@@ -30,10 +33,14 @@ export const useContinue = ({
 
   useEffect(() => {
     if (done) {
+      const minutes = calculateReadingTime(
+        markdown.length + otherMarkdown.length,
+      );
       updateNoteMutation.mutate({
         id: note?.id!,
         markdown,
         agent,
+        minutes,
       });
       setContinuing(false);
       setDone(false);

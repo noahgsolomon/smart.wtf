@@ -1,18 +1,30 @@
 import { trpc } from "@/trpc/client";
 import { useEffect, useState } from "react";
 
+export function calculateReadingTime(textLength: number) {
+  const averageWordLength = 5;
+  const wordsPerMinute = 200;
+
+  const wordCount = textLength / averageWordLength;
+  const readingTimeMinutes = wordCount / wordsPerMinute;
+
+  return Math.ceil(readingTimeMinutes);
+}
+
 export const useRegenerate = ({
   note,
   markdown,
   setMarkdown,
   agent = false,
   agentPrompt = "",
+  otherMarkdown = "",
 }: {
   note: { id: number; title: string } | undefined;
   markdown: string;
   setMarkdown: React.Dispatch<React.SetStateAction<string>>;
   agent?: boolean;
   agentPrompt?: string;
+  otherMarkdown: string;
 }) => {
   const [regenerating, setRegenerating] = useState(false);
   const [done, setDone] = useState(false);
@@ -28,10 +40,14 @@ export const useRegenerate = ({
 
   useEffect(() => {
     if (done) {
+      const minutes = calculateReadingTime(
+        markdown.length + otherMarkdown.length,
+      );
       updateNoteMutation.mutate({
         id: note?.id!,
         markdown,
         agent,
+        minutes,
       });
       setDone(false);
     }
