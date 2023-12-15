@@ -7,7 +7,7 @@ import { trpc } from "@/trpc/client";
 import { type Note } from "@/types";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
-import { Clock, Info, Loader2 } from "lucide-react";
+import { Clock, Copy, Download, Info, Loader2 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import Markdown from "react-markdown";
@@ -21,13 +21,12 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useRegenerate } from "./useRegenerate";
 import { useContinue } from "./useContinue";
 import { useRouter } from "next/navigation";
+import toast, { Toaster } from "react-hot-toast";
 
 type UserNote = {
   id: number;
-  agents: {
-    pfp: string;
-  };
   title: string;
+  emoji: string;
 };
 
 export default function Page({ params }: { params: { noteId: string } }) {
@@ -167,6 +166,7 @@ export default function Page({ params }: { params: { noteId: string } }) {
             id: noteId,
             pfp: note.agents.pfp,
             title: note.title,
+            emoji: note.emoji,
           },
         ]);
       }
@@ -187,8 +187,8 @@ export default function Page({ params }: { params: { noteId: string } }) {
       setUserNotes(
         userNotes.map((note: UserNote) => ({
           id: note.id,
-          pfp: note.agents.pfp,
           title: note.title,
+          emoji: note.emoji,
         })),
       );
     }
@@ -208,6 +208,48 @@ export default function Page({ params }: { params: { noteId: string } }) {
     exit: { opacity: 0, transition: { duration: 0.3 } },
   };
 
+  const handleCopyClick = () => {
+    const textToCopy = readingMode === "agent" ? agentMarkdown : markdown;
+
+    navigator.clipboard
+      .writeText(textToCopy)
+      .then(() => {
+        toast.success("Copied to clipboard", {
+          style: {
+            borderRadius: "var(--radius)",
+            background: "hsl(var(--toast))",
+            color: "hsl(var(--primary))",
+          },
+        });
+      })
+      .catch((err) => {
+        console.error("Error copying text: ", err);
+        toast.error("Error copying to clipboard");
+      });
+  };
+
+  const handleDownloadClick = () => {
+    const textToDownload = readingMode === "agent" ? agentMarkdown : markdown;
+
+    const element = document.createElement("a");
+    const file = new Blob([textToDownload], { type: "text/markdown" });
+    element.href = URL.createObjectURL(file);
+    element.download = `${note?.title}${
+      readingMode === "agent" ? " " + note?.agents.name : ""
+    }.md`;
+    document.body.appendChild(element);
+    element.click();
+    document.body.removeChild(element);
+
+    toast.success("Downloaded", {
+      style: {
+        borderRadius: "var(--radius)",
+        background: "hsl(var(--toast))",
+        color: "hsl(var(--primary))",
+      },
+    });
+  };
+
   return (
     <>
       <NotesHeading currentNote={{ id: parseInt(params.noteId) }} />
@@ -219,15 +261,17 @@ export default function Page({ params }: { params: { noteId: string } }) {
           exit="exit"
         >
           <div className="flex flex-col gap-8 pt-[3rem]">
-            <div className="relative h-[250px] w-full overflow-hidden md:h-[350px] lg:h-[400px]">
+            <div className="relative mx-auto h-[250px] w-full overflow-hidden transition-all md:h-[350px] lg:h-[400px]">
               {imageSrc ? (
-                <Image
-                  layout="fill"
-                  objectFit="cover"
-                  src={imageSrc}
-                  alt={"note image"}
-                  className="border-b border-border"
-                />
+                <>
+                  <Image
+                    layout="fill"
+                    objectFit="cover"
+                    src={imageSrc}
+                    alt={"note image"}
+                  />
+                  <div className="inset-shadow absolute left-0 top-0 h-full w-full" />
+                </>
               ) : (
                 <>
                   <Image
@@ -282,6 +326,14 @@ export default function Page({ params }: { params: { noteId: string } }) {
                         {note?.agents.name}
                       </Button>
                     </div>
+                  </div>
+                  <div className="flex flex-row gap-2">
+                    <Button onClick={handleCopyClick} variant={"outline"}>
+                      <Copy className="h-4 w-4" />
+                    </Button>
+                    <Button onClick={handleDownloadClick} variant={"outline"}>
+                      <Download className="h-4 w-4" />
+                    </Button>
                   </div>
                   <div className="flex flex-row items-center gap-1 text-sm text-primary/50">
                     {regenerating || agentRegenerating ? (
@@ -400,6 +452,7 @@ export default function Page({ params }: { params: { noteId: string } }) {
           </div>
         </motion.div>
       </AnimatePresence>
+      <Toaster />
     </>
   );
 }
