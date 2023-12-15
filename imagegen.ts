@@ -44,7 +44,7 @@ const imageGeneneration = async (initialPrompt: string) => {
   return responseFetch.data[0]?.url;
 };
 
-const imageGen = await imageGeneneration("Jacobian Matrix");
+const imageGen = await imageGeneneration("Evolution");
 
 console.log(imageGen);
 
@@ -459,5 +459,15 @@ Imagine an idyllic meadow where giant pills roll around, grazing peacefully, whi
 Jacobian Matrix
 
 Envision a starry night sky as the backdrop for this cosmic scene. A collection of glowing shapes, each representing a mathematical matrix, hangs weightlessly in space. These matrices are connected by luminous lines, creating a network of code that seems to float above the starry canvas. The shapes pulsate gently, sending ripples of light through the vast expanse, symbolizing the intricate interplay of numbers and relationships in the creation of a Jacobian matrix. This celestial display is a tribute to the elegance and power of mathematical concepts, rendered in the language of the cosmos.
+
+
+
+Evolution
+
+Picture a lush, green landscape stretching into the distance under a blue, cloud-dotted sky. On the grass, an alligator, a bird, and a humanoid figure stand illuminated by the sun. Each of them is balanced on one foot, mid-step, representing a transition. The alligator has elongated legs, the bird's wings are less feathery, and the humanoid figure's form is less ape-like and more upright. Silhouettes of their previous forms linger behind them, creating a sense of their evolutionary journey. The scene is vibrant and full of potential, capturing a moment of change and growth in the natural world.
+
+
+
+
 
 */
