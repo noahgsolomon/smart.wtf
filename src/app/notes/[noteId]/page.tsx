@@ -37,7 +37,7 @@ export default function Page({ params }: { params: { noteId: string } }) {
 
   const retrieveUserNotesQuery = trpc.notes.getUserNotesMeta.useQuery();
   const generatedGif = useMemo(
-    () => `/generating${Math.floor(Math.random() * 4)}.gif`,
+    () => `/generating${Math.floor(Math.random() * 12)}.gif`,
     [],
   );
 
@@ -77,6 +77,7 @@ export default function Page({ params }: { params: { noteId: string } }) {
     setMarkdown: setAgentMarkdown,
     agent: true,
     agentPrompt: note?.agents.prompt,
+    otherMarkdown: markdown,
   });
 
   const { continuing: agentContinuing, handleContinue: agentHandleContinue } =
@@ -86,18 +87,21 @@ export default function Page({ params }: { params: { noteId: string } }) {
       setMarkdown: setAgentMarkdown,
       agent: true,
       agentPrompt: note?.agents.prompt,
+      otherMarkdown: markdown,
     });
 
   const { handleRegenerate, regenerating } = useRegenerate({
     note: { id: note?.id!, title: note?.title! },
     markdown: markdown,
     setMarkdown: setMarkdown,
+    otherMarkdown: agentMarkdown,
   });
 
   const { continuing, handleContinue } = useContinue({
     note: { id: note?.id!, title: note?.title! },
     markdown: markdown,
     setMarkdown: setMarkdown,
+    otherMarkdown: agentMarkdown,
   });
 
   const [hasRegenerated, setHasRegenerated] = useState(false);
@@ -233,12 +237,6 @@ export default function Page({ params }: { params: { noteId: string } }) {
                     alt={"note image"}
                     className="border-b border-border"
                   />
-                  <div className="absolute bottom-0 left-0 right-0 top-0 flex flex-row items-center justify-center gap-1">
-                    <div className="flex flex-col items-center rounded-lg border border-border bg-secondary p-2 opacity-60">
-                      <p>Crafting image</p>
-                      <Loader2 className="h-8 w-8 animate-spin" />
-                    </div>
-                  </div>
                 </>
               )}
             </div>
