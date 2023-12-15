@@ -42,6 +42,7 @@ export default function NotesHeading({
                 <Fragment key={note.id}>
                   {!openNotes.some((openNote) => openNote.id === note.id) && (
                     <DropdownMenuItem
+                      className="cursor-pointer"
                       onClick={() => {
                         setOpenNotes([...openNotes, note]);
                         router.push(`/notes/${note.id}`);
