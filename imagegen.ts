@@ -4,7 +4,27 @@ const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
-const response = async (prompt: string) => {
+const imagePrompt = async (title: string) => {
+  try {
+    const response = await openai.chat.completions.create({
+      model: "ft:gpt-3.5-turbo-1106:personal::8TEhcfKm",
+      messages: [
+        {
+          role: "user",
+          content: title,
+        },
+      ],
+    });
+
+    return response.choices[0]?.message.content;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+  }
+};
+
+const imageGeneneration = async (initialPrompt: string) => {
+  const prompt = await imagePrompt(initialPrompt);
+  console.log(prompt);
   const detailed8BitPreface =
     "Create an image in a detailed retro 8-bit style. The artwork should have a pixelated texture and should have vibrant coloring and scenery.";
 
@@ -24,7 +44,7 @@ const response = async (prompt: string) => {
   return responseFetch.data[0]?.url;
 };
 
-const imageGen = await response("");
+const imageGen = await imageGeneneration("Jacobian Matrix");
 
 console.log(imageGen);
 
@@ -338,7 +358,7 @@ Object-Oriented Programming
 Imagine a cosmic workshop where ethereal beings assemble various geometric shapes, each glowing with a distinct hue. These shapes represent different objects, coming together to form a larger, intricate structure. The beings work harmoniously, with each shape fitting perfectly into its designated place, like a puzzle. Above them, constellations of code stream across the sky, illuminating the process. This imaginative scene encapsulates the essence of Object-Oriented Programming, where distinct objects integrate to create complex, functional systems in a harmonious and structured universe.
 
 
-
+*NEW*
 
 Convolutional Neural Network
 
@@ -399,4 +419,45 @@ Together, the cave with its luminous pool and magical crystal walls reflects the
 Consensus Algorithms in Distributed Systems
 
 Create an image reminiscent of ancient cave paintings, with a modern twist. In a dimly lit cave, a group of stick figures from various backgrounds and cultures stand in a circle. Each figure is holding a smartphone or tablet, and they're all tapping away on their devices, symbolizing the exchange of information and communication in a distributed system. The cave walls, adorned with primitive drawings of animals and shapes, also have digital screens displaying complex mathematical algorithms and diagrams. This blend of ancient and modern elements portrays the evolution of consensus algorithms in a whimsical and thought-provoking manner.
+
+
+
+Linear Algebra
+
+Conducting a symphony of equations, a maestro commands a grand performance in an abstract theater of mathematical vectors and matrices. The stage, a shimmering plane of geometric purity, is set with rows of musicians clad in the uniforms of their components; violinists representing Xs, cellists for Ys, and bass players for Zs. Each musician intently plays their part on the elegant white space, their movements syncing in perfect harmony with the direction of the conductor's baton. The precision and elegance of this mathematical orchestra resonate in the air, transforming the complex notation of linear algebra into a visual and musical masterpiece.
+
+
+
+Memory Management
+
+Imagine a vast, dark sea of space, dotted with islands of shimmering, multi-colored crystal formations. Each island represents a memory storage area in a computer system, and the crystals symbolize individual memory blocks. A delicate dance of energy animates the crystals, as they migrate and combine, breaking apart and coming together, in perfect synchronization. This stunning choreography is the work of an ethereal, radiant figure, a personification of the computer's memory management system. With graceful movements, they direct the flow of data, orchestrating the arrangement and reformation of the crystals, ensuring that the islands of memory remain in harmonious balance. This scene symbolizes the dynamic and complex process of memory allocation and optimization within a computer.
+
+
+Aetherosclerosis
+
+Among the glistening tides of the Aether, where the very fabric of existence weaves and flows, obfuscated vistas teem with elusive forms. These ribbon-like creatures, ephemeral and undulating, symbolize the obstruction of natural flows—a visual allegory illustrating the concept of "aetherosclerosis." Their path, once clear and unencumbered, is now hindered and distorted, as the energy of the Aether struggles to traverse their twisted and constricted realm.
+
+
+
+Cancer Immunotherapy
+
+Imagine a scientific laboratory where miniature astronauts in protective suits work with advanced biological equipment. Here, tiny submarines navigate through a maze of protein pathways, delivering precision strikes against cancer cells. This imaginative scene depicts the futuristic applications of immunotherapy in a world where miniaturization and advanced technology converge to combat the deadliest diseases.
+
+
+
+Mast Cells
+
+Picture a serene, sun-dappled grove, where towering trees cast latticed shadows on the ground. At the center, a majestic, larger-than-life mast cell stands. Its smooth, cylindrical body is a patchwork of earthy bark textures, and its crown of branches sways gently in the breeze. Inside the cell, dynamic granules shimmer with a rainbow of colors, their dance narrating the fascinating role of mast cells in immune function. This idyllic scene captures the harmony and vital importance of mast cells in the body's defense system.
+
+
+Medicine 3.0
+
+Imagine an idyllic meadow where giant pills roll around, grazing peacefully, while a colossal stethoscope swings gently from a nearby tree. The sky above is dotted with fluff-ball clouds, and the sun shines down warmly, its rays forming a great happy face over the meadow. This tapestry of surreal and whimsical imagery captures a delightful and playful scene, a light-hearted metaphor for the future of medicine melding with nature.
+
+
+
+Jacobian Matrix
+
+Envision a starry night sky as the backdrop for this cosmic scene. A collection of glowing shapes, each representing a mathematical matrix, hangs weightlessly in space. These matrices are connected by luminous lines, creating a network of code that seems to float above the starry canvas. The shapes pulsate gently, sending ripples of light through the vast expanse, symbolizing the intricate interplay of numbers and relationships in the creation of a Jacobian matrix. This celestial display is a tribute to the elegance and power of mathematical concepts, rendered in the language of the cosmos.
+
 */
