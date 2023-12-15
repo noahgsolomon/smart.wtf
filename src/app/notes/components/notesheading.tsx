@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Fragment } from "react";
 import { useRouter } from "next13-progressbar";
+import AddNote from "@/app/dashboard/components/notes/addnote";
 
 export default function NotesHeading({
   currentNote,
@@ -61,6 +62,9 @@ export default function NotesHeading({
                   <p>No more notes</p>
                 </DropdownMenuItem>
               )}
+              <div className="flex justify-center p-1">
+                <AddNote />
+              </div>
             </DropdownMenuContent>
           </DropdownMenu>
           <div className="flex flex-row items-center gap-1">

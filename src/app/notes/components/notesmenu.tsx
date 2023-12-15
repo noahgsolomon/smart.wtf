@@ -263,7 +263,7 @@ export default function NotesMenu() {
                                   href={`/notes/${note.id}`}
                                   className="flex cursor-pointer flex-row items-center gap-1 rounded-lg border border-border p-2 transition-all hover:-translate-y-0.5"
                                 >
-                                  <StickyNote className="h-4 w-4 fill-sticky/40 text-sticky/80" />
+                                  <p>{note.emoji}</p>
                                   <p>
                                     {note.title.length > 30
                                       ? `${note.title.slice(0, 30)}...`

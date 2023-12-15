@@ -309,7 +309,7 @@ export default function Page({ params }: { params: { noteId: string } }) {
                       {note?.category}
                     </Badge>
                   </div>
-                  <div className="flex">
+                  <div className="flex flex-row gap-2">
                     <div className="flex flex-row overflow-hidden rounded-lg border border-border">
                       <Button
                         className="rounded-br-none rounded-tr-none hover:scale-100 active:scale-100"
@@ -326,14 +326,14 @@ export default function Page({ params }: { params: { noteId: string } }) {
                         {note?.agents.name}
                       </Button>
                     </div>
-                  </div>
-                  <div className="flex flex-row gap-2">
-                    <Button onClick={handleCopyClick} variant={"outline"}>
-                      <Copy className="h-4 w-4" />
-                    </Button>
-                    <Button onClick={handleDownloadClick} variant={"outline"}>
-                      <Download className="h-4 w-4" />
-                    </Button>
+                    <div className="flex flex-row gap-2">
+                      <Button onClick={handleCopyClick} variant={"outline"}>
+                        <Copy className="h-4 w-4" />
+                      </Button>
+                      <Button onClick={handleDownloadClick} variant={"outline"}>
+                        <Download className="h-4 w-4" />
+                      </Button>
+                    </div>
                   </div>
                   <div className="flex flex-row items-center gap-1 text-sm text-primary/50">
                     {regenerating || agentRegenerating ? (
