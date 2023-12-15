@@ -147,9 +147,8 @@ const Streak = () => {
                     <TooltipContent>
                       <p>{date.toLocaleDateString()}</p>
                       {streakDate && (
-                        <p>{streakDate.dailyEngagementCount} blocks</p>
+                        <p>{streakDate.dailyEngagementCount} engagements</p>
                       )}
-                      <p>{streakDate ? streakDate.activity : "no activity"}</p>
                     </TooltipContent>
                   </Tooltip>
                 );
