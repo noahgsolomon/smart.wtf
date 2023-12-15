@@ -5,7 +5,6 @@ import { PlusIcon, X } from "lucide-react";
 
 import ThemeButton from "@/components/nav/theme";
 import { useNoteContext } from "../context/notescontext";
-import Image from "next/image";
 
 import {
   DropdownMenu,
@@ -48,13 +47,7 @@ export default function NotesHeading({
                       }}
                     >
                       <div className="flex flex-row items-center gap-2">
-                        <Image
-                          src={note.pfp}
-                          alt={note.pfp}
-                          width={24}
-                          height={24}
-                          className="rounded-full border border-border bg-secondary/90"
-                        />
+                        <p>{note.emoji}</p>
                         <p className="font-bold">{note.title}</p>
                       </div>
                     </DropdownMenuItem>
@@ -82,13 +75,7 @@ export default function NotesHeading({
                       router.push(`/notes/${note.id}`);
                     }}
                   >
-                    <Image
-                      src={note.pfp}
-                      alt={note.pfp}
-                      width={24}
-                      height={24}
-                      className="rounded-full border border-border bg-secondary/90"
-                    />
+                    <p>{note.emoji}</p>
                     <p
                       className={`hidden font-bold ${
                         openNotes.length > 2 ? "" : "sm:block"
@@ -123,13 +110,7 @@ export default function NotesHeading({
                           router.push(`/notes/${note.id}`);
                         }}
                       >
-                        <Image
-                          src={note.pfp}
-                          alt={note.pfp}
-                          width={24}
-                          height={24}
-                          className="rounded-full border border-border bg-secondary/90"
-                        />
+                        <p>{note.emoji}</p>
                         <p
                           className={`hidden font-bold ${
                             openNotes.length > 2 ? "" : "sm:block"

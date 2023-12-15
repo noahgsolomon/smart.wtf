@@ -10,13 +10,13 @@ import React, {
 } from "react";
 
 type NoteContextType = {
-  openNotes: { id: number; pfp: string; title: string }[];
+  openNotes: { id: number; title: string; emoji: string }[];
   setOpenNotes: Dispatch<
-    SetStateAction<{ id: number; pfp: string; title: string }[]>
+    SetStateAction<{ id: number; title: string; emoji: string }[]>
   >;
-  userNotes: { id: number; pfp: string; title: string }[];
+  userNotes: { id: number; title: string; emoji: string }[];
   setUserNotes: Dispatch<
-    SetStateAction<{ id: number; pfp: string; title: string }[]>
+    SetStateAction<{ id: number; title: string; emoji: string }[]>
   >;
 };
 
@@ -32,10 +32,10 @@ export const useNoteContext = () => {
 
 export const NoteProvider = ({ children }: { children: ReactNode }) => {
   const [openNotes, setOpenNotes] = useState<
-    { id: number; pfp: string; title: string }[]
+    { id: number; title: string; emoji: string }[]
   >([]);
   const [userNotes, setUserNotes] = useState<
-    { id: number; pfp: string; title: string }[]
+    { id: number; title: string; emoji: string }[]
   >([]);
 
   return (

@@ -25,6 +25,7 @@ export type Note = {
   markdown: string | null;
   agents_markdown: string | null;
   title: string;
+  emoji: string;
   category: string;
   agent_id: number;
   minutes: number | null;

@@ -11,6 +11,7 @@ export const notes = mysqlTable(
     markdown: text("markdown"),
     agents_markdown: text("agents_markdown"),
     title: varchar("title", { length: 100 }).notNull(),
+    emoji: varchar("emoji", { length: 100 }).notNull().default("📝"),
     category: varchar("category", { length: 100 }).notNull(),
     imageUrl: varchar("image_url", { length: 1000 }),
     agent_id: int("agent_id").notNull(),
