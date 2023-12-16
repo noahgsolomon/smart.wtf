@@ -5,7 +5,7 @@ import { z } from "zod";
 import OpenAI from "openai";
 import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
 import { streak } from "@/server/db/schemas/users/schema";
-import { NoteCategories } from "@/types";
+import { type NoteCategories } from "@/types";
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
@@ -681,7 +681,6 @@ export const notesRouter = createTRPCRouter({
         where: and(eq(streak.userId, ctx.user_id), eq(streak.date, dateOnly)),
       });
 
-      let firstCommitToday = false;
       let streakCount = 0;
 
       if (!streakDb) {
@@ -690,7 +689,6 @@ export const notesRouter = createTRPCRouter({
         const day = currentDate.getUTCDate();
         const prevDateOnly = new Date(Date.UTC(year, month, day));
         prevDateOnly.setDate(prevDateOnly.getDate() - 1);
-        firstCommitToday = true;
         const prevStreakDb = await ctx.db.query.streak.findFirst({
           where: and(
             eq(streak.userId, ctx.user_id),
@@ -719,7 +717,6 @@ export const notesRouter = createTRPCRouter({
           streakCount = 1;
         }
       } else {
-        streakCount = streakDb.count;
         await ctx.db
           .update(streak)
           .set({

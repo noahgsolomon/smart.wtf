@@ -32,7 +32,7 @@ export const QuickActionsModal = () => {
 
     document.addEventListener("keydown", down);
     return () => document.removeEventListener("keydown", down);
-  }, []);
+  }, [isOpen, setIsOpen]);
 
   return (
     <DialogModal isOpen={isOpen} setIsOpen={setIsOpen}>

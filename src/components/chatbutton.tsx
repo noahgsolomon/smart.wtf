@@ -1,6 +1,6 @@
 "use client";
 
-import { Bot, Sparkles } from "lucide-react";
+import { Bot } from "lucide-react";
 import Chat from "./chat";
 import { motion } from "framer-motion";
 import { useChatContext } from "@/app/context/chat/ChatContext";
