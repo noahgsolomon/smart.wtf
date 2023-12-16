@@ -17,8 +17,10 @@ import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { trpc } from "@/trpc/client";
 import { useRouter } from "next/navigation";
+import { useAddNote } from "hooks/useaddnote";
+import { set } from "date-fns";
 
-export default function AddNote() {
+export default function AddNote({ visible = false }: { visible?: boolean }) {
   const [noteInput, setNoteInput] = useState("");
   const [agent, setAgent] = useState<{
     name: "rick" | "mrburns" | "bender" | "patrick";
@@ -36,11 +38,13 @@ export default function AddNote() {
       if (data) {
         if (data.valid) {
           router.push(`/notes/${data.noteId}`);
+          setGenerating(false);
+          setIsOpen(false);
+          setNoteInput("");
         } else {
           setInvalidTopic(true);
         }
       }
-      setGenerating(false);
     },
     onError: () => {
       setGenerating(false);
@@ -56,10 +60,12 @@ export default function AddNote() {
     }
   }, [recommendedNotesQuery.data, recommendedTopics.length]);
 
+  const { isOpen, setIsOpen } = useAddNote();
+
   return (
-    <Dialog>
+    <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
-        <Button className="flex flex-row gap-2">
+        <Button className={`${visible ? "flex flex-row gap-2" : "hidden"}`}>
           <PlusIcon className="h-4 w-4" />
           Generate
         </Button>
@@ -104,6 +110,18 @@ export default function AddNote() {
               placeholder="// Multi-Variable Calculus"
               className="col-span-3"
               value={noteInput}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  setGenerating(true);
+                  createNoteMutation.mutate({
+                    agentId: agent.id,
+                    title:
+                      noteInput === ""
+                        ? recommendedTopics[recommendedSelect]!
+                        : noteInput,
+                  });
+                }
+              }}
               onChange={(e) => {
                 setNoteInput(e.target.value);
                 setRecommendedSelect(-1);
