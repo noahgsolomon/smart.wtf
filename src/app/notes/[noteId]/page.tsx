@@ -22,6 +22,7 @@ import { useRegenerate } from "./useRegenerate";
 import { useContinue } from "./useContinue";
 import { useRouter } from "next/navigation";
 import toast, { Toaster } from "react-hot-toast";
+import { useChatContext } from "@/app/context/chat/ChatContext";
 
 type UserNote = {
   id: number;
@@ -108,7 +109,6 @@ export default function Page({ params }: { params: { noteId: string } }) {
 
   useEffect(() => {
     if (note?.markdown) {
-      console.log("setting markdown");
     } else {
       if (note && note.id && note.title && !hasRegenerated && !note.markdown) {
         setHasRegenerated(true);
@@ -135,6 +135,8 @@ export default function Page({ params }: { params: { noteId: string } }) {
     },
   });
 
+  const { setLesson } = useChatContext();
+
   useEffect(() => {
     if (regenerating || continuing || agentRegenerating || agentContinuing)
       return;
@@ -142,10 +144,11 @@ export default function Page({ params }: { params: { noteId: string } }) {
     if (note) {
       setNote(note);
 
-      if (note.markdown) {
+      if (note.markdown && markdown === "") {
+        setLesson(note.markdown);
         setMarkdown(note.markdown);
       }
-      if (note.agents_markdown) {
+      if (note.agents_markdown && agentMarkdown === "") {
         setAgentMarkdown(note.agents_markdown);
       }
 
