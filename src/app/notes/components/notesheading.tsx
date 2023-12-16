@@ -64,7 +64,7 @@ export default function NotesHeading({
                 </DropdownMenuItem>
               )}
               <div className="flex justify-center p-1">
-                <AddNote />
+                <AddNote visible={true} />
               </div>
             </DropdownMenuContent>
           </DropdownMenu>
