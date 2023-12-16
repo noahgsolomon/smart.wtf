@@ -136,7 +136,8 @@ export default function Page({ params }: { params: { noteId: string } }) {
   });
 
   useEffect(() => {
-    if (regenerating || continuing) return;
+    if (regenerating || continuing || agentRegenerating || agentContinuing)
+      return;
     const note = retrieveNoteQuery.data?.note;
     if (note) {
       setNote(note);
