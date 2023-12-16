@@ -13,6 +13,10 @@ import Markdown from "react-markdown";
 import Image from "next/image";
 import remarkGfm from "remark-gfm";
 import rehypeHighlight from "rehype-highlight";
+import remarkMath from "remark-math";
+import rehypeKatex from "rehype-katex";
+import slug from "rehype-slug";
+import rehypeAutolinkHeadings from "rehype-autolink-headings";
 
 const Chat = ({ className }: { className?: string }) => {
   const [isVisible, setIsVisible] = useState(true);
@@ -130,15 +134,15 @@ const Chat = ({ className }: { className?: string }) => {
     >
       <div className="flex flex-col">
         <div className=" flex flex-row items-center justify-between border-b border-border pb-4">
-          <div className="flex flex-row items-center gap-2">
-            <Avatar className="h-[60px] w-[60px] cursor-pointer border border-border transition-all marker:border hover:scale-105">
+          <div className="flex flex-row items-center gap-4 md:gap-6">
+            <Avatar className="h-[60px] w-[60px] cursor-pointer border border-border transition-all marker:border hover:scale-105 md:h-[80px] md:w-[80px]">
               <AvatarImage
                 className={`object-cover transition-all`}
-                src={"https://images.codefoli.com/professorquantum.png"}
+                src={"/botwtf2.png"}
               />
               <AvatarFallback>AI</AvatarFallback>
             </Avatar>
-            <p>Professor Quantum</p>
+            <p className="text-xl font-bold">Bot.wtf</p>
           </div>
           <div className="flex flex-row gap-1">
             {messages?.length > 0 && (
@@ -166,8 +170,10 @@ const Chat = ({ className }: { className?: string }) => {
         >
           <div className="flex justify-start ">
             <p className="max-w-[60%] overflow-hidden rounded-lg border border-border bg-secondary px-2 py-1 text-sm ">
-              Pose a question or topic of interest. I'll either answer or craft
-              a lesson from it. Ready for a knowledge quest?
+              Try to challenge me with a question or topic. I'll either grace
+              you with a response that showcases my superior intellect or, if
+              it's worthy of my time, concoct a lesson. Let's see if you can
+              keep up, shall we?
             </p>
           </div>
           {messages?.map((m, index) => (
@@ -188,7 +194,7 @@ const Chat = ({ className }: { className?: string }) => {
                           return match ? (
                             <div>
                               <p className="code-language">{match[1]}</p>
-                              <pre className={className}>
+                              <pre className={cn(className)}>
                                 <code>{children}</code>
                               </pre>
                             </div>
@@ -210,8 +216,18 @@ const Chat = ({ className }: { className?: string }) => {
                           />
                         ),
                       }}
-                      remarkPlugins={[remarkGfm]}
-                      rehypePlugins={[rehypeHighlight]}
+                      remarkPlugins={[remarkGfm, remarkMath]}
+                      rehypePlugins={[
+                        rehypeKatex,
+                        slug,
+                        [
+                          rehypeAutolinkHeadings,
+                          {
+                            behavior: "wrap",
+                          },
+                        ],
+                        rehypeHighlight,
+                      ]}
                     >
                       {m.text}
                     </Markdown>
