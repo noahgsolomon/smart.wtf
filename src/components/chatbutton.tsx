@@ -1,6 +1,6 @@
 "use client";
 
-import { Sparkles } from "lucide-react";
+import { Bot, Sparkles } from "lucide-react";
 import Chat from "./chat";
 import { motion } from "framer-motion";
 import { useChatContext } from "@/app/context/chat/ChatContext";
@@ -28,7 +28,7 @@ export default function ChatButton() {
           <button onClick={() => setOpen(true)}>
             <div className=" overflow-hidden rounded-full border border-border bg-card transition-all hover:opacity-80">
               <div className="p-4">
-                <Sparkles className="h-7 w-7 fill-primary" />
+                <Bot className="h-7 w-7" />
               </div>
             </div>
           </button>
