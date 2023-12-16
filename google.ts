@@ -12,7 +12,7 @@ const google = async (searchQuery: string) => {
         image.searchQuery,
       )}&cx=${process.env.GOOGLE_CX}&searchType=image&key=${
         process.env.GOOGLE_API_KEY
-      }&num=10`,
+      }&num=1`,
       {
         method: "GET",
         headers: { "Content-Type": "application/json" },
@@ -36,6 +36,6 @@ const google = async (searchQuery: string) => {
   return { markdown: markdownContent };
 };
 
-google("Partial Derivatives");
+google("Partial Derivatives Chain Rule filetype:svg");
 
 export {};

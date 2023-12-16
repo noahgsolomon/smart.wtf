@@ -28,7 +28,7 @@ const imageGeneneration = async (initialPrompt: string) => {
   const detailed8BitPreface =
     "Create an image in a detailed retro 8-bit style. The artwork should have a pixelated texture and should have vibrant coloring and scenery.";
 
-  const fullPrompt = `${detailed8BitPreface} ${prompt} Remember, this is in retro 8-bit style`;
+  const fullPrompt = `${detailed8BitPreface} Picture a shiny metallic robot with a brilliant bald head, flashing LED eyes, and a mad scientist smile. It sports a lab coat and a portal gun, crackling with electric energy as it creates a rippling portal. Behind it, the universe folds and warps, a microcosm in which every possibility is at its robotic fingertips. And through this interdimensional tear, a multitude of colorful alternate realities beckon, each with its own peculiar twist on Rick's iconic anarchic charm. Remember, this is in retro 8-bit style`;
 
   const responseFetch = await openai.images.generate({
     model: "dall-e-3",
@@ -44,7 +44,9 @@ const imageGeneneration = async (initialPrompt: string) => {
   return responseFetch.data[0]?.url;
 };
 
-const imageGen = await imageGeneneration("Evolution");
+const imageGen = await imageGeneneration(
+  "Robot Rick Sanchez from Rick and morty",
+);
 
 console.log(imageGen);
 
