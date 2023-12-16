@@ -72,6 +72,8 @@ export default function NotesMenu() {
 
   const [notes, setNotes] = useState<Note[]>([]);
 
+  const [topicInput, setTopicInput] = useState("");
+
   const [presentCategories, setPresentCategories] =
     useState<{ [key in NoteCategories]: number }>(initialCategories);
 
@@ -94,10 +96,17 @@ export default function NotesMenu() {
         <div className="flex flex-row  items-center gap-4 border-b border-border pb-2 md:gap-4 lg:gap-8">
           <h1>Notes</h1>
           <div>|</div>
-          <AddNote />
+          <AddNote visible={true} />
         </div>
         <div className="relative ">
-          <Input className="shadow-none" placeholder="search here" value={""} />
+          <Input
+            className="shadow-none"
+            placeholder="search here"
+            onChange={(e) => {
+              setTopicInput(e.target.value);
+            }}
+            value={topicInput}
+          />
           <Search className="absolute right-2 top-2 h-4 w-4" />
         </div>
         <div className="flex max-h-[400px] flex-col gap-2 overflow-y-auto overflow-x-hidden">
@@ -105,18 +114,6 @@ export default function NotesMenu() {
             if (count === 0) {
               return null;
             }
-
-            const categoryTailwindFormatted = category
-              .toLowerCase()
-              .split(" ")
-              .map((word, index) =>
-                index === 0
-                  ? word
-                  : word.charAt(0).toUpperCase() + word.slice(1),
-              )
-              .join("");
-
-            console.log(categoryTailwindFormatted);
 
             return (
               <>
