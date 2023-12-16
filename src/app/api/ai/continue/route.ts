@@ -35,7 +35,9 @@ const markdownResponse = async (
         - Partial derivatives: $$\\frac{\\partial^2 f}{\\partial x \\partial y}$$ renders as \\frac{\\partial^2 f}{\\partial x \\partial y}.
         - Summation: $$\\sum_{i=1}^{n} i^2$$ renders as \\sum_{i=1}^{n} i^2.
 
-        NOTE: In the examples above, I have used two backslashes where you see one. This is important because of the way strings resolve backslashes in JavaScript, requiring two backslashes to get one backslash in the string.`,
+        NOTE: In the examples above, I have used two backslashes where you see one. This is important because of the way strings resolve backslashes in JavaScript, requiring two backslashes to get one backslash in the string.
+        
+        Do not include a Table of Contents section, or a Conclusion section.`,
         role: "system",
       },
       {
