@@ -1,7 +1,7 @@
 "use client";
 
 import ThemeButton from "./theme";
-import { buttonVariants } from "../ui/button";
+import { Button, buttonVariants } from "../ui/button";
 import { useAuth } from "@clerk/nextjs";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
@@ -10,6 +10,9 @@ import { usePathname } from "next/navigation";
 import UserButton from "./UserButton";
 import ChatButton from "../chatbutton";
 import { useChatContext } from "@/app/context/chat/ChatContext";
+import { QuickActionsModal } from "../ui/modals/quickactionsmodal";
+import { useQuickActions } from "hooks/usequickactions";
+import AddNote from "@/app/dashboard/components/notes/addnote";
 
 const NavBar = () => {
   const { userId } = useAuth();
@@ -46,6 +49,8 @@ const NavBar = () => {
   // );
   // }
   // }
+
+  const { setIsOpen } = useQuickActions();
 
   return (
     <>
@@ -114,6 +119,21 @@ const NavBar = () => {
         )} */}
 
             <div className="flex items-center justify-end gap-4">
+              <div
+                onClick={() => setIsOpen(true)}
+                className="relative cursor-pointer transition-all hover:opacity-80"
+              >
+                <div className="hidden rounded-lg border border-border bg-secondary/60 py-2 pl-2 pr-24 text-sm text-primary/60 md:block">
+                  Search...
+                </div>
+                <Button
+                  className="bg-card md:absolute md:right-1 md:top-1/2 md:-translate-y-1/2 md:transform"
+                  size={"sm"}
+                  variant={"outline"}
+                >
+                  ⌘K
+                </Button>
+              </div>
               <ThemeButton />
               {userId ? (
                 <>
@@ -147,7 +167,13 @@ const NavBar = () => {
           </div>
         </header>
       ) : null}
-      {userId && ready && <ChatButton />}
+      {userId && ready && (
+        <>
+          <ChatButton />
+          <QuickActionsModal />
+          <AddNote />
+        </>
+      )}
     </>
   );
 };
