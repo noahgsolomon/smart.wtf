@@ -10,6 +10,10 @@ const buttonVariants = cva(
       variant: {
         default:
           "hover:scale-[101%] active:scale-[99%] transition-all bg-primary text-primary-foreground hover:bg-primary/90",
+        darkMode:
+          "hover:scale-[101%] active:scale-[99%] transition-all bg-secondary dark:bg-primary text-secondary-foreground dark:text-primary-foreground hover:bg-secondary/90 dark:hover:bg-primary/90",
+        lightMode:
+          "hover:scale-[101%] active:scale-[99%] transition-all bg-primary dark:bg-secondary text-primary-foreground dark:text-secondary-foreground hover:bg-primary/90 dark:hover:bg-secondary/90",
         destructive:
           "hover:scale-[101%] active:scale-[99%] transition-all bg-destructive text-destructive-foreground hover:bg-destructive/90",
         outline:
@@ -19,6 +23,10 @@ const buttonVariants = cva(
         ghost:
           "hover:scale-[101%] active:scale-[99%] transition-all hover:bg-accent hover:text-accent-foreground",
         link: "hover:scale-[100%] active:scale-[100%] transition-all text-primary underline-offset-4 hover:underline",
+        darkModeLink:
+          "hover:scale-[100%] active:scale-[100%] transition-all text-secondary dark:text-primary underline-offset-4 hover:underline",
+        lightModeLink:
+          "hover:scale-[100%] active:scale-[100%] transition-all text-primary dark:text-secondary underline-offset-4 hover:underline",
         success:
           "hover:scale-[101%] active:scale-[99%] transition-all bg-success text-primary hover:bg-success/90",
       },
@@ -28,6 +36,7 @@ const buttonVariants = cva(
         xs: "h-5 rounded-md px-2 text-xs",
         lg: "h-10 rounded-md px-8",
         icon: "h-9 w-9",
+        xl: "text-lg h-12 rounded-md px-8",
       },
     },
     defaultVariants: {
