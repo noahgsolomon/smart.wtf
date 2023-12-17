@@ -21,6 +21,7 @@ import {
   HoverCardTrigger,
 } from "@/components/ui/hover-card";
 import { Badge } from "@/components/ui/badge";
+import { buttonVariants } from "@/components/ui/button";
 
 export default function NotesMenu() {
   const initialCategories = {
@@ -291,6 +292,12 @@ export default function NotesMenu() {
 
                                   <div className="flex flex-col gap-1 ">
                                     <p className="text-lg">{note.title}</p>
+                                    <Link
+                                      className={buttonVariants()}
+                                      href={`/quiz/${note.id}?prev=/dashboard`}
+                                    >
+                                      Create Quiz
+                                    </Link>
 
                                     <div className="flex flex-row items-center gap-1 text-sm text-primary/80">
                                       <Clock className="h-4 w-4" />
