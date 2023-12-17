@@ -107,6 +107,7 @@ export default function Page({
           <SelectContent className="flex flex-col gap-2 border-none bg-transparent shadow-none">
             {notes?.map((note) => (
               <SelectItem
+                key={note.id}
                 className={`my-1 w-[280px] cursor-pointer transition-all ${
                   background?.mode === "dark"
                     ? "bg-primary text-secondary hover:bg-primary/80 dark:bg-secondary dark:text-primary dark:hover:bg-secondary/80"

@@ -7,15 +7,7 @@ import { trpc } from "@/trpc/client";
 import { type Note } from "@/types";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
-import {
-  ArrowUpRight,
-  Clock,
-  Copy,
-  Download,
-  Info,
-  Loader2,
-  PlusIcon,
-} from "lucide-react";
+import { Clock, Copy, Download, Info, Loader2 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import Markdown from "react-markdown";
