@@ -54,7 +54,9 @@ const NavBar = () => {
 
   return (
     <>
-      {!path.startsWith("/lesson") && !path.startsWith("/notes") ? (
+      {!path.startsWith("/lesson") &&
+      !path.startsWith("/notes") &&
+      !path.startsWith("/quiz") ? (
         <header className="border-sm fixed left-0 right-0 top-0 z-20 border-b border-border bg-card shadow-sm">
           {/* <div
             className={
@@ -172,7 +174,8 @@ const NavBar = () => {
       ) : null}
       {userId && ready && (
         <>
-          <ChatButton />
+          {!path.startsWith("/quiz") && <ChatButton />}
+
           <QuickActionsModal />
           <AddNote />
         </>
