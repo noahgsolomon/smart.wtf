@@ -44,9 +44,7 @@ const imageGeneneration = async (initialPrompt: string) => {
   return responseFetch.data[0]?.url;
 };
 
-const imageGen = await imageGeneneration(
-  "Robot Rick Sanchez from Rick and morty",
-);
+const imageGen = await imageGeneneration("Gaussian Distribution");
 
 console.log(imageGen);
 
