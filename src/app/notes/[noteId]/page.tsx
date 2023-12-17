@@ -7,7 +7,15 @@ import { trpc } from "@/trpc/client";
 import { type Note } from "@/types";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
-import { Clock, Copy, Download, Info, Loader2 } from "lucide-react";
+import {
+  ArrowUpRight,
+  Clock,
+  Copy,
+  Download,
+  Info,
+  Loader2,
+  PlusIcon,
+} from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import Markdown from "react-markdown";
@@ -21,8 +29,8 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useRegenerate } from "./useRegenerate";
 import { useContinue } from "./useContinue";
 import { useRouter } from "next/navigation";
-import toast, { Toaster } from "react-hot-toast";
 import { useChatContext } from "@/app/context/chat/ChatContext";
+import { Toaster, toast } from "sonner";
 
 type UserNote = {
   id: number;
@@ -218,13 +226,7 @@ export default function Page({ params }: { params: { noteId: string } }) {
     navigator.clipboard
       .writeText(textToCopy)
       .then(() => {
-        toast.success("Copied to clipboard", {
-          style: {
-            borderRadius: "var(--radius)",
-            background: "hsl(var(--toast))",
-            color: "hsl(var(--primary))",
-          },
-        });
+        toast.success("Copied to clipboard");
       })
       .catch((err) => {
         console.error("Error copying text: ", err);
@@ -245,13 +247,7 @@ export default function Page({ params }: { params: { noteId: string } }) {
     element.click();
     document.body.removeChild(element);
 
-    toast.success("Downloaded", {
-      style: {
-        borderRadius: "var(--radius)",
-        background: "hsl(var(--toast))",
-        color: "hsl(var(--primary))",
-      },
-    });
+    toast.success("Downloaded");
   };
 
   return (
@@ -292,7 +288,10 @@ export default function Page({ params }: { params: { noteId: string } }) {
             <div className=" flex justify-center px-0 pb-4 pt-8 md:px-4">
               <div className="relative px-8 py-2 pb-24">
                 <div className="flex flex-col gap-2">
-                  <h1 className="max-w-[15ch] text-5xl">{note?.title}</h1>
+                  <div className="flex gap-2">
+                    <h1 className="max-w-[15ch] text-5xl">{note?.title}</h1>
+                  </div>
+
                   <div className="flex flex-row gap-2">
                     <p className="flex flex-row items-center gap-1 text-sm opacity-60">
                       <Clock className="h-3 w-3" />
@@ -313,7 +312,7 @@ export default function Page({ params }: { params: { noteId: string } }) {
                       {note?.category}
                     </Badge>
                   </div>
-                  <div className="flex flex-row gap-2">
+                  <div className="flex flex-wrap gap-2">
                     <div className="flex flex-row overflow-hidden rounded-lg border border-border">
                       <Button
                         className="rounded-br-none rounded-tr-none hover:scale-100 active:scale-100"
@@ -331,10 +330,10 @@ export default function Page({ params }: { params: { noteId: string } }) {
                       </Button>
                     </div>
                     <div className="flex flex-row gap-2">
-                      <Button onClick={handleCopyClick} variant={"outline"}>
+                      <Button onClick={handleCopyClick} variant={"ghost"}>
                         <Copy className="h-4 w-4" />
                       </Button>
-                      <Button onClick={handleDownloadClick} variant={"outline"}>
+                      <Button onClick={handleDownloadClick} variant={"ghost"}>
                         <Download className="h-4 w-4" />
                       </Button>
                     </div>
@@ -421,34 +420,36 @@ export default function Page({ params }: { params: { noteId: string } }) {
                   !continuing &&
                   !agentRegenerating &&
                   !agentContinuing && (
-                    <div className="flex flex-row items-center gap-2 pt-8">
-                      <Button
-                        disabled={generating}
-                        onClick={
-                          readingMode === "agent"
-                            ? agentHandleContinue
-                            : handleContinue
-                        }
-                        className="flex flex-row gap-1 py-5"
-                      >
-                        Continue
-                      </Button>
-                      <p>or</p>
+                    <div className="flex flex-col gap-2">
+                      <div className="flex flex-row items-center gap-2 pt-8">
+                        <Button
+                          disabled={generating}
+                          onClick={
+                            readingMode === "agent"
+                              ? agentHandleContinue
+                              : handleContinue
+                          }
+                          className="flex flex-row gap-1 py-5"
+                        >
+                          Continue
+                        </Button>
+                        <p>or</p>
 
-                      <Button
-                        disabled={generating}
-                        variant={"secondary"}
-                        className="flex flex-row gap-1  py-5"
-                        onClick={() => {
-                          setGenerating(true);
-                          createNoteMutation.mutate({
-                            agentId: note?.agent_id ?? 1,
-                            title: note?.nextTopic!,
-                          });
-                        }}
-                      >
-                        {generating ? "Generating" : note?.nextTopic}
-                      </Button>
+                        <Button
+                          disabled={generating}
+                          variant={"secondary"}
+                          className="flex flex-row gap-1  py-5"
+                          onClick={() => {
+                            setGenerating(true);
+                            createNoteMutation.mutate({
+                              agentId: note?.agent_id ?? 1,
+                              title: note?.nextTopic!,
+                            });
+                          }}
+                        >
+                          {generating ? "Generating" : note?.nextTopic}
+                        </Button>
+                      </div>
                     </div>
                   )}
               </div>
@@ -456,7 +457,7 @@ export default function Page({ params }: { params: { noteId: string } }) {
           </div>
         </motion.div>
       </AnimatePresence>
-      <Toaster />
+      <Toaster richColors position="top-center" />
     </>
   );
 }
