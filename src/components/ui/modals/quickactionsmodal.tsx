@@ -11,16 +11,18 @@ import {
   CommandSeparator,
 } from "@/components/ui/command";
 
-import { Feather, Landmark, User2 } from "lucide-react";
+import { Feather, FileQuestion, Landmark, User2 } from "lucide-react";
 
 import { DialogModal } from "./dialoguemodal";
 import { useQuickActions } from "hooks/usequickactions";
 import Link from "next/link";
 import { useAddNote } from "hooks/useaddnote";
+import { usePathname } from "next/navigation";
 
 export const QuickActionsModal = () => {
   const { isOpen, setIsOpen } = useQuickActions();
   const { setIsOpen: setIsAddNoteOpen } = useAddNote();
+  const pathname = usePathname();
 
   useEffect(() => {
     const down = (e: KeyboardEvent) => {
@@ -52,6 +54,19 @@ export const QuickActionsModal = () => {
                 <Feather className="h-4 w-4" />
                 <span>Generate Note</span>
               </div>
+            </CommandItem>
+            <CommandItem>
+              <Link
+                href={`/quiz?prev=${pathname}`}
+                onClick={() => {
+                  setIsOpen(false);
+                  setIsAddNoteOpen(false);
+                }}
+                className="z-10 flex h-full w-full cursor-pointer flex-row gap-2"
+              >
+                <FileQuestion className="h-4 w-4" />
+                <span>Generate Quiz</span>
+              </Link>
             </CommandItem>
           </CommandGroup>
           <CommandSeparator />
