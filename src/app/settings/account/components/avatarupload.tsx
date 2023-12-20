@@ -1,8 +1,8 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import toast from "react-hot-toast";
 import { useClerk, useUser } from "@clerk/nextjs";
 import { ArrowLeft } from "lucide-react";
 import { type ChangeEvent, useRef, useState } from "react";
+import { toast } from "sonner";
 
 const AvatarUpload = () => {
   const clerk = useClerk();
@@ -16,13 +16,7 @@ const AvatarUpload = () => {
     const file = event.target.files?.item(0);
     if (file) {
       await clerk.user?.setProfileImage({ file });
-      toast.success("Profile image updated", {
-        style: {
-          borderRadius: "var(--radius)",
-          background: "hsl(var(--toast))",
-          color: "hsl(var(--primary))",
-        },
-      });
+      toast.success("Profile image updated");
     }
   };
 
@@ -46,21 +40,9 @@ const AvatarUpload = () => {
       const file = event.dataTransfer.items[0].getAsFile();
       if (file && (file.type === "image/png" || file.type === "image/jpeg")) {
         await clerk.user?.setProfileImage({ file });
-        toast.success("Profile image updated", {
-          style: {
-            borderRadius: "var(--radius)",
-            background: "hsl(var(--toast))",
-            color: "hsl(var(--primary))",
-          },
-        });
+        toast.success("Profile image updated");
       } else {
-        toast.error("invalid file type", {
-          style: {
-            borderRadius: "var(--radius)",
-            background: "hsl(var(--toast))",
-            color: "hsl(var(--primary))",
-          },
-        });
+        toast.error("invalid file type");
       }
     }
   };

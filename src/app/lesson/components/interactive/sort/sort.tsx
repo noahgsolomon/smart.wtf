@@ -20,9 +20,9 @@ import { SortableItem } from "./sortableitem";
 import { Button } from "@/components/ui/button";
 import useSound from "use-sound";
 import { trpc } from "@/trpc/client";
-import toast from "react-hot-toast";
 import { useSectionContext } from "@/app/lesson/sectioncontext";
 import { Loader2 } from "lucide-react";
+import { toast } from "sonner";
 
 export default function Sort({
   chapterId,
@@ -80,11 +80,6 @@ export default function Sort({
       if (response.data.firstCommitToday) {
         toast(`You're on a ${response.data.streakCount} day streak`, {
           icon: "🔥",
-          style: {
-            borderRadius: "var(--radius)",
-            background: "hsl(var(--toast))",
-            color: "hsl(var(--primary))",
-          },
         });
       }
     },
@@ -191,13 +186,7 @@ export default function Sort({
           });
         });
 
-        toast.success("correct!", {
-          style: {
-            borderRadius: "var(--radius)",
-            background: "hsl(var(--toast))",
-            color: "hsl(var(--primary))",
-          },
-        });
+        toast.success("correct!");
         const currentBlock = section[subSection - 1]?.blocks.find(
           (b) => b.id === blockId,
         );
@@ -220,13 +209,7 @@ export default function Sort({
         }
       } else {
         incorrectSound();
-        toast.error("incorrect!", {
-          style: {
-            borderRadius: "var(--radius)",
-            background: "hsl(var(--toast))",
-            color: "hsl(var(--primary))",
-          },
-        });
+        toast.error("incorrect!");
       }
       setLoading(false);
     } catch (error) {

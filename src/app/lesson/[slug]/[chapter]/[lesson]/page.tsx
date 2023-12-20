@@ -17,9 +17,9 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import Understanding from "@/app/lesson/components/interactive/understanding";
 import useSound from "use-sound";
-import toast, { Toaster } from "react-hot-toast";
 import Sort from "@/app/lesson/components/interactive/sort/sort";
 import { useChatContext } from "@/app/context/chat/ChatContext";
+import { Toaster, toast } from "sonner";
 
 export default function Page({
   params,
@@ -84,11 +84,6 @@ export default function Page({
       if (response.data.firstCommitToday) {
         toast(`You're on a ${response.data.streakCount} day streak`, {
           icon: "🔥",
-          style: {
-            borderRadius: "var(--radius)",
-            background: "hsl(var(--toast))",
-            color: "hsl(var(--primary))",
-          },
         });
       }
     },
@@ -561,7 +556,7 @@ export default function Page({
           </div>
         </motion.div>
       </AnimatePresence>
-      <Toaster />
+      <Toaster richColors position="top-center" />
     </>
   );
 }

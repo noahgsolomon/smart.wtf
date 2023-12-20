@@ -6,8 +6,8 @@ import { Button } from "@/components/ui/button";
 import { type ReactElement, useState, useEffect } from "react";
 import { trpc } from "@/trpc/client";
 import { useSectionContext } from "../../sectioncontext";
-import toast, { Toaster } from "react-hot-toast";
 import useSound from "use-sound";
+import { Toaster, toast } from "sonner";
 
 export default function Quiz({
   chapterId,
@@ -38,23 +38,9 @@ export default function Quiz({
   completed?: boolean;
   params: { slug: string; chapter: string; lesson: string };
 }) {
-  const correct = () =>
-    toast.success("correct!", {
-      style: {
-        borderRadius: "var(--radius)",
-        background: "hsl(var(--toast))",
-        color: "hsl(var(--primary))",
-      },
-    });
+  const correct = () => toast.success("correct!");
 
-  const incorrect = () =>
-    toast.error("incorrect!", {
-      style: {
-        borderRadius: "var(--radius)",
-        background: "hsl(var(--toast))",
-        color: "hsl(var(--primary))",
-      },
-    });
+  const incorrect = () => toast.error("incorrect!");
 
   const [guessed, setGuessed] = useState<number[]>([]);
 
@@ -72,11 +58,6 @@ export default function Quiz({
       if (response.data.firstCommitToday) {
         toast(`You're on a ${response.data.streakCount} day streak`, {
           icon: "🔥",
-          style: {
-            borderRadius: "var(--radius)",
-            background: "hsl(var(--toast))",
-            color: "hsl(var(--primary))",
-          },
         });
       }
     },
@@ -297,7 +278,7 @@ export default function Quiz({
           )}
         </div>
       </div>
-      <Toaster />
+      <Toaster richColors position="top-center" />
     </div>
   );
 }

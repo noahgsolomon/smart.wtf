@@ -11,9 +11,9 @@ import {
 import { trpc } from "@/trpc/client";
 import { Lightbulb, Loader2 } from "lucide-react";
 import { type ReactNode, useState } from "react";
-import toast, { Toaster } from "react-hot-toast";
 import { useSectionContext } from "../../sectioncontext";
 import useSound from "use-sound";
+import { Toaster, toast } from "sonner";
 
 export default function Understanding({
   chapterId,
@@ -52,11 +52,6 @@ export default function Understanding({
       if (response.data.firstCommitToday) {
         toast(`You're on a ${response.data.streakCount} day streak`, {
           icon: "🔥",
-          style: {
-            borderRadius: "var(--radius)",
-            background: "hsl(var(--toast))",
-            color: "hsl(var(--primary))",
-          },
         });
       }
     },
@@ -128,13 +123,7 @@ export default function Understanding({
   const handleSubmit = async () => {
     setLoading(true);
     if (userExplanation.length === 0) {
-      toast.error("Please provide an explanation.", {
-        style: {
-          borderRadius: "var(--radius)",
-          background: "hsl(var(--toast))",
-          color: "hsl(var(--primary))",
-        },
-      });
+      toast.error("Please provide an explanation.");
       setSubmitError(true);
       setTimeout(() => {
         setSubmitError(false);
@@ -200,13 +189,7 @@ export default function Understanding({
           });
         });
 
-        toast.success("correct!", {
-          style: {
-            borderRadius: "var(--radius)",
-            background: "hsl(var(--toast))",
-            color: "hsl(var(--primary))",
-          },
-        });
+        toast.success("correct!");
         const currentBlock = section[subSection - 1]?.blocks.find(
           (b) => b.id === blockId,
         );
@@ -229,13 +212,7 @@ export default function Understanding({
         }
       } else {
         incorrectSound();
-        toast.error("incorrect!", {
-          style: {
-            borderRadius: "var(--radius)",
-            background: "hsl(var(--toast))",
-            color: "hsl(var(--primary))",
-          },
-        });
+        toast.error("incorrect!");
       }
       setLoading(false);
     } catch (error) {
@@ -327,7 +304,7 @@ export default function Understanding({
           )}
         </div>
       </div>
-      <Toaster />
+      <Toaster richColors position="top-center" />
     </div>
   );
 }

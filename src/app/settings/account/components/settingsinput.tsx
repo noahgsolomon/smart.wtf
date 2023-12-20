@@ -3,7 +3,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { trpc } from "@/trpc/client";
 import { useState } from "react";
-import toast from "react-hot-toast";
+import { toast } from "sonner";
 
 const SettingsInput = () => {
   const userDB = trpc.user.user.useQuery();
@@ -16,13 +16,7 @@ const SettingsInput = () => {
 
   const handleUsernameSubmit = () => {
     if (username.length < 3 || username.length > 20) {
-      toast.error("Username must be between 3 and 20 characters", {
-        style: {
-          borderRadius: "var(--radius)",
-          background: "hsl(var(--toast))",
-          color: "hsl(var(--primary))",
-        },
-      });
+      toast.error("Username must be between 3 and 20 characters");
       return;
     }
 
@@ -31,20 +25,8 @@ const SettingsInput = () => {
       {
         onSuccess: async (data) => {
           data.status === "OK"
-            ? toast.success("Username updated", {
-                style: {
-                  borderRadius: "var(--radius)",
-                  background: "hsl(var(--toast))",
-                  color: "hsl(var(--primary))",
-                },
-              })
-            : toast.error("Username is taken", {
-                style: {
-                  borderRadius: "var(--radius)",
-                  background: "hsl(var(--toast))",
-                  color: "hsl(var(--primary))",
-                },
-              });
+            ? toast.success("Username updated")
+            : toast.error("Username is taken");
           setUsername("");
           if (data.status === "OK") {
             await userDB.refetch();
@@ -56,13 +38,7 @@ const SettingsInput = () => {
 
   const handleNameSubmit = () => {
     if (name.length < 3 || name.length > 75) {
-      toast.error("Name must be between 3 and 75 characters", {
-        style: {
-          borderRadius: "var(--radius)",
-          background: "hsl(var(--toast))",
-          color: "hsl(var(--primary))",
-        },
-      });
+      toast.error("Name must be between 3 and 75 characters");
       return;
     }
     nameUpload.mutate(
@@ -70,20 +46,8 @@ const SettingsInput = () => {
       {
         onSuccess: async (data) => {
           data.status === "OK"
-            ? toast.success("Name updated", {
-                style: {
-                  borderRadius: "var(--radius)",
-                  background: "hsl(var(--toast))",
-                  color: "hsl(var(--primary))",
-                },
-              })
-            : toast.error("An error occurred", {
-                style: {
-                  borderRadius: "var(--radius)",
-                  background: "hsl(var(--toast))",
-                  color: "hsl(var(--primary))",
-                },
-              });
+            ? toast.success("Name updated")
+            : toast.error("An error occurred");
           setName("");
           if (data.status === "OK") {
             await userDB.refetch();

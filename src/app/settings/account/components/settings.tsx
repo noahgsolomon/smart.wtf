@@ -1,9 +1,9 @@
 "use client";
 
 import AvatarUpload from "./avatarupload";
-import { Toaster } from "react-hot-toast";
 import SettingsInput from "./settingsinput";
 import SettingsActionButtons from "./settingsactionbuttons";
+import { Toaster } from "sonner";
 
 const Settings = () => {
   return (
@@ -11,7 +11,7 @@ const Settings = () => {
       <AvatarUpload />
       <SettingsInput />
       <SettingsActionButtons />
-      <Toaster />
+      <Toaster richColors position="top-center" />
     </div>
   );
 };
