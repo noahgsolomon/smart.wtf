@@ -45,6 +45,7 @@ export default function Page({
   });
 
   const [note, setNote] = useState<Note | null>(null);
+  const [isImageLoaded, setImageLoaded] = useState(false);
 
   useEffect(() => {
     if (getNoteQuery.status === "success" && getNoteQuery.data) {
@@ -76,6 +77,29 @@ export default function Page({
       transition: { type: "spring", delay: 0.4 },
     },
   };
+
+  const handleImageLoaded = () => {
+    setImageLoaded(true);
+  };
+
+  if (!isImageLoaded) {
+    return (
+      <Image
+        alt="background"
+        src={
+          searchParams.bg &&
+          backgrounds.map((bg) => bg.background).includes(searchParams.bg)
+            ? searchParams.bg
+            : background?.background ?? "/arena.gif"
+        }
+        layout="fill"
+        objectFit="cover"
+        objectPosition="center"
+        className="z-0 opacity-0"
+        onLoad={handleImageLoaded}
+      />
+    );
+  }
 
   return (
     <div

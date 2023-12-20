@@ -39,6 +39,7 @@ export default function Page({
   const [selectedNote, setSelectedNote] = useState("");
 
   const notes = trpc.notes.getUserNotes.useQuery().data?.notes;
+  const [isImageLoaded, setImageLoaded] = useState(false);
 
   const containerVariants = {
     hidden: { x: "-10vw", opacity: 0 },
@@ -62,6 +63,24 @@ export default function Page({
       transition: { type: "spring", delay: 0.4 },
     },
   };
+
+  const handleImageLoaded = () => {
+    setImageLoaded(true);
+  };
+
+  if (!isImageLoaded) {
+    return (
+      <Image
+        alt="background"
+        src={background?.background ?? "/arena.gif"}
+        layout="fill"
+        objectFit="cover"
+        objectPosition="center"
+        className="z-0 opacity-100"
+        onLoad={handleImageLoaded}
+      />
+    );
+  }
 
   return (
     <div
