@@ -22,6 +22,7 @@ import {
 } from "@/components/ui/hover-card";
 import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export default function NotesMenu() {
   const initialCategories = {
@@ -68,6 +69,8 @@ export default function NotesMenu() {
     }));
   };
 
+  const [loading, setLoading] = useState(true);
+
   const getUserNotesQuery = trpc.notes.getUserNotes.useQuery();
 
   const [notes, setNotes] = useState<Note[]>([]);
@@ -88,6 +91,7 @@ export default function NotesMenu() {
     }
 
     setPresentCategories(categoryCounts);
+    setLoading(false);
   }, [getUserNotesQuery.data?.notes]);
 
   return (
@@ -110,235 +114,253 @@ export default function NotesMenu() {
           <Search className="absolute right-2 top-2 h-4 w-4" />
         </div>
         <div className="flex max-h-[400px] flex-col gap-2 overflow-y-auto overflow-x-hidden">
-          {Object.entries(presentCategories).map(([category, count]) => {
-            if (count === 0) {
-              return null;
-            }
+          {loading ? (
+            <div className="flex flex-col gap-2">
+              <Skeleton className="flex h-10 w-full cursor-pointer flex-row items-center justify-between rounded-lg border border-border bg-secondary p-2 transition-all hover:bg-secondary/80"></Skeleton>
+              <Skeleton className="flex h-10 w-full cursor-pointer flex-row items-center justify-between rounded-lg border border-border bg-secondary p-2 transition-all hover:bg-secondary/80"></Skeleton>
+            </div>
+          ) : (
+            <>
+              {Object.entries(presentCategories).map(([category, count]) => {
+                if (count === 0) {
+                  return null;
+                }
 
-            return (
-              <>
-                <div>
-                  <div
-                    onClick={() => toggleCategory(category as NoteCategories)}
-                    className="group flex cursor-pointer flex-row items-center justify-between rounded-lg border border-border bg-secondary p-2 transition-all hover:bg-secondary/80"
-                  >
-                    <div className={` flex flex-row items-center gap-2`}>
-                      {categoryOpenState[category as NoteCategories] ? (
-                        <>
-                          <ChevronDown className="h-4 w-4" />
-                          <FolderOpen
-                            className={`h-6 w-6 ${
-                              category === "ENGLISH"
-                                ? "fill-english/50 text-english"
-                                : category === "MATH"
-                                ? "fill-math/50 text-math"
-                                : category === "SCIENCE"
-                                ? "fill-science/50 text-science"
-                                : category === "HISTORY"
-                                ? "fill-history/50 text-history"
-                                : category === "ARTS"
-                                ? "fill-arts/50 text-arts"
-                                : category === "MUSIC"
-                                ? "fill-music/50 text-music"
-                                : category === "LITERATURE"
-                                ? "fill-literature/50 text-literature"
-                                : category === "PHILOSOPHY"
-                                ? "fill-philosophy/50 text-philosophy"
-                                : category === "GEOGRAPHY"
-                                ? "fill-geography/50 text-geography"
-                                : category === "SOCIAL STUDIES"
-                                ? "fill-socialStudies/50 text-socialStudies"
-                                : category === "PHYSICAL EDUCATION"
-                                ? "fill-physicalEducation/50 text-physicalEducation"
-                                : category === "COMPUTER SCIENCE"
-                                ? "fill-computerScience/50 text-computerScience"
-                                : category === "ECONOMICS"
-                                ? "fill-economics/50 text-economics"
-                                : category === "BUSINESS STUDIES"
-                                ? "fill-businessStudies/50 text-businessStudies"
-                                : category === "PSYCHOLOGY"
-                                ? "fill-psychology/50 text-psychology"
-                                : category === "LAW"
-                                ? "fill-law/50 text-law"
-                                : category === "POLITICAL SCIENCE"
-                                ? "fill-politicalScience/50 text-politicalScience"
-                                : category === "ENVIRONMENTAL SCIENCE"
-                                ? "fill-environmentalScience/50 text-environmentalScience"
-                                : category === "ENGINEERING"
-                                ? "fill-engineering/50 text-engineering"
-                                : category === "MEDICINE"
-                                ? "fill-medicine/50 text-medicine"
-                                : category === "AGRICULTURE"
-                                ? "fill-agriculture/50 text-agriculture"
-                                : category === "ASTRONOMY"
-                                ? "fill-astronomy/50 text-astronomy"
-                                : ""
-                            }`}
-                          />
-                        </>
-                      ) : (
-                        <>
-                          <ChevronRight className="h-4 w-4" />
-                          <Folder
-                            className={`h-6 w-6 ${
-                              category === "ENGLISH"
-                                ? "fill-english/50 text-english"
-                                : category === "MATH"
-                                ? "fill-math/50 text-math"
-                                : category === "SCIENCE"
-                                ? "fill-science/50 text-science"
-                                : category === "HISTORY"
-                                ? "fill-history/50 text-history"
-                                : category === "ARTS"
-                                ? "fill-arts/50 text-arts"
-                                : category === "MUSIC"
-                                ? "fill-music/50 text-music"
-                                : category === "LITERATURE"
-                                ? "fill-literature/50 text-literature"
-                                : category === "PHILOSOPHY"
-                                ? "fill-philosophy/50 text-philosophy"
-                                : category === "GEOGRAPHY"
-                                ? "fill-geography/50 text-geography"
-                                : category === "SOCIAL STUDIES"
-                                ? "fill-socialStudies/50 text-socialStudies"
-                                : category === "PHYSICAL EDUCATION"
-                                ? "fill-physicalEducation/50 text-physicalEducation"
-                                : category === "COMPUTER SCIENCE"
-                                ? "fill-computerScience/50 text-computerScience"
-                                : category === "ECONOMICS"
-                                ? "fill-economics/50 text-economics"
-                                : category === "BUSINESS STUDIES"
-                                ? "fill-businessStudies/50 text-businessStudies"
-                                : category === "PSYCHOLOGY"
-                                ? "fill-psychology/50 text-psychology"
-                                : category === "LAW"
-                                ? "fill-law/50 text-law"
-                                : category === "POLITICAL SCIENCE"
-                                ? "fill-politicalScience/50 text-politicalScience"
-                                : category === "ENVIRONMENTAL SCIENCE"
-                                ? "fill-environmentalScience/50 text-environmentalScience"
-                                : category === "ENGINEERING"
-                                ? "fill-engineering/50 text-engineering"
-                                : category === "MEDICINE"
-                                ? "fill-medicine/50 text-medicine"
-                                : category === "AGRICULTURE"
-                                ? "fill-agriculture/50 text-agriculture"
-                                : category === "ASTRONOMY"
-                                ? "fill-astronomy/50 text-astronomy"
-                                : ""
-                            }`}
-                          />
-                        </>
-                      )}
-                      {category
-                        .toLowerCase()
-                        .split(" ")
-                        .map(
-                          (word) =>
-                            word.charAt(0).toUpperCase() + word.slice(1),
-                        )
-                        .join(" ")}
-                    </div>
-                    <div className="flex flex-row items-center gap-2 ">
-                      {count}
-                    </div>
-                  </div>
-                  <div
-                    className={`${
-                      categoryOpenState[category as NoteCategories]
-                        ? ""
-                        : "hidden"
-                    }`}
-                  >
-                    <div className="flex flex-col gap-2 py-2 pl-4">
-                      {notes.map((note) => (
-                        <>
-                          {note.category === category && (
-                            <HoverCard closeDelay={50} openDelay={100}>
-                              <HoverCardTrigger>
-                                <Link
-                                  href={`/notes/${note.id}`}
-                                  className="flex cursor-pointer flex-row items-center gap-1 rounded-lg border border-border p-2 transition-all hover:-translate-y-0.5"
-                                >
-                                  <p>{note.emoji}</p>
-                                  <p>
-                                    {note.title.length > 30
-                                      ? `${note.title.slice(0, 30)}...`
-                                      : note.title}
-                                  </p>
-                                </Link>
-                              </HoverCardTrigger>
-                              <HoverCardContent>
-                                <Link
-                                  href={`/notes/${note.id}`}
-                                  className="flex flex-col justify-between gap-4 transition-all hover:-translate-y-0.5"
-                                >
-                                  <div className="relative">
-                                    <Image
-                                      className="rounded-lg border border-border"
-                                      src={note.imageUrl ?? "/generating1.gif"}
-                                      alt="image"
-                                      width={300}
-                                      height={300}
-                                    />
-                                    <Image
-                                      alt={note.agents.name}
-                                      src={note.agents.pfp}
-                                      width={40}
-                                      height={40}
-                                      className="absolute bottom-1 left-1 z-10 rounded-full border border-border bg-secondary"
-                                    />
-                                  </div>
-
-                                  <div className="flex flex-col gap-1 ">
-                                    <p className="text-lg">{note.title}</p>
-                                    <Link
-                                      className={buttonVariants()}
-                                      href={`/quiz/${note.id}?prev=/dashboard`}
-                                    >
-                                      Create Quiz
-                                    </Link>
-
-                                    <div className="flex flex-row items-center gap-1 text-sm text-primary/80">
-                                      <Clock className="h-4 w-4" />
-                                      <span>{note.minutes} minute read.</span>
-                                    </div>
-
-                                    <div className="flex">
-                                      <Badge
-                                        /*@ts-ignore*/
-                                        variant={note?.category
-                                          .toLowerCase()
-                                          .split(" ")
-                                          .map((word, index) =>
-                                            index === 0
-                                              ? word
-                                              : word.charAt(0).toUpperCase() +
-                                                word.slice(1),
-                                          )
-                                          .join("")}
-                                      >
-                                        {note?.category}
-                                      </Badge>
-                                    </div>
-
-                                    <p className="text-xs text-primary/60">
-                                      {note.description}
-                                    </p>
-                                  </div>
-                                </Link>
-                              </HoverCardContent>
-                            </HoverCard>
+                return (
+                  <>
+                    <div>
+                      <div
+                        onClick={() =>
+                          toggleCategory(category as NoteCategories)
+                        }
+                        className="group flex cursor-pointer flex-row items-center justify-between rounded-lg border border-border bg-secondary p-2 transition-all hover:bg-secondary/80"
+                      >
+                        <div className={` flex flex-row items-center gap-2`}>
+                          {categoryOpenState[category as NoteCategories] ? (
+                            <>
+                              <ChevronDown className="h-4 w-4" />
+                              <FolderOpen
+                                className={`h-6 w-6 ${
+                                  category === "ENGLISH"
+                                    ? "fill-english/50 text-english"
+                                    : category === "MATH"
+                                    ? "fill-math/50 text-math"
+                                    : category === "SCIENCE"
+                                    ? "fill-science/50 text-science"
+                                    : category === "HISTORY"
+                                    ? "fill-history/50 text-history"
+                                    : category === "ARTS"
+                                    ? "fill-arts/50 text-arts"
+                                    : category === "MUSIC"
+                                    ? "fill-music/50 text-music"
+                                    : category === "LITERATURE"
+                                    ? "fill-literature/50 text-literature"
+                                    : category === "PHILOSOPHY"
+                                    ? "fill-philosophy/50 text-philosophy"
+                                    : category === "GEOGRAPHY"
+                                    ? "fill-geography/50 text-geography"
+                                    : category === "SOCIAL STUDIES"
+                                    ? "fill-socialStudies/50 text-socialStudies"
+                                    : category === "PHYSICAL EDUCATION"
+                                    ? "fill-physicalEducation/50 text-physicalEducation"
+                                    : category === "COMPUTER SCIENCE"
+                                    ? "fill-computerScience/50 text-computerScience"
+                                    : category === "ECONOMICS"
+                                    ? "fill-economics/50 text-economics"
+                                    : category === "BUSINESS STUDIES"
+                                    ? "fill-businessStudies/50 text-businessStudies"
+                                    : category === "PSYCHOLOGY"
+                                    ? "fill-psychology/50 text-psychology"
+                                    : category === "LAW"
+                                    ? "fill-law/50 text-law"
+                                    : category === "POLITICAL SCIENCE"
+                                    ? "fill-politicalScience/50 text-politicalScience"
+                                    : category === "ENVIRONMENTAL SCIENCE"
+                                    ? "fill-environmentalScience/50 text-environmentalScience"
+                                    : category === "ENGINEERING"
+                                    ? "fill-engineering/50 text-engineering"
+                                    : category === "MEDICINE"
+                                    ? "fill-medicine/50 text-medicine"
+                                    : category === "AGRICULTURE"
+                                    ? "fill-agriculture/50 text-agriculture"
+                                    : category === "ASTRONOMY"
+                                    ? "fill-astronomy/50 text-astronomy"
+                                    : ""
+                                }`}
+                              />
+                            </>
+                          ) : (
+                            <>
+                              <ChevronRight className="h-4 w-4" />
+                              <Folder
+                                className={`h-6 w-6 ${
+                                  category === "ENGLISH"
+                                    ? "fill-english/50 text-english"
+                                    : category === "MATH"
+                                    ? "fill-math/50 text-math"
+                                    : category === "SCIENCE"
+                                    ? "fill-science/50 text-science"
+                                    : category === "HISTORY"
+                                    ? "fill-history/50 text-history"
+                                    : category === "ARTS"
+                                    ? "fill-arts/50 text-arts"
+                                    : category === "MUSIC"
+                                    ? "fill-music/50 text-music"
+                                    : category === "LITERATURE"
+                                    ? "fill-literature/50 text-literature"
+                                    : category === "PHILOSOPHY"
+                                    ? "fill-philosophy/50 text-philosophy"
+                                    : category === "GEOGRAPHY"
+                                    ? "fill-geography/50 text-geography"
+                                    : category === "SOCIAL STUDIES"
+                                    ? "fill-socialStudies/50 text-socialStudies"
+                                    : category === "PHYSICAL EDUCATION"
+                                    ? "fill-physicalEducation/50 text-physicalEducation"
+                                    : category === "COMPUTER SCIENCE"
+                                    ? "fill-computerScience/50 text-computerScience"
+                                    : category === "ECONOMICS"
+                                    ? "fill-economics/50 text-economics"
+                                    : category === "BUSINESS STUDIES"
+                                    ? "fill-businessStudies/50 text-businessStudies"
+                                    : category === "PSYCHOLOGY"
+                                    ? "fill-psychology/50 text-psychology"
+                                    : category === "LAW"
+                                    ? "fill-law/50 text-law"
+                                    : category === "POLITICAL SCIENCE"
+                                    ? "fill-politicalScience/50 text-politicalScience"
+                                    : category === "ENVIRONMENTAL SCIENCE"
+                                    ? "fill-environmentalScience/50 text-environmentalScience"
+                                    : category === "ENGINEERING"
+                                    ? "fill-engineering/50 text-engineering"
+                                    : category === "MEDICINE"
+                                    ? "fill-medicine/50 text-medicine"
+                                    : category === "AGRICULTURE"
+                                    ? "fill-agriculture/50 text-agriculture"
+                                    : category === "ASTRONOMY"
+                                    ? "fill-astronomy/50 text-astronomy"
+                                    : ""
+                                }`}
+                              />
+                            </>
                           )}
-                        </>
-                      ))}
+                          {category
+                            .toLowerCase()
+                            .split(" ")
+                            .map(
+                              (word) =>
+                                word.charAt(0).toUpperCase() + word.slice(1),
+                            )
+                            .join(" ")}
+                        </div>
+                        <div className="flex flex-row items-center gap-2 ">
+                          {count}
+                        </div>
+                      </div>
+                      <div
+                        className={`${
+                          categoryOpenState[category as NoteCategories]
+                            ? ""
+                            : "hidden"
+                        }`}
+                      >
+                        <div className="flex flex-col gap-2 py-2 pl-4">
+                          {notes.map((note) => (
+                            <>
+                              {note.category === category && (
+                                <HoverCard closeDelay={50} openDelay={100}>
+                                  <HoverCardTrigger>
+                                    <Link
+                                      href={`/notes/${note.id}`}
+                                      className="flex cursor-pointer flex-row items-center gap-1 rounded-lg border border-border p-2 transition-all hover:-translate-y-0.5"
+                                    >
+                                      <p>{note.emoji}</p>
+                                      <p>
+                                        {note.title.length > 30
+                                          ? `${note.title.slice(0, 30)}...`
+                                          : note.title}
+                                      </p>
+                                    </Link>
+                                  </HoverCardTrigger>
+                                  <HoverCardContent align="start">
+                                    <Link
+                                      href={`/notes/${note.id}`}
+                                      className="flex flex-col justify-between gap-4 transition-all hover:-translate-y-0.5"
+                                    >
+                                      <div className="relative">
+                                        <Image
+                                          className="rounded-lg border border-border"
+                                          src={
+                                            note.imageUrl ?? "/generating1.gif"
+                                          }
+                                          alt="image"
+                                          width={300}
+                                          height={300}
+                                        />
+                                        <Image
+                                          alt={note.agents.name}
+                                          src={note.agents.pfp}
+                                          width={40}
+                                          height={40}
+                                          className="absolute bottom-1 left-1 z-10 rounded-full border border-border bg-secondary"
+                                        />
+                                      </div>
+
+                                      <div className="flex flex-col gap-1 ">
+                                        <p className="text-lg">{note.title}</p>
+                                        <Link
+                                          className={buttonVariants()}
+                                          href={`/quiz/${note.id}?prev=/dashboard`}
+                                        >
+                                          Create Quiz
+                                        </Link>
+
+                                        <div className="flex flex-row items-center gap-1 text-sm text-primary/80">
+                                          <Clock className="h-4 w-4" />
+                                          <span>
+                                            {note.minutes} minute read.
+                                          </span>
+                                        </div>
+
+                                        <div className="flex">
+                                          <Badge
+                                            /*@ts-ignore*/
+                                            variant={note?.category
+                                              .toLowerCase()
+                                              .split(" ")
+                                              .map((word, index) =>
+                                                index === 0
+                                                  ? word
+                                                  : word
+                                                      .charAt(0)
+                                                      .toUpperCase() +
+                                                    word.slice(1),
+                                              )
+                                              .join("")}
+                                          >
+                                            {note?.category}
+                                          </Badge>
+                                        </div>
+
+                                        <p className="text-xs text-primary/60">
+                                          {note.description}
+                                        </p>
+                                      </div>
+                                    </Link>
+                                  </HoverCardContent>
+                                </HoverCard>
+                              )}
+                            </>
+                          ))}
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                </div>
-              </>
-            );
-          })}
-          {notes.length === 0 && (
+                  </>
+                );
+              })}
+            </>
+          )}
+
+          {/* {notes.length === 0 && !loading && (
             <div className="flex flex-col items-center gap-2">
               <p className="text-xl">no notes.</p>
               <Image
@@ -348,7 +370,7 @@ export default function NotesMenu() {
                 alt="sad face"
               />
             </div>
-          )}
+          )} */}
         </div>
       </div>
     </div>
