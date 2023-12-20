@@ -50,6 +50,8 @@ export default function NotesMenu() {
     ASTRONOMY: 0,
   };
 
+  const [preloadImages, setPreloadImages] = useState(false);
+
   const [categoryOpenState, setCategoryOpenState] = useState<{
     [key in NoteCategories]: boolean;
   }>(
@@ -92,6 +94,7 @@ export default function NotesMenu() {
 
     setPresentCategories(categoryCounts);
     setLoading(false);
+    setPreloadImages(true);
   }, [getUserNotesQuery.data?.notes]);
 
   return (
@@ -373,6 +376,20 @@ export default function NotesMenu() {
           )} */}
         </div>
       </div>
+      {preloadImages &&
+        notes.map((note) => {
+          return (
+            <div key={note.id} className="hidden">
+              <Image
+                src={note.imageUrl ?? "/generating1.gif"}
+                alt="Preload image"
+                width={300}
+                height={300}
+                className=""
+              />
+            </div>
+          );
+        })}
     </div>
   );
 }
