@@ -14,7 +14,7 @@ export type UserSubscriptionPlan = SubscriptionPlan &
 
 export type Message = {
   role: "assistant" | "user";
-  text: string;
+  content: string;
 };
 
 export type Note = {
