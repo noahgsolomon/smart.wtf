@@ -9,15 +9,12 @@ import SmartWtfLogo from "../svg/smartwtf";
 import { usePathname } from "next/navigation";
 import UserButton from "./UserButton";
 import ChatButton from "../chatbutton";
-import { useChatContext } from "@/app/context/chat/ChatContext";
 import { QuickActionsModal } from "../ui/modals/quickactionsmodal";
 import { useQuickActions } from "hooks/usequickactions";
 import AddNote from "@/app/dashboard/components/notes/addnote";
 
 const NavBar = () => {
   const { userId } = useAuth();
-
-  const { ready } = useChatContext();
 
   const path = usePathname();
 
@@ -121,7 +118,7 @@ const NavBar = () => {
         )} */}
 
             <div className="flex items-center justify-end gap-4">
-              {userId && ready && (
+              {userId && (
                 <div
                   onClick={() => setIsOpen(true)}
                   className="relative hidden cursor-pointer transition-all hover:opacity-80 md:block"
@@ -172,7 +169,7 @@ const NavBar = () => {
           </div>
         </header>
       ) : null}
-      {userId && ready && (
+      {userId && (
         <>
           {!path.startsWith("/quiz") && <ChatButton />}
 
