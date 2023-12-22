@@ -51,6 +51,7 @@ export default function NotesMenu() {
   };
 
   const [preloadImages, setPreloadImages] = useState(false);
+  const [preloadImagesList, setPreloadImagesList] = useState<string[]>([]);
 
   const [categoryOpenState, setCategoryOpenState] = useState<{
     [key in NoteCategories]: boolean;
@@ -96,6 +97,10 @@ export default function NotesMenu() {
     setLoading(false);
     setPreloadImages(true);
   }, [getUserNotesQuery.data?.notes]);
+
+  useEffect(() => {
+    console.log(preloadImagesList);
+  }, [preloadImagesList]);
 
   return (
     <div className="min-h-[475px] rounded-lg border border-border bg-card p-4">
@@ -284,7 +289,14 @@ export default function NotesMenu() {
                                       </p>
                                     </Link>
                                   </HoverCardTrigger>
-                                  <HoverCardContent align="start">
+                                  <HoverCardContent
+                                    className={`${
+                                      preloadImagesList.includes(note.imageUrl!)
+                                        ? ""
+                                        : "hidden"
+                                    }`}
+                                    align="start"
+                                  >
                                     <Link
                                       href={`/notes/${note.id}`}
                                       className="flex flex-col justify-between gap-4 transition-all hover:-translate-y-0.5"
@@ -379,13 +391,20 @@ export default function NotesMenu() {
       {preloadImages &&
         notes.map((note) => {
           return (
-            <div key={note.id} className="hidden">
+            <div key={note.id} className="h-0 w-0 opacity-0">
               <Image
                 src={note.imageUrl ?? "/generating1.gif"}
                 alt="Preload image"
                 width={300}
                 height={300}
                 className=""
+                onLoad={() => {
+                  console.log("fired!");
+                  setPreloadImagesList((prevState) => [
+                    ...prevState,
+                    note.imageUrl!,
+                  ]);
+                }}
               />
             </div>
           );

@@ -44,7 +44,7 @@ const imageGeneneration = async (initialPrompt: string) => {
   return responseFetch.data[0]?.url;
 };
 
-const imageGen = await imageGeneneration("Linear Regression");
+const imageGen = await imageGeneneration("Bias Variance Tradeoff");
 
 console.log(imageGen);
 
