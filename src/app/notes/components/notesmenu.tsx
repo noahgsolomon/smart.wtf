@@ -133,10 +133,8 @@ export default function NotesMenu() {
     );
     setFilteredNotes(filtered);
 
-    // Reset categories count
-    let categoriesCount = { ...initialCategories };
+    const categoriesCount = { ...initialCategories };
 
-    // Count how many notes each category has after filter
     filtered.forEach((note) => {
       categoriesCount[note.category as NoteCategories]++;
     });
