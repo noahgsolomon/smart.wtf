@@ -1,6 +1,9 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   darkMode: ["class"],
+  future: {
+    hoverOnlyWhenSupported: true,
+  },
   content: [
     "./pages/**/*.{ts,tsx}",
     "./components/**/*.{ts,tsx}",
@@ -16,6 +19,10 @@ module.exports = {
       },
     },
     extend: {
+      screens: {
+        coarse: { raw: "(pointer: coarse)" },
+        fine: { raw: "(pointer: fine)" },
+      },
       colors: {
         sticky: "hsl(var(--sticky))",
         english: "hsl(var(--english))",
@@ -145,5 +152,9 @@ module.exports = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate"), require("@tailwindcss/typography")],
+  plugins: [
+    require("@tailwindcss/container-queries"),
+    require("tailwindcss-animate"),
+    require("@tailwindcss/typography"),
+  ],
 };
