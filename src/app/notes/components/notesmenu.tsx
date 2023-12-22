@@ -398,13 +398,6 @@ export default function NotesMenu() {
                                           width={300}
                                           height={300}
                                         />
-                                        <Image
-                                          alt={note.agents.name}
-                                          src={note.agents.pfp}
-                                          width={40}
-                                          height={40}
-                                          className="absolute bottom-1 left-1 z-10 rounded-full border border-border bg-secondary"
-                                        />
                                       </div>
 
                                       <div className="flex flex-col gap-1 ">
