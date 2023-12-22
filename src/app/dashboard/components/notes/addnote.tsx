@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { Flame, Loader2, PlusIcon, Wand } from "lucide-react";
+import { Flame, Loader2, PlusIcon, Wand, XIcon } from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -57,7 +57,7 @@ export default function AddNote({ visible = false }: { visible?: boolean }) {
         setRecommendedTopics((prev) => [...prev, note]);
       });
     }
-  }, [recommendedNotesQuery.data, recommendedTopics.length]);
+  }, [recommendedNotesQuery.data, recommendedTopics.length, recommendedTopics]);
 
   const { isOpen, setIsOpen } = useAddNote();
 
@@ -69,10 +69,14 @@ export default function AddNote({ visible = false }: { visible?: boolean }) {
           Generate
         </Button>
       </DialogTrigger>
-      <DialogContent className="rounded-lg sm:max-w-[425px]">
+      <DialogContent className=" rounded-lg sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>
+          <DialogTitle className="relative ">
             <h3>Generate Note</h3>
+            <XIcon
+              className="absolute right-2 top-2 h-4 w-4 cursor-pointer transition-all hover:opacity-80"
+              onClick={() => setIsOpen(false)}
+            />
           </DialogTitle>
           <DialogDescription>
             Generate a note on whatever topic you desire!

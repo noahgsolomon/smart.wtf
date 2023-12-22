@@ -348,7 +348,7 @@ export default function NotesMenu() {
                                             </DialogDescription>
                                           </DialogHeader>
 
-                                          <DialogFooter>
+                                          <DialogFooter className="flex gap-2">
                                             <DialogClose asChild>
                                               <Button variant={"outline"}>
                                                 Cancel
@@ -377,7 +377,7 @@ export default function NotesMenu() {
                                     </div>
                                   </HoverCardTrigger>
                                   <HoverCardContent
-                                    className={`${
+                                    className={`coarse:hidden ${
                                       preloadImagesList.includes(note.imageUrl!)
                                         ? ""
                                         : "hidden"
