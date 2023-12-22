@@ -42,6 +42,8 @@ export default function AddNote({ visible = false }: { visible?: boolean }) {
           setNoteInput("");
         } else {
           setInvalidTopic(true);
+          setNoteInput("");
+          setGenerating(false);
         }
       }
     },
@@ -131,8 +133,12 @@ export default function AddNote({ visible = false }: { visible?: boolean }) {
                 setInvalidTopic(false);
               }}
             />
-            <p className={`hidden text-sm text-destructive`}>
-              'Noah' is not a valid topic
+            <p
+              className={`${
+                invalidTopic ? "" : "hidden"
+              } text-sm text-destructive`}
+            >
+              Not a valid topic
             </p>
           </div>
         </div>
@@ -251,6 +257,7 @@ export default function AddNote({ visible = false }: { visible?: boolean }) {
               generating
             }
             onClick={() => {
+              setInvalidTopic(false);
               setGenerating(true);
               createNoteMutation.mutate({
                 agentId: agent.id,
