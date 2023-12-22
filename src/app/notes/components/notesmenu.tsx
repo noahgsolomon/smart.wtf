@@ -11,6 +11,7 @@ import {
   Folder,
   FolderOpen,
   Search,
+  Trash2,
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -21,8 +22,19 @@ import {
   HoverCardTrigger,
 } from "@/components/ui/hover-card";
 import { Badge } from "@/components/ui/badge";
-import { buttonVariants } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { DialogClose } from "@radix-ui/react-dialog";
+import { Toaster, toast } from "sonner";
 
 export default function NotesMenu() {
   const initialCategories = {
@@ -65,6 +77,16 @@ export default function NotesMenu() {
     ),
   );
 
+  const deleteNoteMutation = trpc.notes.deleteNote.useMutation({
+    onSuccess: () => {
+      getUserNotesQuery.refetch();
+      toast.success("Note deleted!");
+    },
+    onError: () => {
+      toast.error("Something went wrong!");
+    },
+  });
+
   const toggleCategory = (category: NoteCategories) => {
     setCategoryOpenState((prevState) => ({
       ...prevState,
@@ -97,10 +119,6 @@ export default function NotesMenu() {
     setLoading(false);
     setPreloadImages(true);
   }, [getUserNotesQuery.data?.notes]);
-
-  useEffect(() => {
-    console.log(preloadImagesList);
-  }, [preloadImagesList]);
 
   return (
     <div className="min-h-[475px] rounded-lg border border-border bg-card p-4">
@@ -277,17 +295,86 @@ export default function NotesMenu() {
                               {note.category === category && (
                                 <HoverCard closeDelay={50} openDelay={100}>
                                   <HoverCardTrigger>
-                                    <Link
-                                      href={`/notes/${note.id}`}
-                                      className="flex cursor-pointer flex-row items-center gap-1 rounded-lg border border-border p-2 transition-all hover:-translate-y-0.5"
-                                    >
-                                      <p>{note.emoji}</p>
-                                      <p>
-                                        {note.title.length > 30
-                                          ? `${note.title.slice(0, 30)}...`
-                                          : note.title}
-                                      </p>
-                                    </Link>
+                                    <div className="group flex cursor-pointer flex-row items-center justify-between gap-1 rounded-lg border border-border p-2 transition-all hover:-translate-y-0.5">
+                                      <Link
+                                        className="flex h-full w-full flex-row gap-1"
+                                        href={`/notes/${note.id}`}
+                                      >
+                                        <p>{note.emoji}</p>
+                                        <p>
+                                          {note.title.length > 30
+                                            ? `${note.title.slice(0, 30)}...`
+                                            : note.title}
+                                        </p>
+                                      </Link>
+
+                                      <Dialog>
+                                        <DialogTrigger
+                                          className="group z-10 block transition-all md:opacity-0 md:group-hover:opacity-100"
+                                          asChild
+                                        >
+                                          <Button
+                                            variant={"ghost"}
+                                            className="p-2"
+                                          >
+                                            <Trash2 className="h-4 w-4 transition-all group-hover:text-destructive" />
+                                          </Button>
+                                        </DialogTrigger>
+                                        <DialogContent className="rounded-lg sm:max-w-[425px]">
+                                          <DialogHeader>
+                                            <DialogTitle className="">
+                                              <Image
+                                                src={note.agents.pfp}
+                                                alt={note.agents.name}
+                                                width={48}
+                                                height={48}
+                                                className="rounded-full border border-border bg-secondary"
+                                              />
+                                              <h3>Delete Note</h3>
+                                            </DialogTitle>
+                                            <DialogDescription>
+                                              {note.agents.name ===
+                                              "Rick Sanchez"
+                                                ? "Morty, just get rid of it!"
+                                                : note.agents.name ===
+                                                  "Patrick Star"
+                                                ? "Can we say goodbye first?"
+                                                : note.agents.name ===
+                                                  "Mr. Burns"
+                                                ? "Release the hounds on this note."
+                                                : note.agents.name === "Bender"
+                                                ? `Let's go already, dump it!`
+                                                : "Are you sure you want to delete this note?"}
+                                            </DialogDescription>
+                                          </DialogHeader>
+
+                                          <DialogFooter>
+                                            <DialogClose asChild>
+                                              <Button variant={"outline"}>
+                                                Cancel
+                                              </Button>
+                                            </DialogClose>
+                                            <DialogClose asChild>
+                                              <Button
+                                                onClick={() => {
+                                                  setPresentCategories(
+                                                    initialCategories,
+                                                  );
+                                                  deleteNoteMutation.mutate({
+                                                    id: note.id,
+                                                  });
+                                                }}
+                                                className="flex flex-row gap-1"
+                                                variant={"destructive"}
+                                              >
+                                                Delete
+                                                <Trash2 className="h-3 w-3" />
+                                              </Button>
+                                            </DialogClose>
+                                          </DialogFooter>
+                                        </DialogContent>
+                                      </Dialog>
+                                    </div>
                                   </HoverCardTrigger>
                                   <HoverCardContent
                                     className={`${
@@ -399,7 +486,6 @@ export default function NotesMenu() {
                 height={300}
                 className=""
                 onLoad={() => {
-                  console.log("fired!");
                   setPreloadImagesList((prevState) => [
                     ...prevState,
                     note.imageUrl!,
@@ -409,6 +495,7 @@ export default function NotesMenu() {
             </div>
           );
         })}
+      <Toaster richColors position="top-center" />
     </div>
   );
 }
