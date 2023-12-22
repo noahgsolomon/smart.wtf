@@ -482,6 +482,11 @@ function getRandomEmoji(category: NoteCategories): string {
 }
 
 export const notesRouter = createTRPCRouter({
+  deleteNote: protectedProcedure
+    .input(z.object({ id: z.number() }))
+    .mutation(async ({ ctx, input }) => {
+      await ctx.db.delete(notes).where(eq(notes.id, input.id));
+    }),
   createImage: protectedProcedure
     .input(z.object({ title: z.string(), id: z.number() }))
     .mutation(async ({ ctx, input: { title, id } }) => {
