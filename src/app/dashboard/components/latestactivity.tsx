@@ -26,23 +26,28 @@ export default function LatestActivity() {
   return (
     <div className="flex w-full flex-col gap-4 bg-card p-4 md:w-auto">
       <div className="w-full">
-        {latestQuery.isLoading || !latest ? (
+        {latestQuery.isLoading && (
           <AspectRatio ratio={7 / 4}>
             <Skeleton className={`h-full w-full rounded-lg`}></Skeleton>
           </AspectRatio>
-        ) : (
-          <Image
-            src={
-              latest.latest.courseChapterSections?.imageUrl ??
-              "https://images.codefoli.com/systems-design-1-1.png"
-            }
-            priority={true}
-            alt="lesson"
-            width={700}
-            height={200}
-            className="max-w-full rounded-lg"
-          />
         )}
+        <Image
+          src={
+            latestQuery.isLoading || !latest
+              ? "https://images.codefoli.com/systems-design-1-1.png"
+              : latest.latest.courseChapterSections?.imageUrl ??
+                "https://images.codefoli.com/systems-design-1-1.png"
+          }
+          priority={true}
+          alt="lesson"
+          width={700}
+          height={200}
+          className={`max-w-full rounded-lg ${
+            latestQuery.isLoading || !latest
+              ? "h-0 w-0 max-w-0 opacity-0"
+              : "opacity-100"
+          }`}
+        />
       </div>
 
       <div className="flex flex-col gap-2">
