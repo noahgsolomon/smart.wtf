@@ -2,8 +2,9 @@ import { api } from "@/trpc/server";
 import LatestActivity from "./components/latestactivity";
 import Streak from "./components/streak";
 import NotesMenu from "../notes/components/notesmenu";
+import Dashboard from "./components/dashboard";
 
-const Dashboard = async () => {
+const Page = async () => {
   const user = (await api.user.user.query()).user;
 
   return (
@@ -20,21 +21,7 @@ const Dashboard = async () => {
                 }`}
               </h3>
             </div>
-
-            <div className="flex flex-col gap-16 md:gap-4">
-              <div className="flex flex-col gap-16 transition-all md:flex-row md:gap-4">
-                <div className="flex flex-col">
-                  <LatestActivity />
-                </div>
-
-                <div className="flex flex-col">
-                  <NotesMenu />
-                </div>
-              </div>
-              <div className="flex max-w-[775px] flex-col gap-2">
-                <Streak />
-              </div>
-            </div>
+            <Dashboard />
           </div>
         </section>
         {/* <section className="py-10">
@@ -49,4 +36,4 @@ const Dashboard = async () => {
   );
 };
 
-export default Dashboard;
+export default Page;
