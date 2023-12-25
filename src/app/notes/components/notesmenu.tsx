@@ -144,7 +144,7 @@ export default function NotesMenu() {
   }, [notes, topicInput]);
 
   return (
-    <div className="min-h-[475px] rounded-lg border border-border bg-card p-4">
+    <div className=" rounded-r-lg bg-card p-4">
       <div className="flex flex-col gap-2">
         <div className="flex flex-row  items-center gap-4 border-b border-border pb-2 md:gap-4 lg:gap-8">
           <h1>Notes</h1>
