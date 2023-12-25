@@ -22,7 +22,8 @@ import { useRegenerate } from "./useRegenerate";
 import { useContinue } from "./useContinue";
 import { useRouter } from "next/navigation";
 import { useChatContext } from "@/app/context/chat/ChatContext";
-import { Toaster, toast } from "sonner";
+import { toast } from "sonner";
+import { Toaster } from "@/components/ui/sonner";
 
 type UserNote = {
   id: number;

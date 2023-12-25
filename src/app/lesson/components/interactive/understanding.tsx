@@ -13,7 +13,8 @@ import { Lightbulb, Loader2 } from "lucide-react";
 import { type ReactNode, useState } from "react";
 import { useSectionContext } from "../../sectioncontext";
 import useSound from "use-sound";
-import { Toaster, toast } from "sonner";
+import { toast } from "sonner";
+import { Toaster } from "@/components/ui/sonner";
 
 export default function Understanding({
   chapterId,

@@ -3,7 +3,7 @@
 import AvatarUpload from "./avatarupload";
 import SettingsInput from "./settingsinput";
 import SettingsActionButtons from "./settingsactionbuttons";
-import { Toaster } from "sonner";
+import { Toaster } from "@/components/ui/sonner";
 
 const Settings = () => {
   return (

@@ -19,7 +19,8 @@ import Understanding from "@/app/lesson/components/interactive/understanding";
 import useSound from "use-sound";
 import Sort from "@/app/lesson/components/interactive/sort/sort";
 import { useChatContext } from "@/app/context/chat/ChatContext";
-import { Toaster, toast } from "sonner";
+import { toast } from "sonner";
+import { Toaster } from "@/components/ui/sonner";
 
 export default function Page({
   params,

@@ -7,7 +7,8 @@ import { type ReactElement, useState, useEffect } from "react";
 import { trpc } from "@/trpc/client";
 import { useSectionContext } from "../../sectioncontext";
 import useSound from "use-sound";
-import { Toaster, toast } from "sonner";
+import { toast } from "sonner";
+import { Toaster } from "@/components/ui/sonner";
 
 export default function Quiz({
   chapterId,
