@@ -195,11 +195,11 @@ const Streak = () => {
         </div>
 
         <div className="relative flex">
-          <div className="overflow-x-auto overflow-y-hidden rounded-md border border-border bg-card p-2 px-5 pb-5 md:p-5">
-            <div className="absolute bottom-0 right-0 top-0 z-10 my-4 border-r border-border bg-card pl-[10px]"></div>
+          <div className="overflow-x-auto overflow-y-hidden rounded-b-lg bg-card p-2 px-5 pb-5 md:p-5">
+            <div className="absolute bottom-0 right-0 top-0 z-10 my-4 bg-card pl-[10px]"></div>
             <div className="absolute bottom-0 right-[10px] top-0 z-10 my-4 pl-[10px] backdrop-blur-[1px]"></div>
 
-            <div className="absolute bottom-0 left-0 top-0 z-10 my-4 border-l border-border bg-card pl-[10px]"></div>
+            <div className="absolute bottom-0 left-0 top-0 z-10 my-4 bg-card pl-[10px]"></div>
             <div className="absolute bottom-0 left-[10px] top-0 z-10 my-4 pl-[10px] backdrop-blur-[1px]"></div>
 
             <ul className="flex w-[800px] flex-nowrap pb-2 pl-10 text-sm">
