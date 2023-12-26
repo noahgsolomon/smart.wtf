@@ -23,7 +23,7 @@ const markdownResponse = async (
       {
         content: `${agentPrompt} Continue the markdown document on the specified topic, aiming for an additional 1,000 words. The document should not repeat what is already present in the previous content, and should focus on something new that is a logical next step for the material that has been previously discussed.
 
-         It is mandatory to include at least one image to enhance the understanding of the topic. Please add placeholders for images where relevant with the format ![Search Query Text](image-N-asset), where N represents the order of the image (the first image would be image-1-asset, and so on). Provide their search queries in the square brackets but do not include the searchQueries visibly in the text; they should only be in the alt text of the image placeholders. If you believe an SVG format is best suited for an image (which should be all math images), include 'filetype:svg' in its search query.
+         It is mandatory to include at least one image to enhance the understanding of the topic. Please add placeholders for images where relevant with the format ![Search Query Text](image-N-asset), where N represents the order of the image (the first image would be image-1-asset, and so on). Provide their search queries in the square brackets but do not include the searchQueries visibly in the text; they should only be in the alt text of the image placeholders. If you believe an SVG format is best suited for an image (which should be all math images), include svg in its search query.
 
         Ensure the final output is all in markdown format, and that the image placeholders are in the correct format.
 
