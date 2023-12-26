@@ -56,16 +56,6 @@ const Streak = () => {
     }
   }, [streak]);
 
-  useEffect(() => {
-    if (currentDateRef.current) {
-      currentDateRef.current.scrollIntoView({
-        behavior: "auto",
-        block: "nearest",
-        inline: "start",
-      });
-    }
-  }, []);
-
   const generateDates = (year: number): Date[] => {
     const dates: Date[] = [];
     const date = new Date(year, 0, 1);
@@ -194,7 +184,7 @@ const Streak = () => {
           </Tooltip>
         </div>
 
-        <div className="relative flex">
+        <div className="relative flex bg-card">
           <div className="overflow-x-auto overflow-y-hidden rounded-b-lg bg-card p-2 px-5 pb-5 md:p-5">
             <div className="absolute bottom-0 right-0 top-0 z-10 my-4 bg-card pl-[10px]"></div>
             <div className="absolute bottom-0 right-[10px] top-0 z-10 my-4 pl-[10px] backdrop-blur-[1px]"></div>
