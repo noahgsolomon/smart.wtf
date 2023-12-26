@@ -1,7 +1,4 @@
 import { api } from "@/trpc/server";
-import LatestActivity from "./components/latestactivity";
-import Streak from "./components/streak";
-import NotesMenu from "../notes/components/notesmenu";
 import Dashboard from "./components/dashboard";
 
 const Page = async () => {
@@ -9,7 +6,7 @@ const Page = async () => {
 
   return (
     <>
-      <main className="mx-5 mt-20 transition-all lg:mx-24 2xl:mx-80">
+      <main className="mx-5 mt-20 transition-all lg:mx-28 2xl:mx-48">
         <section className="py-10">
           <div className="flex flex-col gap-8">
             <div className="flex flex-row items-center gap-2">
@@ -24,13 +21,6 @@ const Page = async () => {
             <Dashboard />
           </div>
         </section>
-        {/* <section className="py-10">
-          <div className="flex flex-col gap-12">
-            <Suspense fallback={<CourseSkeleton />}>
-              <Courses />
-            </Suspense>
-          </div>
-        </section> */}
       </main>
     </>
   );
