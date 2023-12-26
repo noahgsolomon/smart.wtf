@@ -15,6 +15,7 @@ import {
 import { Fragment } from "react";
 import { useRouter } from "next13-progressbar";
 import AddNote from "@/app/dashboard/components/notes/addnote";
+import { useAddNote } from "hooks/useaddnote";
 
 export default function NotesHeading({
   currentNote,
@@ -23,6 +24,7 @@ export default function NotesHeading({
 }) {
   const { openNotes, setOpenNotes, userNotes } = useNoteContext();
   const router = useRouter();
+  const { setIsOpen } = useAddNote();
 
   return (
     <div className="fixed left-0 right-0 top-0 z-20 flex w-screen flex-row items-center justify-between border-b border-border bg-card  px-2 py-2 shadow-sm md:px-10">
@@ -64,7 +66,13 @@ export default function NotesHeading({
                 </DropdownMenuItem>
               )}
               <div className="flex justify-center p-1">
-                <AddNote visible={true} />
+                <Button
+                  onClick={() => setIsOpen(true)}
+                  className="flex flex-row gap-2"
+                >
+                  <PlusIcon className="h-4 w-4" />
+                  Generate
+                </Button>
               </div>
             </DropdownMenuContent>
           </DropdownMenu>

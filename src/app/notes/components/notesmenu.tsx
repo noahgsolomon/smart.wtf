@@ -10,6 +10,7 @@ import {
   Clock,
   Folder,
   FolderOpen,
+  PlusIcon,
   Search,
   Trash2,
 } from "lucide-react";
@@ -36,6 +37,7 @@ import {
 import { DialogClose } from "@radix-ui/react-dialog";
 import { toast } from "sonner";
 import { Toaster } from "@/components/ui/sonner";
+import { useAddNote } from "hooks/useaddnote";
 
 export default function NotesMenu() {
   const initialCategories = {
@@ -87,6 +89,8 @@ export default function NotesMenu() {
       toast.error("Something went wrong!");
     },
   });
+
+  const { setIsOpen } = useAddNote();
 
   const toggleCategory = (category: NoteCategories) => {
     setCategoryOpenState((prevState) => ({
@@ -144,12 +148,18 @@ export default function NotesMenu() {
   }, [notes, topicInput]);
 
   return (
-    <div className=" rounded-r-lg bg-card p-4">
+    <div className="max-h-[600px] min-h-[450px] overflow-y-auto rounded-r-lg bg-card p-4 md:min-h-fit">
       <div className="flex flex-col gap-2">
         <div className="flex flex-row  items-center gap-4 border-b border-border pb-2 md:gap-4 lg:gap-8">
           <h1>Notes</h1>
           <div>|</div>
-          <AddNote visible={true} />
+          <Button
+            onClick={() => setIsOpen(true)}
+            className="flex flex-row gap-2"
+          >
+            <PlusIcon className="h-4 w-4" />
+            Generate
+          </Button>
         </div>
         <div className="relative ">
           <Input
@@ -184,7 +194,7 @@ export default function NotesMenu() {
                             className="group flex cursor-pointer flex-row items-center justify-between rounded-lg border border-border bg-secondary p-2 transition-all hover:bg-secondary/80"
                           >
                             <div
-                              className={` flex flex-row items-center gap-2`}
+                              className={`flex flex-row items-center gap-2 text-lg`}
                             >
                               {categoryOpenState[category as NoteCategories] ? (
                                 <>

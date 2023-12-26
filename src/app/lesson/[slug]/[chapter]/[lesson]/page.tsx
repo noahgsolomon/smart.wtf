@@ -81,7 +81,6 @@ export default function Page({
   const mutateBlock = trpc.course.setBlockCompleted.useMutation({
     onSuccess: (response) => {
       console.log("successss");
-      console.log(JSON.stringify(response.data, null, 2));
       if (response.data.firstCommitToday) {
         toast(`You're on a ${response.data.streakCount} day streak`, {
           icon: "🔥",
@@ -91,8 +90,6 @@ export default function Page({
   });
 
   const { setLesson, lesson } = useChatContext();
-
-  console.log(lesson);
 
   let chatContext = "";
 
