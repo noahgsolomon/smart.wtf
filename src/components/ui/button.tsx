@@ -4,22 +4,22 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "shadow-none transition-all inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50 ",
+  " transition-all inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50 ",
   {
     variants: {
       variant: {
         default:
-          "hover:scale-[101%] active:scale-[99%] transition-all bg-primary text-primary-foreground hover:bg-primary/90",
+          "shadow-sm hover:scale-[101%] active:scale-[99%] transition-all bg-primary text-primary-foreground hover:bg-primary/90",
         darkMode:
-          "hover:scale-[101%] active:scale-[99%] transition-all bg-secondary dark:bg-primary text-secondary-foreground dark:text-primary-foreground hover:bg-secondary/90 dark:hover:bg-primary/90",
+          "shadow-sm hover:scale-[101%] active:scale-[99%] transition-all bg-secondary dark:bg-primary text-secondary-foreground dark:text-primary-foreground hover:bg-secondary/90 dark:hover:bg-primary/90",
         lightMode:
-          "hover:scale-[101%] active:scale-[99%] transition-all bg-primary dark:bg-secondary text-primary-foreground dark:text-secondary-foreground hover:bg-primary/90 dark:hover:bg-secondary/90",
+          "shadow-sm hover:scale-[101%] active:scale-[99%] transition-all bg-primary dark:bg-secondary text-primary-foreground dark:text-secondary-foreground hover:bg-primary/90 dark:hover:bg-secondary/90",
         destructive:
-          "hover:scale-[101%] active:scale-[99%] transition-all bg-destructive text-destructive-foreground hover:bg-destructive/90",
+          "shadow-sm hover:scale-[101%] active:scale-[99%] transition-all bg-destructive text-destructive-foreground hover:bg-destructive/90",
         outline:
-          "hover:scale-[101%] active:scale-[99%] transition-all border border-input bg-transparent hover:bg-accent hover:text-accent-foreground",
+          " hover:scale-[101%] active:scale-[99%] transition-all border border-input bg-transparent hover:bg-accent hover:text-accent-foreground",
         secondary:
-          "hover:scale-[101%] active:scale-[99%] transition-all bg-accent text-secondary-foreground hover:bg-primary/10 dark:hover:bg-accent/80",
+          "shadow-sm hover:scale-[101%] active:scale-[99%] transition-all bg-accent text-secondary-foreground hover:bg-primary/10 dark:hover:bg-accent/80",
         ghost:
           "hover:scale-[101%] active:scale-[99%] transition-all hover:bg-accent hover:text-accent-foreground",
         link: "hover:scale-[100%] active:scale-[100%] transition-all text-primary underline-offset-4 hover:underline",
@@ -28,7 +28,7 @@ const buttonVariants = cva(
         lightModeLink:
           "hover:scale-[100%] active:scale-[100%] transition-all text-primary dark:text-secondary underline-offset-4 hover:underline",
         success:
-          "hover:scale-[101%] active:scale-[99%] transition-all bg-success text-primary hover:bg-success/90",
+          "shadow-sm hover:scale-[101%] active:scale-[99%] transition-all bg-success text-primary hover:bg-success/90",
       },
       size: {
         default: "h-9 px-4 py-2",
