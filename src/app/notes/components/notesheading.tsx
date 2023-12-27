@@ -14,7 +14,6 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Fragment } from "react";
 import { useRouter } from "next13-progressbar";
-import AddNote from "@/app/dashboard/components/notes/addnote";
 import { useAddNote } from "hooks/useaddnote";
 
 export default function NotesHeading({

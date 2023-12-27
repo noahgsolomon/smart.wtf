@@ -686,8 +686,6 @@ export const notesRouter = createTRPCRouter({
         where: and(eq(streak.userId, ctx.user_id), eq(streak.date, dateOnly)),
       });
 
-      let streakCount = 0;
-
       if (!streakDb) {
         const year = currentDate.getUTCFullYear();
         const month = currentDate.getUTCMonth();
@@ -709,7 +707,6 @@ export const notesRouter = createTRPCRouter({
             dailyEngagementCount: 1,
             activity: "notes",
           });
-          streakCount = prevStreakDb.count + 1;
         } else {
           await ctx.db.insert(streak).values({
             userId: ctx.user_id,
@@ -719,7 +716,6 @@ export const notesRouter = createTRPCRouter({
             activity: "notes",
             dailyEngagementCount: 1,
           });
-          streakCount = 1;
         }
       } else {
         await ctx.db

@@ -37,16 +37,16 @@ export default function Page({ params }: { params: { noteId: string } }) {
   });
 
   const retrieveUserNotesQuery = trpc.notes.getUserNotesMeta.useQuery();
-  const generatedGif = useMemo(
-    () => `/generating${Math.floor(Math.random() * 12)}.gif`,
-    [],
-  );
+  // const generatedGif = useMemo(
+  //   () => `/generating${Math.floor(Math.random() * 12)}.gif`,
+  //   [],
+  // );
 
   const [imageMutationCalled, setImageMutationCalled] = useState(false);
   const { openNotes, setOpenNotes, setUserNotes } = useNoteContext();
   const [note, setNote] = useState<Note | null>(null);
   const [readingMode, setReadingMode] = useState<"normal" | "agent">("normal");
-  const [imageSrc, setImageSrc] = useState<string | null>(null);
+  const [_, setImageSrc] = useState<string | null>(null);
 
   const [markdown, setMarkdown] = useState("");
   const [agentMarkdown, setAgentMarkdown] = useState("");

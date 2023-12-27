@@ -1,7 +1,6 @@
 "use client";
 import {
   Carousel,
-  CarouselApi,
   CarouselContent,
   CarouselItem,
   CarouselNext,
@@ -10,9 +9,7 @@ import {
 import Image from "next/image";
 import SectionCard from "./sectioncard";
 import ChapterDivider from "./chapterdivider";
-import { Dot } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
-import { useEffect, useState } from "react";
 
 export default function LearningPath() {
   return (
