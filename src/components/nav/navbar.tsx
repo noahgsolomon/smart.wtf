@@ -8,7 +8,6 @@ import { cn } from "@/lib/utils";
 import SmartWtfLogo from "../svg/smartwtf";
 import { usePathname } from "next/navigation";
 import UserButton from "./UserButton";
-import ChatButton from "../chatbutton";
 import { QuickActionsModal } from "../ui/modals/quickactionsmodal";
 import { useQuickActions } from "hooks/usequickactions";
 import AddNote from "@/app/dashboard/components/notes/addnote";

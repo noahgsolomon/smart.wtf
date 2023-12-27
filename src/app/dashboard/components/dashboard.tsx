@@ -1,9 +1,4 @@
 "use client";
-import {
-  ResizableHandle,
-  ResizablePanel,
-  ResizablePanelGroup,
-} from "@/components/ui/resizable";
 import LatestActivity from "./latestactivity";
 import NotesMenu from "@/app/notes/components/notesmenu";
 import Streak from "./streak";

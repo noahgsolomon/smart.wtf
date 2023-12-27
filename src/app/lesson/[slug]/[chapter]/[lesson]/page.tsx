@@ -89,7 +89,7 @@ export default function Page({
     },
   });
 
-  const { setLesson, lesson } = useChatContext();
+  const { setLesson } = useChatContext();
 
   let chatContext = "";
 

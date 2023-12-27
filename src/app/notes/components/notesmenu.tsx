@@ -1,11 +1,9 @@
 "use client";
 
-import AddNote from "@/app/dashboard/components/notes/addnote";
 import { Input } from "@/components/ui/input";
 import { trpc } from "@/trpc/client";
 import { type Note, type NoteCategories } from "@/types";
 import {
-  ChevronDown,
   ChevronRight,
   Clock,
   Folder,

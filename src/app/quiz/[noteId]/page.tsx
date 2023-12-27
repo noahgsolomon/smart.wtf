@@ -9,7 +9,7 @@ import { buttonVariants } from "@/components/ui/button";
 import Link from "next/link";
 import { trpc } from "@/trpc/client";
 import { useRouter } from "next/navigation";
-import { Note } from "@/types";
+import { type Note } from "@/types";
 
 const backgrounds = [
   { background: "/generating8.gif", mode: "light" },

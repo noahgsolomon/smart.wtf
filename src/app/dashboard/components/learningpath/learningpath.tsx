@@ -1,5 +1,4 @@
 "use client";
-import { Card, CardContent } from "@/components/ui/card";
 import {
   Carousel,
   CarouselContent,
@@ -10,7 +9,7 @@ import {
 import Image from "next/image";
 import SectionCard from "./sectioncard";
 import ChapterDivider from "./chapterdivider";
-import { Dot, Lock } from "lucide-react";
+import { Dot } from "lucide-react";
 
 export default function LearningPath() {
   return (

@@ -1,6 +1,5 @@
 "use client";
 
-import { trpc } from "@/trpc/client";
 import { type Message } from "@/types";
 import React, {
   createContext,
