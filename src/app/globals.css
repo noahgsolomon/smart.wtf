@@ -49,7 +49,10 @@ html {
     --medicine: 220 100% 65%;
     --agriculture: 140 100% 65%;
     --astronomy: 240 100% 65%;
-
+    --pastel-yellow: 60 70% 90%;
+    --pastel-red: 354 100% 90%;
+    --pastel-blue: 210 70% 90%;
+    --pastel-purple: 270 70% 90%;
     --sticky: 670 100% 40%;
 
     --rick: 208 100% 50%;
@@ -63,16 +66,11 @@ html {
     --blue: 210 100% 50%;
     --light-blue: 210 80% 85%;
     --link: 240 100% 55%;
-    /* This is the blue link color */
     --link-hover: 240 100% 45%;
-    /* Slightly darker shade for hover */
     --progressBar: 210 25% 55%;
     --blob1: 230 60% 75%;
-    /* A light, muted blue */
     --blob2: 260 50% 80%;
-    /* A light, muted purple */
     --blob3: 280 40% 85%;
-    /* A light, muted pinkish color */
     --brain: 340 25% 85%;
     --brain-foreground: 340 15% 50%;
 
@@ -85,19 +83,13 @@ html {
     --library: 28 50% 40%;
     --library-foreground: 28 25% 30%;
     --common: 120 25% 75%;
-    /* Muted Green */
     --common-foreground: 120 15% 40%;
     --uncommon: 240 25% 75%;
-    /* Muted Blue */
     --uncommon-foreground: 240 15% 40%;
     --rare: 58 100% 45%;
-    /* Gold */
     --rare-foreground: 58 45% 95%;
-
     --gold: 58 100% 50%;
-    /* Gold for light mode */
     --gold-foreground: 58 45% 40%;
-    /* Foreground for gold in light mode */
   }
 
   .dark {
@@ -152,43 +144,31 @@ html {
     --medicine: 220 100% 80%;
     --agriculture: 140 100% 80%;
     --astronomy: 240 100% 80%;
-
-    /* Lighter shade of blue for dark theme */
     --link-hover: 210 80% 61%;
-    /* Slightly darker shade for hover in dark theme */
     --progressBar: 210 10% 85%;
     --blob1: 230 20% 50%;
-    /* A brighter, muted blue for dark theme */
     --blob2: 260 15% 40%;
-    /* A brighter, muted purple for dark theme */
     --blob3: 280 10% 45%;
-    /* A brighter, muted pinkish color for dark theme */
     --brain: 330 25% 60%;
     --brain-foreground: 330 12% 70%;
-
     --common: 120 25% 45%;
-    /* Brighter Green */
     --common-foreground: 120 15% 70%;
     --uncommon: 240 25% 55%;
-    /* Brighter Blue */
     --uncommon-foreground: 240 15% 70%;
     --rare: 58 100% 40%;
-    /* Brighter Gold */
     --rare-foreground: 58 45% 85%;
-
     --fish: 355 90% 40%;
     --fish-foreground: 355 45% 50%;
-
     --success: 120 50% 40%;
     --success-foreground: 120 25% 50%;
-
     --library: 28 50% 30%;
     --library-foreground: 28 25% 40%;
-
     --gold: 58 100% 40%;
-    /* Gold for dark mode */
     --gold-foreground: 58 45% 60%;
-    /* Foreground for gold in dark mode */
+    --pastel-yellow: 60 80% 70%;
+    --pastel-red: 0 80% 70%;
+    --pastel-blue: 210 80% 70%;
+    --pastel-purple: 270 80% 70%;
   }
 }
 
@@ -199,7 +179,9 @@ html {
 
   body {
     @apply bg-background text-foreground;
+
   }
+
 }
 
 .cl-internal-b3fm6y {

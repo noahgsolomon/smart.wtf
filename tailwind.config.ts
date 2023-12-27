@@ -24,6 +24,10 @@ module.exports = {
         fine: { raw: "(pointer: fine)" },
       },
       colors: {
+        pastelBlue: "hsl(var(--pastel-blue))",
+        pastelPurple: "hsl(var(--pastel-purple))",
+        pastelRed: "hsl(var(--pastel-red))",
+        pastelYellow: "hsl(var(--pastel-yellow))",
         sticky: "hsl(var(--sticky))",
         english: "hsl(var(--english))",
         math: "hsl(var(--math))",
