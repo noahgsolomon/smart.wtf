@@ -6,7 +6,7 @@ const Page = async () => {
 
   return (
     <>
-      <main className="mx-5 mt-20 transition-all lg:mx-28 2xl:mx-48">
+      <main className="2xl:mx-58 mx-[7%] mt-20 transition-all lg:mx-32 xl:mx-48">
         <section className="py-10">
           <div className="flex flex-col gap-8">
             <div className="flex flex-row items-center gap-2">
