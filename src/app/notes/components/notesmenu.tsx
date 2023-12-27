@@ -146,12 +146,10 @@ export default function NotesMenu() {
   }, [notes, topicInput]);
 
   return (
-    <div className="h-full max-h-[700px] overflow-y-auto rounded-lg border bg-card p-4 shadow-md md:min-h-fit">
+    <div className="h-full max-h-[700px] overflow-y-auto rounded-lg border bg-card/70 p-4 shadow-md dark:bg-card/80 md:min-h-fit">
       <div className="flex flex-col gap-2">
-        <div className="flex flex-col items-center gap-2 border-border pb-2 md:flex-row md:gap-4 md:border-b lg:gap-8">
+        <div className="flex flex-row items-center justify-between border-b border-border pb-2">
           <h1>Notes</h1>
-          <div className="w-full border md:hidden"></div>
-          <div className="hidden md:block">|</div>
           <Button
             onClick={() => setIsOpen(true)}
             className="flex flex-row gap-2"
@@ -172,8 +170,8 @@ export default function NotesMenu() {
         <div className="flex max-h-[400px] flex-col gap-2 overflow-y-auto overflow-x-hidden">
           {loading ? (
             <div className="flex flex-col gap-2">
-              <Skeleton className="flex h-10 w-full cursor-pointer flex-row items-center justify-between rounded-lg border border-border bg-secondary p-2 transition-all hover:bg-secondary/80"></Skeleton>
-              <Skeleton className="flex h-10 w-full cursor-pointer flex-row items-center justify-between rounded-lg border border-border bg-secondary p-2 transition-all hover:bg-secondary/80"></Skeleton>
+              <Skeleton className="flex h-10 w-full cursor-pointer flex-row items-center justify-between rounded-lg border border-border bg-secondary/90 p-2 transition-all hover:bg-secondary/80"></Skeleton>
+              <Skeleton className="flex h-10 w-full cursor-pointer flex-row items-center justify-between rounded-lg border border-border bg-secondary/90 p-2 transition-all hover:bg-secondary/80"></Skeleton>
             </div>
           ) : (
             <>
@@ -190,7 +188,7 @@ export default function NotesMenu() {
                             onClick={() =>
                               toggleCategory(category as NoteCategories)
                             }
-                            className=" group flex cursor-pointer flex-row items-center justify-between rounded-lg border border-border bg-secondary p-2 transition-all hover:bg-secondary/80"
+                            className=" group flex cursor-pointer flex-row items-center justify-between rounded-lg border border-border bg-secondary/90 p-2 transition-all hover:bg-secondary/80"
                           >
                             <div
                               className={`flex flex-row items-center gap-2 text-lg`}
@@ -328,7 +326,7 @@ export default function NotesMenu() {
                                 : "hidden"
                             }`}
                           >
-                            <div className="flex flex-col gap-2 py-2 pl-4">
+                            <div className="flex flex-col gap-2 py-2">
                               {notes.map((note) => (
                                 <>
                                   {note.category === category && (
@@ -336,11 +334,23 @@ export default function NotesMenu() {
                                       <HoverCardTrigger>
                                         <div className="group flex cursor-pointer flex-row items-center justify-between gap-1 rounded-lg border border-border p-2 transition-all hover:-translate-y-0.5">
                                           <Link
-                                            className="flex h-full w-full flex-row gap-1"
+                                            className="flex h-full w-full flex-row items-center gap-4 text-lg"
                                             href={`/notes/${note.id}`}
                                           >
-                                            <p>{note.emoji}</p>
-                                            <p className="whitespace-nowrap">
+                                            <Image
+                                              src={
+                                                note.imageUrl ??
+                                                "/generating1.gif"
+                                              }
+                                              className="rounded-lg border fine:hidden"
+                                              alt="note image"
+                                              width={80}
+                                              height={48}
+                                            />
+                                            <p className="coarse:hidden">
+                                              {note.emoji}
+                                            </p>
+                                            <p className="">
                                               {note.title.length > 30
                                                 ? `${note.title.slice(
                                                     0,
@@ -514,7 +524,7 @@ export default function NotesMenu() {
                             onClick={() =>
                               toggleCategory(category as NoteCategories)
                             }
-                            className="group flex cursor-pointer flex-row items-center justify-between rounded-lg border border-border bg-secondary p-2 transition-all hover:bg-secondary/80"
+                            className="group flex cursor-pointer flex-row items-center justify-between rounded-lg border border-border bg-secondary/90 p-2 transition-all hover:bg-secondary/80"
                           >
                             <div
                               className={` flex flex-row items-center gap-2`}
@@ -652,7 +662,7 @@ export default function NotesMenu() {
                                 : "hidden"
                             }`}
                           >
-                            <div className="flex flex-col gap-2 py-2 pl-4">
+                            <div className="flex flex-col gap-2 py-2">
                               {filteredNotes.map((note) => (
                                 <>
                                   {note.category === category && (
