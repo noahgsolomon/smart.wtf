@@ -254,7 +254,7 @@ export default function Page({ params }: { params: { noteId: string } }) {
           exit="exit"
         >
           <div className="flex flex-col gap-8 pt-[3rem]">
-            <div className="relative mx-auto h-[250px] w-full overflow-hidden transition-all md:h-[350px] lg:h-[400px]">
+            {/* <div className="relative mx-auto h-[250px] w-full overflow-hidden rounded-lg p-4 transition-all md:h-[350px] lg:h-[400px] xl:hidden">
               {imageSrc ? (
                 <>
                   <Image
@@ -262,6 +262,7 @@ export default function Page({ params }: { params: { noteId: string } }) {
                     objectFit="cover"
                     src={imageSrc}
                     alt={"note image"}
+                    className="border-b"
                   />
                   <div className="inset-shadow absolute left-0 top-0 h-full w-full" />
                 </>
@@ -276,9 +277,20 @@ export default function Page({ params }: { params: { noteId: string } }) {
                   />
                 </>
               )}
-            </div>
+            </div> */}
+            {/* <div className="hidden pt-12  xl:block ">
+              {imageSrc && (
+                <Image
+                  width={400}
+                  height={300}
+                  src={imageSrc}
+                  alt={"note image"}
+                  className="mx-auto rounded-lg border"
+                />
+              )}
+            </div> */}
 
-            <div className=" flex justify-center px-0 pb-4 pt-8 md:px-4">
+            <div className="flex justify-center px-0 pb-4 pt-48 md:px-4 lg:pt-64 ">
               <div className="relative px-8 py-2 pb-24">
                 <div className="flex flex-col gap-2">
                   <div className="flex gap-2">
