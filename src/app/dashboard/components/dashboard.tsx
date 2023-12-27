@@ -12,103 +12,51 @@ import LearningPath from "./learningpath/learningpath";
 export default function Dashboard() {
   return (
     <div>
-      <div className="hidden xl:block">
-        <ResizablePanelGroup
-          direction="horizontal"
-          className="w-full rounded-lg border bg-card"
-        >
-          <ResizablePanel defaultSize={65} defaultValue={35}>
-            <ResizablePanelGroup direction="vertical">
-              <ResizablePanelGroup
-                direction="horizontal"
-                className="w-full min-w-[600px]"
-              >
-                <ResizablePanel className="min-w-[320px]">
+      <div className="hidden 2xl:block">
+        <div className="flex w-full flex-row gap-4 rounded-lg">
+          <div className="w-[70%]">
+            <div className="flex flex-col gap-4">
+              <div className="flex w-full gap-4">
+                <div className="w-[60%]">
                   <LatestActivity />
-                </ResizablePanel>
-                <ResizableHandle withHandle />
-                <ResizablePanel className="min-w-[320px] bg-card">
+                </div>
+                <div className="w-[40%]">
                   <NotesMenu />
-                </ResizablePanel>
-              </ResizablePanelGroup>
-              <ResizablePanelGroup
-                className="max-h-[175px] border-t"
-                direction="horizontal"
-              >
-                <ResizablePanel>
-                  <div className="flex w-full flex-col gap-2">
-                    <Streak />
-                  </div>
-                </ResizablePanel>
-              </ResizablePanelGroup>
-            </ResizablePanelGroup>
-          </ResizablePanel>
-          <ResizableHandle withHandle />
-          <ResizablePanel
-            defaultSize={35}
-            defaultValue={35}
-            className="min-w-[300px] max-w-[400px]"
-          >
-            <LearningPath />
-          </ResizablePanel>
-        </ResizablePanelGroup>
-      </div>
-      <div className="hidden md:block xl:hidden">
-        <ResizablePanelGroup className="rounded-lg border" direction="vertical">
-          <ResizablePanelGroup direction="horizontal" className="w-full">
-            <ResizablePanel className="min-w-[320px]">
-              <LatestActivity />
-            </ResizablePanel>
-            <ResizableHandle withHandle />
-            <ResizablePanel className="min-w-[320px] bg-card">
-              <NotesMenu />
-            </ResizablePanel>
-          </ResizablePanelGroup>
-          <ResizablePanelGroup className="border-t" direction="horizontal">
-            <ResizablePanel className="w-full">
-              <LearningPath />
-            </ResizablePanel>
-          </ResizablePanelGroup>
-          <ResizablePanelGroup
-            className="max-h-[175px] border-t"
-            direction="horizontal"
-          >
-            <ResizablePanel>
-              <div className="flex w-full flex-col gap-2">
-                <Streak />
+                </div>
               </div>
-            </ResizablePanel>
-          </ResizablePanelGroup>
-        </ResizablePanelGroup>
+              <Streak />
+            </div>
+          </div>
+          <div className="w-[30%]">
+            <LearningPath />
+          </div>
+        </div>
+      </div>
+      <div className="hidden md:block 2xl:hidden">
+        <div className="flex flex-col gap-4 rounded-lg">
+          <div className="flex w-full gap-4">
+            <div className="w-[55%]">
+              <LatestActivity />
+            </div>
+            <div className="w-[45%]">
+              <NotesMenu />
+            </div>
+          </div>
+          <div>
+            <div className="w-full">
+              <LearningPath />
+            </div>
+          </div>
+          <Streak />
+        </div>
       </div>
       <div className="block md:hidden">
-        <ResizablePanelGroup className="rounded-lg border" direction="vertical">
-          <ResizablePanelGroup direction="horizontal" className="w-full">
-            <ResizablePanel className="min-w-[320px]">
-              <LatestActivity />
-            </ResizablePanel>
-          </ResizablePanelGroup>
-          <ResizablePanelGroup direction="horizontal">
-            <ResizablePanel className="min-w-[320px] bg-card">
-              <NotesMenu />
-            </ResizablePanel>
-          </ResizablePanelGroup>
-          <ResizablePanelGroup direction="horizontal">
-            <ResizablePanel>
-              <LearningPath />
-            </ResizablePanel>
-          </ResizablePanelGroup>
-          <ResizablePanelGroup
-            className="max-h-[175px] border-t"
-            direction="horizontal"
-          >
-            <ResizablePanel>
-              <div className="flex w-full flex-col gap-2">
-                <Streak />
-              </div>
-            </ResizablePanel>
-          </ResizablePanelGroup>
-        </ResizablePanelGroup>
+        <div className="flex flex-col gap-4 rounded-lg">
+          <LatestActivity />
+          <NotesMenu />
+          <LearningPath />
+          <Streak />
+        </div>
       </div>
     </div>
   );
