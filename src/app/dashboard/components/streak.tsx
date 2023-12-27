@@ -81,13 +81,10 @@ const Streak = () => {
     );
 
     return (
-      <ul className="flex flex-col gap-x-[0.1rem] gap-y-[0.2rem] pr-2">
+      <ul className="flex flex-col gap-1 pr-2">
         {Object.keys(groupedDates).map((key) => {
           return (
-            <div
-              key={key}
-              className="flex flex-row  gap-x-[0.1rem] gap-y-[0.15rem]"
-            >
+            <div key={key} className="flex flex-row gap-[0.2rem]">
               {groupedDates[parseInt(key)]?.map((date, index) => {
                 const streakDate = streak.find((streakDate) => {
                   return (
@@ -125,7 +122,7 @@ const Streak = () => {
                       <li
                         ref={isToday ? currentDateRef : null}
                         data-level="0"
-                        className={`rounded-sm  p-[0.4rem] ${
+                        className={`rounded-[2px] p-[0.4rem] ${
                           streakDate
                             ? `bg-success opacity-${roundToNearestTen(
                                 (dailyEngagementCount ?? 0) + 40,
@@ -151,7 +148,7 @@ const Streak = () => {
   };
 
   return (
-    <div className="relative">
+    <div className="relative overflow-hidden rounded-lg shadow-md ">
       <TooltipProvider delayDuration={0}>
         <div className="absolute left-1 top-1 z-[15] pb-4">
           <Tooltip>
@@ -184,15 +181,15 @@ const Streak = () => {
           </Tooltip>
         </div>
 
-        <div className="relative flex bg-card">
-          <div className="overflow-x-auto overflow-y-hidden rounded-b-lg bg-card p-2 px-5 pb-5 md:p-5">
+        <div className="relative flex rounded-lg border bg-card">
+          <div className="overflow-x-auto overflow-y-hidden rounded-l-lg bg-card p-2 px-5 pb-5 md:p-5">
             <div className="absolute bottom-0 right-0 top-0 z-10 my-4 bg-card pl-[10px]"></div>
             <div className="absolute bottom-0 right-[10px] top-0 z-10 my-4 pl-[10px] backdrop-blur-[1px]"></div>
 
             <div className="absolute bottom-0 left-0 top-0 z-10 my-4 bg-card pl-[10px]"></div>
             <div className="absolute bottom-0 left-[10px] top-0 z-10 my-4 pl-[10px] backdrop-blur-[1px]"></div>
 
-            <ul className="flex w-[800px] flex-nowrap pb-2 pl-10 text-sm">
+            <ul className="flex w-[900px] flex-nowrap pb-2 pl-10 text-sm">
               <li className="w-[68px]">Jan</li>
               <li className="w-[68px]">Feb</li>
               <li className="w-[68px]">Mar</li>
