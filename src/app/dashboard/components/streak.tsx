@@ -170,7 +170,7 @@ const Streak = () => {
           <Tooltip>
             <TooltipTrigger>
               <div className="flex cursor-pointer items-end gap-2 transition-all hover:scale-105">
-                <div className="rounded-lg border border-border bg-primary">
+                <div className="rounded-lg border border-border bg-primary/90">
                   <p className="px-2 py-1 text-secondary">
                     🔥 {currentStreakCount}
                   </p>
@@ -181,12 +181,12 @@ const Streak = () => {
           </Tooltip>
         </div>
 
-        <div className="relative flex rounded-lg border bg-card">
-          <div className="overflow-x-auto overflow-y-hidden rounded-l-lg bg-card p-2 px-5 pb-5 md:p-5">
-            <div className="absolute bottom-0 right-0 top-0 z-10 my-4 bg-card pl-[10px]"></div>
+        <div className="relative flex rounded-lg border bg-card/70 dark:bg-card/80">
+          <div className="overflow-x-auto overflow-y-hidden rounded-l-lg bg-card/70 p-2 px-5 pb-5 dark:bg-card/80 md:p-5">
+            <div className="absolute bottom-0 right-0 top-0 z-10 my-4 bg-card/70 pl-[10px] dark:bg-card/80"></div>
             <div className="absolute bottom-0 right-[10px] top-0 z-10 my-4 pl-[10px] backdrop-blur-[1px]"></div>
 
-            <div className="absolute bottom-0 left-0 top-0 z-10 my-4 bg-card pl-[10px]"></div>
+            <div className="absolute bottom-0 left-0 top-0 z-10 my-4 bg-card/70 pl-[10px] dark:bg-card/80"></div>
             <div className="absolute bottom-0 left-[10px] top-0 z-10 my-4 pl-[10px] backdrop-blur-[1px]"></div>
 
             <ul className="flex w-[900px] flex-nowrap pb-2 pl-10 text-sm">
