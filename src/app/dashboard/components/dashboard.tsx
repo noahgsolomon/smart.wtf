@@ -19,7 +19,9 @@ export default function Dashboard() {
                   <NotesMenu />
                 </div>
               </div>
-              <Streak />
+              <div className="rounded-lg bg-card/70 dark:bg-card/80">
+                <Streak />
+              </div>
             </div>
           </div>
           <div className="w-[30%]">
@@ -42,7 +44,9 @@ export default function Dashboard() {
               <LearningPath />
             </div>
           </div>
-          <Streak />
+          <div className="rounded-lg bg-card/70 dark:bg-card/80">
+            <Streak />
+          </div>
         </div>
       </div>
       <div className="block md:hidden">
