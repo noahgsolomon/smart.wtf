@@ -54,7 +54,7 @@ const NavBar = () => {
       {!path.startsWith("/lesson") &&
       !path.startsWith("/notes") &&
       !path.startsWith("/quiz") ? (
-        <header className="border-sm fixed left-0 right-0 top-0 z-20 border-b border-border bg-card">
+        <header className="border-sm fixed left-0 right-0 top-0 z-20 border-b border-border bg-card shadow-lg">
           {/* <div
             className={
               "flex flex-row items-center justify-center gap-4 border-b border-border pt-1"
@@ -171,7 +171,7 @@ const NavBar = () => {
       ) : null}
       {userId && (
         <>
-          {!path.startsWith("/quiz") && <ChatButton />}
+          {/* {!path.startsWith("/quiz") && <ChatButton />} */}
           <AddNote />
           <QuickActionsModal />
         </>
