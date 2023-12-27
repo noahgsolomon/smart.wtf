@@ -148,11 +148,12 @@ export default function NotesMenu() {
   }, [notes, topicInput]);
 
   return (
-    <div className="max-h-[600px] min-h-[450px] overflow-y-auto rounded-r-lg bg-card p-4 md:min-h-fit">
+    <div className="h-full max-h-[700px] overflow-y-auto rounded-lg border bg-card p-4 shadow-md md:min-h-fit">
       <div className="flex flex-col gap-2">
-        <div className="flex flex-row  items-center gap-4 border-b border-border pb-2 md:gap-4 lg:gap-8">
+        <div className="flex flex-col items-center gap-2 border-border pb-2 md:flex-row md:gap-4 md:border-b lg:gap-8">
           <h1>Notes</h1>
-          <div>|</div>
+          <div className="w-full border md:hidden"></div>
+          <div className="hidden md:block">|</div>
           <Button
             onClick={() => setIsOpen(true)}
             className="flex flex-row gap-2"
@@ -191,14 +192,20 @@ export default function NotesMenu() {
                             onClick={() =>
                               toggleCategory(category as NoteCategories)
                             }
-                            className="group flex cursor-pointer flex-row items-center justify-between rounded-lg border border-border bg-secondary p-2 transition-all hover:bg-secondary/80"
+                            className=" group flex cursor-pointer flex-row items-center justify-between rounded-lg border border-border bg-secondary p-2 transition-all hover:bg-secondary/80"
                           >
                             <div
                               className={`flex flex-row items-center gap-2 text-lg`}
                             >
+                              <ChevronRight
+                                className={`h-4 w-4 ${
+                                  categoryOpenState[category as NoteCategories]
+                                    ? "rotate-90"
+                                    : ""
+                                } transition-all`}
+                              />
                               {categoryOpenState[category as NoteCategories] ? (
                                 <>
-                                  <ChevronDown className="h-4 w-4" />
                                   <FolderOpen
                                     className={`h-6 w-6 ${
                                       category === "ENGLISH"
@@ -251,7 +258,6 @@ export default function NotesMenu() {
                                 </>
                               ) : (
                                 <>
-                                  <ChevronRight className="h-4 w-4" />
                                   <Folder
                                     className={`h-6 w-6 ${
                                       category === "ENGLISH"
@@ -336,7 +342,7 @@ export default function NotesMenu() {
                                             href={`/notes/${note.id}`}
                                           >
                                             <p>{note.emoji}</p>
-                                            <p>
+                                            <p className="whitespace-nowrap">
                                               {note.title.length > 30
                                                 ? `${note.title.slice(
                                                     0,
@@ -515,9 +521,15 @@ export default function NotesMenu() {
                             <div
                               className={` flex flex-row items-center gap-2`}
                             >
+                              <ChevronRight
+                                className={`h-4 w-4 ${
+                                  categoryOpenState[category as NoteCategories]
+                                    ? "rotate-90"
+                                    : ""
+                                } transition-all`}
+                              />
                               {categoryOpenState[category as NoteCategories] ? (
                                 <>
-                                  <ChevronDown className="h-4 w-4" />
                                   <FolderOpen
                                     className={`h-6 w-6 ${
                                       category === "ENGLISH"
@@ -570,7 +582,6 @@ export default function NotesMenu() {
                                 </>
                               ) : (
                                 <>
-                                  <ChevronRight className="h-4 w-4" />
                                   <Folder
                                     className={`h-6 w-6 ${
                                       category === "ENGLISH"
