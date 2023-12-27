@@ -34,7 +34,7 @@ const imageGeneneration = async (initialPrompt: string) => {
     model: "dall-e-3",
     prompt: fullPrompt,
     n: 1,
-    size: "1792x1024",
+    size: "1024x1024",
     quality: "hd",
     style: "vivid",
     response_format: "url",
@@ -44,10 +44,32 @@ const imageGeneneration = async (initialPrompt: string) => {
   return responseFetch.data[0]?.url;
 };
 
-const imageGen = await imageGeneneration("Covariance Matrix");
+const promises = [
+  imageGeneneration("Linear Regression"),
+  imageGeneneration("Classification with Logistic Regression"),
+  imageGeneneration("Decision Trees and Random Forests"),
+  imageGeneneration("Clustering K-Means"),
+  imageGeneneration("Dimensionality Reduction with PCA"),
+  imageGeneneration("Neural Networks and Deep Learning Basics"),
+];
 
-console.log(imageGen);
+const [imageGen1, imageGen2, imageGen3, imageGen4, imageGen5, imageGen6] =
+  await Promise.all(promises);
 
+console.log(
+  "imageGen1",
+  imageGen1,
+  "imageGen2",
+  imageGen2,
+  "imageGen3",
+  imageGen3,
+  "imageGen4",
+  imageGen4,
+  "imageGen5",
+  imageGen5,
+  "imageGen6",
+  imageGen6,
+);
 /*
 
 Partial Derivatives
