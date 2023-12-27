@@ -24,7 +24,7 @@ export default function LatestActivity() {
   }
 
   return (
-    <div className="flex w-full flex-col gap-4 rounded-lg border bg-card p-4 shadow-md md:w-auto">
+    <div className="flex w-full flex-col gap-4 rounded-lg border bg-card/70 p-4 shadow-md dark:bg-card/80 md:w-auto">
       <div className="w-full">
         {latestQuery.isLoading && (
           <AspectRatio ratio={7 / 4}>
@@ -82,7 +82,7 @@ export default function LatestActivity() {
         <>
           <Progress
             className="h-4 border-2 border-border"
-            indicatorClassName="bg-blue rounded-r-lg"
+            indicatorClassName="bg-blue/80 rounded-r-lg"
             value={latest.latest.percentageCompleted ?? 50}
           />
           <Link
