@@ -24,7 +24,7 @@ export default function LatestActivity() {
   }
 
   return (
-    <div className="flex w-full flex-col gap-4 bg-card p-4 md:w-auto">
+    <div className="flex w-full flex-col gap-4 rounded-lg border bg-card p-4 shadow-md md:w-auto">
       <div className="w-full">
         {latestQuery.isLoading && (
           <AspectRatio ratio={7 / 4}>
@@ -63,7 +63,7 @@ export default function LatestActivity() {
               {latest.latest.courseChapterSections?.course.name ??
                 "Systems Design"}
             </h3>
-            <p className="max-w-[30ch] text-base">
+            <p className="hidden max-w-[30ch] text-base md:block">
               {latest.latest.courseChapterSections?.name ?? "Lesson"}
             </p>
             <p className="text-sm opacity-80">
@@ -94,7 +94,7 @@ export default function LatestActivity() {
             }&b=${latest.latest.blockId}`}
             className={cn(buttonVariants(), `transition-all`)}
           >
-            Continue where you left off{" "}
+            Continue
             <ArrowRightCircle className=" h-5 w-5 pl-1" />
           </Link>
         </>
