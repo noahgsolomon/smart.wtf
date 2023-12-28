@@ -432,7 +432,7 @@ export default function NotesMenu() {
                                         </div>
                                       </HoverCardTrigger>
                                       <HoverCardContent
-                                        className={`coarse:hidden ${
+                                        className={` coarse:hidden ${
                                           preloadImagesList.includes(
                                             note.imageUrl!,
                                           )
