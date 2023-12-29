@@ -233,7 +233,7 @@ export default function ChatButton() {
             <div className="flex flex-row gap-2 border-t border-border py-4">
               <div className="relative w-full">
                 <Input
-                  className="rounded-lg pl-3 pr-10 outline-none"
+                  className="rounded-lg bg-secondary pl-3 pr-10 outline-none "
                   value={input}
                   onKeyDown={(e) => {
                     if (e.key === "Enter" && input.length > 0 && !generating) {

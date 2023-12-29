@@ -160,7 +160,7 @@ export default function NotesMenu() {
         </div>
         <div className="relative ">
           <Input
-            className="shadow-none"
+            className="bg-secondary/90 shadow-none"
             placeholder="search here"
             onChange={(e) => setTopicInput(e.target.value)}
             value={topicInput}

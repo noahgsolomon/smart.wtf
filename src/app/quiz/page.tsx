@@ -134,6 +134,7 @@ export default function Page({
                 }`}
                 value={note.id.toString()}
               >
+                {note.emoji + " "}
                 {note.title}
               </SelectItem>
             ))}
