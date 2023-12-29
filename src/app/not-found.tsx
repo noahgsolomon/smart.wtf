@@ -7,10 +7,7 @@ const Error = () => {
   return (
     <div className="flex h-[calc(100vh-20rem)] flex-col items-center justify-center gap-8">
       404 Not Found Error
-      <Link
-        className={buttonVariants({ variant: "outline" })}
-        href="/dashboard"
-      >
+      <Link className={buttonVariants()} href="/dashboard">
         Dashboard
       </Link>
     </div>
