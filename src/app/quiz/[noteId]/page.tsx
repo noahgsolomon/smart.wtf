@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Loader2 } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useMemo, useState } from "react";
 import { buttonVariants } from "@/components/ui/button";
@@ -44,16 +44,53 @@ export default function Page({
     id: parseInt(params.noteId),
   });
 
+  const generateQuizMutation = trpc.quiz.generateQuiz.useMutation({
+    onSuccess: () => {
+      console.log("success");
+      setGenerating(false);
+    },
+    onError: (err) => {
+      console.log(err);
+      setGenerating(false);
+    },
+  });
+
+  const isQuizActiveQuery = trpc.quiz.isQuizAvailable.useQuery({
+    noteId: parseInt(params.noteId),
+  });
+
   const [note, setNote] = useState<Note | null>(null);
   const [isImageLoaded, setImageLoaded] = useState(false);
+  const [generating, setGenerating] = useState(true);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    if (!params.noteId || !parseInt(params.noteId)) {
+      router.push(searchParams.prev ?? "/dashboard");
+    }
     if (getNoteQuery.status === "success" && getNoteQuery.data) {
-      setNote(getNoteQuery.data.note);
+      const note = getNoteQuery.data.note;
+      setNote(note);
+      const available = isQuizActiveQuery.data?.available;
+      setGenerating(!available ?? false);
+      if (!available) {
+        generateQuizMutation.mutate({
+          noteId: parseInt(params.noteId),
+          noteTitle: note.title,
+        });
+      }
+      setLoading(false);
     } else if (getNoteQuery.status === "error") {
       router.push(searchParams.prev ?? "/dashboard");
     }
-  }, [getNoteQuery.status, getNoteQuery.data, router, searchParams.prev]);
+  }, [
+    router,
+    params.noteId,
+    getNoteQuery.status,
+    getNoteQuery.data,
+    router,
+    searchParams.prev,
+  ]);
 
   const containerVariants = {
     hidden: { x: "-10vw", opacity: 0 },
@@ -82,7 +119,7 @@ export default function Page({
     setImageLoaded(true);
   };
 
-  if (!isImageLoaded) {
+  if (!isImageLoaded || loading) {
     return (
       <Image
         alt="background"
@@ -95,7 +132,7 @@ export default function Page({
         layout="fill"
         objectFit="cover"
         objectPosition="center"
-        className="z-0 opacity-0"
+        className="z-0 h-0 w-0 opacity-0"
         onLoad={handleImageLoaded}
       />
     );
@@ -155,17 +192,22 @@ export default function Page({
           }`}
           variants={textVariants}
         >
-          ARE YOU READY?
+          {generating ? "Generating quiz" : "ARE YOU READY?"}
         </motion.h1>
         <motion.div
           className="flex flex-col gap-2"
           variants={buttonVariantsAnimation}
         >
           <Button
+            disabled={generating}
             variant={background?.mode === "light" ? "darkMode" : "lightMode"}
             size={"lg"}
           >
-            Let's do it!
+            {generating ? (
+              <Loader2 className="h-4 w-4 animate-spin transition-all" />
+            ) : (
+              "Let's do it!"
+            )}
           </Button>
           <Link
             href={searchParams.prev ?? "/dashboard"}
