@@ -17,6 +17,32 @@ export type Message = {
   content: string;
 };
 
+export type Question = (Quiz | Understanding | Sorting)[];
+
+export type Quiz = {
+  quiz: {
+    correctOption: number;
+    questionMarkdown: string;
+    explanationMarkdown: string;
+    options: { order: number; option: string }[];
+  };
+};
+
+export type Understanding = {
+  understanding: {
+    questionMarkdown: string;
+    explanationMarkdown: string;
+  };
+};
+
+export type Sorting = {
+  sorting: {
+    questionMarkdown: string;
+    explanationMarkdown: string;
+    options: { order: number; option: string }[];
+  };
+};
+
 export type Note = {
   id: number;
   description: string | null;
