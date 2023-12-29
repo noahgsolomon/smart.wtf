@@ -168,17 +168,25 @@ export const blocksRelations = relations(blocks, ({ one, many }) => ({
   userCompletedBlocks: many(userCompletedBlocks),
 }));
 
-export const interactiveComponents = mysqlTable("interactive_components", {
-  id: int("id").primaryKey().autoincrement(),
-  blockId: int("block_id").notNull(),
-  type: varchar("type", {
-    length: 50,
-    enum: ["QUIZ", "UNDERSTANDING", "SORTING"],
-  }).notNull(),
-  quizId: int("quiz_id"),
-  understandingId: int("understanding_id"),
-  sortingId: int("sorting_id"),
-});
+export const interactiveComponents = mysqlTable(
+  "interactive_components",
+  {
+    id: int("id").primaryKey().autoincrement(),
+    blockId: int("block_id"),
+    type: varchar("type", {
+      length: 50,
+      enum: ["QUIZ", "UNDERSTANDING", "SORTING"],
+    }).notNull(),
+    quizId: int("quiz_id"),
+    understandingId: int("understanding_id"),
+    sortingId: int("sorting_id"),
+    noteId: int("note_id"),
+  },
+  (t) => ({
+    noteIdx: index("note_idx").on(t.noteId),
+    blockIdx: index("block_idx").on(t.blockId),
+  }),
+);
 
 export const interactiveComponentsRelations = relations(
   interactiveComponents,
