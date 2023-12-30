@@ -19,9 +19,12 @@ export default function LatestActivity() {
 
   const [click] = useSound("/click.mp3", { volume: 0.5 });
 
-  if (latestQuery.isLoading && latest && !latest.latest.id) {
+  //@ts-ignore
+  if (!latestQuery.isLoading && latest && !latest.id) {
     return <RecommendedLesson />;
   }
+
+  console.log(latestQuery.isLoading);
 
   return (
     <div className="flex w-full flex-col gap-4 rounded-lg border bg-card/70 p-4 shadow-md dark:bg-card/80 md:w-auto">
