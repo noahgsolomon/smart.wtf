@@ -12,6 +12,7 @@ import { QuickActionsModal } from "../ui/modals/quickactionsmodal";
 import { useQuickActions } from "hooks/usequickactions";
 import AddNote from "@/app/dashboard/components/notes/addnote";
 import ChatButton from "../chatbutton";
+import { useEffect, useState } from "react";
 
 const NavBar = () => {
   const { userId } = useAuth();
@@ -49,13 +50,30 @@ const NavBar = () => {
 
   const { setIsOpen } = useQuickActions();
 
+  const [isTop, setIsTop] = useState(true);
+
+  useEffect(() => {
+    const checkScroll = () => {
+      setIsTop(window.scrollY <= 35);
+    };
+
+    window.addEventListener("scroll", checkScroll);
+    return () => {
+      window.removeEventListener("scroll", checkScroll);
+    };
+  }, []);
+
   return (
     <>
       {!path.startsWith("/lesson") &&
       !path.startsWith("/notes") &&
       !path.startsWith("/quiz") ? (
-        <header className="border-sm fixed left-0 right-0 top-0 z-20 border-b border-border bg-card shadow-lg">
-          {/* <div
+        <header
+          className={`fixed left-0 right-0 top-0 z-20 transition-all ${
+            isTop ? "" : "border-sm border-b bg-card/70 backdrop-blur-3xl"
+          } `}
+        >
+          {/* <div 
             className={
               "flex flex-row items-center justify-center gap-4 border-b border-border pt-1"
             }
