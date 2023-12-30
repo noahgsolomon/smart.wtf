@@ -6,7 +6,6 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { trpc } from "@/trpc/client";
 import Image from "next/image";
 import blazing from "public/blazing.png";
 import { useEffect, useRef, useState } from "react";

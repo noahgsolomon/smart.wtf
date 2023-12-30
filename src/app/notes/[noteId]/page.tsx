@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import NotesHeading from "../components/notesheading";
 import { useNoteContext } from "../context/notescontext";
 import { trpc } from "@/trpc/client";
@@ -46,7 +46,7 @@ export default function Page({ params }: { params: { noteId: string } }) {
   const { openNotes, setOpenNotes, setUserNotes } = useNoteContext();
   const [note, setNote] = useState<Note | null>(null);
   const [readingMode, setReadingMode] = useState<"normal" | "agent">("normal");
-  const [_, setImageSrc] = useState<string | null>(null);
+  const [, setImageSrc] = useState<string | null>(null);
 
   const [markdown, setMarkdown] = useState("");
   const [agentMarkdown, setAgentMarkdown] = useState("");

@@ -1,7 +1,6 @@
 "use client";
 
 import { Input } from "@/components/ui/input";
-import { trpc } from "@/trpc/client";
 import { type Note, type NoteCategories } from "@/types";
 import {
   ChevronRight,
@@ -10,7 +9,6 @@ import {
   FolderOpen,
   PlusIcon,
   Search,
-  Trash2,
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -21,18 +19,8 @@ import {
   HoverCardTrigger,
 } from "@/components/ui/hover-card";
 import { Badge } from "@/components/ui/badge";
-import { Button, buttonVariants } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-import { DialogClose } from "@radix-ui/react-dialog";
 
 const notes = [
   {

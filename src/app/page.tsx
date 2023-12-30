@@ -1,9 +1,5 @@
-import Image from "next/image";
 import { auth } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
-import interactiveLearning from "public/interactivelearning.png";
-import askAsYouLearn from "public/askasyoulearn.png";
-import superchargedLibrary from "public/superchargedlibrary.png";
 import DemoNotesMenu from "@/components/demo/demonotesmenu";
 import DemoLatestActivity from "@/components/demo/demolatestactivity";
 import DemoStreak from "@/components/demo/demostreak";
