@@ -15,7 +15,7 @@ export default function DemoLearningPath() {
   return (
     <div className="relative">
       <Badge
-        className="absolute -right-6 -top-2 z-10 p-1 text-sm"
+        className="absolute -right-2 -top-2 z-10 p-1 text-sm md:-right-6"
         variant={"history"}
       >
         Coming Soon
