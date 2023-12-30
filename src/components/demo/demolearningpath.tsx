@@ -28,7 +28,7 @@ export default function DemoLearningPath() {
               <CarouselItem key={index}>
                 <div className="flex flex-col gap-1 border-b pb-2">
                   <Image
-                    src={"/machinelearning.png"}
+                    src={"https://images.smart.wtf/machinelearning.png"}
                     className="rounded-lg border"
                     alt="machine-learning"
                     width={400}
@@ -39,7 +39,7 @@ export default function DemoLearningPath() {
                     Learn the basics of machine learning
                   </p>
                 </div>
-                <div className="h-[348px] overflow-y-auto border-b">
+                <div className="h-[355px] overflow-y-auto border-b">
                   <div className="flex flex-col gap-2 py-4">
                     <ChapterDivider
                       chapter={1}
@@ -48,15 +48,15 @@ export default function DemoLearningPath() {
                     />
                     <SectionCard
                       name={"Introduction to Machine Learning Concepts"}
-                      imageUrl={"/ml-1-1.png"}
+                      imageUrl={"https://images.smart.wtf/ml-1-1.png"}
                     />
                     <SectionCard
                       name={'"Data Preprocessing Essentials'}
-                      imageUrl={"/ml-1-2.png"}
+                      imageUrl={"https://images.smart.wtf/ml-1-2.png"}
                     />
                     <SectionCard
                       name={"Supervised vs Unsupervised Learning"}
-                      imageUrl={"/ml-1-3.png"}
+                      imageUrl={"https://images.smart.wtf/ml-1-3.png"}
                     />
                   </div>
                   <div className="flex flex-col gap-2 py-4">
@@ -67,15 +67,15 @@ export default function DemoLearningPath() {
                     />
                     <SectionCard
                       name={"Linear Regression Techniques"}
-                      imageUrl={"/ml-2-1.png"}
+                      imageUrl={"https://images.smart.wtf/ml-2-1.png"}
                     />
                     <SectionCard
                       name={"Classification with Logistic Regression"}
-                      imageUrl={"/ml-2-2.png"}
+                      imageUrl={"https://images.smart.wtf/ml-2-2.png"}
                     />
                     <SectionCard
                       name={"Decision Trees and Random Forests"}
-                      imageUrl={"/ml-2-3.png"}
+                      imageUrl={"https://images.smart.wtf/ml-2-3.png"}
                     />
                   </div>
                   <div className="flex flex-col gap-2 py-4">
@@ -86,15 +86,15 @@ export default function DemoLearningPath() {
                     />
                     <SectionCard
                       name={"Clustering with K-Means"}
-                      imageUrl={"/ml-3-1.png"}
+                      imageUrl={"https://images.smart.wtf/ml-3-1.png"}
                     />
                     <SectionCard
                       name={"Dimensionality Reduction with PCA"}
-                      imageUrl={"/ml-3-2.png"}
+                      imageUrl={"https://images.smart.wtf/ml-3-2.png"}
                     />
                     <SectionCard
                       name={"Neural Networks and Deep Learning Basics"}
-                      imageUrl={"/ml-3-3.png"}
+                      imageUrl={"https://images.smart.wtf/ml-3-3.png"}
                     />
                   </div>
                 </div>

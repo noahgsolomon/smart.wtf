@@ -9,6 +9,7 @@ import botwtf from "public/botwtf2.png";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 
 export default function Home() {
   const user = auth();
@@ -22,15 +23,21 @@ export default function Home() {
       {/* <HeroBlob /> */}
       <div className="mt-[100px] flex w-[90%] flex-col items-center justify-center bg-opacity-60 text-4xl lg:w-[75%] xl:w-[60%]">
         <div className="flex flex-col items-center justify-center gap-8 pb-8">
-          <h1 className="relative max-w-[10ch] text-center text-6xl font-bold">
-            SMART.WTF
-            <Badge
-              className="absolute -right-6 -top-8 text-lg md:-right-12"
-              variant={"math"}
-            >
+          <div className=" flex flex-col items-center gap-2">
+            <Badge className="text-lg md:hidden" variant={"math"}>
               BETA
             </Badge>
-          </h1>
+            <h1 className="relative max-w-[10ch] text-center text-5xl font-bold lg:text-6xl">
+              SMART.WTF
+              <Badge
+                className="absolute -top-8 hidden text-lg md:-right-12 md:block"
+                variant={"math"}
+              >
+                BETA
+              </Badge>
+            </h1>
+          </div>
+
           {/* <Image
             className="rounded-lg border border-border shadow-md"
             width={1000}
