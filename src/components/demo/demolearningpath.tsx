@@ -39,7 +39,7 @@ export default function DemoLearningPath() {
                     Learn the basics of machine learning
                   </p>
                 </div>
-                <div className="h-[355px] overflow-y-auto border-b">
+                <div className="h-[380px] overflow-y-auto border-b">
                   <div className="flex flex-col gap-2 py-4">
                     <ChapterDivider
                       chapter={1}
