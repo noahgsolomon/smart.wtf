@@ -15,7 +15,7 @@ export default function DemoLatestActivity() {
     <div className="flex w-full flex-col gap-4 rounded-lg border bg-card/70 p-4 shadow-md dark:bg-card/80 md:w-auto">
       <div className="w-full">
         <Image
-          src={"https://images.codefoli.com/systems-design-1-1.png"}
+          src={"https://images.codefoli.com/systems-design-2-4.png"}
           priority={true}
           alt="lesson"
           width={700}
@@ -27,8 +27,10 @@ export default function DemoLatestActivity() {
       <div className="flex flex-col gap-2">
         <>
           <h3>Systems Design</h3>
-          <p className="hidden max-w-[30ch] text-base md:block">Lesson</p>
-          <p className="text-sm opacity-80">Lesson 1 of 40</p>
+          <p className="hidden max-w-[30ch] text-base md:block">
+            Handling Large-scale Data: Big Table, DynamoDB, and Beyond
+          </p>
+          <p className="text-sm opacity-80">Lesson 8 of 40</p>
         </>
       </div>
 

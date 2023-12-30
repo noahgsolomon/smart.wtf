@@ -145,8 +145,6 @@ export default function NotesMenu() {
     setActiveCategories(categoriesCount);
   }, [notes, topicInput]);
 
-  console.log(notes);
-
   return (
     <div className="h-full max-h-[700px] overflow-y-auto rounded-lg border bg-card/70 p-4 shadow-md dark:bg-card/80 md:min-h-fit">
       <div className="flex flex-col gap-2">
