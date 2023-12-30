@@ -1,14 +1,13 @@
-import { CheckCircle2 } from "lucide-react";
-import BrainBlob from "@/components/ui/blobs/brainblob";
 import Image from "next/image";
-import Link from "next/link";
 import { auth } from "@clerk/nextjs";
-import alienPlanet from "public/alienplanet.png";
 import { redirect } from "next/navigation";
-import wtfCoin from "public/wtfcoin.png";
 import interactiveLearning from "public/interactivelearning.png";
 import askAsYouLearn from "public/askasyoulearn.png";
 import superchargedLibrary from "public/superchargedlibrary.png";
+import DemoNotesMenu from "@/components/demo/demonotesmenu";
+import DemoLatestActivity from "@/components/demo/demolatestactivity";
+import DemoStreak from "@/components/demo/demostreak";
+import DemoLearningPath from "@/components/demo/demolearningpath";
 
 export default function Home() {
   const user = auth();
@@ -26,13 +25,67 @@ export default function Home() {
             smart.wtf
           </h1>
           <p className="text-center text-2xl opacity-60">coming soon...</p>
-          <Image
+          {/* <Image
             className="rounded-lg border border-border shadow-md"
-            width={600}
+            width={1000}
             height={600}
-            src={alienPlanet}
+            src={smartwtf}
             alt="smart.wtf"
-          />
+          /> */}
+        </div>
+        <div className="relative flex w-full flex-col gap-8 py-6">
+          <div className="mx-auto w-full">
+            <div className="hidden 2xl:block">
+              <div className="flex w-full flex-row gap-4 rounded-lg">
+                <div className="w-[70%]">
+                  <div className="flex flex-col gap-4">
+                    <div className="flex w-full gap-4">
+                      <div className="w-[60%]">
+                        <DemoLatestActivity />
+                      </div>
+                      <div className="w-[40%]">
+                        <DemoNotesMenu />
+                      </div>
+                    </div>
+                    <div className="rounded-lg bg-card/70 dark:bg-card/80">
+                      <DemoStreak />
+                    </div>
+                  </div>
+                </div>
+                <div className="w-[30%]">
+                  <DemoLearningPath />
+                </div>
+              </div>
+            </div>
+            <div className="hidden md:block 2xl:hidden">
+              <div className="flex flex-col gap-4 rounded-lg">
+                <div className="flex w-full gap-4">
+                  <div className="w-[55%]">
+                    <DemoLatestActivity />
+                  </div>
+                  <div className="w-[45%]">
+                    <DemoNotesMenu />
+                  </div>
+                </div>
+                <div>
+                  <div className="w-full">
+                    <DemoLearningPath />
+                  </div>
+                </div>
+                <div className="rounded-lg bg-card/70 dark:bg-card/80">
+                  <DemoStreak />
+                </div>
+              </div>
+            </div>
+            <div className="block md:hidden">
+              <div className="flex flex-col gap-4 rounded-lg">
+                <DemoLatestActivity />
+                <DemoNotesMenu />
+                <DemoLearningPath />
+                <DemoStreak />
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* <div className="mt-96">
@@ -42,7 +95,7 @@ export default function Home() {
             <div className="animate-blob animation-delay-4000 absolute -bottom-10 right-40 h-72 w-72 rounded-full bg-blob3 opacity-70 mix-blend-multiply blur-xl filter"></div>
           </div>
         </div> */}
-        <section className="mb-20 mt-20 flex w-full flex-col gap-16">
+        {/* <section className="mb-20 mt-20 flex w-full flex-col gap-16">
           <h3 className="text-center text-4xl">
             &ldquo;wtf do you have to offer?&ldquo;
           </h3>
@@ -66,7 +119,6 @@ export default function Home() {
                 className="rounded-lg border border-border"
                 alt="interactive learning"
               />
-              {/* <FishBlob /> */}
             </div>
           </div>
           <div className="flex w-full flex-col-reverse items-center justify-between gap-8 md:flex-row">
@@ -78,7 +130,6 @@ export default function Home() {
                 className="rounded-lg border border-border"
                 alt="interactive learning"
               />
-              {/* <FishBlob /> */}
             </div>
             <div className="flex flex-col gap-4">
               <h3 className="text-3xl">Ask as You Learn</h3>
@@ -115,8 +166,8 @@ export default function Home() {
               />
             </div>
           </div>
-        </section>
-        <div className="mb-[100px] mt-10 flex w-full flex-col items-center justify-center gap-8 rounded-lg p-3">
+        </section> */}
+        {/* <div className="mb-[100px] mt-10 flex w-full flex-col items-center justify-center gap-8 rounded-lg p-3">
           <h3 className="text-center">Wanna be smart? Join the crew.</h3>
           <div className="relative rounded-lg border border-border bg-card p-8 pb-4 opacity-80 shadow-md">
             <BrainBlob />
@@ -168,12 +219,6 @@ export default function Home() {
                     alt="brain"
                     className="animate-pulse cursor-pointer transition-all hover:scale-110"
                   />
-                  {/* <div className="mouse1 absolute">
-                    <MousePointer2 className="text-link opacity-80" />
-                    <div className="rounded-lg bg-link-hover px-2 py-1 text-xs text-secondary opacity-50">
-                      Noah
-                    </div>
-                  </div> */}
                 </div>
               </Link>
             </div>
@@ -182,7 +227,7 @@ export default function Home() {
               {"(no credit card required)"}
             </p>
           </div>
-        </div>
+        </div> */}
       </div>
     </main>
   );
