@@ -11,6 +11,7 @@ import { ChatProvider } from "./context/chat/ChatContext";
 import { Background } from "@/components/ui/background";
 
 export const metadata: Metadata = {
+  viewport: "width=device-width, initial-scale=1",
   appleWebApp: true,
   manifest: "/manifest.json",
   icons: { apple: "/icon.png" },
