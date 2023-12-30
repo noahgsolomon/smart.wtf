@@ -145,6 +145,8 @@ export default function NotesMenu() {
     setActiveCategories(categoriesCount);
   }, [notes, topicInput]);
 
+  console.log(notes);
+
   return (
     <div className="h-full max-h-[700px] overflow-y-auto rounded-lg border bg-card/70 p-4 shadow-md dark:bg-card/80 md:min-h-fit">
       <div className="flex flex-col gap-2">
@@ -160,7 +162,7 @@ export default function NotesMenu() {
         </div>
         <div className="relative ">
           <Input
-            className="bg-secondary/90 shadow-none"
+            className="bg-secondary/90 shadow-none transition-all focus:outline-1 focus:outline-lightBlue"
             placeholder="search here"
             onChange={(e) => setTopicInput(e.target.value)}
             value={topicInput}
@@ -670,11 +672,23 @@ export default function NotesMenu() {
                                       <HoverCardTrigger>
                                         <div className="group flex cursor-pointer flex-row items-center justify-between gap-1 rounded-lg border border-border p-2 transition-all hover:-translate-y-0.5">
                                           <Link
-                                            className="flex h-full w-full flex-row gap-1"
-                                            href={`/notes/${note.id}`}
+                                            className="flex h-full w-full flex-row items-center gap-4 text-lg"
+                                            href={`/signup`}
                                           >
-                                            <p>{note.emoji}</p>
-                                            <p>
+                                            <Image
+                                              src={
+                                                note.imageUrl ??
+                                                "/generating1.gif"
+                                              }
+                                              className="rounded-lg border fine:hidden"
+                                              alt="note image"
+                                              width={80}
+                                              height={48}
+                                            />
+                                            <p className="text-lg coarse:hidden">
+                                              {note.emoji}
+                                            </p>
+                                            <p className="text-lg">
                                               {note.title.length > 30
                                                 ? `${note.title.slice(
                                                     0,

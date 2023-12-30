@@ -205,7 +205,7 @@ export default function DemoNotesMenu() {
         </div>
         <div className="relative ">
           <Input
-            className="bg-secondary/90 shadow-none"
+            className="bg-secondary/90 shadow-none transition-all focus:outline-1 focus:outline-lightBlue"
             placeholder="search here"
             onChange={(e) => setTopicInput(e.target.value)}
             value={topicInput}
@@ -647,10 +647,20 @@ export default function DemoNotesMenu() {
                                       <HoverCardTrigger>
                                         <div className="group flex cursor-pointer flex-row items-center justify-between gap-1 rounded-lg border border-border p-2 transition-all hover:-translate-y-0.5">
                                           <Link
-                                            className="flex h-full w-full flex-row gap-1"
+                                            className="flex h-full w-full flex-row items-center gap-4 text-lg"
                                             href={`/signup`}
                                           >
-                                            <p className="text-lg">
+                                            <Image
+                                              src={
+                                                note.imageUrl ??
+                                                "/generating1.gif"
+                                              }
+                                              className="rounded-lg border fine:hidden"
+                                              alt="note image"
+                                              width={80}
+                                              height={48}
+                                            />
+                                            <p className="text-lg coarse:hidden">
                                               {note.emoji}
                                             </p>
                                             <p className="text-lg">
