@@ -45,18 +45,19 @@ const imageGeneneration = async (initialPrompt: string) => {
 };
 
 const promises = [
-  imageGeneneration(
-    "Future Learning Platform called smart.wtf (smart.wtf should be in the image). It should be animals in the arctic learning around a campfire in a vibrant environment",
-  ),
-  imageGeneneration(
-    "Future Learning Platform called smart.wtf (smart.wtf should be in the image). It should be animals in the arctic learning around a campfire in a vibrant environment",
-  ),
+  imageGeneneration("Systems Design"),
+  imageGeneneration("Systems Design"),
+  imageGeneneration("Systems Design"),
+  imageGeneneration("Systems Design"),
 ];
 
-const [imageGen1, imageGen2] = await Promise.all(promises);
+const [imageGen1, imageGen2, imageGen3, imageGen4] =
+  await Promise.all(promises);
 
 console.log("imageGen1", imageGen1);
 console.log("imageGen2", imageGen2);
+console.log("imageGen3", imageGen3);
+console.log("imageGen4", imageGen4);
 /*
 
 Partial Derivatives
