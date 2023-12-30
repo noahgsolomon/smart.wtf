@@ -12,8 +12,8 @@ export default function RecommendedLesson() {
   const [click] = useSound("/click.mp3", { volume: 0.5 });
 
   return (
-    <div className="flex w-full flex-col gap-4 bg-card p-4 md:w-auto">
-      <div className="w-full ">
+    <div className="flex w-full flex-col gap-4 rounded-lg border bg-card/70 p-4 shadow-md dark:bg-card/80 md:w-auto">
+      <div className="w-full">
         <Image
           src={"https://images.codefoli.com/systems-design-1-1.png"}
           alt="lesson"
