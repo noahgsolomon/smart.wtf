@@ -34,7 +34,7 @@ const imageGeneneration = async (initialPrompt: string) => {
     model: "dall-e-3",
     prompt: fullPrompt,
     n: 1,
-    size: "1024x1024",
+    size: "1792x1024",
     quality: "hd",
     style: "vivid",
     response_format: "url",
@@ -45,31 +45,18 @@ const imageGeneneration = async (initialPrompt: string) => {
 };
 
 const promises = [
-  imageGeneneration("Linear Regression"),
-  imageGeneneration("Classification with Logistic Regression"),
-  imageGeneneration("Decision Trees and Random Forests"),
-  imageGeneneration("Clustering K-Means"),
-  imageGeneneration("Dimensionality Reduction with PCA"),
-  imageGeneneration("Neural Networks and Deep Learning Basics"),
+  imageGeneneration(
+    "Future Learning Platform called smart.wtf (smart.wtf should be in the image). It should be animals in the arctic learning around a campfire in a vibrant environment",
+  ),
+  imageGeneneration(
+    "Future Learning Platform called smart.wtf (smart.wtf should be in the image). It should be animals in the arctic learning around a campfire in a vibrant environment",
+  ),
 ];
 
-const [imageGen1, imageGen2, imageGen3, imageGen4, imageGen5, imageGen6] =
-  await Promise.all(promises);
+const [imageGen1, imageGen2] = await Promise.all(promises);
 
-console.log(
-  "imageGen1",
-  imageGen1,
-  "imageGen2",
-  imageGen2,
-  "imageGen3",
-  imageGen3,
-  "imageGen4",
-  imageGen4,
-  "imageGen5",
-  imageGen5,
-  "imageGen6",
-  imageGen6,
-);
+console.log("imageGen1", imageGen1);
+console.log("imageGen2", imageGen2);
 /*
 
 Partial Derivatives
