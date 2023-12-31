@@ -69,8 +69,10 @@ const NavBar = () => {
       !path.startsWith("/notes") &&
       !path.startsWith("/quiz") ? (
         <header
-          className={`fixed left-0 right-0 top-0 z-20 transition-all ${
-            isTop ? "" : "border-sm border-b bg-card/70 backdrop-blur-3xl"
+          className={`border-sm fixed left-0 right-0 top-0 z-20 transition-all coarse:border-b coarse:bg-card/80 coarse:backdrop-blur-3xl ${
+            isTop
+              ? ""
+              : "fine:border-sm fine:border-b fine:bg-card/80 fine:backdrop-blur-3xl"
           } `}
         >
           {/* <div 
