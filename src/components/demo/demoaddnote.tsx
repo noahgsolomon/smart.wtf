@@ -30,7 +30,7 @@ export default function DemoAddNote({
   }>({ name: "rick", id: 1 });
   const [recommendedSelect, setRecommendedSelect] = useState(-1);
   const [invalidTopic, setInvalidTopic] = useState(false);
-  const [recommendedTopics, setRecommendedTopics] = useState<string[]>([
+  const [recommendedTopics] = useState<string[]>([
     "Shared Covariance Matrix",
     "Logistic Regression",
     "Fall of Roman Empire",

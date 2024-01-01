@@ -101,13 +101,6 @@ const Streak = () => {
                   );
                 });
 
-                const today = new Date();
-                const todayDate = new Date(
-                  today.getUTCFullYear(),
-                  today.getUTCMonth(),
-                  today.getUTCDate(),
-                ).toUTCString();
-
                 const dailyEngagementCount = streakDate?.dailyEngagementCount;
 
                 return (
