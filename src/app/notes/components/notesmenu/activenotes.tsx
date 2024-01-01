@@ -21,7 +21,7 @@ import { type NoteCategories } from "@/types";
 import { ChevronRight, Clock, Folder, FolderOpen, Trash2 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import type useNotesMenu from "./usenotesmenu";
+import type useNotesMenu from "./useNotesMenu";
 
 export default function ActiveNotes({
   activeCategories,
