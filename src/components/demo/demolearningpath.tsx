@@ -39,7 +39,7 @@ export default function DemoLearningPath() {
                     Learn the basics of machine learning
                   </p>
                 </div>
-                <div className="h-[380px] overflow-y-auto border-b">
+                <div className="max-h-[360px] overflow-y-auto border-b">
                   <div className="flex flex-col gap-2 py-4">
                     <ChapterDivider
                       chapter={1}
@@ -101,7 +101,7 @@ export default function DemoLearningPath() {
               </CarouselItem>
             ))}
           </CarouselContent>
-          <div className="flex h-[50px] w-full items-center justify-between  p-2 ">
+          <div className="flex min-h-[50px] w-full items-center justify-between  p-2 ">
             <CarouselPrevious />
             <CarouselNext />
           </div>
@@ -127,7 +127,7 @@ export default function DemoLearningPath() {
                     </p>
                   </div>
                 </div>
-                <div className="flex max-h-[350px] flex-col gap-2 overflow-y-auto border-b">
+                <div className="flex min-h-[350px] flex-col gap-2 overflow-y-auto border-b">
                   <div className="flex flex-col gap-2 py-4">
                     <ChapterDivider
                       chapter={1}
@@ -196,7 +196,7 @@ export default function DemoLearningPath() {
               </CarouselItem>
             ))}
           </CarouselContent>
-          <div className="flex h-[50px] w-full items-center justify-between p-2">
+          <div className="flex min-h-[50px] w-full items-center justify-between p-2">
             <CarouselPrevious />
             <CarouselNext />
           </div>
@@ -222,7 +222,7 @@ export default function DemoLearningPath() {
                     </p>
                   </div>
                 </div>
-                <div className="flex max-h-[350px] flex-col gap-2 overflow-y-auto border-b">
+                <div className="flex min-h-[350px] flex-col gap-2 overflow-y-auto border-b">
                   <div className="flex flex-col gap-2 py-4">
                     <ChapterDivider
                       chapter={1}
@@ -290,7 +290,7 @@ export default function DemoLearningPath() {
               </CarouselItem>
             ))}
           </CarouselContent>
-          <div className="flex h-[50px] w-full items-center justify-between p-2 ">
+          <div className="flex min-h-[50px] w-full items-center justify-between p-2 ">
             <CarouselPrevious />
             <CarouselNext />
           </div>

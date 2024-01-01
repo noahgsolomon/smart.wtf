@@ -160,7 +160,6 @@ export default function NotesMenu() {
         </div>
         <div className="relative ">
           <Input
-            className="bg-secondary/90 shadow-none transition-all focus:outline-1 focus:outline-lightBlue"
             placeholder="search here"
             onChange={(e) => setTopicInput(e.target.value)}
             value={topicInput}
