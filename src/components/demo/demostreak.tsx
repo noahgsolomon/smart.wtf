@@ -30,76 +30,10 @@ export default function DemoStreak() {
   useEffect(() => {
     setStreak([
       {
-        activity: "systems design course",
-        date: new Date("2023-12-04T00:00:00.000Z"),
-        dailyEngagementCount: 3,
-        count: 1,
-      },
-      {
         activity: "notes",
-        date: new Date("2023-12-15T00:00:00.000Z"),
-        dailyEngagementCount: 140,
-        count: 1,
-      },
-      {
-        activity: "notes",
-        date: new Date("2023-12-16T00:00:00.000Z"),
-        dailyEngagementCount: 149,
-        count: 2,
-      },
-      {
-        activity: "notes",
-        date: new Date("2023-12-17T00:00:00.000Z"),
-        dailyEngagementCount: 114,
-        count: 3,
-      },
-      {
-        activity: "systems design course",
-        date: new Date("2023-12-20T00:00:00.000Z"),
-        dailyEngagementCount: 11,
-        count: 1,
-      },
-      {
-        activity: "notes",
-        date: new Date("2023-12-22T00:00:00.000Z"),
-        dailyEngagementCount: 26,
-        count: 1,
-      },
-      {
-        activity: "notes",
-        date: new Date("2023-12-25T00:00:00.000Z"),
-        dailyEngagementCount: 22,
-        count: 1,
-      },
-      {
-        activity: "notes",
-        date: new Date("2023-12-26T00:00:00.000Z"),
-        dailyEngagementCount: 23,
-        count: 2,
-      },
-      {
-        activity: "notes",
-        date: new Date("2023-12-27T00:00:00.000Z"),
-        dailyEngagementCount: 119,
-        count: 3,
-      },
-      {
-        activity: "notes",
-        date: new Date("2023-12-28T00:00:00.000Z"),
-        dailyEngagementCount: 20,
-        count: 4,
-      },
-      {
-        activity: "notes",
-        date: new Date("2023-12-29T00:00:00.000Z"),
-        dailyEngagementCount: 89,
-        count: 5,
-      },
-      {
-        activity: "notes",
-        date: new Date("2023-12-30T00:00:00.000Z"),
+        date: new Date("2024-01-01T00:00:00.000Z"),
         dailyEngagementCount: 1,
-        count: 6,
+        count: 1,
       },
     ]);
   }, []);
@@ -141,7 +75,8 @@ export default function DemoStreak() {
     const dates = generateDates(new Date().getFullYear());
     const groupedDates: Record<number, Date[]> = dates.reduce(
       (acc, date) => {
-        const dayOfWeek = date.getDay();
+        let dayOfWeek = date.getDay() - 1;
+        dayOfWeek === -1 ? 6 : dayOfWeek;
         if (!acc[dayOfWeek]) {
           acc[dayOfWeek] = [];
         }

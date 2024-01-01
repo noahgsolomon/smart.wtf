@@ -9,7 +9,7 @@ import {
 import { trpc } from "@/trpc/client";
 import Image from "next/image";
 import blazing from "public/blazing.png";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 type StreakData = {
   date: Date;
@@ -27,7 +27,6 @@ const Streak = () => {
   const streakQuery = trpc.user.streak.useQuery();
   const [streak, setStreak] = useState<StreakData[]>([]);
   const [currentStreakCount, setCurrentStreakCount] = useState(0);
-  const currentDateRef = useRef<HTMLLIElement>(null);
 
   useEffect(() => {
     setStreak(streakQuery.data?.streak ?? []);
@@ -70,7 +69,8 @@ const Streak = () => {
     const dates = generateDates(new Date().getFullYear());
     const groupedDates: Record<number, Date[]> = dates.reduce(
       (acc, date) => {
-        const dayOfWeek = date.getDay();
+        let dayOfWeek = date.getDay() - 1;
+        dayOfWeek === -1 ? 6 : dayOfWeek;
         if (!acc[dayOfWeek]) {
           acc[dayOfWeek] = [];
         }
@@ -79,6 +79,8 @@ const Streak = () => {
       },
       {} as Record<number, Date[]>,
     );
+
+    console.log(streak);
 
     return (
       <ul className="flex flex-col gap-1 pr-2">
@@ -120,7 +122,6 @@ const Streak = () => {
                   <Tooltip key={index}>
                     <TooltipTrigger>
                       <li
-                        ref={isToday ? currentDateRef : null}
                         data-level="0"
                         className={`rounded-[2px] p-[0.4rem] ${
                           streakDate
