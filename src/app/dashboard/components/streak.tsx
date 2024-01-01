@@ -80,8 +80,6 @@ const Streak = () => {
       {} as Record<number, Date[]>,
     );
 
-    console.log(streak);
-
     return (
       <ul className="flex flex-col gap-1 pr-2">
         {Object.keys(groupedDates).map((key) => {

@@ -20,6 +20,7 @@ export default function RecommendedLesson() {
           width={700}
           className="max-w-full rounded-lg"
           height={200}
+          priority={true}
         />
       </div>
       <div className="flex flex-col gap-2">

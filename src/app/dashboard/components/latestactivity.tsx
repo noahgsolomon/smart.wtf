@@ -24,8 +24,6 @@ export default function LatestActivity() {
     return <RecommendedLesson />;
   }
 
-  console.log(latestQuery.isLoading);
-
   return (
     <div className="flex w-full flex-col gap-4 rounded-lg border bg-card/70 p-4 shadow-md dark:bg-card/80 md:w-auto">
       <div className="w-full">
@@ -46,7 +44,7 @@ export default function LatestActivity() {
           width={700}
           height={200}
           className={`max-w-full rounded-lg ${
-            latestQuery.isLoading || !latest
+            latestQuery.isLoading || !latest?.latest
               ? "h-0 w-0 max-w-0 opacity-0"
               : "opacity-100"
           }`}
