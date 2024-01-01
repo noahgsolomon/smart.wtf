@@ -4,7 +4,7 @@ import { Input } from "@/components/ui/input";
 import { PlusIcon, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
-import useNotesMenu from "./useNotesMenu";
+import useNotesMenu from "./usenotesmenu";
 import AllNotes from "./allnotes";
 import ActiveNotes from "./activenotes";
 import PreloadImages from "./preloadimages";

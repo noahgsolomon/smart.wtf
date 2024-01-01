@@ -45,10 +45,11 @@ const imageGeneneration = async (initialPrompt: string) => {
 };
 
 const promises = [
-  imageGeneneration("Systems Design"),
-  imageGeneneration("Systems Design"),
-  imageGeneneration("Systems Design"),
-  imageGeneneration("Systems Design"),
+  imageGeneneration("Man vs. Dragon"),
+  imageGeneneration("Neural Network Dragon vs. Knight"),
+  imageGeneneration("Lightning Ball Creature vs. Knight"),
+  imageGeneneration("David vs. Goliath"),
+  imageGeneneration("Knight vs. Huge Demon"),
 ];
 
 const [imageGen1, imageGen2, imageGen3, imageGen4] =
