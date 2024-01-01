@@ -45,20 +45,16 @@ const imageGeneneration = async (initialPrompt: string) => {
 };
 
 const promises = [
-  imageGeneneration("Man vs. Dragon"),
-  imageGeneneration("Neural Network Dragon vs. Knight"),
-  imageGeneneration("Lightning Ball Creature vs. Knight"),
-  imageGeneneration("David vs. Goliath"),
-  imageGeneneration("Knight vs. Huge Demon"),
+  imageGeneneration("Knight vs. Huge Spaghetti"),
+  imageGeneneration("Knight vs. Huge Spaghetti Monster"),
+  imageGeneneration("Knight vs. Spaghetti Monster"),
 ];
 
-const [imageGen1, imageGen2, imageGen3, imageGen4] =
-  await Promise.all(promises);
+const [imageGen1, imageGen2, imageGen3] = await Promise.all(promises);
 
 console.log("imageGen1", imageGen1);
 console.log("imageGen2", imageGen2);
 console.log("imageGen3", imageGen3);
-console.log("imageGen4", imageGen4);
 /*
 
 Partial Derivatives
