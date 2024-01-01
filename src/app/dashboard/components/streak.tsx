@@ -107,12 +107,6 @@ const Streak = () => {
                   today.getUTCMonth(),
                   today.getUTCDate(),
                 ).toUTCString();
-                const isToday =
-                  new Date(
-                    date.getUTCFullYear(),
-                    date.getUTCMonth(),
-                    date.getUTCDate(),
-                  ).toUTCString() === todayDate;
 
                 const dailyEngagementCount = streakDate?.dailyEngagementCount;
 

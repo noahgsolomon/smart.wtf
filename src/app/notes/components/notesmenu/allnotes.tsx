@@ -17,11 +17,11 @@ import {
   HoverCardContent,
   HoverCardTrigger,
 } from "@/components/ui/hover-card";
-import { NoteCategories } from "@/types";
+import { type NoteCategories } from "@/types";
 import { ChevronRight, Clock, Folder, FolderOpen, Trash2 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import useNotesMenu from "./useNotesMenu";
+import type useNotesMenu from "./useNotesMenu";
 
 export default function AllNotes({
   presentCategories,

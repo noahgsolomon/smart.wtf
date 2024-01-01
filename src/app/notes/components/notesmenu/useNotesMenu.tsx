@@ -1,5 +1,5 @@
 import { trpc } from "@/trpc/client";
-import { Note, NoteCategories } from "@/types";
+import { type Note, type NoteCategories } from "@/types";
 import { useAddNote } from "hooks/useaddnote";
 import { useCallback, useEffect, useState } from "react";
 import { toast } from "sonner";

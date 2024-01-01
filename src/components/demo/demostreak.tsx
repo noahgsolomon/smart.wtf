@@ -76,7 +76,7 @@ export default function DemoStreak() {
     const groupedDates: Record<number, Date[]> = dates.reduce(
       (acc, date) => {
         let dayOfWeek = date.getDay() - 1;
-        dayOfWeek === -1 ? 6 : dayOfWeek;
+        dayOfWeek = dayOfWeek === -1 ? 6 : dayOfWeek;
         if (!acc[dayOfWeek]) {
           acc[dayOfWeek] = [];
         }

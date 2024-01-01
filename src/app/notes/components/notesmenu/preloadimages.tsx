@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import useNotesMenu from "./useNotesMenu";
+import type useNotesMenu from "./useNotesMenu";
 
 export default function PreloadImages({
   preloadImages,

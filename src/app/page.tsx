@@ -4,12 +4,7 @@ import DemoNotesMenu from "@/components/demo/demonotesmenu";
 import DemoLatestActivity from "@/components/demo/demolatestactivity";
 import DemoStreak from "@/components/demo/demostreak";
 import DemoLearningPath from "@/components/demo/demolearningpath";
-import Image from "next/image";
-import botwtf from "public/botwtf2.png";
-import { ArrowRight } from "lucide-react";
-import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 
 export default function Home() {
   const user = auth();
