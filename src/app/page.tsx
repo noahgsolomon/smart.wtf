@@ -65,7 +65,7 @@ export default function Home() {
                     </div>
                   </div>
                 </div>
-                <div className="w-[30%]">
+                <div className="flex w-[30%] flex-col">
                   <DemoLearningPath />
                 </div>
               </div>
