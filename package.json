@@ -73,6 +73,7 @@
     "react-dom": "^18",
     "react-hook-form": "^7.47.0",
     "react-hot-toast": "^2.4.1",
+    "react-lag-radar": "^1.0.0",
     "react-markdown": "^9.0.0",
     "react-resizable-panels": "^1.0.4",
     "react-spring": "^9.7.3",
