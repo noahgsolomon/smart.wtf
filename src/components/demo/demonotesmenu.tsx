@@ -21,7 +21,6 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
-import { useNoteContext } from "@/app/notes/context/notescontext";
 import { useAddNote } from "hooks/useaddnote";
 
 const notes = [
