@@ -8,7 +8,6 @@ import { trpc } from "@/trpc/client";
 import { useSectionContext } from "../../sectioncontext";
 import useSound from "use-sound";
 import { toast } from "sonner";
-import { Toaster } from "@/components/ui/sonner";
 
 export default function Quiz({
   chapterId,
@@ -279,7 +278,6 @@ export default function Quiz({
           )}
         </div>
       </div>
-      <Toaster richColors position="top-center" />
     </div>
   );
 }

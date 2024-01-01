@@ -1,7 +1,6 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { Toaster } from "@/components/ui/sonner";
 import { Copy, CopyCheck } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
@@ -34,7 +33,6 @@ export default function CopyButton() {
           <Copy className="h-4 w-4" />
         )}
       </Button>
-      <Toaster />
     </>
   );
 }

@@ -1,7 +1,6 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { Toaster } from "@/components/ui/sonner";
 import { useToast } from "@/components/ui/use-toast";
 import { cn } from "@/lib/utils";
 import { trpc } from "@/trpc/client";
@@ -53,7 +52,6 @@ const CourseLikeButton = ({
           )}
         />
       </Button>
-      <Toaster />
     </>
   );
 };

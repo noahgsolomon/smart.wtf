@@ -3,7 +3,6 @@
 import AvatarUpload from "./avatarupload";
 import SettingsInput from "./settingsinput";
 import SettingsActionButtons from "./settingsactionbuttons";
-import { Toaster } from "@/components/ui/sonner";
 
 const Settings = () => {
   return (
@@ -11,7 +10,6 @@ const Settings = () => {
       <AvatarUpload />
       <SettingsInput />
       <SettingsActionButtons />
-      <Toaster richColors position="top-center" />
     </div>
   );
 };

@@ -23,7 +23,6 @@ import { useContinue } from "./useContinue";
 import { useRouter } from "next/navigation";
 import { useChatContext } from "@/app/context/chat/ChatContext";
 import { toast } from "sonner";
-import { Toaster } from "@/components/ui/sonner";
 
 type UserNote = {
   id: number;
@@ -462,7 +461,6 @@ export default function Page({ params }: { params: { noteId: string } }) {
           </div>
         </motion.div>
       </AnimatePresence>
-      <Toaster richColors position="top-center" />
     </>
   );
 }
