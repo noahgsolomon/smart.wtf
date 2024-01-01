@@ -21,6 +21,8 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
+import { useNoteContext } from "@/app/notes/context/notescontext";
+import { useAddNote } from "hooks/useaddnote";
 
 const notes = [
   {
@@ -394,6 +396,7 @@ export default function DemoNotesMenu() {
 
   const [topicInput, setTopicInput] = useState("");
   const [filteredNotes, setFilteredNotes] = useState<Note[]>([]);
+  const { setIsOpen } = useAddNote();
 
   const [presentCategories, setPresentCategories] =
     useState<{ [key in NoteCategories]: number }>(initialCategories);
@@ -437,13 +440,13 @@ export default function DemoNotesMenu() {
       <div className="flex flex-col gap-2">
         <div className="flex flex-row items-center justify-between border-b border-border pb-2">
           <h1>Notes</h1>
-          <Link
+          <div
+            onClick={() => setIsOpen(true)}
             className={buttonVariants({ className: "flex flex-row gap-2" })}
-            href={"/signup"}
           >
             <PlusIcon className="h-4 w-4" />
             Generate
-          </Link>
+          </div>
         </div>
         <div className="relative ">
           <Input

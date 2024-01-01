@@ -1,6 +1,6 @@
 "use client";
 import LatestActivity from "./latestactivity";
-import NotesMenu from "@/app/notes/components/notesmenu";
+import NotesMenu from "@/app/notes/components/notesmenu/notesmenu";
 import Streak from "./streak";
 import LearningPath from "./learningpath/learningpath";
 

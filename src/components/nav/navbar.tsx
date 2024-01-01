@@ -13,6 +13,7 @@ import { useQuickActions } from "hooks/usequickactions";
 import AddNote from "@/app/dashboard/components/notes/addnote";
 import ChatButton from "../chatbutton";
 import { useEffect, useState } from "react";
+import DemoAddNote from "../demo/demoaddnote";
 
 const NavBar = () => {
   const { userId } = useAuth();
@@ -189,12 +190,14 @@ const NavBar = () => {
           </div>
         </header>
       ) : null}
-      {userId && (
+      {userId ? (
         <>
           {!path.startsWith("/quiz") && <ChatButton />}
           <AddNote />
           <QuickActionsModal />
         </>
+      ) : (
+        <DemoAddNote />
       )}
     </>
   );
