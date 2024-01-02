@@ -20,7 +20,8 @@ export default function LatestActivity() {
   const [click] = useSound("/click.mp3", { volume: 0.5 });
 
   //@ts-ignore
-  if (!latestQuery.isLoading && latest && !latest.id) {
+  if (!latestQuery.isLoading && latest && !latest.latest) {
+    console.log(true);
     return <RecommendedLesson />;
   }
 

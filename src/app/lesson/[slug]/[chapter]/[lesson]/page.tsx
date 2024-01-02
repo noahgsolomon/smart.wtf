@@ -71,9 +71,7 @@ export default function Page({
         (a, b) => a.order - b.order,
       );
       setSection(sortedSections);
-      console.log("loaded");
     } else {
-      console.log("loading");
     }
   }, [setSection, sectionQuery.isLoading, sectionQuery.data?.section]);
 
