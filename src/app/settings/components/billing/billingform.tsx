@@ -8,28 +8,24 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { useToast } from "@/components/ui/use-toast";
 import { type getUserSubscriptionPlan } from "@/lib/stripe";
 import { trpc } from "@/trpc/client";
 import { Loader2 } from "lucide-react";
 import { format } from "date-fns";
+import { toast } from "sonner";
 
 interface BillingFormProps {
   subscriptionPlan: Awaited<ReturnType<typeof getUserSubscriptionPlan>>;
 }
 
 const BillingForm = ({ subscriptionPlan }: BillingFormProps) => {
-  const { toast } = useToast();
-
   const { mutate: createStripeSession, isLoading } =
     trpc.user.createStripeSession.useMutation({
       onSuccess: ({ url }) => {
         if (url) window.location.href = url;
         if (!url) {
-          toast({
-            title: "There was a problem...",
-            description: "Please try again in a moment",
-            variant: "destructive",
+          toast.error("There was a problem...", {
+            description: "Please try again later.",
           });
         }
       },

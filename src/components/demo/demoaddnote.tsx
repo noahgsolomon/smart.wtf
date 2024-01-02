@@ -16,7 +16,7 @@ import { useState } from "react";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { useRouter } from "next/navigation";
-import { useAddNote } from "hooks/useaddnote";
+import { useAddNote } from "@/utils/hooks/useaddnote";
 
 export default function DemoAddNote({
   visible = false,

@@ -9,7 +9,7 @@ import SmartWtfLogo from "../svg/smartwtf";
 import { usePathname } from "next/navigation";
 import UserButton from "./UserButton";
 import { QuickActionsModal } from "../ui/modals/quickactionsmodal";
-import { useQuickActions } from "hooks/usequickactions";
+import { useQuickActions } from "@/utils/hooks/usequickactions";
 import AddNote from "@/app/dashboard/components/notes/addnote";
 import ChatButton from "../chatbutton";
 import { useEffect, useState } from "react";

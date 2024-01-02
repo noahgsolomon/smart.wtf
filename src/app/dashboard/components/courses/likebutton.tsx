@@ -1,11 +1,11 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { useToast } from "@/components/ui/use-toast";
 import { cn } from "@/lib/utils";
 import { trpc } from "@/trpc/client";
 import { Heart } from "lucide-react";
 import { useState } from "react";
+import { toast } from "sonner";
 
 const CourseLikeButton = ({
   clicked,
@@ -16,7 +16,6 @@ const CourseLikeButton = ({
 }) => {
   const [isLiked, setIsLiked] = useState(clicked);
   const like = trpc.course.addLike.useMutation();
-  const { toast } = useToast();
 
   const handleLikeToggle = () => {
     setIsLiked(!isLiked);
@@ -25,10 +24,7 @@ const CourseLikeButton = ({
       {
         onSuccess: () => {
           if (!isLiked) {
-            toast({
-              title: "Success",
-              description: "Thank you for liking our course!",
-            });
+            toast.success("Liked!");
           }
         },
         onError: () => {

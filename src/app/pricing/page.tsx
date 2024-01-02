@@ -1,4 +1,3 @@
-import BrainBlob from "@/components/ui/blobs/brainblob";
 import { CheckCircle2 } from "lucide-react";
 import ProButton from "./probutton";
 
@@ -8,7 +7,6 @@ const Page = () => {
       <div className="flex h-full w-full flex-col items-center justify-center gap-8 rounded-lg p-3 pt-24">
         <h3 className="text-center text-3xl">Wanna be smart? Join the crew.</h3>
         <div className="relative rounded-lg border border-border bg-card p-8 pb-4 opacity-80 shadow-md">
-          <BrainBlob />
           <div className="flex flex-col">
             <p className="text-center text-5xl">
               <span className="text-4xl line-through opacity-50">$15</span> $5

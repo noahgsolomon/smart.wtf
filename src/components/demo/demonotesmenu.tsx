@@ -21,7 +21,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
-import { useAddNote } from "hooks/useaddnote";
+import { useAddNote } from "@/utils/hooks/useaddnote";
 
 const notes = [
   {

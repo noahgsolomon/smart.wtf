@@ -17,7 +17,7 @@ import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { trpc } from "@/trpc/client";
 import { useRouter } from "next/navigation";
-import { useAddNote } from "hooks/useaddnote";
+import { useAddNote } from "@/utils/hooks/useaddnote";
 
 export default function AddNote({ visible = false }: { visible?: boolean }) {
   const [noteInput, setNoteInput] = useState("");
