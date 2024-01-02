@@ -14,9 +14,9 @@ import {
 import { Feather, FileQuestion, Landmark, User2 } from "lucide-react";
 
 import { DialogModal } from "./dialoguemodal";
-import { useQuickActions } from "hooks/usequickactions";
+import { useQuickActions } from "@/utils/hooks/usequickactions";
 import Link from "next/link";
-import { useAddNote } from "hooks/useaddnote";
+import { useAddNote } from "@/utils/hooks/useaddnote";
 import { usePathname } from "next/navigation";
 
 export const QuickActionsModal = () => {
