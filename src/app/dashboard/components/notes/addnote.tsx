@@ -91,8 +91,10 @@ export default function AddNote({ visible = false }: { visible?: boolean }) {
               {recommendedTopics.map((topic, index) => (
                 <Button
                   key={index}
-                  className={`transition-all ${
-                    recommendedSelect === index ? "border border-primary" : ""
+                  className={`border transition-all ${
+                    recommendedSelect === index
+                      ? "border-2 border-lightBlue"
+                      : ""
                   }`}
                   onClick={() => {
                     setRecommendedSelect(index);
