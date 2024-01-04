@@ -2,68 +2,45 @@
 
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Button } from "@/components/ui/button";
-
 import { type ReactElement, useState, useEffect } from "react";
-import { trpc } from "@/trpc/client";
-import { useSectionContext } from "../../sectioncontext";
 import useSound from "use-sound";
 import { toast } from "sonner";
+import Markdown from "react-markdown";
+import Image from "next/image";
+import remarkGfm from "remark-gfm";
+import rehypeAutolinkHeadings from "rehype-autolink-headings";
+import rehypeHighlight from "rehype-highlight";
+import slug from "rehype-slug";
 
 export default function Quiz({
-  chapterId,
-  chapterOrder,
-  sectionOrder,
-  sectionId,
-  subSection,
-  blockOrder,
-  blockId,
   content,
   explanation,
   options,
   answer,
   completed,
-  params,
 }: {
-  chapterId: number;
-  chapterOrder: number;
-  sectionOrder: number;
-  sectionId: number;
-  subSection: number;
-  blockOrder: number;
-  blockId: number;
-  content: ReactElement;
-  explanation: ReactElement;
+  content: string;
+  explanation: string;
   options: { order: number; option: string }[];
   answer: number;
   completed?: boolean;
-  params: { slug: string; chapter: string; lesson: string };
 }) {
   const correct = () => toast.success("correct!");
 
   const incorrect = () => toast.error("incorrect!");
+
+  console.log("options: " + JSON.stringify(options));
 
   const [guessed, setGuessed] = useState<number[]>([]);
 
   const [isFlipped, setIsFlipped] = useState(false);
   const [currentGuess, setCurrentGuess] = useState<number | null>(null);
 
-  const mutateBlock = trpc.course.setBlockCompleted.useMutation({
-    onSuccess: (response) => {
-      if (response.data.firstCommitToday) {
-        toast(`You're on a ${response.data.streakCount} day streak`, {
-          icon: "🔥",
-        });
-      }
-    },
-  });
-
   const [correctSound] = useSound("/correct.mp3", { volume: 0.5 });
   const [incorrectSound] = useSound("/incorrect.mp3", { volume: 0.5 });
   const [flipSound] = useSound("/flip.mp3", { volume: 0.5 });
 
   const [side, setSide] = useState<"QUESTION" | "ANSWER">("QUESTION");
-
-  const { section, setSection } = useSectionContext();
 
   useEffect(() => {
     if (completed) {
@@ -73,40 +50,6 @@ export default function Quiz({
 
   const revealedAnswer = () => {
     if (!completed) {
-      mutateBlock.mutate({
-        blockId,
-        courseId: section[0]?.courseChapterSections.course.id!,
-        blockOrder,
-        sectionId,
-        subSectionId: section[subSection - 1]?.id!,
-        subSectionOrder: subSection,
-        chapterId,
-        chapterOrder,
-        sectionOrder,
-        slug: params.slug,
-      });
-
-      setSection((prev) => {
-        return prev.map((section, index) => {
-          if (index === subSection - 1) {
-            const updatedBlocks = section.blocks.map((block) => {
-              if (block.id === blockId) {
-                const updatedUserCompletedBlocks = [
-                  ...block.userCompletedBlocks,
-                  { blockId: blockId },
-                ];
-                return {
-                  ...block,
-                  userCompletedBlocks: updatedUserCompletedBlocks,
-                };
-              }
-              return block;
-            });
-            return { ...section, blocks: updatedBlocks };
-          }
-          return section;
-        });
-      });
     }
     toggleFlip();
   };
@@ -129,62 +72,7 @@ export default function Quiz({
     });
     if (guess === answer) {
       correctSound();
-      mutateBlock.mutate({
-        blockId,
-        courseId: section[0]?.courseChapterSections.course.id!,
-        blockOrder,
-        sectionId,
-        subSectionId: section[subSection - 1]?.id!,
-        subSectionOrder: subSection,
-        chapterId,
-        chapterOrder,
-        sectionOrder,
-        slug: params.slug,
-      });
-
-      setSection((prev) => {
-        return prev.map((section, index) => {
-          if (index === subSection - 1) {
-            const updatedBlocks = section.blocks.map((block) => {
-              if (block.id === blockId) {
-                const updatedUserCompletedBlocks = [
-                  ...block.userCompletedBlocks,
-                  { blockId: blockId },
-                ];
-                return {
-                  ...block,
-                  userCompletedBlocks: updatedUserCompletedBlocks,
-                };
-              }
-              return block;
-            });
-            return { ...section, blocks: updatedBlocks };
-          }
-          return section;
-        });
-      });
-
       correct();
-      const currentBlock = section[subSection - 1]?.blocks.find(
-        (b) => b.id === blockId,
-      );
-
-      const nextBlock = section[subSection - 1]?.blocks.find(
-        (b) => b.order === currentBlock?.order! + 1,
-      );
-
-      const currentBlockOrder = currentBlock?.order!;
-
-      const isNotLastBlockInSubsection =
-        currentBlockOrder < (section[subSection - 1]?.blocks.length ?? 0);
-
-      if (isNotLastBlockInSubsection && nextBlock) {
-        setTimeout(() => {
-          document.getElementById(nextBlock.id.toString())!.scrollIntoView({
-            behavior: "smooth",
-          });
-        }, 100);
-      }
     } else {
       incorrectSound();
       incorrect();
@@ -201,7 +89,39 @@ export default function Quiz({
         >
           {side === "QUESTION" ? (
             <div className="front">
-              <div>{content}</div>
+              <div>
+                <Markdown
+                  components={{
+                    img: ({ ...props }) => (
+                      <Image
+                        className="rounded-lg"
+                        src={
+                          props.src ??
+                          "https://images.codefoli.com/smartwtf.png"
+                        }
+                        alt={props.alt ?? "smartwtf"}
+                        priority={true}
+                        layout="responsive"
+                        width={1792}
+                        height={1024}
+                      />
+                    ),
+                  }}
+                  remarkPlugins={[remarkGfm]}
+                  rehypePlugins={[
+                    slug,
+                    [
+                      rehypeAutolinkHeadings,
+                      {
+                        behavior: "wrap",
+                      },
+                    ],
+                    rehypeHighlight,
+                  ]}
+                >
+                  {content}
+                </Markdown>
+              </div>
               <div>
                 <div className="w-2/3 space-y-6">
                   <div>
@@ -256,7 +176,36 @@ export default function Quiz({
             </div>
           ) : (
             <div className="back">
-              {explanation}
+              <Markdown
+                components={{
+                  img: ({ ...props }) => (
+                    <Image
+                      className="rounded-lg"
+                      src={
+                        props.src ?? "https://images.codefoli.com/smartwtf.png"
+                      }
+                      alt={props.alt ?? "smartwtf"}
+                      priority={true}
+                      layout="responsive"
+                      width={1792}
+                      height={1024}
+                    />
+                  ),
+                }}
+                remarkPlugins={[remarkGfm]}
+                rehypePlugins={[
+                  slug,
+                  [
+                    rehypeAutolinkHeadings,
+                    {
+                      behavior: "wrap",
+                    },
+                  ],
+                  rehypeHighlight,
+                ]}
+              >
+                {explanation}
+              </Markdown>
               <div className="flex flex-row gap-2 py-6">
                 <Button
                   variant={"secondary"}
