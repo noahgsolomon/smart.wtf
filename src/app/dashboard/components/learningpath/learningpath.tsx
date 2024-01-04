@@ -15,12 +15,14 @@ export default function LearningPath() {
   return (
     <div className="relative">
       <Badge
-        className="absolute -right-6 -top-2 z-10 p-1 text-sm"
+        className="absolute -right-6 -top-2 z-30 p-1 text-sm"
         variant={"history"}
       >
         Coming Soon
       </Badge>
-      {/* <div className="absolute bottom-0 left-0 right-0 top-0 z-20 flex items-center justify-center rounded-lg bg-primary/30"></div> */}
+      {process.env.NEXT_PUBLIC_ENV === "PROD" ? (
+        <div className="absolute bottom-0 left-0 right-0 top-0 z-20 flex items-center justify-center rounded-lg bg-primary/30"></div>
+      ) : null}
       <div className="hidden h-full rounded-lg border bg-card/70 p-4 shadow-md dark:bg-card/80 2xl:block">
         <Carousel className="flex h-full w-full flex-col justify-between">
           <CarouselContent>

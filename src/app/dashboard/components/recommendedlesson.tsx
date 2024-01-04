@@ -1,5 +1,6 @@
 "use client";
 
+import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { cn } from "@/lib/utils";
@@ -12,7 +13,17 @@ export default function RecommendedLesson() {
   const [click] = useSound("/click.mp3", { volume: 0.5 });
 
   return (
-    <div className="flex w-full flex-col gap-4 rounded-lg border bg-card/70 p-4 shadow-md dark:bg-card/80 md:w-auto">
+    <div className="relative flex w-full flex-col gap-4 rounded-lg border bg-card/70 p-4 shadow-md dark:bg-card/80 md:w-auto">
+      <Badge
+        className="absolute -right-6 -top-2 z-30 p-1 text-sm"
+        variant={"arts"}
+      >
+        Coming soon
+      </Badge>
+      {process.env.NEXT_PUBLIC_ENV === "PROD" ? (
+        <div className="absolute bottom-0 left-0 right-0 top-0 z-20 flex items-center justify-center rounded-lg bg-primary/30"></div>
+      ) : null}
+
       <div className="w-full">
         <Image
           src={"https://images.codefoli.com/systems-design-1-1.png"}

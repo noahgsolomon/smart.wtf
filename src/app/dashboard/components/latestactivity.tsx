@@ -11,6 +11,7 @@ import useSound from "use-sound";
 import RecommendedLesson from "./recommendedlesson";
 import { Skeleton } from "@/components/ui/skeleton";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
+import { Badge } from "@/components/ui/badge";
 
 export default function LatestActivity() {
   const latestQuery = trpc.course.getLatestActivity.useQuery();
@@ -26,7 +27,17 @@ export default function LatestActivity() {
   }
 
   return (
-    <div className="flex w-full flex-col gap-4 rounded-lg border bg-card/70 p-4 shadow-md dark:bg-card/80 md:w-auto">
+    <div className="relative flex w-full flex-col gap-4 rounded-lg border bg-card/70 p-4 shadow-md dark:bg-card/80 md:w-auto">
+      <Badge
+        className="absolute -right-6 -top-2 z-30 p-1 text-sm"
+        variant={"arts"}
+      >
+        Coming soon
+      </Badge>
+      {process.env.NEXT_PUBLIC_ENV === "PROD" ? (
+        <div className="absolute bottom-0 left-0 right-0 top-0 z-20 flex items-center justify-center rounded-lg bg-primary/30"></div>
+      ) : null}
+
       <div className="w-full">
         {latestQuery.isLoading && (
           <AspectRatio ratio={7 / 4}>
