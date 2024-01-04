@@ -15,6 +15,23 @@ const openai = new OpenAI({
 });
 
 export const quizRouter = createTRPCRouter({
+  getQuestions: protectedProcedure
+    .input(z.object({ noteId: z.number() }))
+    .query(async ({ input: { noteId }, ctx }) => {
+      const quizQuestions = await ctx.db.query.interactiveComponents.findMany({
+        where: eq(interactiveComponents.noteId, noteId),
+        with: {
+          quizzes: true,
+          understanding: true,
+          sorting: true,
+        },
+      });
+      if (quizQuestions.length === 0) {
+        return { available: false };
+      }
+
+      return { available: true, questions: quizQuestions };
+    }),
   isQuizAvailable: protectedProcedure
     .input(z.object({ noteId: z.number() }))
     .query(async ({ ctx, input }) => {
