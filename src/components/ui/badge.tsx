@@ -26,7 +26,7 @@ const badgeVariants = cva(
         hard: "border-transparent bg-red-500 text-secondary dark:text-primary  hover:bg-red-400",
         medium:
           "border-transparent bg-yellow-500 text-secondary dark:text-primary  hover:bg-yellow-400",
-        english: "border-transparent bg-blue-500 text-white  hover:bg-blue-400",
+        english: "border-transparent bg-blue text-white  hover:bg-blue",
         math: "border-transparent bg-red-500 text-white  hover:bg-red-400",
         science:
           "border-transparent bg-indigo-500 text-white  hover:bg-indigo-400",
@@ -35,7 +35,7 @@ const badgeVariants = cva(
         arts: "border-transparent bg-pink-500 text-white  hover:bg-pink-400",
         music: "border-transparent bg-teal-500 text-white  hover:bg-teal-400",
         literature:
-          "border-transparent bg-deep-orange-500 text-white  hover:bg-deep-orange-400",
+          "border-transparent bg-orange-500 text-white  hover:bg-orange-400",
         philosophy:
           "border-transparent bg-lime-500 text-white  hover:bg-lime-400",
         geography:
