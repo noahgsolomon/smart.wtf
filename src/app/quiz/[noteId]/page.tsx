@@ -20,15 +20,8 @@ const backgrounds = [
   { background: "/woods.gif", mode: "light" },
 ];
 
-// generating9 dark
-// generating8 light
-// generating6 dark
-// generating11 dark
-// arena light
-// woods light
-
 export default function Page({
-  params,
+  params: { noteId },
   searchParams,
 }: {
   params: { noteId: string };
@@ -41,7 +34,7 @@ export default function Page({
   const router = useRouter();
 
   const getNoteQuery = trpc.notes.getNote.useQuery({
-    id: parseInt(params.noteId),
+    id: parseInt(noteId),
   });
 
   const generateQuizMutation = trpc.quiz.generateQuiz.useMutation({
@@ -56,7 +49,7 @@ export default function Page({
   });
 
   const isQuizActiveQuery = trpc.quiz.isQuizAvailable.useQuery({
-    noteId: parseInt(params.noteId),
+    noteId: parseInt(noteId),
   });
 
   const [note, setNote] = useState<Note | null>(null);
@@ -65,7 +58,7 @@ export default function Page({
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (!params.noteId || !parseInt(params.noteId)) {
+    if (!noteId || !parseInt(noteId)) {
       router.push(searchParams.prev ?? "/dashboard");
     }
     if (getNoteQuery.status === "success" && getNoteQuery.data) {
@@ -75,7 +68,7 @@ export default function Page({
       setGenerating(!available ?? false);
       if (!available) {
         generateQuizMutation.mutate({
-          noteId: parseInt(params.noteId),
+          noteId: parseInt(noteId),
           noteTitle: note.title,
         });
       }
@@ -85,7 +78,7 @@ export default function Page({
     }
   }, [
     router,
-    params.noteId,
+    noteId,
     getNoteQuery.status,
     getNoteQuery.data,
     router,
@@ -199,6 +192,7 @@ export default function Page({
           variants={buttonVariantsAnimation}
         >
           <Button
+            onClick={() => router.push(`/quiz/${noteId}/play`)}
             disabled={generating}
             variant={background?.mode === "light" ? "darkMode" : "lightMode"}
             size={"lg"}
