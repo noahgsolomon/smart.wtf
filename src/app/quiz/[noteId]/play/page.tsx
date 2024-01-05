@@ -10,8 +10,6 @@ import {
   Carousel,
   CarouselContent,
   CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
 } from "@/components/ui/carousel";
 
 export default function Page({
@@ -44,7 +42,10 @@ export default function Page({
           <CarouselContent>
             {questions?.questions?.map((question) => {
               return (
-                <CarouselItem className="flex items-center justify-center">
+                <CarouselItem
+                  key={question.id}
+                  className="flex items-center justify-center"
+                >
                   <div className="flex max-w-[800px] flex-col px-8">
                     {question.type === "QUIZ" && question.quizzes ? (
                       <Quiz

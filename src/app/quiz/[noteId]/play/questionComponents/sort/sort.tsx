@@ -23,11 +23,7 @@ import { Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import { SortableItem } from "./sortableitem";
 import Markdown from "react-markdown";
-import Image from "next/image";
 import remarkGfm from "remark-gfm";
-import rehypeAutolinkHeadings from "rehype-autolink-headings";
-import rehypeHighlight from "rehype-highlight";
-import slug from "rehype-slug";
 import remarkMath from "remark-math";
 import rehypeKatex from "rehype-katex";
 
