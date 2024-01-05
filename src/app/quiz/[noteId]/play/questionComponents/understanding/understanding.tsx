@@ -8,11 +8,14 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { trpc } from "@/trpc/client";
 import { Lightbulb, Loader2 } from "lucide-react";
-import { type ReactNode, useState } from "react";
+import { useState } from "react";
 import useSound from "use-sound";
 import { toast } from "sonner";
+import Markdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import remarkMath from "remark-math";
+import rehypeKatex from "rehype-katex";
 
 export default function Understanding({
   question,
@@ -110,9 +113,15 @@ export default function Understanding({
           } ${isFlipped ? "is-flipped" : ""}`}
         >
           {side === "front" ? (
-            <div className="front">
-              <div className="relative">
-                <div className="pb-4">{question}</div>
+            <div className="front flex flex-col gap-4 ">
+              <div className="relative flex flex-col gap-4 ">
+                <Markdown
+                  className="prose prose-slate max-w-[250px] dark:prose-invert md:max-w-none"
+                  remarkPlugins={[remarkGfm, remarkMath]}
+                  rehypePlugins={[rehypeKatex]}
+                >
+                  {question}
+                </Markdown>
                 <Textarea
                   className="h-[125px] bg-background"
                   value={userExplanation}
@@ -146,7 +155,7 @@ export default function Understanding({
                   </Tooltip>
                 </TooltipProvider>
               </div>
-              <div className="py-2">
+              <div>
                 <Button
                   variant={submitError ? "destructive" : "default"}
                   onClick={handleSubmit}
@@ -163,9 +172,15 @@ export default function Understanding({
               </div>
             </div>
           ) : (
-            <div className="back">
-              <div className="pt-4 text-2xl font-bold">Explanation</div>
-              {explanation}
+            <div className="back flex flex-col gap-4 ">
+              <Markdown
+                className="prose prose-slate max-w-[250px] dark:prose-invert md:max-w-none"
+                remarkPlugins={[remarkGfm, remarkMath]}
+                rehypePlugins={[rehypeKatex]}
+              >
+                {explanation}
+              </Markdown>
+
               <div className="pb-4">
                 <Button
                   variant={"secondary"}
