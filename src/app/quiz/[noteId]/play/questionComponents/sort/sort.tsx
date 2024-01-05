@@ -28,6 +28,8 @@ import remarkGfm from "remark-gfm";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeHighlight from "rehype-highlight";
 import slug from "rehype-slug";
+import remarkMath from "remark-math";
+import rehypeKatex from "rehype-katex";
 
 export default function Sort({
   question,
@@ -119,42 +121,18 @@ export default function Sort({
     <div className="p-4">
       <div className="card-container">
         <div
-          className={`rounded-lg ${
+          className={` rounded-lg ${
             completed ? "border border-success" : ""
           } card ${isFlipped ? "is-flipped" : ""}`}
         >
           {side === "QUESTION" ? (
-            <div className=" front space-y-6">
+            <div className="front flex min-h-[300px] flex-col justify-between">
               <div>
                 <h2>
                   <Markdown
-                    components={{
-                      img: ({ ...props }) => (
-                        <Image
-                          className="rounded-lg"
-                          src={
-                            props.src ??
-                            "https://images.codefoli.com/smartwtf.png"
-                          }
-                          alt={props.alt ?? "smartwtf"}
-                          priority={true}
-                          layout="responsive"
-                          width={1792}
-                          height={1024}
-                        />
-                      ),
-                    }}
-                    remarkPlugins={[remarkGfm]}
-                    rehypePlugins={[
-                      slug,
-                      [
-                        rehypeAutolinkHeadings,
-                        {
-                          behavior: "wrap",
-                        },
-                      ],
-                      rehypeHighlight,
-                    ]}
+                    className="prose prose-slate max-w-[250px] dark:prose-invert md:max-w-none"
+                    remarkPlugins={[remarkGfm, remarkMath]}
+                    rehypePlugins={[rehypeKatex]}
                   >
                     {question}
                   </Markdown>
@@ -202,34 +180,11 @@ export default function Sort({
               </div>
             </div>
           ) : (
-            <div className="back">
+            <div className="back flex min-h-[300px] flex-col justify-between">
               <Markdown
-                components={{
-                  img: ({ ...props }) => (
-                    <Image
-                      className="rounded-lg"
-                      src={
-                        props.src ?? "https://images.codefoli.com/smartwtf.png"
-                      }
-                      alt={props.alt ?? "smartwtf"}
-                      priority={true}
-                      layout="responsive"
-                      width={1792}
-                      height={1024}
-                    />
-                  ),
-                }}
-                remarkPlugins={[remarkGfm]}
-                rehypePlugins={[
-                  slug,
-                  [
-                    rehypeAutolinkHeadings,
-                    {
-                      behavior: "wrap",
-                    },
-                  ],
-                  rehypeHighlight,
-                ]}
+                className="prose prose-slate max-w-[250px] dark:prose-invert md:max-w-none"
+                remarkPlugins={[remarkGfm, remarkMath]}
+                rehypePlugins={[rehypeKatex]}
               >
                 {explanation}
               </Markdown>

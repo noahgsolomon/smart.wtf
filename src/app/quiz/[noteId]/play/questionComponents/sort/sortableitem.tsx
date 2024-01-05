@@ -54,19 +54,19 @@ export function SortableItem({
             {completed ? (
               <Check className="h-5 w-5 text-success" />
             ) : (
-              <div className="flex flex-col gap-1 transition-all group-hover:opacity-50">
-                <div className="flex flex-row gap-1"></div>
-                <div className="flex flex-row gap-1">
-                  <div className="h-1 w-1 rounded-lg bg-primary"></div>
-                  <div className="h-1 w-1 rounded-lg bg-primary"></div>
+              <div className="flex flex-col gap-[2px] transition-all group-hover:opacity-50">
+                <div className="flex flex-row gap-[2px]"></div>
+                <div className="flex flex-row gap-[2px]">
+                  <div className="h-[2px] w-[2px] rounded-lg bg-primary"></div>
+                  <div className="h-[2px] w-[2px] rounded-lg bg-primary"></div>
                 </div>
-                <div className="flex flex-row gap-1">
-                  <div className="h-1 w-1 rounded-lg bg-primary"></div>
-                  <div className="h-1 w-1 rounded-lg bg-primary"></div>
+                <div className="flex flex-row gap-[2px]">
+                  <div className="h-[2px] w-[2px] rounded-lg bg-primary"></div>
+                  <div className="h-[2px] w-[2px] rounded-lg bg-primary"></div>
                 </div>
-                <div className="flex flex-row gap-1">
-                  <div className="h-1 w-1 rounded-lg bg-primary"></div>
-                  <div className="h-1 w-1 rounded-lg bg-primary"></div>
+                <div className="flex flex-row gap-[2px]">
+                  <div className="h-[2px] w-[2px] rounded-lg bg-primary"></div>
+                  <div className="h-[2px] w-[2px] rounded-lg bg-primary"></div>
                 </div>
               </div>
             )}
