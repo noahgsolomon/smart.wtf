@@ -2,7 +2,7 @@
 
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Button } from "@/components/ui/button";
-import { type ReactElement, useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import useSound from "use-sound";
 import { toast } from "sonner";
 import Markdown from "react-markdown";
@@ -11,6 +11,8 @@ import remarkGfm from "remark-gfm";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeHighlight from "rehype-highlight";
 import slug from "rehype-slug";
+import remarkMath from "remark-math";
+import rehypeKatex from "rehype-katex";
 
 export default function Quiz({
   content,
@@ -81,128 +83,67 @@ export default function Quiz({
 
   return (
     <div className="p-4">
-      <div className="card-container">
+      <div className="card-container ">
         <div
           className={`rounded-lg border ${
             completed ? "border-success" : "border-border"
           } card ${isFlipped ? "is-flipped" : ""}`}
         >
           {side === "QUESTION" ? (
-            <div className="front">
+            <div className="front flex min-h-[300px] flex-col justify-between">
               <div>
                 <Markdown
-                  components={{
-                    img: ({ ...props }) => (
-                      <Image
-                        className="rounded-lg"
-                        src={
-                          props.src ??
-                          "https://images.codefoli.com/smartwtf.png"
-                        }
-                        alt={props.alt ?? "smartwtf"}
-                        priority={true}
-                        layout="responsive"
-                        width={1792}
-                        height={1024}
-                      />
-                    ),
-                  }}
-                  remarkPlugins={[remarkGfm]}
-                  rehypePlugins={[
-                    slug,
-                    [
-                      rehypeAutolinkHeadings,
-                      {
-                        behavior: "wrap",
-                      },
-                    ],
-                    rehypeHighlight,
-                  ]}
+                  className=" prose prose-slate max-w-[250px] dark:prose-invert md:max-w-none"
+                  remarkPlugins={[remarkGfm, remarkMath]}
+                  rehypePlugins={[rehypeKatex]}
                 >
                   {content}
                 </Markdown>
               </div>
               <div>
-                <div className="w-2/3 space-y-6">
-                  <div>
-                    <div className="space-y-3">
-                      <div>
-                        <RadioGroup className="flex flex-col space-y-1">
-                          {options.map((option, index) => {
-                            return (
-                              <div
-                                key={index}
-                                className="flex items-center space-x-3"
-                              >
-                                <div>
-                                  <RadioGroupItem
-                                    onClick={() => setCurrentGuess(index + 1)}
-                                    disabled={
-                                      guessed.includes(index + 1) ||
-                                      guessed.includes(answer)
-                                    }
-                                    correct={
-                                      answer == index + 1 &&
-                                      guessed.includes(index + 1)
-                                    }
-                                    incorrect={
-                                      answer != index + 1 &&
-                                      guessed.includes(index + 1)
-                                    }
-                                    value={(index + 1).toString()}
-                                  />
-                                </div>
-                                <div className="text-lg">{option.option}</div>
-                              </div>
-                            );
-                          })}
-                        </RadioGroup>
+                <RadioGroup className="flex flex-col space-y-1">
+                  {options.map((option, index) => {
+                    return (
+                      <div key={index} className="flex items-center space-x-3">
+                        <RadioGroupItem
+                          onClick={() => setCurrentGuess(index + 1)}
+                          disabled={
+                            guessed.includes(index + 1) ||
+                            guessed.includes(answer)
+                          }
+                          correct={
+                            answer == index + 1 && guessed.includes(index + 1)
+                          }
+                          incorrect={
+                            answer != index + 1 && guessed.includes(index + 1)
+                          }
+                          value={(index + 1).toString()}
+                        />
+                        <div className="max-w-[250px] text-base">
+                          {option.option}
+                        </div>
                       </div>
-                      <div />
-                    </div>
-                  </div>
-                  <div className="flex flex-row gap-2 py-6">
-                    {!guessed.includes(answer) ? (
-                      <Button onClick={() => onSubmit({ guess: currentGuess })}>
-                        Check
-                      </Button>
-                    ) : null}
-                    <Button variant={"secondary"} onClick={revealedAnswer}>
-                      Show Explanation
+                    );
+                  })}
+                </RadioGroup>
+                <div className="flex flex-row gap-2 py-6">
+                  {!guessed.includes(answer) ? (
+                    <Button onClick={() => onSubmit({ guess: currentGuess })}>
+                      Check
                     </Button>
-                  </div>
+                  ) : null}
+                  <Button variant={"secondary"} onClick={revealedAnswer}>
+                    Show Explanation
+                  </Button>
                 </div>
               </div>
             </div>
           ) : (
-            <div className="back">
+            <div className={`back flex min-h-[300px] flex-col justify-between`}>
               <Markdown
-                components={{
-                  img: ({ ...props }) => (
-                    <Image
-                      className="rounded-lg"
-                      src={
-                        props.src ?? "https://images.codefoli.com/smartwtf.png"
-                      }
-                      alt={props.alt ?? "smartwtf"}
-                      priority={true}
-                      layout="responsive"
-                      width={1792}
-                      height={1024}
-                    />
-                  ),
-                }}
-                remarkPlugins={[remarkGfm]}
-                rehypePlugins={[
-                  slug,
-                  [
-                    rehypeAutolinkHeadings,
-                    {
-                      behavior: "wrap",
-                    },
-                  ],
-                  rehypeHighlight,
-                ]}
+                className="prose prose-slate max-w-[250px] dark:prose-invert md:max-w-none"
+                remarkPlugins={[remarkGfm, remarkMath]}
+                rehypePlugins={[rehypeKatex]}
               >
                 {explanation}
               </Markdown>
