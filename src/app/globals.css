@@ -344,26 +344,16 @@ h6 {
 
 :target {
   scroll-margin-top: 75px;
-  /* Adjust this value to match your navbar's height */
 }
 
-/* The container for the card */
 .card-container {
   perspective: 1000px;
-  /* Create perspective */
 }
 
-/* The card itself */
 .card {
-  width: 100%;
-  /* Set card width */
-  height: 100%;
-  /* Set card height */
   position: relative;
   transform-style: preserve-3d;
-  /* Preserve 3d transformations */
   transition: transform 0.4s;
-  /* Animate the transform property */
 }
 
 /* The flipping state */
@@ -375,7 +365,7 @@ h6 {
 /* The front and back sides of the card */
 .front,
 .back {
-  @apply p-4 gap-2 flex flex-col rounded-lg border border-border w-full h-full bg-card
+  @apply p-4 gap-2 flex flex-col rounded-lg border border-border bg-card
   /* Hide the back side of the card when facing away */
 }
 
