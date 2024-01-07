@@ -8,8 +8,11 @@ import Sort from "./questionComponents/sort/sort";
 import Understanding from "./questionComponents/understanding/understanding";
 import {
   Carousel,
+  CarouselApi,
   CarouselContent,
   CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
 } from "@/components/ui/carousel";
 
 export default function Page({
@@ -27,18 +30,43 @@ export default function Page({
     typeof quizQuestionsQuery.data | null
   >(null);
 
+  const [current, setCurrent] = useState(0);
+
+  const [api, setApi] = useState<CarouselApi>();
+
+  useEffect(() => {
+    if (!api) {
+      return;
+    }
+
+    setCurrent(api.selectedScrollSnap());
+
+    api.on("select", () => {
+      setCurrent(api.selectedScrollSnap());
+    });
+  }, [api]);
+
   useEffect(() => {
     if (quizQuestionsQuery.data?.available) {
-      console.log(quizQuestionsQuery.data.questions);
       setQuestions(quizQuestionsQuery.data);
+    } else {
+      setQuestions(null);
     }
   }, [quizQuestionsQuery.isFetched]);
 
   return (
     <>
-      <QuizHeading q={q} noteId={noteId} />
+      <QuizHeading
+        api={api}
+        completed={[]}
+        current={current}
+        questions={questions!}
+      />
       <div className=" flex h-screen w-screen items-center justify-center overflow-x-hidden pt-12">
-        <Carousel className="flex w-full flex-col items-center justify-center">
+        <Carousel
+          setApi={setApi}
+          className="flex w-full flex-col items-center justify-center"
+        >
           <CarouselContent>
             {questions?.questions?.map((question) => {
               return (
@@ -79,6 +107,11 @@ export default function Page({
               );
             })}
           </CarouselContent>
+          <div className={"flex flex-row items-center gap-6"}>
+            <CarouselPrevious className="h-12 w-12" />
+
+            <CarouselNext className="h-12 w-12" />
+          </div>
         </Carousel>
       </div>
     </>
