@@ -27,8 +27,6 @@ export default function Quiz({
 
   const incorrect = () => toast.error("incorrect!");
 
-  console.log("options: " + JSON.stringify(options));
-
   const [guessed, setGuessed] = useState<number[]>([]);
 
   const [isFlipped, setIsFlipped] = useState(false);
@@ -115,9 +113,13 @@ export default function Quiz({
                           }
                           value={(index + 1).toString()}
                         />
-                        <div className="max-w-[250px] text-base">
+                        <Markdown
+                          className=" prose prose-slate max-w-[250px] text-base dark:prose-invert"
+                          remarkPlugins={[remarkGfm, remarkMath]}
+                          rehypePlugins={[rehypeKatex]}
+                        >
                           {option.option}
-                        </div>
+                        </Markdown>
                       </div>
                     );
                   })}
