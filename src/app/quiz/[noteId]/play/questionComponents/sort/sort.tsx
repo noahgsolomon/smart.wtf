@@ -18,7 +18,6 @@ import {
 } from "@dnd-kit/sortable";
 import { Button } from "@/components/ui/button";
 import useSound from "use-sound";
-import { trpc } from "@/trpc/client";
 import { Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import { SortableItem } from "./sortableitem";
@@ -59,16 +58,6 @@ export default function Sort({
       coordinateGetter: sortableKeyboardCoordinates,
     }),
   );
-
-  const mutateBlock = trpc.course.setBlockCompleted.useMutation({
-    onSuccess: (response) => {
-      if (response.data.firstCommitToday) {
-        toast(`You're on a ${response.data.streakCount} day streak`, {
-          icon: "🔥",
-        });
-      }
-    },
-  });
 
   const [isFlipped, setIsFlipped] = useState(false);
   const [correctSound] = useSound("/correct.mp3", { volume: 0.5 });

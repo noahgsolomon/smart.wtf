@@ -17,10 +17,8 @@ import {
 
 export default function Page({
   params: { noteId },
-  searchParams: { q },
 }: {
   params: { noteId: string };
-  searchParams: { q: string };
 }) {
   const quizQuestionsQuery = trpc.quiz.getQuestions.useQuery({
     noteId: parseInt(noteId),

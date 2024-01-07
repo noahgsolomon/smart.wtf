@@ -2,7 +2,7 @@
 
 import ThemeButton from "@/components/nav/theme";
 import { buttonVariants } from "@/components/ui/button";
-import { CarouselApi } from "@/components/ui/carousel";
+import { type CarouselApi } from "@/components/ui/carousel";
 import { Progress } from "@/components/ui/progress";
 import {
   Tooltip,
@@ -11,7 +11,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
-import { RouterOutput } from "@/trpc/client";
+import { type RouterOutput } from "@/trpc/client";
 import { X } from "lucide-react";
 
 export default function QuizHeading({
@@ -22,7 +22,7 @@ export default function QuizHeading({
 }: {
   current: number;
   questions: RouterOutput["quiz"]["getQuestions"];
-  completed: { [key: number]: boolean };
+  completed: Record<number, boolean>;
   api: CarouselApi | undefined;
 }) {
   return (
