@@ -84,6 +84,7 @@ export default function Page({
                         content={question.quizzes.questionMarkdown}
                         answer={question.quizzes.correctOption}
                         api={api}
+                        questionCount={questions?.questions?.length ?? 0}
                       />
                     ) : question.type === "SORTING" && question.sorting ? (
                       <Sort
@@ -95,6 +96,7 @@ export default function Page({
                         question={question.sorting.questionMarkdown}
                         key={question.sorting.id}
                         api={api}
+                        questionCount={questions?.questions?.length ?? 0}
                       />
                     ) : question.type === "UNDERSTANDING" &&
                       question.understanding ? (
@@ -106,6 +108,7 @@ export default function Page({
                         setCompleted={setCompleted}
                         explanation={question.understanding.explanationMarkdown}
                         api={api}
+                        questionCount={questions?.questions?.length ?? 0}
                       />
                     ) : null}
                   </div>
