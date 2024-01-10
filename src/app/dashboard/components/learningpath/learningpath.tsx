@@ -21,7 +21,7 @@ export default function LearningPath() {
         Coming Soon
       </Badge>
       {process.env.NEXT_PUBLIC_ENV === "PROD" ? (
-        <div className="absolute bottom-0 left-0 right-0 top-0 z-20 flex items-center justify-center rounded-lg bg-primary/30"></div>
+        <div className="absolute bottom-0 left-0 right-0 top-0 z-20 flex items-center justify-center rounded-lg"></div>
       ) : null}
       <div className="hidden h-full rounded-lg border bg-card/70 p-4 shadow-md dark:bg-card/80 2xl:block">
         <Carousel className="flex h-full w-full flex-col justify-between">

@@ -35,7 +35,7 @@ export default function LatestActivity() {
         Coming soon
       </Badge>
       {process.env.NEXT_PUBLIC_ENV === "PROD" ? (
-        <div className="absolute bottom-0 left-0 right-0 top-0 z-20 flex items-center justify-center rounded-lg bg-primary/30"></div>
+        <div className="absolute bottom-0 left-0 right-0 top-0 z-20 flex items-center justify-center rounded-lg "></div>
       ) : null}
 
       <div className="w-full">
