@@ -9,28 +9,33 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { Lightbulb, Loader2 } from "lucide-react";
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import useSound from "use-sound";
 import { toast } from "sonner";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import remarkMath from "remark-math";
 import rehypeKatex from "rehype-katex";
+import { CarouselApi } from "@/components/ui/carousel";
 
 export default function Understanding({
+  index,
+  setCompleted,
   question,
   explanation,
   completed,
+  api,
 }: {
+  index: number;
+  setCompleted: Dispatch<SetStateAction<Record<number, boolean>>>;
   question: string;
   explanation: string;
   completed: boolean;
+  api: CarouselApi | undefined;
 }) {
   const [userExplanation, setUserExplanation] = useState("");
   const maxExplanationLength = 1000;
-  const [side, setSide] = useState<"front" | "back">(
-    completed ? "back" : "front",
-  );
+  const [side, setSide] = useState<"front" | "back">("front");
   const [incorrectSound] = useSound("/incorrect.mp3", { volume: 0.5 });
   const [flipSound] = useSound("/flip.mp3", { volume: 0.5 });
 
@@ -51,6 +56,7 @@ export default function Understanding({
 
   const revealedAnswer = () => {
     if (!completed) {
+      setCompleted((prev) => ({ ...prev, [index]: true }));
     }
     toggleFlip();
   };
@@ -87,8 +93,8 @@ export default function Understanding({
       console.log(dataBody.correct);
       if (dataBody.correct) {
         correctSound();
-
         toast.success("correct!");
+        setCompleted((prev) => ({ ...prev, [index]: true }));
       } else {
         incorrectSound();
         toast.error("incorrect!");
@@ -104,24 +110,18 @@ export default function Understanding({
     <div className="py-4">
       <div className="card-container">
         <div
-          className={`card rounded-lg border ${
-            completed && correct !== false
-              ? "border-success"
-              : correct === false
-              ? "border-destructive"
-              : "border-border"
-          } ${isFlipped ? "is-flipped" : ""}`}
+          className={`card rounded-lg border ${isFlipped ? "is-flipped" : ""}`}
         >
           {side === "front" ? (
-            <div className="front flex flex-col gap-4 ">
-              <div className="relative flex flex-col gap-4 ">
-                <Markdown
-                  className="prose prose-slate max-w-[250px] dark:prose-invert md:max-w-none"
-                  remarkPlugins={[remarkGfm, remarkMath]}
-                  rehypePlugins={[rehypeKatex]}
-                >
-                  {question}
-                </Markdown>
+            <div className="front flex min-h-[300px] flex-col justify-between">
+              <Markdown
+                className="prose prose-slate max-w-[250px] dark:prose-invert md:max-w-none"
+                remarkPlugins={[remarkGfm, remarkMath]}
+                rehypePlugins={[rehypeKatex]}
+              >
+                {question}
+              </Markdown>
+              <div className="relative">
                 <Textarea
                   className="h-[125px] bg-background"
                   value={userExplanation}
@@ -156,23 +156,29 @@ export default function Understanding({
                 </TooltipProvider>
               </div>
               <div>
-                <Button
-                  variant={submitError ? "destructive" : "default"}
-                  onClick={handleSubmit}
-                  disabled={
-                    submitError || loading || userExplanation.length === 0
-                  }
-                >
-                  {loading ? (
-                    <Loader2 className="h-4 w-4 animate-spin" />
-                  ) : (
-                    "submit"
-                  )}
-                </Button>
+                {!completed ? (
+                  <Button
+                    variant={submitError ? "destructive" : "default"}
+                    onClick={handleSubmit}
+                    disabled={
+                      submitError || loading || userExplanation.length === 0
+                    }
+                  >
+                    {loading ? (
+                      <Loader2 className="h-4 w-4 animate-spin" />
+                    ) : (
+                      "Check"
+                    )}
+                  </Button>
+                ) : (
+                  <Button onClick={() => api?.scrollTo(index + 1)}>
+                    Continue
+                  </Button>
+                )}
               </div>
             </div>
           ) : (
-            <div className="back flex flex-col gap-4 ">
+            <div className="back flex min-h-[300px] flex-col justify-between">
               <Markdown
                 className="prose prose-slate max-w-[250px] dark:prose-invert md:max-w-none"
                 remarkPlugins={[remarkGfm, remarkMath]}
