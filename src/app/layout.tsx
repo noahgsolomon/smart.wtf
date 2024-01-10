@@ -9,6 +9,7 @@ import ProgressBarProvider from "./progressbar";
 import { GeistSans } from "geist/font";
 import { ChatProvider } from "./context/chat/ChatContext";
 import { Background } from "@/components/ui/background";
+import { Analytics } from "@vercel/analytics/react";
 
 export const metadata: Metadata = {
   viewport: "width=device-width, initial-scale=1",
@@ -55,6 +56,7 @@ export default function RootLayout({
             </Providers>
           </ClerkProvider>
         </TRPCReactProvider>
+        <Analytics />
       </body>
     </html>
   );
