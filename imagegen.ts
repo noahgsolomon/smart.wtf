@@ -45,9 +45,9 @@ const imageGeneneration = async (initialPrompt: string) => {
 };
 
 const promises = [
-  imageGeneneration("Knight vs. Huge Spaghetti"),
-  imageGeneneration("Knight vs. Huge Spaghetti Monster"),
-  imageGeneneration("Knight vs. Spaghetti Monster"),
+  imageGeneneration("The Matrix"),
+  imageGeneneration("AI Future"),
+  imageGeneneration("AI Overlords ruling humans"),
 ];
 
 const [imageGen1, imageGen2, imageGen3] = await Promise.all(promises);
