@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import {
   DndContext,
   closestCenter,
@@ -25,17 +25,24 @@ import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import remarkMath from "remark-math";
 import rehypeKatex from "rehype-katex";
+import { CarouselApi } from "@/components/ui/carousel";
 
 export default function Sort({
+  api,
+  index,
+  setCompleted,
   question,
   explanation,
   completed,
   options,
 }: {
+  index: number;
+  setCompleted: Dispatch<SetStateAction<Record<number, boolean>>>;
   question: string;
   explanation: string;
   completed: boolean;
   options: { order: number; option: string }[];
+  api: CarouselApi | undefined;
 }) {
   const [randomOrderedOptions, setRandomOrderedOptions] = useState(() => {
     const shuffledOptions: string[] = [
@@ -64,7 +71,6 @@ export default function Sort({
   const [incorrectSound] = useSound("/incorrect.mp3", { volume: 0.5 });
   const [flipSound] = useSound("/flip.mp3", { volume: 0.5 });
   const [side, setSide] = useState<"QUESTION" | "ANSWER">("QUESTION");
-  const [loading, setLoading] = useState(false);
 
   const toggleFlip = () => {
     flipSound();
@@ -74,12 +80,12 @@ export default function Sort({
 
   const revealedAnswer = () => {
     if (!completed) {
+      setCompleted((prev) => ({ ...prev, [index]: true }));
     }
     toggleFlip();
   };
 
   const handleSubmit = () => {
-    setLoading(true);
     try {
       if (
         randomOrderedOptions.join("") ===
@@ -89,16 +95,14 @@ export default function Sort({
           .join("")
       ) {
         correctSound();
-
         toast.success("correct!");
+        setCompleted((prev) => ({ ...prev, [index]: true }));
       } else {
         incorrectSound();
         toast.error("incorrect!");
       }
-      setLoading(false);
     } catch (error) {
       console.error("Error fetching data: ", error);
-      setLoading(false);
     }
   };
 
@@ -106,9 +110,7 @@ export default function Sort({
     <div className="p-4">
       <div className="card-container">
         <div
-          className={` rounded-lg ${
-            completed ? "border border-success" : ""
-          } card ${isFlipped ? "is-flipped" : ""}`}
+          className={` card rounded-lg border ${isFlipped ? "is-flipped" : ""}`}
         >
           {side === "QUESTION" ? (
             <div className="front flex min-h-[300px] flex-col justify-between">
@@ -148,13 +150,13 @@ export default function Sort({
                 </DndContext>
               </div>
               <div className="flex flex-row gap-2">
-                <Button onClick={handleSubmit} disabled={loading || completed}>
-                  {loading ? (
-                    <Loader2 className="h-4 w-4 animate-spin" />
-                  ) : (
-                    "Check"
-                  )}
-                </Button>
+                {!completed ? (
+                  <Button onClick={handleSubmit}>Check</Button>
+                ) : (
+                  <Button onClick={() => api?.scrollTo(index + 1)}>
+                    Continue
+                  </Button>
+                )}
                 <Button
                   type="button"
                   variant={"secondary"}
