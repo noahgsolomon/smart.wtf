@@ -59,7 +59,7 @@ export default function Page({
         current={current}
         questions={questions!}
       />
-      <div className=" flex h-screen w-screen items-center justify-center overflow-x-hidden pt-12">
+      <div className="relative flex h-screen w-screen items-center justify-center overflow-x-hidden pt-12">
         <Carousel
           setApi={setApi}
           className="flex w-full flex-col items-center justify-center"
@@ -69,7 +69,7 @@ export default function Page({
               return (
                 <CarouselItem
                   key={question.id}
-                  className="flex items-center justify-center"
+                  className="flex h-[100vh] items-center justify-center"
                 >
                   <div className="flex max-w-[800px] flex-col px-8">
                     {question.type === "QUIZ" && question.quizzes ? (
