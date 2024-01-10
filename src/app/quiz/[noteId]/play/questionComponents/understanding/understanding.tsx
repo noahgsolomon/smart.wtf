@@ -1,6 +1,6 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import {
   Tooltip,
@@ -16,6 +16,8 @@ import remarkGfm from "remark-gfm";
 import remarkMath from "remark-math";
 import rehypeKatex from "rehype-katex";
 import { type CarouselApi } from "@/components/ui/carousel";
+import Link from "next/link";
+import { motion } from "framer-motion";
 
 export default function Understanding({
   index,
@@ -24,6 +26,7 @@ export default function Understanding({
   explanation,
   completed,
   api,
+  questionCount,
 }: {
   index: number;
   setCompleted: Dispatch<SetStateAction<Record<number, boolean>>>;
@@ -31,6 +34,7 @@ export default function Understanding({
   explanation: string;
   completed: boolean;
   api: CarouselApi | undefined;
+  questionCount: number;
 }) {
   const [userExplanation, setUserExplanation] = useState("");
   const maxExplanationLength = 1000;
@@ -48,6 +52,7 @@ export default function Understanding({
   const [continueSound] = useSound("/click.mp3", { volume: 0.5 });
   const [incorrectVal, setIncorrectVal] = useState(false);
   const [correctVal, setCorrectVal] = useState(false);
+  const [incorrectAnimation, setIncorrectAnimation] = useState(false);
 
   const toggleFlip = () => {
     flipSound();
@@ -96,6 +101,10 @@ export default function Understanding({
       } else {
         incorrectSound();
         setIncorrectVal(true);
+        setIncorrectAnimation(true);
+        setTimeout(() => {
+          setIncorrectAnimation(false);
+        }, 500);
       }
       setLoading(false);
     } catch (error) {
@@ -104,9 +113,20 @@ export default function Understanding({
     }
   };
 
+  const swayAnimation = {
+    sway: {
+      x: [0, -10, 10, -10, 0],
+      transition: { duration: 0.5 },
+    },
+  };
+
   return (
     <div className="py-4">
-      <div className="card-container relative">
+      <motion.div
+        variants={swayAnimation}
+        animate={incorrectAnimation ? "sway" : ""}
+        className="card-container relative"
+      >
         <div
           style={{
             width: "100%",
@@ -211,6 +231,13 @@ export default function Understanding({
                       "Check"
                     )}
                   </Button>
+                ) : index === questionCount - 1 ? (
+                  <Link
+                    className={buttonVariants({ variant: "success" })}
+                    href={"/dashboard"}
+                  >
+                    Complete
+                  </Link>
                 ) : (
                   <Button
                     onClick={() => {
@@ -246,7 +273,7 @@ export default function Understanding({
             </div>
           )}
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 }
