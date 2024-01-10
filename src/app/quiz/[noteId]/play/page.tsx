@@ -29,7 +29,6 @@ export default function Page({
 
   const [current, setCurrent] = useState(0);
   const [completed, setCompleted] = useState<Record<number, boolean>>([]);
-  const [loading, setLoading] = useState(true);
 
   const [api, setApi] = useState<CarouselApi>();
 
@@ -48,7 +47,6 @@ export default function Page({
   useEffect(() => {
     if (quizQuestionsQuery.data?.available) {
       setQuestions(quizQuestionsQuery.data);
-      setLoading(false);
     } else {
       setQuestions(null);
     }
