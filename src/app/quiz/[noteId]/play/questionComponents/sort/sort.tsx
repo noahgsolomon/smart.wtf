@@ -16,7 +16,7 @@ import {
   sortableKeyboardCoordinates,
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import useSound from "use-sound";
 import { SortableItem } from "./sortableitem";
 import Markdown from "react-markdown";
@@ -24,6 +24,8 @@ import remarkGfm from "remark-gfm";
 import remarkMath from "remark-math";
 import rehypeKatex from "rehype-katex";
 import { type CarouselApi } from "@/components/ui/carousel";
+import Link from "next/link";
+import { motion } from "framer-motion";
 
 export default function Sort({
   api,
@@ -33,6 +35,7 @@ export default function Sort({
   explanation,
   completed,
   options,
+  questionCount,
 }: {
   index: number;
   setCompleted: Dispatch<SetStateAction<Record<number, boolean>>>;
@@ -41,6 +44,7 @@ export default function Sort({
   completed: boolean;
   options: { order: number; option: string }[];
   api: CarouselApi | undefined;
+  questionCount: number;
 }) {
   const [randomOrderedOptions, setRandomOrderedOptions] = useState(() => {
     const shuffledOptions: string[] = [
@@ -72,6 +76,7 @@ export default function Sort({
   const [continueSound] = useSound("/click.mp3", { volume: 0.5 });
   const [incorrectVal, setIncorrectVal] = useState(false);
   const [correctVal, setCorrectVal] = useState(false);
+  const [incorrectAnimation, setIncorrectAnimation] = useState(false);
 
   const toggleFlip = () => {
     flipSound();
@@ -101,15 +106,29 @@ export default function Sort({
       } else {
         incorrectSound();
         setIncorrectVal(true);
+        setIncorrectAnimation(true);
+        setTimeout(() => {
+          setIncorrectAnimation(false);
+        }, 500);
       }
     } catch (error) {
       console.error("Error fetching data: ", error);
     }
   };
+  const swayAnimation = {
+    sway: {
+      x: [0, -10, 10, -10, 0],
+      transition: { duration: 0.5 },
+    },
+  };
 
   return (
     <div className="p-4">
-      <div className="card-container relative">
+      <motion.div
+        variants={swayAnimation}
+        animate={incorrectAnimation ? "sway" : ""}
+        className="card-container relative"
+      >
         <div
           style={{
             width: "100%",
@@ -195,6 +214,13 @@ export default function Sort({
               <div className="flex flex-row gap-2">
                 {!completed ? (
                   <Button onClick={handleSubmit}>Check</Button>
+                ) : index === questionCount - 1 ? (
+                  <Link
+                    className={buttonVariants({ variant: "success" })}
+                    href={"/dashboard"}
+                  >
+                    Complete
+                  </Link>
                 ) : (
                   <Button
                     onClick={() => {
@@ -236,7 +262,7 @@ export default function Sort({
             </div>
           )}
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 
