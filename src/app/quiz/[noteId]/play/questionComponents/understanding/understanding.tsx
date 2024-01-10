@@ -9,13 +9,13 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { Lightbulb, Loader2 } from "lucide-react";
-import { Dispatch, SetStateAction, useState } from "react";
+import { type Dispatch, type SetStateAction, useState } from "react";
 import useSound from "use-sound";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import remarkMath from "remark-math";
 import rehypeKatex from "rehype-katex";
-import { CarouselApi } from "@/components/ui/carousel";
+import { type CarouselApi } from "@/components/ui/carousel";
 
 export default function Understanding({
   index,

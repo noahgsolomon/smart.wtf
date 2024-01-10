@@ -8,7 +8,7 @@ import Sort from "./questionComponents/sort/sort";
 import Understanding from "./questionComponents/understanding/understanding";
 import {
   Carousel,
-  CarouselApi,
+  type CarouselApi,
   CarouselContent,
   CarouselItem,
 } from "@/components/ui/carousel";

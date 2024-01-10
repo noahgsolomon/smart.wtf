@@ -2,13 +2,13 @@
 
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Button } from "@/components/ui/button";
-import { useState, useEffect, SetStateAction, Dispatch } from "react";
+import { useState, useEffect, type SetStateAction, type Dispatch } from "react";
 import useSound from "use-sound";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import remarkMath from "remark-math";
 import rehypeKatex from "rehype-katex";
-import { CarouselApi } from "@/components/ui/carousel";
+import { type CarouselApi } from "@/components/ui/carousel";
 
 export default function Quiz({
   api,
