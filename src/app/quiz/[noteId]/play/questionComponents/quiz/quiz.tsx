@@ -2,26 +2,33 @@
 
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Button } from "@/components/ui/button";
-import { useState, useEffect } from "react";
+import { useState, useEffect, SetStateAction, Dispatch } from "react";
 import useSound from "use-sound";
 import { toast } from "sonner";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import remarkMath from "remark-math";
 import rehypeKatex from "rehype-katex";
+import { CarouselApi } from "@/components/ui/carousel";
 
 export default function Quiz({
+  api,
+  index,
+  setCompleted,
   content,
   explanation,
   options,
   answer,
   completed,
 }: {
+  index: number;
+  setCompleted: Dispatch<SetStateAction<Record<number, boolean>>>;
   content: string;
   explanation: string;
   options: { order: number; option: string }[];
   answer: number;
   completed?: boolean;
+  api: CarouselApi | undefined;
 }) {
   const correct = () => toast.success("correct!");
 
@@ -46,6 +53,7 @@ export default function Quiz({
 
   const revealedAnswer = () => {
     if (!completed) {
+      setCompleted((prev) => ({ ...prev, [index]: true }));
     }
     toggleFlip();
   };
@@ -69,6 +77,7 @@ export default function Quiz({
     if (guess === answer) {
       correctSound();
       correct();
+      setCompleted((prev) => ({ ...prev, [index]: true }));
     } else {
       incorrectSound();
       incorrect();
@@ -79,9 +88,7 @@ export default function Quiz({
     <div className="p-4">
       <div className="card-container ">
         <div
-          className={`rounded-lg border ${
-            completed ? "border-success" : "border-border"
-          } card ${isFlipped ? "is-flipped" : ""}`}
+          className={`card rounded-lg border ${isFlipped ? "is-flipped" : ""}`}
         >
           {side === "QUESTION" ? (
             <div className="front flex min-h-[300px] flex-col justify-between">
@@ -125,11 +132,15 @@ export default function Quiz({
                   })}
                 </RadioGroup>
                 <div className="flex flex-row gap-2 py-6">
-                  {!guessed.includes(answer) ? (
+                  {!completed && !guessed.includes(answer) ? (
                     <Button onClick={() => onSubmit({ guess: currentGuess })}>
                       Check
                     </Button>
-                  ) : null}
+                  ) : (
+                    <Button onClick={() => api?.scrollTo(index + 1)}>
+                      Continue
+                    </Button>
+                  )}
                   <Button variant={"secondary"} onClick={revealedAnswer}>
                     Show Explanation
                   </Button>
