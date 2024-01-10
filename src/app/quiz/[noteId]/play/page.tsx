@@ -68,74 +68,57 @@ export default function Page({
           className="flex w-full flex-col items-center justify-center"
         >
           <CarouselContent>
-            {loading ? (
-              <Loader2 className="h-10 w-10 animate-spin" />
-            ) : (
-              <>
-                {questions?.questions?.map((question, index) => {
-                  return (
-                    <CarouselItem
-                      key={question.id}
-                      className="flex h-[100vh] items-center justify-center"
-                    >
-                      <div className="flex max-w-[800px] flex-col px-8">
-                        {question.type === "QUIZ" && question.quizzes ? (
-                          <Quiz
-                            index={index}
-                            key={question.quizzes.id}
-                            completed={completed[index] ?? false}
-                            explanation={question.quizzes.explanationMarkdown}
-                            //@ts-ignore
-                            options={question.quizzes.options}
-                            setCompleted={setCompleted}
-                            content={question.quizzes.questionMarkdown}
-                            answer={question.quizzes.correctOption}
-                            api={api}
-                            questionCount={questions?.questions?.length ?? 0}
-                          />
-                        ) : question.type === "SORTING" && question.sorting ? (
-                          <Sort
-                            index={index}
-                            completed={completed[index] ?? false}
-                            explanation={question.sorting.explanationMarkdown}
-                            options={question.sorting.options}
-                            setCompleted={setCompleted}
-                            question={question.sorting.questionMarkdown}
-                            key={question.sorting.id}
-                            api={api}
-                            questionCount={questions?.questions?.length ?? 0}
-                          />
-                        ) : question.type === "UNDERSTANDING" &&
-                          question.understanding ? (
-                          <Understanding
-                            index={index}
-                            key={question.understanding.id}
-                            question={question.understanding?.questionMarkdown}
-                            completed={completed[index] ?? false}
-                            setCompleted={setCompleted}
-                            explanation={
-                              question.understanding.explanationMarkdown
-                            }
-                            api={api}
-                            questionCount={questions?.questions?.length ?? 0}
-                          />
-                        ) : null}
-                      </div>
-                    </CarouselItem>
-                  );
-                })}
-              </>
-            )}
+            {questions?.questions?.map((question, index) => {
+              return (
+                <CarouselItem
+                  key={question.id}
+                  className="flex h-[100vh] items-center justify-center"
+                >
+                  <div className="flex max-w-[800px] flex-col px-8">
+                    {question.type === "QUIZ" && question.quizzes ? (
+                      <Quiz
+                        index={index}
+                        key={question.quizzes.id}
+                        completed={completed[index] ?? false}
+                        explanation={question.quizzes.explanationMarkdown}
+                        //@ts-ignore
+                        options={question.quizzes.options}
+                        setCompleted={setCompleted}
+                        content={question.quizzes.questionMarkdown}
+                        answer={question.quizzes.correctOption}
+                        api={api}
+                        questionCount={questions?.questions?.length ?? 0}
+                      />
+                    ) : question.type === "SORTING" && question.sorting ? (
+                      <Sort
+                        index={index}
+                        completed={completed[index] ?? false}
+                        explanation={question.sorting.explanationMarkdown}
+                        options={question.sorting.options}
+                        setCompleted={setCompleted}
+                        question={question.sorting.questionMarkdown}
+                        key={question.sorting.id}
+                        api={api}
+                        questionCount={questions?.questions?.length ?? 0}
+                      />
+                    ) : question.type === "UNDERSTANDING" &&
+                      question.understanding ? (
+                      <Understanding
+                        index={index}
+                        key={question.understanding.id}
+                        question={question.understanding?.questionMarkdown}
+                        completed={completed[index] ?? false}
+                        setCompleted={setCompleted}
+                        explanation={question.understanding.explanationMarkdown}
+                        api={api}
+                        questionCount={questions?.questions?.length ?? 0}
+                      />
+                    ) : null}
+                  </div>
+                </CarouselItem>
+              );
+            })}
           </CarouselContent>
-          {/* <div
-            className={`${
-              loading ? "hidden" : ""
-            } flex flex-row items-center gap-6`}
-          >
-            <CarouselPrevious className="h-12 w-12" />
-
-            <CarouselNext className="h-12 w-12" />
-          </div> */}
         </Carousel>
       </div>
     </>
