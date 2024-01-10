@@ -1,7 +1,7 @@
 "use client";
 
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { useState, useEffect, type SetStateAction, type Dispatch } from "react";
 import useSound from "use-sound";
 import Markdown from "react-markdown";
@@ -9,6 +9,8 @@ import remarkGfm from "remark-gfm";
 import remarkMath from "remark-math";
 import rehypeKatex from "rehype-katex";
 import { type CarouselApi } from "@/components/ui/carousel";
+import Link from "next/link";
+import { motion } from "framer-motion";
 
 export default function Quiz({
   api,
@@ -19,6 +21,7 @@ export default function Quiz({
   options,
   answer,
   completed,
+  questionCount,
 }: {
   index: number;
   setCompleted: Dispatch<SetStateAction<Record<number, boolean>>>;
@@ -28,6 +31,7 @@ export default function Quiz({
   answer: number;
   completed?: boolean;
   api: CarouselApi | undefined;
+  questionCount: number;
 }) {
   const [guessed, setGuessed] = useState<number[]>([]);
 
@@ -42,6 +46,7 @@ export default function Quiz({
 
   const [side, setSide] = useState<"QUESTION" | "ANSWER">("QUESTION");
   const [continueSound] = useSound("/click.mp3", { volume: 0.5 });
+  const [incorrectAnimation, setIncorrectAnimation] = useState(false);
 
   useEffect(() => {
     if (completed) {
@@ -79,12 +84,27 @@ export default function Quiz({
     } else {
       incorrectSound();
       setIncorrectVal(true);
+      setIncorrectAnimation(true);
+      setTimeout(() => {
+        setIncorrectAnimation(false);
+      }, 500);
     }
   }
 
+  const swayAnimation = {
+    sway: {
+      x: [0, -10, 10, -10, 0],
+      transition: { duration: 0.5 },
+    },
+  };
+
   return (
     <div className="p-4">
-      <div className="card-container relative">
+      <motion.div
+        variants={swayAnimation}
+        animate={incorrectAnimation ? "sway" : ""}
+        className="card-container relative"
+      >
         <div
           style={{
             width: "100%",
@@ -176,6 +196,13 @@ export default function Quiz({
                     <Button onClick={() => onSubmit({ guess: currentGuess })}>
                       Check
                     </Button>
+                  ) : index === questionCount - 1 ? (
+                    <Link
+                      className={buttonVariants({ variant: "success" })}
+                      href={"/dashboard"}
+                    >
+                      Complete
+                    </Link>
                   ) : (
                     <Button
                       onClick={() => {
@@ -214,7 +241,7 @@ export default function Quiz({
             </div>
           )}
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 }
