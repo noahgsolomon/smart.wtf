@@ -18,8 +18,6 @@ import {
 } from "@dnd-kit/sortable";
 import { Button } from "@/components/ui/button";
 import useSound from "use-sound";
-import { Loader2 } from "lucide-react";
-import { toast } from "sonner";
 import { SortableItem } from "./sortableitem";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
@@ -71,6 +69,9 @@ export default function Sort({
   const [incorrectSound] = useSound("/incorrect.mp3", { volume: 0.5 });
   const [flipSound] = useSound("/flip.mp3", { volume: 0.5 });
   const [side, setSide] = useState<"QUESTION" | "ANSWER">("QUESTION");
+  const [continueSound] = useSound("/click.mp3", { volume: 0.5 });
+  const [incorrectVal, setIncorrectVal] = useState(false);
+  const [correctVal, setCorrectVal] = useState(false);
 
   const toggleFlip = () => {
     flipSound();
@@ -95,11 +96,11 @@ export default function Sort({
           .join("")
       ) {
         correctSound();
-        toast.success("correct!");
         setCompleted((prev) => ({ ...prev, [index]: true }));
+        setCorrectVal(true);
       } else {
         incorrectSound();
-        toast.error("incorrect!");
+        setIncorrectVal(true);
       }
     } catch (error) {
       console.error("Error fetching data: ", error);
@@ -108,7 +109,49 @@ export default function Sort({
 
   return (
     <div className="p-4">
-      <div className="card-container">
+      <div className="card-container relative">
+        <div
+          style={{
+            width: "100%",
+            maxWidth: "640px",
+            backgroundImage: `radial-gradient(at 27% 37%, hsla(0, 50%, 50%, 1) 0px, transparent 50%),
+                      radial-gradient(at 97% 21%, hsla(5, 50%, 60%, 1) 0px, transparent 50%),
+                      radial-gradient(at 52% 99%, hsla(10, 50%, 55%, 1) 0px, transparent 50%),
+                      radial-gradient(at 10% 29%, hsla(15, 50%, 65%, 1) 0px, transparent 50%),
+                      radial-gradient(at 97% 96%, hsla(20, 50%, 70%, 1) 0px, transparent 50%),
+                      radial-gradient(at 33% 50%, hsla(25, 50%, 75%, 1) 0px, transparent 50%),
+                      radial-gradient(at 79% 53%, hsla(30, 50%, 80%, 1) 0px, transparent 50%)`,
+            position: "absolute",
+            height: "100%",
+            filter: "blur(100px) saturate(150%)",
+            top: "80px",
+            opacity: 0.15,
+          }}
+          className={`absolute bottom-0 left-0 right-0 top-0 transition-all ${
+            incorrectVal && !correctVal ? "" : "hidden opacity-0"
+          }`}
+        ></div>
+        <div
+          style={{
+            width: "100%",
+            maxWidth: "640px",
+            backgroundImage: `radial-gradient(at 27% 37%, hsla(90, 50%, 50%, 1) 0px, transparent 50%),
+                      radial-gradient(at 97% 21%, hsla(100, 50%, 60%, 1) 0px, transparent 50%),
+                      radial-gradient(at 52% 99%, hsla(110, 50%, 55%, 1) 0px, transparent 50%),
+                      radial-gradient(at 10% 29%, hsla(120, 50%, 65%, 1) 0px, transparent 50%),
+                      radial-gradient(at 97% 96%, hsla(130, 50%, 70%, 1) 0px, transparent 50%),
+                      radial-gradient(at 33% 50%, hsla(140, 50%, 75%, 1) 0px, transparent 50%),
+                      radial-gradient(at 79% 53%, hsla(150, 50%, 80%, 1) 0px, transparent 50%)`,
+            position: "absolute",
+            height: "100%",
+            filter: "blur(100px) saturate(150%)",
+            top: "80px",
+            opacity: 0.15,
+          }}
+          className={`absolute bottom-0 left-0 right-0 top-0 transition-all ${
+            correctVal ? "" : "hidden opacity-0"
+          }`}
+        ></div>
         <div
           className={` card rounded-lg border ${isFlipped ? "is-flipped" : ""}`}
         >
@@ -153,7 +196,12 @@ export default function Sort({
                 {!completed ? (
                   <Button onClick={handleSubmit}>Check</Button>
                 ) : (
-                  <Button onClick={() => api?.scrollTo(index + 1)}>
+                  <Button
+                    onClick={() => {
+                      continueSound();
+                      api?.scrollTo(index + 1);
+                    }}
+                  >
                     Continue
                   </Button>
                 )}
