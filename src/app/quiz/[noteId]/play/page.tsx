@@ -11,8 +11,6 @@ import {
   CarouselApi,
   CarouselContent,
   CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
 } from "@/components/ui/carousel";
 
 export default function Page({
@@ -29,6 +27,7 @@ export default function Page({
   >(null);
 
   const [current, setCurrent] = useState(0);
+  const [completed, setCompleted] = useState<Record<number, boolean>>([]);
 
   const [api, setApi] = useState<CarouselApi>();
 
@@ -56,7 +55,7 @@ export default function Page({
     <>
       <QuizHeading
         api={api}
-        completed={[]}
+        completed={completed}
         current={current}
         questions={questions!}
       />
@@ -66,7 +65,7 @@ export default function Page({
           className="flex w-full flex-col items-center justify-center"
         >
           <CarouselContent>
-            {questions?.questions?.map((question) => {
+            {questions?.questions?.map((question, index) => {
               return (
                 <CarouselItem
                   key={question.id}
@@ -75,29 +74,38 @@ export default function Page({
                   <div className="flex max-w-[800px] flex-col px-8">
                     {question.type === "QUIZ" && question.quizzes ? (
                       <Quiz
+                        index={index}
                         key={question.quizzes.id}
-                        completed={false}
+                        completed={completed[index] ?? false}
                         explanation={question.quizzes.explanationMarkdown}
                         //@ts-ignore
                         options={question.quizzes.options}
+                        setCompleted={setCompleted}
                         content={question.quizzes.questionMarkdown}
                         answer={question.quizzes.correctOption}
+                        api={api}
                       />
                     ) : question.type === "SORTING" && question.sorting ? (
                       <Sort
-                        completed={false}
+                        index={index}
+                        completed={completed[index] ?? false}
                         explanation={question.sorting.explanationMarkdown}
                         options={question.sorting.options}
+                        setCompleted={setCompleted}
                         question={question.sorting.questionMarkdown}
                         key={question.sorting.id}
+                        api={api}
                       />
                     ) : question.type === "UNDERSTANDING" &&
                       question.understanding ? (
                       <Understanding
+                        index={index}
                         key={question.understanding.id}
                         question={question.understanding?.questionMarkdown}
-                        completed={false}
+                        completed={completed[index] ?? false}
+                        setCompleted={setCompleted}
                         explanation={question.understanding.explanationMarkdown}
+                        api={api}
                       />
                     ) : null}
                   </div>
@@ -105,11 +113,15 @@ export default function Page({
               );
             })}
           </CarouselContent>
-          <div className={"flex flex-row items-center gap-6"}>
+          {/* <div
+            className={`${
+              loading ? "hidden" : ""
+            } flex flex-row items-center gap-6`}
+          >
             <CarouselPrevious className="h-12 w-12" />
 
             <CarouselNext className="h-12 w-12" />
-          </div>
+          </div> */}
         </Carousel>
       </div>
     </>
