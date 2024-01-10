@@ -13,6 +13,7 @@ import {
 import { cn } from "@/lib/utils";
 import { type RouterOutput } from "@/trpc/client";
 import { X } from "lucide-react";
+import Link from "next/link";
 
 export default function QuizHeading({
   questions,
@@ -27,9 +28,12 @@ export default function QuizHeading({
 }) {
   return (
     <div className="fixed left-0 right-0 top-0 z-20 flex w-screen flex-row items-center justify-between border-b border-border bg-card  px-2 py-2 md:px-10">
-      <a href={`/dashboard`} className={buttonVariants({ variant: "ghost" })}>
+      <Link
+        href={`/dashboard`}
+        className={buttonVariants({ variant: "ghost" })}
+      >
         <X className="h-4 w-4" />
-      </a>
+      </Link>
       <TooltipProvider delayDuration={0}>
         <div className="flex h-4 w-[200px] flex-row gap-1 md:w-[400px]">
           {questions &&
