@@ -1,13 +1,12 @@
 "use client";
 
-import { ArrowUp, Bot, CornerDownLeft, MessageSquareIcon } from "lucide-react";
+import { Bot, Copy, CornerDownLeft, RotateCw } from "lucide-react";
 import { useChatContext } from "@/app/context/chat/ChatContext";
 import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer";
 import { cn } from "@/lib/utils";
 import { Button } from "./ui/button";
 import Markdown from "react-markdown";
 import Image from "next/image";
-import { Input } from "./ui/input";
 import { useEffect, useRef, useState } from "react";
 import remarkGfm from "remark-gfm";
 import rehypeHighlight from "rehype-highlight";
@@ -16,10 +15,61 @@ import rehypeKatex from "rehype-katex";
 import slug from "rehype-slug";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import { useUser } from "@clerk/nextjs";
-import { ChatInputArea } from "@lobehub/ui";
+import {
+  ActionIconGroup,
+  ActionIconGroupProps,
+  ChatItem,
+  ChatItemProps,
+  MetaData,
+  useControls,
+  useCreateStore,
+} from "@lobehub/ui";
 import { Textarea } from "./ui/textarea";
+import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip";
 
 export default function ChatButton() {
+  const store = useCreateStore();
+
+  const items: ActionIconGroupProps["items"] = [
+    {
+      icon: RotateCw,
+      key: "regenerate",
+      label: "Regenerate",
+    },
+    {
+      icon: Copy,
+      key: "copy",
+      label: "Copy",
+    },
+  ];
+
+  const userItems: ActionIconGroupProps["items"] = [
+    {
+      icon: Copy,
+      key: "copy",
+      label: "Copy",
+    },
+  ];
+
+  const control: ChatItemProps | any = useControls(
+    {
+      loading: false,
+      message: {
+        rows: true,
+        value:
+          "要使用 dayjs 的 fromNow 函数，需要先安装 dayjs 库并在代码中引入它。然后，可以使用以下语法来获取当前时间与给定时间之间的相对时间：\n\n```javascript\ndayjs().fromNow();\ndayjs('2021-05-01').fromNow();\n```",
+      },
+      primary: false,
+      showTitle: true,
+      time: 1_686_538_950_084,
+      type: {
+        options: ["block", "pure"],
+        value: "block",
+      },
+    },
+    { store },
+  );
+
   const [input, setInput] = useState("");
 
   const {
@@ -69,6 +119,16 @@ export default function ChatButton() {
     handleGenerate(chatPrompt);
   };
 
+  const avatar: MetaData = {
+    avatar: "🤖",
+    title: "Bot.wtf",
+  };
+
+  const userAvatar: MetaData = {
+    avatar: "😎",
+    title: "Noah Solomon",
+  };
+
   return (
     <div className="fixed bottom-4 right-4 z-30 ">
       <Drawer onOpenChange={setOpen} open={open}>
@@ -82,13 +142,51 @@ export default function ChatButton() {
           </div>
         </DrawerTrigger>
         <DrawerContent className="mx-auto flex max-w-[1000px] justify-center rounded-t-lg border bg-card">
-          <div className="p-4">
+          <div className="p-4 pb-0">
             <div
               ref={chatContainerRef}
               className={`flex max-h-[600px] min-h-[400px] flex-col gap-6 overflow-y-auto md:p-4`}
             >
               {messages?.map((m, index) => (
                 <div key={index}>
+                  <ChatItem
+                    message={"sup"}
+                    placement="right"
+                    actions={
+                      <Tooltip>
+                        <div className="flex flex-row gap-2 rounded-lg border bg-secondary/50 p-1">
+                          <Tooltip>
+                            <TooltipTrigger>
+                              <Button variant={"ghost"} size={"sm"}>
+                                <Copy className="h-4 w-4 text-primary/60" />
+                              </Button>
+                            </TooltipTrigger>
+                            <TooltipContent>Copy</TooltipContent>
+                          </Tooltip>
+
+                          <Tooltip>
+                            <TooltipTrigger>
+                              <Button variant={"ghost"} size={"sm"}>
+                                <RotateCw className="h-4 w-4 text-primary/60" />
+                              </Button>
+                            </TooltipTrigger>
+                            <TooltipContent>Regenerate</TooltipContent>
+                          </Tooltip>
+                        </div>
+                      </Tooltip>
+                    }
+                    type="block"
+                    renderMessage={() => {
+                      return (
+                        <div className="cum rounded-lg border bg-secondary px-2 py-1 text-primary">
+                          sup
+                        </div>
+                      );
+                    }}
+                    avatar={userAvatar}
+                    showTitle
+                    loading
+                  />
                   {m.role === "user" ? (
                     <div className="flex items-center justify-end gap-2">
                       <p className="max-w-[80%] overflow-hidden rounded-lg border border-border bg-primary px-2 py-1 text-sm text-secondary shadow-sm md:max-w-[60%] ">
