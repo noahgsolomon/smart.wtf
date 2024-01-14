@@ -45,9 +45,15 @@ const imageGeneneration = async (initialPrompt: string) => {
 };
 
 const promises = [
-  imageGeneneration("The Matrix"),
-  imageGeneneration("AI Future"),
-  imageGeneneration("AI Overlords ruling humans"),
+  imageGeneneration(
+    "Batch normalization (a big box being filled up with smaller things from the top)",
+  ),
+  imageGeneneration(
+    "As the cubes land within the box, a transformation begins. The once-empty space steadily fills with a dance of light and color, a radiant display that ripples through the cubes like a wave. Inside the box, the smaller blocks blend and organize, as if drawn together by an unseen force. Their individual hues merge and harmonize, creating a mesmerizing spectacle of shifting shades and patterns within the massive container.",
+  ),
+  imageGeneneration(
+    "As the cubes land within the box, a transformation begins. The once-empty space steadily fills with a dance of light and color, a radiant display that ripples through the cubes like a wave. Inside the box, the smaller blocks blend and organize, as if drawn together by an unseen force. Their individual hues merge and harmonize, creating a mesmerizing spectacle of shifting shades and patterns within the massive container.",
+  ),
 ];
 
 const [imageGen1, imageGen2, imageGen3] = await Promise.all(promises);
