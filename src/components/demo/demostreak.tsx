@@ -3,7 +3,6 @@
 import {
   Tooltip,
   TooltipContent,
-  TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import Image from "next/image";
@@ -155,72 +154,70 @@ export default function DemoStreak() {
 
   return (
     <div className="relative overflow-hidden rounded-lg shadow-md ">
-      <TooltipProvider delayDuration={0}>
-        <div className="absolute left-1 top-1 z-[15] pb-4">
-          <Tooltip>
-            <TooltipTrigger>
-              <div className="flex cursor-pointer items-end gap-2 transition-all hover:scale-105">
-                <Image
-                  className="object-contain"
-                  width={50}
-                  height={50}
-                  src={blazing}
-                  alt={"fire fish"}
-                />
-              </div>
-            </TooltipTrigger>
-            <TooltipContent>Let's get that streak going!</TooltipContent>
-          </Tooltip>
-        </div>
-        <div className="absolute right-2 top-2 z-[15] pb-4">
-          <Tooltip>
-            <TooltipTrigger>
-              <div className="flex cursor-pointer items-end gap-2 transition-all hover:scale-105">
-                <div className="rounded-lg border border-border bg-primary/90">
-                  <p className="px-2 py-1 text-base text-secondary">
-                    🔥 {currentStreakCount}
-                  </p>
-                </div>
-              </div>
-            </TooltipTrigger>
-            <TooltipContent>Your current streak</TooltipContent>
-          </Tooltip>
-        </div>
-
-        <div className="relative flex rounded-lg border bg-card/70 dark:bg-card/80">
-          <div className="overflow-x-auto overflow-y-hidden rounded-l-lg bg-card/70 p-2 px-5 pb-5 dark:bg-card/80 md:p-5">
-            <div className="absolute bottom-0 right-0 top-0 z-10 my-4 bg-card/70 pl-[10px] dark:bg-card/80"></div>
-            <div className="absolute bottom-0 right-[10px] top-0 z-10 my-4 pl-[10px] backdrop-blur-[1px]"></div>
-
-            <div className="absolute bottom-0 left-0 top-0 z-10 my-4 bg-card/70 pl-[10px] dark:bg-card/80"></div>
-            <div className="absolute bottom-0 left-[10px] top-0 z-10 my-4 pl-[10px] backdrop-blur-[1px]"></div>
-
-            <ul className="flex w-[900px] flex-nowrap pb-2 pl-10 text-sm">
-              <li className="w-[68px]">Jan</li>
-              <li className="w-[68px]">Feb</li>
-              <li className="w-[68px]">Mar</li>
-              <li className="w-[68px]">Apr</li>
-              <li className="w-[68px]">May</li>
-              <li className="w-[68px]">Jun</li>
-              <li className="w-[68px]">Jul</li>
-              <li className="w-[68px]">Aug</li>
-              <li className="w-[68px]">Sep</li>
-              <li className="w-[68px]">Oct</li>
-              <li className="w-[68px]">Nov</li>
-              <li className="w-[68px]">Dec</li>
-            </ul>
-
-            <div className="flex flex-row gap-2">
-              <ul className="days flex flex-col gap-4 pt-4 text-xs">
-                <li>Mon</li>
-                <li>Wed</li>
-                <li>Fri</li>
-              </ul>
-              {streakCalendar()}
+      <div className="absolute left-1 top-1 z-[15] pb-4">
+        <Tooltip>
+          <TooltipTrigger>
+            <div className="flex cursor-pointer items-end gap-2 transition-all hover:scale-105">
+              <Image
+                className="object-contain"
+                width={50}
+                height={50}
+                src={blazing}
+                alt={"fire fish"}
+              />
             </div>
+          </TooltipTrigger>
+          <TooltipContent>Let's get that streak going!</TooltipContent>
+        </Tooltip>
+      </div>
+      <div className="absolute right-2 top-2 z-[15] pb-4">
+        <Tooltip>
+          <TooltipTrigger>
+            <div className="flex cursor-pointer items-end gap-2 transition-all hover:scale-105">
+              <div className="rounded-lg border border-border bg-primary/90">
+                <p className="px-2 py-1 text-base text-secondary">
+                  🔥 {currentStreakCount}
+                </p>
+              </div>
+            </div>
+          </TooltipTrigger>
+          <TooltipContent>Your current streak</TooltipContent>
+        </Tooltip>
+      </div>
+
+      <div className="relative flex rounded-lg border bg-card/70 dark:bg-card/80">
+        <div className="overflow-x-auto overflow-y-hidden rounded-l-lg bg-card/70 p-2 px-5 pb-5 dark:bg-card/80 md:p-5">
+          <div className="absolute bottom-0 right-0 top-0 z-10 my-4 bg-card/70 pl-[10px] dark:bg-card/80"></div>
+          <div className="absolute bottom-0 right-[10px] top-0 z-10 my-4 pl-[10px] backdrop-blur-[1px]"></div>
+
+          <div className="absolute bottom-0 left-0 top-0 z-10 my-4 bg-card/70 pl-[10px] dark:bg-card/80"></div>
+          <div className="absolute bottom-0 left-[10px] top-0 z-10 my-4 pl-[10px] backdrop-blur-[1px]"></div>
+
+          <ul className="flex w-[900px] flex-nowrap pb-2 pl-10 text-sm">
+            <li className="w-[68px]">Jan</li>
+            <li className="w-[68px]">Feb</li>
+            <li className="w-[68px]">Mar</li>
+            <li className="w-[68px]">Apr</li>
+            <li className="w-[68px]">May</li>
+            <li className="w-[68px]">Jun</li>
+            <li className="w-[68px]">Jul</li>
+            <li className="w-[68px]">Aug</li>
+            <li className="w-[68px]">Sep</li>
+            <li className="w-[68px]">Oct</li>
+            <li className="w-[68px]">Nov</li>
+            <li className="w-[68px]">Dec</li>
+          </ul>
+
+          <div className="flex flex-row gap-2">
+            <ul className="days flex flex-col gap-4 pt-4 text-xs">
+              <li>Mon</li>
+              <li>Wed</li>
+              <li>Fri</li>
+            </ul>
+            {streakCalendar()}
           </div>
         </div>
-      </TooltipProvider>
+      </div>
     </div>
   );
 }

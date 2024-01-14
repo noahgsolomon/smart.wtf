@@ -460,24 +460,7 @@ export default function Page({
                         blockVisible ? "" : "hidden"
                       }`}
                     >
-                      <div className="flex flex-col pb-4">
-                        {markdown}
-
-                        {/* <div className="flex justify-end">
-                          <TooltipProvider delayDuration={0}>
-                            <Tooltip>
-                              <TooltipTrigger>
-                                <Button variant={"ghost"}>
-                                  <Bot className="h-4 w-4 opacity-50" />
-                                </Button>
-                              </TooltipTrigger>
-                              <TooltipContent>
-                                Let Professor Quantum explain this block
-                              </TooltipContent>
-                            </Tooltip>
-                          </TooltipProvider>
-                        </div> */}
-                      </div>
+                      <div className="flex flex-col pb-4">{markdown}</div>
                       {interactive}
                       {section[lessonNumber - 1]?.blocks.length ===
                         block.order &&

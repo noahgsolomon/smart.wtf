@@ -5,7 +5,6 @@ import { Textarea } from "@/components/ui/textarea";
 import {
   Tooltip,
   TooltipContent,
-  TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { trpc } from "@/trpc/client";
@@ -255,20 +254,18 @@ export default function Understanding({
                 >
                   {userExplanation.length}/{maxExplanationLength}
                 </div>
-                <TooltipProvider delayDuration={0}>
-                  <Tooltip>
-                    <TooltipTrigger className="absolute bottom-2 right-2 ">
-                      <Button
-                        onClick={revealedAnswer}
-                        size={"sm"}
-                        className="items-center rounded-lg border border-border hover:text-yellow-500"
-                      >
-                        <Lightbulb className="h-5 w-5" />
-                      </Button>
-                    </TooltipTrigger>
-                    <TooltipContent>click to reveal explanation</TooltipContent>
-                  </Tooltip>
-                </TooltipProvider>
+                <Tooltip>
+                  <TooltipTrigger className="absolute bottom-2 right-2 ">
+                    <Button
+                      onClick={revealedAnswer}
+                      size={"sm"}
+                      className="items-center rounded-lg border border-border hover:text-yellow-500"
+                    >
+                      <Lightbulb className="h-5 w-5" />
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent>click to reveal explanation</TooltipContent>
+                </Tooltip>
               </div>
               <div className="py-2">
                 <Button

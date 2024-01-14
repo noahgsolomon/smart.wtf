@@ -10,6 +10,7 @@ import { GeistSans } from "geist/font";
 import { ChatProvider } from "./context/chat/ChatContext";
 import { Background } from "@/components/ui/background";
 import { Analytics } from "@vercel/analytics/react";
+import { TooltipProvider } from "@/components/ui/tooltip";
 
 export const metadata: Metadata = {
   viewport: "width=device-width, initial-scale=1",
@@ -44,16 +45,18 @@ export default function RootLayout({
       <body className={`${GeistSans.className} antialiased`}>
         <TRPCReactProvider headers={headers()}>
           <ClerkProvider>
-            <Providers>
-              <ProgressBarProvider>
-                <ChatProvider>
-                  <NavBar />
-                  <Background />
-                  {children}
-                  {modal}
-                </ChatProvider>
-              </ProgressBarProvider>
-            </Providers>
+            <TooltipProvider delayDuration={0}>
+              <Providers>
+                <ProgressBarProvider>
+                  <ChatProvider>
+                    <NavBar />
+                    <Background />
+                    {children}
+                    {modal}
+                  </ChatProvider>
+                </ProgressBarProvider>
+              </Providers>
+            </TooltipProvider>
           </ClerkProvider>
         </TRPCReactProvider>
         <Analytics />

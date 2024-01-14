@@ -7,7 +7,6 @@ import { Progress } from "@/components/ui/progress";
 import {
   Tooltip,
   TooltipContent,
-  TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
@@ -34,28 +33,26 @@ export default function QuizHeading({
       >
         <X className="h-4 w-4" />
       </Link>
-      <TooltipProvider delayDuration={0}>
-        <div className="flex h-4 w-[200px] flex-row gap-1 md:w-[400px]">
-          {questions &&
-            questions.available &&
-            questions.questions?.map((question, index) => (
-              <Tooltip key={question.id}>
-                <TooltipTrigger asChild>
-                  <Progress
-                    onClick={() => api?.scrollTo(index)}
-                    className={cn(
-                      `h-full cursor-pointer transition-all hover:scale-[102%] hover:opacity-90 active:scale-[98%]`,
-                      index === current ? "ring-2 ring-lightBlue" : "",
-                    )}
-                    indicatorClassName="rounded-r-lg"
-                    value={completed[index] ? 100 : 0}
-                  />
-                </TooltipTrigger>
-                <TooltipContent>Question {index + 1}</TooltipContent>
-              </Tooltip>
-            ))}
-        </div>
-      </TooltipProvider>
+      <div className="flex h-4 w-[200px] flex-row gap-1 md:w-[400px]">
+        {questions &&
+          questions.available &&
+          questions.questions?.map((question, index) => (
+            <Tooltip key={question.id}>
+              <TooltipTrigger asChild>
+                <Progress
+                  onClick={() => api?.scrollTo(index)}
+                  className={cn(
+                    `h-full cursor-pointer transition-all hover:scale-[102%] hover:opacity-90 active:scale-[98%]`,
+                    index === current ? "ring-2 ring-lightBlue" : "",
+                  )}
+                  indicatorClassName="rounded-r-lg"
+                  value={completed[index] ? 100 : 0}
+                />
+              </TooltipTrigger>
+              <TooltipContent>Question {index + 1}</TooltipContent>
+            </Tooltip>
+          ))}
+      </div>
       <div className="flex flex-row items-center gap-2">
         <ThemeButton className="hidden md:block" />
       </div>
