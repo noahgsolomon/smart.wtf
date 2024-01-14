@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowUp, Bot } from "lucide-react";
+import { ArrowUp, Bot, CornerDownLeft, MessageSquareIcon } from "lucide-react";
 import { useChatContext } from "@/app/context/chat/ChatContext";
 import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer";
 import { cn } from "@/lib/utils";
@@ -16,6 +16,8 @@ import rehypeKatex from "rehype-katex";
 import slug from "rehype-slug";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import { useUser } from "@clerk/nextjs";
+import { ChatInputArea } from "@lobehub/ui";
+import { Textarea } from "./ui/textarea";
 
 export default function ChatButton() {
   const [input, setInput] = useState("");
@@ -83,7 +85,7 @@ export default function ChatButton() {
           <div className="p-4">
             <div
               ref={chatContainerRef}
-              className={`flex h-[450px] flex-col  gap-6 overflow-y-auto sm:h-[500px] md:p-4`}
+              className={`flex max-h-[600px] min-h-[400px] flex-col gap-6 overflow-y-auto md:p-4`}
             >
               {messages?.map((m, index) => (
                 <div key={index}>
@@ -230,35 +232,43 @@ export default function ChatButton() {
                 </div>
               )}
             </div>
-            <div className="flex flex-row gap-2 border-t border-border py-4">
-              <div className="relative w-full">
-                <Input
-                  className="rounded-lg bg-secondary pl-3 pr-10 outline-none "
-                  value={input}
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter" && input.length > 0 && !generating) {
-                      handleSubmit();
-                    }
-                  }}
-                  onChange={(e) => {
-                    setInput(e.target.value);
-                    setChatPrompt(e.target.value);
-                  }}
-                  placeholder="enter message here..."
-                />
-                <Button
-                  disabled={input.length === 0 || generating}
-                  type="button"
-                  onClick={handleSubmit}
-                  className={`${
-                    input.length > 0
-                      ? "bg-blue hover:bg-blue hover:opacity-80"
-                      : ""
-                  } absolute inset-y-1 right-1 flex h-auto min-h-0 items-center justify-center rounded-lg p-2`}
-                >
-                  <ArrowUp className="h-4 w-4" />
-                </Button>
+          </div>
+          <div className="border-t">
+            <Textarea
+              value={input}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  if (input.length === 0) return;
+                  if (!e.metaKey) {
+                    e.preventDefault();
+                    handleSubmit();
+                  } else {
+                    const target = e.target as HTMLTextAreaElement;
+                    setInput(
+                      input.slice(0, target.selectionStart) +
+                        "\n" +
+                        input.slice(target.selectionEnd),
+                    );
+                    target.selectionStart = target.selectionEnd =
+                      target.selectionStart + 1;
+                  }
+                }
+              }}
+              onChange={(e) => {
+                setInput(e.target.value);
+                setChatPrompt(e.target.value);
+              }}
+              placeholder="Type your message here..."
+              className="h-[100px] resize-none rounded-none border-none p-4 shadow-none"
+            />
+            <div className="m-4 flex flex-row items-center justify-end gap-4">
+              <div className="flex flex-row items-center gap-1 text-xs text-primary/60">
+                <CornerDownLeft className="h-3 w-3" />
+                Send / ⌘<CornerDownLeft className="h-3 w-3" /> New Line
               </div>
+              <Button disabled={input.length === 0} onClick={handleSubmit}>
+                Send
+              </Button>
             </div>
           </div>
         </DrawerContent>

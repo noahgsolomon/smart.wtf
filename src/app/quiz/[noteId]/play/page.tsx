@@ -12,7 +12,6 @@ import {
   CarouselContent,
   CarouselItem,
 } from "@/components/ui/carousel";
-import { Loader2 } from "lucide-react";
 
 export default function Page({
   params: { noteId },
