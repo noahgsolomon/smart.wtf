@@ -14,62 +14,11 @@ import remarkMath from "remark-math";
 import rehypeKatex from "rehype-katex";
 import slug from "rehype-slug";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
-import { useUser } from "@clerk/nextjs";
-import {
-  ActionIconGroup,
-  ActionIconGroupProps,
-  ChatItem,
-  ChatItemProps,
-  MetaData,
-  useControls,
-  useCreateStore,
-} from "@lobehub/ui";
+import { ChatItem, MetaData } from "@lobehub/ui";
 import { Textarea } from "./ui/textarea";
 import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip";
 
 export default function ChatButton() {
-  const store = useCreateStore();
-
-  const items: ActionIconGroupProps["items"] = [
-    {
-      icon: RotateCw,
-      key: "regenerate",
-      label: "Regenerate",
-    },
-    {
-      icon: Copy,
-      key: "copy",
-      label: "Copy",
-    },
-  ];
-
-  const userItems: ActionIconGroupProps["items"] = [
-    {
-      icon: Copy,
-      key: "copy",
-      label: "Copy",
-    },
-  ];
-
-  const control: ChatItemProps | any = useControls(
-    {
-      loading: false,
-      message: {
-        rows: true,
-        value:
-          "要使用 dayjs 的 fromNow 函数，需要先安装 dayjs 库并在代码中引入它。然后，可以使用以下语法来获取当前时间与给定时间之间的相对时间：\n\n```javascript\ndayjs().fromNow();\ndayjs('2021-05-01').fromNow();\n```",
-      },
-      primary: false,
-      showTitle: true,
-      time: 1_686_538_950_084,
-      type: {
-        options: ["block", "pure"],
-        value: "block",
-      },
-    },
-    { store },
-  );
-
   const [input, setInput] = useState("");
 
   const {
@@ -83,8 +32,6 @@ export default function ChatButton() {
     setChatPrompt,
     chatResponse,
   } = useChatContext();
-
-  const user = useUser();
 
   const chatContainerRef = useRef<HTMLDivElement>(null);
 
