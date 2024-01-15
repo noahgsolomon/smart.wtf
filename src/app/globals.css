@@ -476,3 +476,11 @@ mrow {
 input {
   @apply coarse:text-[18px]
 }
+
+.acss-qpkmq2 {
+  @apply bg-transparent !important;
+}
+
+.acss-284vld {
+  @apply overflow-visible !important;
+}
