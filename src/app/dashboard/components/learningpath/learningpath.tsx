@@ -15,7 +15,7 @@ export default function LearningPath() {
   return (
     <div className="relative">
       <Badge
-        className="absolute -right-6 -top-2 z-30 p-1 text-sm"
+        className="absolute -right-6 -top-2 z-10 p-1 text-sm"
         variant={"history"}
       >
         Coming Soon
