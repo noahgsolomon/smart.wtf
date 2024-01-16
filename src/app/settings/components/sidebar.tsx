@@ -16,7 +16,7 @@ const SideBar = () => {
         <User2 className="h-4 w-4" />
         Account
       </Link>
-      <Link
+      {/* <Link
         href="/settings/achievements"
         className={cn(
           buttonVariants({ variant: "ghost" }),
@@ -25,7 +25,7 @@ const SideBar = () => {
       >
         <Fish className="h-4 w-4" />
         Achievements
-      </Link>
+      </Link> */}
       <Link
         href="/settings/billing"
         className={cn(

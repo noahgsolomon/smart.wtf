@@ -52,12 +52,12 @@ const UserButton = () => {
             Billing
           </DropdownMenuItem>
         </Link>
-        <Link href="/settings/achievements">
+        {/* <Link href="/settings/achievements">
           <DropdownMenuItem className="mx-1 my-1 cursor-pointer gap-2 text-sm">
             <Fish className="h-4 w-4" />
             Achievements
           </DropdownMenuItem>
-        </Link>
+        </Link> */}
         <div className="border-t border-border">
           <DropdownMenuItem
             className="mx-1 my-1 cursor-pointer gap-4 text-sm"
