@@ -17,6 +17,7 @@ import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import { ChatItem, MetaData } from "@lobehub/ui";
 import { Textarea } from "./ui/textarea";
 import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip";
+import { toast } from "sonner";
 
 export default function ChatButton() {
   const [input, setInput] = useState("");
@@ -94,7 +95,7 @@ export default function ChatButton() {
           <div className="p-4 pb-0">
             <div
               ref={chatContainerRef}
-              className={`flex max-h-[600px] min-h-[400px] flex-col overflow-y-auto md:p-4`}
+              className={`flex max-h-[400px] min-h-[400px] flex-col overflow-y-auto md:max-h-[600px]`}
             >
               {messages?.map((m, index) => (
                 <div key={index}>
@@ -106,7 +107,18 @@ export default function ChatButton() {
                           <div className="flex flex-row rounded-lg border bg-secondary/50 p-1">
                             <Tooltip>
                               <TooltipTrigger>
-                                <Button variant={"ghost"} size={"sm"}>
+                                <Button
+                                  onClick={() => {
+                                    navigator.clipboard
+                                      .writeText(m.content)
+                                      .then(() => toast.success("Copied!"))
+                                      .catch(() =>
+                                        toast.error("Failed to copy!"),
+                                      );
+                                  }}
+                                  variant={"ghost"}
+                                  size={"sm"}
+                                >
                                   <Copy className="h-4 w-4 text-primary/60" />
                                 </Button>
                               </TooltipTrigger>
@@ -171,7 +183,6 @@ export default function ChatButton() {
                         );
                       }}
                       avatar={userAvatar}
-                      showTitle
                     />
                   ) : (
                     <ChatItem
@@ -181,7 +192,18 @@ export default function ChatButton() {
                           <div className="flex flex-row rounded-lg border bg-secondary/50 p-1">
                             <Tooltip>
                               <TooltipTrigger>
-                                <Button variant={"ghost"} size={"sm"}>
+                                <Button
+                                  onClick={() => {
+                                    navigator.clipboard
+                                      .writeText(m.content)
+                                      .then(() => toast.success("Copied!"))
+                                      .catch(() =>
+                                        toast.error("Failed to copy!"),
+                                      );
+                                  }}
+                                  variant={"ghost"}
+                                  size={"sm"}
+                                >
                                   <Copy className="h-4 w-4 text-primary/60" />
                                 </Button>
                               </TooltipTrigger>
@@ -255,7 +277,6 @@ export default function ChatButton() {
                         );
                       }}
                       avatar={avatar}
-                      showTitle
                     />
                   )}
                 </div>
@@ -263,29 +284,6 @@ export default function ChatButton() {
               {generating && (
                 <ChatItem
                   placement="left"
-                  actions={
-                    <Tooltip>
-                      <div className="flex flex-row rounded-lg border bg-secondary/50 p-1">
-                        <Tooltip>
-                          <TooltipTrigger>
-                            <Button variant={"ghost"} size={"sm"}>
-                              <Copy className="h-4 w-4 text-primary/60" />
-                            </Button>
-                          </TooltipTrigger>
-                          <TooltipContent>Copy</TooltipContent>
-                        </Tooltip>
-
-                        <Tooltip>
-                          <TooltipTrigger>
-                            <Button variant={"ghost"} size={"sm"}>
-                              <RotateCw className="h-4 w-4 text-primary/60" />
-                            </Button>
-                          </TooltipTrigger>
-                          <TooltipContent>Regenerate</TooltipContent>
-                        </Tooltip>
-                      </div>
-                    </Tooltip>
-                  }
                   type="block"
                   renderMessage={() => {
                     return (
@@ -340,7 +338,6 @@ export default function ChatButton() {
                     );
                   }}
                   avatar={avatar}
-                  showTitle
                   loading
                 />
               )}
@@ -372,7 +369,7 @@ export default function ChatButton() {
                 setChatPrompt(e.target.value);
               }}
               placeholder="Type your message here..."
-              className="h-[100px] resize-none rounded-none border-none bg-transparent p-4 shadow-none"
+              className="h-[100px] resize-none rounded-none border-none bg-transparent p-4 text-base shadow-none"
             />
             <div className="m-4 flex flex-row items-center justify-end gap-4">
               <div className="flex flex-row items-center gap-1 text-xs text-primary/60">
