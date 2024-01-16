@@ -1,6 +1,6 @@
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { Fish, Landmark, User2 } from "lucide-react";
+import { Landmark, User2 } from "lucide-react";
 import Link from "next/link";
 
 const SideBar = () => {

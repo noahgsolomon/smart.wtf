@@ -14,7 +14,7 @@ import remarkMath from "remark-math";
 import rehypeKatex from "rehype-katex";
 import slug from "rehype-slug";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
-import { ChatItem, MetaData } from "@lobehub/ui";
+import { ChatItem, type MetaData } from "@lobehub/ui";
 import { Textarea } from "./ui/textarea";
 import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip";
 import { toast } from "sonner";
