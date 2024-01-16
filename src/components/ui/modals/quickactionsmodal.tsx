@@ -11,18 +11,21 @@ import {
   CommandSeparator,
 } from "@/components/ui/command";
 
-import { Feather, FileQuestion, Landmark, User2 } from "lucide-react";
+import { Bot, Feather, FileQuestion, Landmark, User2 } from "lucide-react";
 
 import { DialogModal } from "./dialoguemodal";
 import { useQuickActions } from "@/utils/hooks/usequickactions";
 import Link from "next/link";
 import { useAddNote } from "@/utils/hooks/useaddnote";
 import { usePathname } from "next/navigation";
+import { useChatContext } from "@/app/context/chat/ChatContext";
 
 export const QuickActionsModal = () => {
   const { isOpen, setIsOpen } = useQuickActions();
   const { setIsOpen: setIsAddNoteOpen } = useAddNote();
   const pathname = usePathname();
+
+  const { setOpen: setChatOpen } = useChatContext();
 
   useEffect(() => {
     const down = (e: KeyboardEvent) => {
@@ -67,6 +70,19 @@ export const QuickActionsModal = () => {
                 <FileQuestion className="h-4 w-4" />
                 <span>Generate Quiz</span>
               </Link>
+            </CommandItem>
+            <CommandItem>
+              <div
+                onClick={() => {
+                  setIsOpen(false);
+                  setIsAddNoteOpen(false);
+                  setChatOpen(true);
+                }}
+                className="z-10 flex h-full w-full cursor-pointer flex-row gap-2"
+              >
+                <Bot className="h-4 w-4" />
+                <span>Chat</span>
+              </div>
             </CommandItem>
           </CommandGroup>
           <CommandSeparator />
