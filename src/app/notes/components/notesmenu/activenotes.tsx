@@ -187,7 +187,7 @@ export default function ActiveNotes({
                   {filteredNotes.map((note) => (
                     <>
                       {note.category === category && (
-                        <HoverCard closeDelay={50} openDelay={100}>
+                        <HoverCard closeDelay={50} openDelay={500}>
                           <HoverCardTrigger>
                             <div className="group flex cursor-pointer flex-row items-center justify-between gap-1 rounded-lg border border-border p-2 transition-all hover:-translate-y-0.5">
                               <Link
