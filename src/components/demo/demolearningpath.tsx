@@ -21,7 +21,7 @@ export default function DemoLearningPath() {
         Coming Soon
       </Badge>
       {/* <div className="absolute bottom-0 left-0 right-0 top-0 z-20 flex items-center justify-center rounded-lg bg-primary/30"></div> */}
-      <div className="hidden h-full rounded-lg border bg-card/70 p-4 shadow-md dark:bg-card/80 2xl:block">
+      <div className="hidden rounded-lg border bg-card/70 p-4 shadow-md dark:bg-card/80 2xl:flex">
         <Carousel className="flex h-full w-full flex-col justify-between">
           <CarouselContent>
             {Array.from({ length: 3 }).map((_, index) => (
@@ -39,7 +39,7 @@ export default function DemoLearningPath() {
                     Learn the basics of machine learning
                   </p>
                 </div>
-                <div className="max-h-[360px] overflow-y-auto border-b">
+                <div className="flex h-[380px] flex-col overflow-y-auto border-b">
                   <div className="flex flex-col gap-2 py-4">
                     <ChapterDivider
                       chapter={1}
@@ -127,14 +127,14 @@ export default function DemoLearningPath() {
                     </p>
                   </div>
                 </div>
-                <div className="flex min-h-[350px] flex-col gap-2 overflow-y-auto border-b">
+                <div className="hide-scrollbar flex max-h-[600px] min-h-[350px] flex-col gap-2 overflow-y-auto border-b">
                   <div className="flex flex-col gap-2 py-4">
                     <ChapterDivider
                       chapter={1}
                       title={"Foundations  of Machine Learning"}
                       imageUrl={""}
                     />
-                    <div className="flex max-w-full flex-row gap-2 overflow-x-auto">
+                    <div className="flex max-w-full flex-col gap-2 overflow-x-auto">
                       <SectionCard
                         name={"Introduction to Machine Learning Concepts"}
                         imageUrl={"https://images.smart.wtf/ml-1-1.png"}
@@ -156,7 +156,7 @@ export default function DemoLearningPath() {
                       imageUrl={""}
                     />
 
-                    <div className="flex max-w-full flex-row gap-2 overflow-x-auto">
+                    <div className="flex max-w-full flex-col gap-2 overflow-x-auto">
                       <SectionCard
                         name={"Linear Regression Techniques"}
                         imageUrl={"https://images.smart.wtf/ml-2-1.png"}
@@ -177,7 +177,7 @@ export default function DemoLearningPath() {
                       title={"Unsupervised Learning"}
                       imageUrl={""}
                     />
-                    <div className="flex max-w-full flex-row gap-2 overflow-x-auto">
+                    <div className="flex max-w-full flex-col gap-2 overflow-x-auto">
                       <SectionCard
                         name={"Clustering with K-Means"}
                         imageUrl={"https://images.smart.wtf/ml-3-1.png"}
@@ -222,14 +222,14 @@ export default function DemoLearningPath() {
                     </p>
                   </div>
                 </div>
-                <div className="flex min-h-[350px] flex-col gap-2 overflow-y-auto border-b">
+                <div className="hide-scrollbar flex max-h-[600px] min-h-[350px] flex-col gap-2 overflow-y-auto border-b">
                   <div className="flex flex-col gap-2 py-4">
                     <ChapterDivider
                       chapter={1}
                       title={"Foundations  of Machine Learning"}
                       imageUrl={""}
                     />
-                    <div className="flex max-w-full flex-row gap-2 overflow-x-auto">
+                    <div className="flex max-w-full flex-col gap-2 overflow-x-auto">
                       <SectionCard
                         name={"Introduction to Machine Learning Concepts"}
                         imageUrl={"https://images.smart.wtf/ml-1-1.png"}
@@ -250,7 +250,7 @@ export default function DemoLearningPath() {
                       title={"Supervised Learning Algorithms"}
                       imageUrl={""}
                     />
-                    <div className="flex max-w-full flex-row gap-2 overflow-x-auto">
+                    <div className="flex max-w-full flex-col gap-2 overflow-x-auto">
                       <SectionCard
                         name={"Linear Regression Techniques"}
                         imageUrl={"https://images.smart.wtf/ml-2-1.png"}
@@ -271,7 +271,7 @@ export default function DemoLearningPath() {
                       title={"Unsupervised Learning"}
                       imageUrl={""}
                     />
-                    <div className="flex max-w-full flex-row gap-2 overflow-x-auto">
+                    <div className="flex max-w-full flex-col gap-2 overflow-x-auto">
                       <SectionCard
                         name={"Clustering with K-Means"}
                         imageUrl={"https://images.smart.wtf/ml-3-1.png"}

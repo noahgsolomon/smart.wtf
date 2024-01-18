@@ -15,22 +15,20 @@ export default function LearningPath() {
   return (
     <div className="relative">
       <Badge
-        className="absolute -right-6 -top-2 z-10 p-1 text-sm"
+        className="absolute -right-2 -top-2 z-10 p-1 text-sm md:-right-6"
         variant={"history"}
       >
         Coming Soon
       </Badge>
-      {process.env.NEXT_PUBLIC_ENV === "PROD" ? (
-        <div className="absolute bottom-0 left-0 right-0 top-0 z-20 flex items-center justify-center rounded-lg"></div>
-      ) : null}
-      <div className="hidden h-full rounded-lg border bg-card/70 p-4 shadow-md dark:bg-card/80 2xl:block">
+      {/* <div className="absolute bottom-0 left-0 right-0 top-0 z-20 flex items-center justify-center rounded-lg bg-primary/30"></div> */}
+      <div className="hidden rounded-lg border bg-card/70 p-4 shadow-md dark:bg-card/80 2xl:flex">
         <Carousel className="flex h-full w-full flex-col justify-between">
           <CarouselContent>
             {Array.from({ length: 3 }).map((_, index) => (
               <CarouselItem key={index}>
                 <div className="flex flex-col gap-1 border-b pb-2">
                   <Image
-                    src={"/machinelearning.png"}
+                    src={"https://images.smart.wtf/machinelearning.png"}
                     className="rounded-lg border"
                     alt="machine-learning"
                     width={400}
@@ -41,7 +39,7 @@ export default function LearningPath() {
                     Learn the basics of machine learning
                   </p>
                 </div>
-                <div className="h-[390px] overflow-y-auto border-b">
+                <div className="flex h-[390px] flex-col overflow-y-auto border-b">
                   <div className="flex flex-col gap-2 py-4">
                     <ChapterDivider
                       chapter={1}
@@ -103,7 +101,7 @@ export default function LearningPath() {
               </CarouselItem>
             ))}
           </CarouselContent>
-          <div className="flex h-[50px] w-full items-center justify-between  p-2 ">
+          <div className="flex min-h-[50px] w-full items-center justify-between  p-2 ">
             <CarouselPrevious />
             <CarouselNext />
           </div>
@@ -116,7 +114,7 @@ export default function LearningPath() {
               <CarouselItem key={index}>
                 <div className="flex flex-row items-center gap-8 border-b pb-2">
                   <Image
-                    src={"/machinelearning.png"}
+                    src={"https://images.smart.wtf/machinelearning.png"}
                     className="rounded-lg border"
                     alt="machine-learning"
                     width={200}
@@ -129,14 +127,14 @@ export default function LearningPath() {
                     </p>
                   </div>
                 </div>
-                <div className="flex max-h-[350px] flex-col gap-2 overflow-y-auto border-b">
+                <div className="hide-scrollbar flex max-h-[600px] min-h-[350px] flex-col gap-2 overflow-y-auto border-b">
                   <div className="flex flex-col gap-2 py-4">
                     <ChapterDivider
                       chapter={1}
                       title={"Foundations  of Machine Learning"}
                       imageUrl={""}
                     />
-                    <div className="flex max-w-full flex-row gap-2 overflow-x-auto">
+                    <div className="flex max-w-full flex-col gap-2 overflow-x-auto">
                       <SectionCard
                         name={"Introduction to Machine Learning Concepts"}
                         imageUrl={"https://images.smart.wtf/ml-1-1.png"}
@@ -158,7 +156,7 @@ export default function LearningPath() {
                       imageUrl={""}
                     />
 
-                    <div className="flex max-w-full flex-row gap-2 overflow-x-auto">
+                    <div className="flex max-w-full flex-col gap-2 overflow-x-auto">
                       <SectionCard
                         name={"Linear Regression Techniques"}
                         imageUrl={"https://images.smart.wtf/ml-2-1.png"}
@@ -179,7 +177,7 @@ export default function LearningPath() {
                       title={"Unsupervised Learning"}
                       imageUrl={""}
                     />
-                    <div className="flex max-w-full flex-row gap-2 overflow-x-auto">
+                    <div className="flex max-w-full flex-col gap-2 overflow-x-auto">
                       <SectionCard
                         name={"Clustering with K-Means"}
                         imageUrl={"https://images.smart.wtf/ml-3-1.png"}
@@ -198,7 +196,7 @@ export default function LearningPath() {
               </CarouselItem>
             ))}
           </CarouselContent>
-          <div className="flex h-[50px] w-full items-center justify-between p-2">
+          <div className="flex min-h-[50px] w-full items-center justify-between p-2">
             <CarouselPrevious />
             <CarouselNext />
           </div>
@@ -211,7 +209,7 @@ export default function LearningPath() {
               <CarouselItem key={index}>
                 <div className="flex flex-col items-center gap-8 border-b pb-2">
                   <Image
-                    src={"/machinelearning.png"}
+                    src={"https://images.smart.wtf/machinelearning.png"}
                     className="rounded-lg border"
                     alt="machine-learning"
                     width={200}
@@ -224,14 +222,14 @@ export default function LearningPath() {
                     </p>
                   </div>
                 </div>
-                <div className="flex max-h-[350px] flex-col gap-2 overflow-y-auto border-b">
+                <div className="hide-scrollbar flex max-h-[600px] min-h-[350px] flex-col gap-2 overflow-y-auto border-b">
                   <div className="flex flex-col gap-2 py-4">
                     <ChapterDivider
                       chapter={1}
                       title={"Foundations  of Machine Learning"}
                       imageUrl={""}
                     />
-                    <div className="flex max-w-full flex-row gap-2 overflow-x-auto">
+                    <div className="flex max-w-full flex-col gap-2 overflow-x-auto">
                       <SectionCard
                         name={"Introduction to Machine Learning Concepts"}
                         imageUrl={"https://images.smart.wtf/ml-1-1.png"}
@@ -252,7 +250,7 @@ export default function LearningPath() {
                       title={"Supervised Learning Algorithms"}
                       imageUrl={""}
                     />
-                    <div className="flex max-w-full flex-row gap-2 overflow-x-auto">
+                    <div className="flex max-w-full flex-col gap-2 overflow-x-auto">
                       <SectionCard
                         name={"Linear Regression Techniques"}
                         imageUrl={"https://images.smart.wtf/ml-2-1.png"}
@@ -273,7 +271,7 @@ export default function LearningPath() {
                       title={"Unsupervised Learning"}
                       imageUrl={""}
                     />
-                    <div className="flex max-w-full flex-row gap-2 overflow-x-auto">
+                    <div className="flex max-w-full flex-col gap-2 overflow-x-auto">
                       <SectionCard
                         name={"Clustering with K-Means"}
                         imageUrl={"https://images.smart.wtf/ml-3-1.png"}
@@ -292,7 +290,7 @@ export default function LearningPath() {
               </CarouselItem>
             ))}
           </CarouselContent>
-          <div className="flex h-[50px] w-full items-center justify-between p-2 ">
+          <div className="flex min-h-[50px] w-full items-center justify-between p-2 ">
             <CarouselPrevious />
             <CarouselNext />
           </div>
