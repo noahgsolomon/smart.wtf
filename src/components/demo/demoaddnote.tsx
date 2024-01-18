@@ -137,7 +137,7 @@ export default function DemoAddNote({
               />
               <Image
                 className="z-10 scale-[110%]"
-                src={"/rick.png"}
+                src={"https://images.smart.wtf/rick.png"}
                 width={75}
                 height={75}
                 alt="rick"
@@ -161,7 +161,7 @@ export default function DemoAddNote({
               />
               <Image
                 className="z-10 scale-[110%]"
-                src={"/mrburns.png"}
+                src={"https://images.smart.wtf/mrburns.png"}
                 width={75}
                 height={75}
                 alt="mrburns"
@@ -185,7 +185,7 @@ export default function DemoAddNote({
               />
               <Image
                 className="z-10 scale-[125%]"
-                src={"/bender.png"}
+                src={"https://images.smart.wtf/bender.png"}
                 width={75}
                 height={75}
                 alt="bender"
@@ -209,7 +209,7 @@ export default function DemoAddNote({
               />
               <Image
                 className="z-10 scale-[120%]"
-                src={"/patrick.png"}
+                src={"https://images.smart.wtf/patrick.png"}
                 width={75}
                 height={75}
                 alt="patrick"
