@@ -16,7 +16,7 @@ export default function Home() {
   return (
     <main className="relative mt-6 flex flex-col items-center justify-center gap-4">
       {/* <HeroBlob /> */}
-      <div className="mt-[100px] flex w-[90%] flex-col items-center justify-center bg-opacity-60 text-4xl lg:w-[65%]">
+      <div className="mt-[100px] flex w-[90%] flex-col items-center justify-center bg-opacity-60 text-4xl lg:w-[80%] xl:w-[65%]">
         <div className="flex flex-col items-center justify-center gap-8 pb-8">
           <div className=" flex flex-col items-center gap-2">
             <Badge className="text-lg md:hidden" variant={"math"}>
@@ -44,8 +44,8 @@ export default function Home() {
         <div className="relative flex w-full flex-col gap-8 py-6">
           <div className="mx-auto w-full">
             <div className="hidden 2xl:block">
-              <div className="flex w-full flex-row gap-4 rounded-lg">
-                <div className="w-[70%]">
+              <div className="relative flex w-full flex-row gap-4 rounded-lg">
+                <div className="flex w-[70%] flex-grow flex-col">
                   <div className="flex flex-col gap-4">
                     <div className="flex w-full gap-4">
                       <div className="w-[60%]">
@@ -60,7 +60,7 @@ export default function Home() {
                     </div>
                   </div>
                 </div>
-                <div className="flex w-[30%] flex-col">
+                <div className="flex w-[30%] flex-grow flex-col">
                   <DemoLearningPath />
                 </div>
               </div>
