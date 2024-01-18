@@ -54,7 +54,7 @@ export default function NotesMenu() {
           />
           <Search className="absolute right-2 top-2 h-4 w-4" />
         </div>
-        <div className="flex max-h-[400px] flex-col gap-2 overflow-y-auto overflow-x-hidden">
+        <div className="hide-scrollbar flex h-[500px] flex-col gap-2 overflow-y-auto overflow-x-hidden border-b md:h-[300px] lg:h-[350px] 2xl:h-[380px]">
           {topicInput.length === 0 ? (
             <AllNotes
               presentCategories={presentCategories}
