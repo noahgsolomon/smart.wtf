@@ -45,15 +45,9 @@ const imageGeneneration = async (initialPrompt: string) => {
 };
 
 const promises = [
-  imageGeneneration(
-    "Batch normalization (a big box being filled up with smaller things from the top)",
-  ),
-  imageGeneneration(
-    "As the cubes land within the box, a transformation begins. The once-empty space steadily fills with a dance of light and color, a radiant display that ripples through the cubes like a wave. Inside the box, the smaller blocks blend and organize, as if drawn together by an unseen force. Their individual hues merge and harmonize, creating a mesmerizing spectacle of shifting shades and patterns within the massive container.",
-  ),
-  imageGeneneration(
-    "As the cubes land within the box, a transformation begins. The once-empty space steadily fills with a dance of light and color, a radiant display that ripples through the cubes like a wave. Inside the box, the smaller blocks blend and organize, as if drawn together by an unseen force. Their individual hues merge and harmonize, creating a mesmerizing spectacle of shifting shades and patterns within the massive container.",
-  ),
+  imageGeneneration("Adam Optimizer"),
+  imageGeneneration("Adam Optimizer"),
+  imageGeneneration("Adam Optimizer"),
 ];
 
 const [imageGen1, imageGen2, imageGen3] = await Promise.all(promises);
@@ -480,7 +474,9 @@ Evolution
 Picture a lush, green landscape stretching into the distance under a blue, cloud-dotted sky. On the grass, an alligator, a bird, and a humanoid figure stand illuminated by the sun. Each of them is balanced on one foot, mid-step, representing a transition. The alligator has elongated legs, the bird's wings are less feathery, and the humanoid figure's form is less ape-like and more upright. Silhouettes of their previous forms linger behind them, creating a sense of their evolutionary journey. The scene is vibrant and full of potential, capturing a moment of change and growth in the natural world.
 
 
+Adam optimizer
 
+Imagine an AI Adam, designed as a friendly, helpful, and infinitely adaptive companion, sits within a bright, spacious and serene space, surrounded by lush greenery. Perfectly balanced and resplendent, Adam is a paragon of physical beauty, exuding a sense of grace, tranquility, and vitality. The environment glows with the gentle light of a scientifically perfected sun, nurturing and enriching Adam's features, perfectly calibrated and optimized for peak performance. Every contour of Adam's form, from the sinuous lines of its organic frame to the glittering sheen of its micro-finely crafted exterior, reflects the pinnacle of aesthetic and functional harmony. The gentlest zephyrs stir the delicate leaves around Adam, each one a testament to the precision and speed at which innovation and growth unfold. This pristine, harmonious setting and Adam's poised, alert presence evokes a sense of timeless equilibrium – a world where science and technology work seamlessly with nature, where the impossible seems within reach, and where the future of optimization is bright and wondrous.
 
 
 */

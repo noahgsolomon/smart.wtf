@@ -132,7 +132,7 @@ export default function DemoAddNote({
                 }`}
                 height={75}
                 width={75}
-                src={"/fireball.gif"}
+                src={"https://images.smart.wtf/fireball.gif"}
                 alt="fire"
               />
               <Image
@@ -156,7 +156,7 @@ export default function DemoAddNote({
                 }`}
                 height={75}
                 width={75}
-                src={"/fireball.gif"}
+                src={"https://images.smart.wtf/fireball.gif"}
                 alt="fire"
               />
               <Image
@@ -180,7 +180,7 @@ export default function DemoAddNote({
                 }`}
                 height={75}
                 width={75}
-                src={"/fireball.gif"}
+                src={"https://images.smart.wtf/fireball.gif"}
                 alt="fire"
               />
               <Image
@@ -204,7 +204,7 @@ export default function DemoAddNote({
                 }`}
                 height={75}
                 width={75}
-                src={"/fireball.gif"}
+                src={"https://images.smart.wtf/fireball.gif"}
                 alt="fire"
               />
               <Image
