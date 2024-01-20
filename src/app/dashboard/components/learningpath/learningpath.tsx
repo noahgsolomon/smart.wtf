@@ -39,7 +39,7 @@ export default function LearningPath() {
                     Learn the basics of machine learning
                   </p>
                 </div>
-                <div className="flex h-[390px] flex-col overflow-y-auto border-b">
+                <div className="hide-scrollbar flex h-[390px] flex-col overflow-y-auto border-b">
                   <div className="flex flex-col gap-2 py-4">
                     <ChapterDivider
                       chapter={1}
