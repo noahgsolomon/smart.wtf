@@ -20,16 +20,16 @@ export const metadata: Metadata = {
   openGraph: {
     url: "https://smart.wtf",
     title: "smart.wtf",
-    description: "interactive learning",
-    images: ["https://images.codefoli.com/alienplanet.png"],
+    description: "Making the learning process fun, intuitive, and absurd.",
+    images: ["https://images.smart.wtf/smart.png"],
   },
   title: "smart.wtf",
-  description: "interactive learning",
+  description: "Making the learning process fun, intuitive, and absurd.",
   twitter: {
     card: "summary_large_image",
     site: "smart.wtf",
     creator: "@noahgsolomon",
-    images: ["https://images.codefoli.com/alienplanet.png"],
+    images: ["https://images.smart.wtf/smart.png"],
   },
 };
 

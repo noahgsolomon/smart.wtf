@@ -45,16 +45,21 @@ const imageGeneneration = async (initialPrompt: string) => {
 };
 
 const promises = [
-  imageGeneneration("Adam Optimizer"),
-  imageGeneneration("Adam Optimizer"),
-  imageGeneneration("Adam Optimizer"),
+  imageGeneneration("Glowing Star in Desert"),
+  imageGeneneration("Glowing Star in Empty Space"),
+  imageGeneneration("Glowing Star crashing into earth"),
+  imageGeneneration("Glowing Star"),
+  imageGeneneration("Glowing Star in Glass"),
 ];
 
-const [imageGen1, imageGen2, imageGen3] = await Promise.all(promises);
+const [imageGen1, imageGen2, imageGen3, imageGen4, imageGen5] =
+  await Promise.all(promises);
 
 console.log("imageGen1", imageGen1);
 console.log("imageGen2", imageGen2);
 console.log("imageGen3", imageGen3);
+console.log("imageGen4", imageGen4);
+console.log("imageGen5", imageGen5);
 /*
 
 Partial Derivatives
@@ -477,6 +482,18 @@ Picture a lush, green landscape stretching into the distance under a blue, cloud
 Adam optimizer
 
 Imagine an AI Adam, designed as a friendly, helpful, and infinitely adaptive companion, sits within a bright, spacious and serene space, surrounded by lush greenery. Perfectly balanced and resplendent, Adam is a paragon of physical beauty, exuding a sense of grace, tranquility, and vitality. The environment glows with the gentle light of a scientifically perfected sun, nurturing and enriching Adam's features, perfectly calibrated and optimized for peak performance. Every contour of Adam's form, from the sinuous lines of its organic frame to the glittering sheen of its micro-finely crafted exterior, reflects the pinnacle of aesthetic and functional harmony. The gentlest zephyrs stir the delicate leaves around Adam, each one a testament to the precision and speed at which innovation and growth unfold. This pristine, harmonious setting and Adam's poised, alert presence evokes a sense of timeless equilibrium – a world where science and technology work seamlessly with nature, where the impossible seems within reach, and where the future of optimization is bright and wondrous.
+
+
+
+Deep Star
+
+A magnificent iceberg, massive and crystalline, floats amidst the shining expanse of the arctic sea. Its surface glistens under the ethereal light of the aurora, refracting and reflecting the dancing colors in a mesmerizing display. At its very heart, encased in a perfect, translucent pocket of ice, a star of pure light glows with an otherworldly luminescence. This celestial gem is a stark contrast to the surrounding icy landscape, radiating warmth and magic in the midst of the frozen tableau, a magnificent emblem of hope and wonder in the heart of the Arctic.
+
+
+
+Deep Star
+
+Picture a vast, arid desert aglow under a clear, moonlit night sky. In the center of this dramatic landscape, a single, radiant star shines with an otherworldly brilliance, casting beams of light across the sandy dunes that shift and shimmer in the star's ethereal illumination. The star's glow extends far into the distance, creating a surreal and mesmerizing scene that seems to defy the stark emptiness of the desert. The sky above is a deep, velvety blue, studded with a myriad of stars, but the one at the heart of the desert is the most luminous, a captivating sight that hints at mysteries and wonders waiting to be discovered in this timeless and magical place.
 
 
 */
