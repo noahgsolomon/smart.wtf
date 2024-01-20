@@ -13,7 +13,6 @@ import { Analytics } from "@vercel/analytics/react";
 import { TooltipProvider } from "@/components/ui/tooltip";
 
 export const metadata: Metadata = {
-  viewport: "width=device-width, initial-scale=1",
   appleWebApp: true,
   manifest: "/manifest.json",
   icons: { apple: "/icon.png" },
