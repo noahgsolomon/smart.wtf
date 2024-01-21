@@ -456,7 +456,7 @@ export default function DemoNotesMenu() {
           />
           <Search className="absolute right-2 top-2 h-4 w-4" />
         </div>
-        <div className="hide-scrollbar flex h-[500px] flex-col gap-2 overflow-y-auto overflow-x-hidden border-b  md:h-[300px] lg:h-[350px] 2xl:h-[420px]">
+        <div className="flex h-[500px] flex-col gap-2 overflow-y-auto overflow-x-hidden  border-b md:h-[350px] lg:h-[400px] 2xl:h-[420px]">
           {loading ? (
             <div className="flex flex-col gap-2">
               <Skeleton className="flex h-10 w-full cursor-pointer flex-row items-center justify-between rounded-lg border border-border bg-secondary/90 p-2 transition-all hover:bg-secondary/80"></Skeleton>
