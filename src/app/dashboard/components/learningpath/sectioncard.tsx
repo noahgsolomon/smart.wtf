@@ -1,16 +1,22 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 
 export default function SectionCard({
   name,
   imageUrl,
+  link,
 }: {
   name: string;
   imageUrl: string;
+  link: string;
 }) {
   return (
-    <div className="flex min-w-[250px] flex-row items-center gap-4 rounded-lg border bg-secondary/60 p-2">
+    <Link
+      href={link}
+      className="flex min-w-[250px] flex-row items-center gap-4 rounded-lg border bg-secondary/60 p-2 transition-all hover:-translate-y-0.5 active:scale-[99%]"
+    >
       <Image
         src={imageUrl}
         alt="machine learning"
@@ -21,6 +27,6 @@ export default function SectionCard({
       <div>
         <p className="text-sm text-primary/90 md:text-base">{name}</p>
       </div>
-    </div>
+    </Link>
   );
 }
