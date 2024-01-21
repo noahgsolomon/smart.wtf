@@ -10,11 +10,16 @@ import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import ChapterDivider from "@/app/dashboard/components/learningpath/chapterdivider";
 import SectionCard from "@/app/dashboard/components/learningpath/sectioncard";
+import { Button } from "../ui/button";
+import { ArrowRightCircle, BookOpen } from "lucide-react";
+import ProgressSpinner from "../progressspinner";
+import { Progress } from "../ui/progress";
 
 type learningPath = {
   title: string;
   description: string;
   imageUrl: string;
+  progress: number;
   chapters: {
     title: string;
     sections: {
@@ -29,6 +34,7 @@ const learningPaths: learningPath = [
     title: "Game Development",
     description: "Get your foot in the door with Game Development",
     imageUrl: "https://images.smart.wtf/gamedev.png",
+    progress: 0,
     chapters: [
       {
         title: "Game Design Fundamentals",
@@ -104,6 +110,7 @@ const learningPaths: learningPath = [
     title: "Intro to Machine Learning",
     description: "Learn the basics of machine learning",
     imageUrl: "https://images.smart.wtf/machinelearning.png",
+    progress: 45,
     chapters: [
       {
         title: "Foundations  of Machine Learning",
@@ -174,20 +181,39 @@ export default function DemoLearningPath() {
         <Carousel className="flex h-full w-full flex-col justify-between">
           <CarouselContent className="h-[690px]">
             {learningPaths.map(
-              ({ chapters, description, title, imageUrl }, index) => (
+              ({ chapters, description, title, imageUrl, progress }, index) => (
                 <CarouselItem key={index}>
-                  <div className="flex flex-col gap-1 border-b pb-2">
-                    <Image
-                      src={imageUrl}
-                      className="rounded-lg border"
-                      alt={title}
-                      width={350}
-                      height={200}
-                    />
+                  <div className="flex w-full flex-col gap-1 border-b pb-2">
+                    <div className="relative flex h-[200px] w-full items-center justify-center rounded-lg border bg-secondary px-2">
+                      <Image
+                        src={imageUrl}
+                        alt={title}
+                        className=" rounded-lg border"
+                        width={315}
+                        height={180}
+                      />
+                    </div>
+
                     <h2>{title}</h2>
                     <p className="text-sm opacity-80">{description}</p>
+                    {progress > 0 && (
+                      <Progress
+                        className="h-4 border-2 border-border"
+                        indicatorClassName="bg-blue/80 rounded-r-lg"
+                        value={progress}
+                      />
+                    )}
+                    <Button className="flex items-center gap-1">
+                      {progress === 0 ? (
+                        <>
+                          Begin <BookOpen className="h-5 w-5" />
+                        </>
+                      ) : (
+                        "Continue"
+                      )}
+                    </Button>
                   </div>
-                  <div className="hide-scrollbar flex h-full flex-col overflow-y-auto border-b pb-[275px]">
+                  <div className=" flex h-full flex-col overflow-y-auto border-b pb-[320px]">
                     {chapters.map((chapter, index) => (
                       <div key={index} className="flex flex-col gap-2 py-4">
                         <ChapterDivider
@@ -198,6 +224,7 @@ export default function DemoLearningPath() {
                         />
                         {chapter.sections.map((section, index) => (
                           <SectionCard
+                            link="/signup"
                             key={index}
                             name={section.title}
                             imageUrl={section.imageUrl}
@@ -211,7 +238,7 @@ export default function DemoLearningPath() {
               ),
             )}
           </CarouselContent>
-          <div className="flex h-[50px] w-full items-center justify-between  p-2 ">
+          <div className="flex h-[50px] w-full items-center justify-between border-t p-2 ">
             <CarouselPrevious />
             <CarouselNext />
           </div>
@@ -236,7 +263,7 @@ export default function DemoLearningPath() {
                       <p className="text-sm opacity-80">{description}</p>
                     </div>
                   </div>
-                  <div className="hide-scrollbar flex max-h-[600px] min-h-[350px] flex-col gap-2 overflow-y-auto border-b">
+                  <div className=" flex max-h-[600px] min-h-[350px] flex-col gap-2 overflow-y-auto">
                     {chapters.map((chapter, index) => (
                       <div key={index} className="flex flex-col gap-2 py-4">
                         <ChapterDivider
@@ -247,6 +274,7 @@ export default function DemoLearningPath() {
                         <div className="flex max-w-full flex-col gap-2 overflow-x-auto">
                           {chapter.sections.map((section, index) => (
                             <SectionCard
+                              link="/signup"
                               key={index}
                               name={section.title}
                               imageUrl={section.imageUrl}
@@ -260,7 +288,7 @@ export default function DemoLearningPath() {
               ),
             )}
           </CarouselContent>
-          <div className="flex min-h-[50px] w-full items-center justify-between p-2">
+          <div className="flex min-h-[50px] w-full items-center justify-between border-t p-2">
             <CarouselPrevious />
             <CarouselNext />
           </div>
@@ -285,7 +313,7 @@ export default function DemoLearningPath() {
                       <p className="text-sm opacity-80">{description}</p>
                     </div>
                   </div>
-                  <div className="hide-scrollbar flex max-h-[600px] min-h-[350px] flex-col gap-2 overflow-y-auto border-b">
+                  <div className=" flex max-h-[600px] min-h-[350px] flex-col gap-2 overflow-y-auto border-b">
                     {chapters.map((chapter, index) => (
                       <div className="flex flex-col gap-2 py-4" key={index}>
                         <ChapterDivider
@@ -296,6 +324,7 @@ export default function DemoLearningPath() {
                         <div className="flex max-w-full flex-col gap-2 overflow-x-auto">
                           {chapter.sections.map((section, index) => (
                             <SectionCard
+                              link="/signup"
                               key={index}
                               name={section.title}
                               imageUrl={section.imageUrl}
