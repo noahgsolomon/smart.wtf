@@ -3,7 +3,6 @@
 import { buttonVariants } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { cn } from "@/lib/utils";
-import { ArrowRightCircle } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import useSound from "use-sound";
@@ -16,14 +15,13 @@ export default function DemoLatestActivity() {
       <div className="w-full">
         <Image
           src={"https://images.codefoli.com/systems-design-2-4.png"}
-          priority={true}
           alt="lesson"
+          priority
           width={700}
           height={200}
           className={`max-w-full rounded-lg`}
         />
       </div>
-
       <div className="flex flex-col gap-2">
         <>
           <h3>Systems Design</h3>

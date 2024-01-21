@@ -6,14 +6,13 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import ChapterDivider from "@/app/dashboard/components/learningpath/chapterdivider";
 import SectionCard from "@/app/dashboard/components/learningpath/sectioncard";
-import { Button } from "../ui/button";
-import { ArrowRightCircle, BookOpen } from "lucide-react";
-import ProgressSpinner from "../progressspinner";
+import { buttonVariants } from "../ui/button";
 import { Progress } from "../ui/progress";
+import Link from "next/link";
+import Image from "next/image";
 
 type learningPath = {
   title: string;
@@ -203,15 +202,14 @@ export default function DemoLearningPath() {
                         value={progress}
                       />
                     )}
-                    <Button className="flex items-center gap-1">
-                      {progress === 0 ? (
-                        <>
-                          Begin <BookOpen className="h-5 w-5" />
-                        </>
-                      ) : (
-                        "Continue"
-                      )}
-                    </Button>
+                    <Link
+                      href="/signup"
+                      className={buttonVariants({
+                        className: "flex items-center gap-1",
+                      })}
+                    >
+                      {progress === 0 ? "Begin" : "Continue"}
+                    </Link>
                   </div>
                   <div className=" flex h-full flex-col overflow-y-auto border-b pb-[320px]">
                     {chapters.map((chapter, index) => (
@@ -300,7 +298,7 @@ export default function DemoLearningPath() {
             {learningPaths.map(
               ({ chapters, description, title, imageUrl }, index) => (
                 <CarouselItem key={index}>
-                  <div className="flex flex-row items-center gap-8 border-b pb-2">
+                  <div className="flex flex-col items-center gap-8 border-b pb-2">
                     <Image
                       src={imageUrl}
                       className="rounded-lg border"
