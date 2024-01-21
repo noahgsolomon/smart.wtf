@@ -435,7 +435,7 @@ export default function DemoNotesMenu() {
   }, [notes, topicInput]);
 
   return (
-    <div className=" h-full rounded-lg border bg-card/70 p-4 shadow-md dark:bg-card/80">
+    <div className="h-full rounded-lg border bg-card/70 p-4 shadow-md dark:bg-card/80">
       <div className="flex flex-col gap-2">
         <div className="flex flex-row items-center justify-between border-b border-border pb-2">
           <h1>Notes</h1>
@@ -456,7 +456,7 @@ export default function DemoNotesMenu() {
           />
           <Search className="absolute right-2 top-2 h-4 w-4" />
         </div>
-        <div className="hide-scrollbar flex h-[500px] flex-col gap-2 overflow-y-auto overflow-x-hidden border-b md:h-[300px] lg:h-[350px] 2xl:h-[330px]">
+        <div className="hide-scrollbar flex h-[500px] flex-col gap-2 overflow-y-auto overflow-x-hidden border-b  md:h-[300px] lg:h-[350px] 2xl:h-[420px]">
           {loading ? (
             <div className="flex flex-col gap-2">
               <Skeleton className="flex h-10 w-full cursor-pointer flex-row items-center justify-between rounded-lg border border-border bg-secondary/90 p-2 transition-all hover:bg-secondary/80"></Skeleton>
