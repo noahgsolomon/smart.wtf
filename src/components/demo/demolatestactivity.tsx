@@ -12,7 +12,7 @@ export default function DemoLatestActivity() {
   const [click] = useSound("/click.mp3", { volume: 0.5 });
 
   return (
-    <div className="flex w-full flex-col gap-4 rounded-lg border bg-card/70 p-4 shadow-md dark:bg-card/80 md:w-auto">
+    <div className="flex h-full w-full flex-col gap-4 rounded-lg border bg-card/70 p-4 shadow-md dark:bg-card/80 md:w-auto">
       <div className="w-full">
         <Image
           src={"https://images.codefoli.com/systems-design-2-4.png"}
