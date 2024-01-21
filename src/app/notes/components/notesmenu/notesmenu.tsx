@@ -1,13 +1,15 @@
 "use client";
 
 import { Input } from "@/components/ui/input";
-import { PlusIcon, Search } from "lucide-react";
+import { Image as LucideImage, PlusIcon, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import useNotesMenu from "./useNotesMenu";
 import AllNotes from "./allnotes";
 import ActiveNotes from "./activenotes";
 import PreloadImages from "./preloadimages";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import Image from "next/image";
 
 export default function NotesMenu() {
   const {
@@ -34,7 +36,7 @@ export default function NotesMenu() {
   }
 
   return (
-    <div className="h-full max-h-[700px] overflow-y-auto rounded-lg border bg-card/70 p-4 shadow-md dark:bg-card/80 md:min-h-fit">
+    <div className="h-full max-h-[700px] overflow-y-auto overflow-x-hidden rounded-lg border bg-card/70 p-4 shadow-md dark:bg-card/80 md:min-h-fit">
       <div className="flex flex-col gap-2">
         <div className="flex flex-row items-center justify-between border-b border-border pb-2">
           <h1>Notes</h1>
@@ -46,15 +48,43 @@ export default function NotesMenu() {
             Generate
           </Button>
         </div>
-        <div className="relative ">
-          <Input
-            placeholder="search here"
-            onChange={(e) => setTopicInput(e.target.value)}
-            value={topicInput}
-          />
-          <Search className="absolute right-2 top-2 h-4 w-4" />
+
+        <div className="flex flex-row gap-2">
+          <div className="relative w-full">
+            <Input
+              placeholder="search here"
+              onChange={(e) => setTopicInput(e.target.value)}
+              value={topicInput}
+            />
+            <Search className="absolute right-2 top-2 h-4 w-4" />
+          </div>
+          {notes.length > 0 && (
+            <Dialog>
+              <DialogTrigger asChild>
+                <Button variant={"outline"} className={`flex flex-row gap-2`}>
+                  <LucideImage className="h-5 w-5" />
+                </Button>
+              </DialogTrigger>
+              <DialogContent className="hide-scrollbar flex max-h-[60vh] flex-wrap justify-center overflow-y-auto rounded-lg bg-transparent">
+                {notes.map((note) => (
+                  <>
+                    {note.imageUrl && (
+                      <Image
+                        className="rounded-lg"
+                        src={note.imageUrl}
+                        width={500}
+                        height={200}
+                        alt={note.title}
+                      />
+                    )}
+                  </>
+                ))}
+              </DialogContent>
+            </Dialog>
+          )}
         </div>
-        <div className="hide-scrollbar flex h-[500px] flex-col gap-2 overflow-y-auto overflow-x-hidden border-b md:h-[300px] lg:h-[350px] 2xl:h-[380px]">
+
+        <div className="flex h-[500px] flex-col gap-2 overflow-y-auto overflow-x-hidden border-b md:h-[350px] lg:h-[400px] 2xl:h-[420px]">
           {topicInput.length === 0 ? (
             <AllNotes
               presentCategories={presentCategories}
