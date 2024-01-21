@@ -156,8 +156,10 @@ const NavBar = () => {
                   </Button>
                 </div>
               )}
+              <div className="coarse:hidden">
+                <ThemeButton />
+              </div>
 
-              <ThemeButton />
               {userId ? (
                 <>
                   {/* {user?.user && !user?.user?.subscribed && (
@@ -192,9 +194,11 @@ const NavBar = () => {
       ) : null}
       {userId ? (
         <>
-          {!path.startsWith("/quiz") && <ChatButton />}
+          <div className="coarse:hidden">
+            {!path.startsWith("/quiz") && <ChatButton />}
+            <QuickActionsModal />
+          </div>
           <AddNote />
-          <QuickActionsModal />
         </>
       ) : (
         <DemoAddNote />
