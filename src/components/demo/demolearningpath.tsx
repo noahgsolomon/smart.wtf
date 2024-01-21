@@ -189,14 +189,16 @@ export default function DemoLearningPath() {
                   </div>
                   <div className="hide-scrollbar flex h-full flex-col overflow-y-auto border-b pb-[275px]">
                     {chapters.map((chapter, index) => (
-                      <div className="flex flex-col gap-2 py-4">
+                      <div key={index} className="flex flex-col gap-2 py-4">
                         <ChapterDivider
+                          key={index}
                           chapter={index + 1}
                           title={chapter.title}
                           imageUrl=""
                         />
-                        {chapter.sections.map((section) => (
+                        {chapter.sections.map((section, index) => (
                           <SectionCard
+                            key={index}
                             name={section.title}
                             imageUrl={section.imageUrl}
                           />
@@ -236,15 +238,16 @@ export default function DemoLearningPath() {
                   </div>
                   <div className="hide-scrollbar flex max-h-[600px] min-h-[350px] flex-col gap-2 overflow-y-auto border-b">
                     {chapters.map((chapter, index) => (
-                      <div className="flex flex-col gap-2 py-4">
+                      <div key={index} className="flex flex-col gap-2 py-4">
                         <ChapterDivider
                           chapter={index + 1}
                           title={chapter.title}
                           imageUrl=""
                         />
                         <div className="flex max-w-full flex-col gap-2 overflow-x-auto">
-                          {chapter.sections.map((section) => (
+                          {chapter.sections.map((section, index) => (
                             <SectionCard
+                              key={index}
                               name={section.title}
                               imageUrl={section.imageUrl}
                             />
@@ -284,15 +287,16 @@ export default function DemoLearningPath() {
                   </div>
                   <div className="hide-scrollbar flex max-h-[600px] min-h-[350px] flex-col gap-2 overflow-y-auto border-b">
                     {chapters.map((chapter, index) => (
-                      <div className="flex flex-col gap-2 py-4">
+                      <div className="flex flex-col gap-2 py-4" key={index}>
                         <ChapterDivider
                           chapter={index + 1}
                           title={chapter.title}
                           imageUrl=""
                         />
                         <div className="flex max-w-full flex-col gap-2 overflow-x-auto">
-                          {chapter.sections.map((section) => (
+                          {chapter.sections.map((section, index) => (
                             <SectionCard
+                              key={index}
                               name={section.title}
                               imageUrl={section.imageUrl}
                             />

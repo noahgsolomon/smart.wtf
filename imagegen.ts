@@ -24,7 +24,6 @@ const imagePrompt = async (title: string) => {
 
 const imageGeneneration = async (initialPrompt: string) => {
   const prompt = await imagePrompt(initialPrompt);
-  console.log(prompt);
   const detailed8BitPreface =
     "Create an image in a detailed retro 8-bit style. The artwork should have a pixelated texture and should have vibrant coloring and scenery.";
 
@@ -34,32 +33,157 @@ const imageGeneneration = async (initialPrompt: string) => {
     model: "dall-e-3",
     prompt: fullPrompt,
     n: 1,
-    size: "1792x1024",
+    size: "1024x1024",
     quality: "hd",
     style: "vivid",
     response_format: "url",
     user: "user-1234",
   });
 
-  return responseFetch.data[0]?.url;
+  return {
+    imageUrl: responseFetch.data[0]?.url,
+    initialPrompt: initialPrompt,
+    prompt: prompt,
+  };
 };
 
 const promises = [
-  imageGeneneration("Glowing Star in Desert"),
-  imageGeneneration("Glowing Star in Empty Space"),
-  imageGeneneration("Glowing Star crashing into earth"),
-  imageGeneneration("Glowing Star"),
-  imageGeneneration("Glowing Star in Glass"),
+  // imageGeneneration("Game Development"),
+  // imageGeneneration("Game Development"),
+  // imageGeneneration("Understanding Game Genres and Player Experiences"),
+  // imageGeneneration("Understanding Game Genres and Player Experiences"),
+  // imageGeneneration("Principles of Game Mechanics and Dynamics"),
+  // imageGeneneration("Principles of Game Mechanics and Dynamics"),
+  // imageGeneneration("Creating Engaging Game Worlds and Storylines"),
+  // imageGeneneration("Creating Engaging Game Worlds and Storylines"),
+  // imageGeneneration("2D and 3D Graphics Programming"),
+  // imageGeneneration("2D and 3D Graphics Programming"),
+  // imageGeneneration("Building Interactive Gameplay Systems"),
+  // imageGeneneration("Building Interactive Gameplay Systems"),
+  // imageGeneneration("Artificial Intelligence in Games"),
+  // imageGeneneration("Artificial Intelligence in Games"),
+  // imageGeneneration("Principles of Game Mechanics and Dynamics"),
+  // imageGeneneration("Principles of Game Mechanics and Dynamics"),
+  // imageGeneneration("Network Programming for Multiplayer Games"),
+  // imageGeneneration("Network Programming for Multiplayer Games"),
+  // imageGeneneration("Optimizing Game Performance and Memory Management"),
+  // imageGeneneration("Optimizing Game Performance and Memory Management"),
+  imageGeneneration("Testing and Debugging Game Applications"),
+  imageGeneneration("Testing and Debugging Game Applications"),
+  imageGeneneration("Marketing Strategies for Indie Game Developers"),
+  imageGeneneration("Marketing Strategies for Indie Game Developers"),
+  imageGeneneration("Post-Launch Support and Community Building"),
+  imageGeneneration("Post-Launch Support and Community Building"),
 ];
 
-const [imageGen1, imageGen2, imageGen3, imageGen4, imageGen5] =
-  await Promise.all(promises);
+const [
+  // imageGen1,
+  // imageGen2,
+  // imageGen3,
+  // imageGen4,
+  // imageGen5,
+  // imageGen6,
+  // imageGen7,
+  // imageGen8,
+  // imageGen9,
+  // imageGen10,
+  // imageGen11,
+  // imageGen12,
+  // imageGen13,
+  // imageGen14,
+  // imageGen15,
+  // imageGen16,
+  // imageGen17,
+  // imageGen18,
+  // imageGen19,
+  // imageGen20,
+  imageGen21,
+  imageGen22,
+  imageGen23,
+  imageGen24,
+  imageGen25,
+  imageGen26,
+] = await Promise.all(promises);
 
-console.log("imageGen1", imageGen1);
-console.log("imageGen2", imageGen2);
-console.log("imageGen3", imageGen3);
-console.log("imageGen4", imageGen4);
-console.log("imageGen5", imageGen5);
+// console.log(
+//   `prompt: ${imageGen1?.initialPrompt}, image gen prompt: ${imageGen1?.prompt}, image: ${imageGen1?.imageUrl}`,
+// );
+// console.log(
+//   `prompt: ${imageGen2?.initialPrompt}, image gen prompt: ${imageGen2?.prompt}, image: ${imageGen2?.imageUrl}`,
+// );
+// console.log(
+//   `prompt: ${imageGen3?.initialPrompt}, image gen prompt: ${imageGen3?.prompt}, image: ${imageGen3?.imageUrl}`,
+// );
+// console.log(
+//   `prompt: ${imageGen4?.initialPrompt}, image gen prompt: ${imageGen4?.prompt}, image: ${imageGen4?.imageUrl}`,
+// );
+// console.log(
+//   `prompt: ${imageGen5?.initialPrompt}, image gen prompt: ${imageGen5?.prompt}, image: ${imageGen5?.imageUrl}`,
+// );
+// console.log(
+//   `prompt: ${imageGen6?.initialPrompt}, image gen prompt: ${imageGen6?.prompt}, image: ${imageGen6?.imageUrl}`,
+// );
+// console.log(
+//   `prompt: ${imageGen7?.initialPrompt}, image gen prompt: ${imageGen7?.prompt}, image: ${imageGen7?.imageUrl}`,
+// );
+// console.log(
+//   `prompt: ${imageGen8?.initialPrompt}, image gen prompt: ${imageGen8?.prompt}, image: ${imageGen8?.imageUrl}`,
+// );
+// console.log(
+//   `prompt: ${imageGen9?.initialPrompt}, image gen prompt: ${imageGen9?.prompt}, image: ${imageGen9?.imageUrl}`,
+// );
+// console.log(
+//   `prompt: ${imageGen10?.initialPrompt}, image gen prompt: ${imageGen10?.prompt}, image: ${imageGen10?.imageUrl}`,
+// );
+// console.log(
+//   `prompt: ${imageGen11?.initialPrompt}, image gen prompt: ${imageGen11?.prompt}, image: ${imageGen11?.imageUrl}`,
+// );
+// console.log(
+//   `prompt: ${imageGen12?.initialPrompt}, image gen prompt: ${imageGen12?.prompt}, image: ${imageGen12?.imageUrl}`,
+// );
+// console.log(
+//   `prompt: ${imageGen13?.initialPrompt}, image gen prompt: ${imageGen13?.prompt}, image: ${imageGen13?.imageUrl}`,
+// );
+// console.log(
+//   `prompt: ${imageGen14?.initialPrompt}, image gen prompt: ${imageGen14?.prompt}, image: ${imageGen14?.imageUrl}`,
+// );
+// console.log(
+//   `prompt: ${imageGen15?.initialPrompt}, image gen prompt: ${imageGen15?.prompt}, image: ${imageGen15?.imageUrl}`,
+// );
+// console.log(
+//   `prompt: ${imageGen16?.initialPrompt}, image gen prompt: ${imageGen16?.prompt}, image: ${imageGen16?.imageUrl}`,
+// );
+// console.log(
+//   `prompt: ${imageGen17?.initialPrompt}, image gen prompt: ${imageGen17?.prompt}, image: ${imageGen17?.imageUrl}`,
+// );
+// console.log(
+//   `prompt: ${imageGen18?.initialPrompt}, image gen prompt: ${imageGen18?.prompt}, image: ${imageGen18?.imageUrl}`,
+// );
+// console.log(
+//   `prompt: ${imageGen19?.initialPrompt}, image gen prompt: ${imageGen19?.prompt}, image: ${imageGen19?.imageUrl}`,
+// );
+// console.log(
+//   `prompt: ${imageGen20?.initialPrompt}, image gen prompt: ${imageGen20?.prompt}, image: ${imageGen20?.imageUrl}`,
+// );
+console.log(
+  `prompt: ${imageGen21?.initialPrompt}, image gen prompt: ${imageGen21?.prompt}, image: ${imageGen21?.imageUrl}`,
+);
+console.log(
+  `prompt: ${imageGen22?.initialPrompt}, image gen prompt: ${imageGen22?.prompt}, image: ${imageGen22?.imageUrl}`,
+);
+console.log(
+  `prompt: ${imageGen23?.initialPrompt}, image gen prompt: ${imageGen23?.prompt}, image: ${imageGen23?.imageUrl}`,
+);
+console.log(
+  `prompt: ${imageGen24?.initialPrompt}, image gen prompt: ${imageGen24?.prompt}, image: ${imageGen24?.imageUrl}`,
+);
+console.log(
+  `prompt: ${imageGen25?.initialPrompt}, image gen prompt: ${imageGen25?.prompt}, image: ${imageGen25?.imageUrl}`,
+);
+console.log(
+  `prompt: ${imageGen26?.initialPrompt}, image gen prompt: ${imageGen26?.prompt}, image: ${imageGen26?.imageUrl}`,
+);
+
 /*
 
 Partial Derivatives
@@ -494,6 +618,67 @@ A magnificent iceberg, massive and crystalline, floats amidst the shining expans
 Deep Star
 
 Picture a vast, arid desert aglow under a clear, moonlit night sky. In the center of this dramatic landscape, a single, radiant star shines with an otherworldly brilliance, casting beams of light across the sandy dunes that shift and shimmer in the star's ethereal illumination. The star's glow extends far into the distance, creating a surreal and mesmerizing scene that seems to defy the stark emptiness of the desert. The sky above is a deep, velvety blue, studded with a myriad of stars, but the one at the heart of the desert is the most luminous, a captivating sight that hints at mysteries and wonders waiting to be discovered in this timeless and magical place.
+
+
+Game Development
+
+Envision a bustling medieval marketplace with colorful tents and flags, each representing a different game development studio. At each stall, artisans with diverse skills and backgrounds are hard at work, crafting new games. The market square is alive with energy and creativity, as developers exchange ideas, test each other's games, and collaborate on new projects. Above, a dragon-shaped balloon soars, symbolizing the spirit of adventure and innovation in this dynamic community.
+
+
+Understanding Game Genres and Player Experiences
+
+The genre of the game not only determines the theme, setting, and story, but also shapes the player's experience, their strategic thinking, and the emotions evoked. For instance, in a fast-paced action game, players may feel a rush of adrenaline as they navigate through a battlefield while in a puzzle game, they may experience a sense of accomplishment when they solve a complex riddle. These experiences are further influenced by game mechanics, visuals, and sound, creating a unique world for players to explore and interact with.
+
+
+Creating Engaging Game Worlds and Storylines
+
+Empty map of free-play wilderness flanked by mountains, framed by a thick green border of pine trees. Wide river snakes through, fed by a rushing waterfall on the left, feeding a serene lake on the right. Bear-fish leap upstream, chased by a translucent fox-hawk. Sunlight breaks through clouds to cast rainbow-splashed light across the scene.
+
+
+Principles of Game Mechanics and Dynamics
+
+Visualize an alien world where a towering, crystal-based city looms above a vast, undulating patchwork of forests, each section a different color. Elevators and gravity-defying walkways connect this patchwork city, creating a dynamic web of translucent paths that pulse and change color in response to the city's needs. Down below, a river of what appears to be liquid glass weaves through the forests, guided by glowing paths that shift and reform according to the river's flow. This unlikely world seems to combine the principles of game mechanics with an ecosystem that is continuously adapting and evolving.
+
+
+
+
+Understanding Game Genres and Player Experiences
+
+Picture a cosmic arena where a variety of alien species come together to play an assortment of thrilling games. The games range from intense, fast-paced races on futuristic vehicles to strategic battles in space, each with its own unique challenges and landscapes. The alien spectators cheer animatedly, their colorful tentacles and antennae waving in excitement. This lively scene depicts an intergalactic gaming hub where beings from across the universe gather to compete, have fun, and create memorable experiences.
+
+
+
+2D and 3D Graphics Programming
+
+The sun set peacefully on the horizon, casting a warm glow on the calm waters. The sandy beach was a golden strip, and the palm trees swayed gently in the breeze. The occasional bird flew by, casting its shadow on the sand. The cool blue of the ocean melted into the sky, creating a serene backdrop for the tranquil scene. The bright orange of the sun touched everything with its soft light, creating a perfect ending to the day. As the sun dipped lower, the sky turned into a canvas of vibrant colors, painting the clouds in shades of pink, purple, and red. The world seemed to hold its breath, enchanted by the beauty of the moment.
+
+
+
+
+Artificial Intelligence in Games
+
+More and more, AI game characters and environments are becoming closer to biologically-inspired and living in appearance. Imagine a game world where the AI evolves and grows over time, reflecting complex and dynamic ecosystems. Picture an augmented reality where players engage with AI foes or companions that adapt to their strategies in real time, creating thrilling and unexpected gameplay experiences on a breathtaking digital canvas.
+
+
+
+Optimizing Game Performance and Memory Management
+
+In the early stages of a project to create an alternative reality game, a group of programmers, game designers, and artists gather in a sunlit room with a window overlooking a serene garden. Everyone is buzzing with excitement about the potential of blending a physical space with an interconnected AR experience.
+
+A large display on the wall cycles through colorful concepts and wireframes of augmented reality scenes, interspersed with photos of nearby locations that are likely to become part of the game's physical setting. A whiteboard at the center of the room is covered in a web of interconnected ideas, where arrows and annotations link virtual elements to real-world points of interest.
+
+Groups of team members huddle around various workstations, each one focusing on a different aspect of the game's development. Programmers are deeply engrossed in discussions about optimizing game performance and memory management, digging into lines of code and sharing optimization techniques. Nearby, a team of designers playfully debates the visual aesthetics of the virtual overlays, with mock-ups and 3D models projected onto transparent screens for easy comparison.
+
+At the back of the room, a group of artists surround a large table cluttered with sketches and color swatches, discussing how to bring the virtual creatures and artifacts to life in a way that seamlessly integrates with the physical environment. One artist excitedly points to a detailed illustration of a whimsical, brightly colored creature, while another nods and scribbles notes on a blueprint of a potential game location.
+
+Amidst this creative chaos, a tranquil ambiance prevails. Soft music fills the room, and the gentle rustle of leaves from the garden outside drifts in through the open window, blending with the faint hum of technology. The air is charged with a palpable sense of possibility, as each participant contributes their expertise to shape a game that promises to bridge realms, captivate players, and blur the boundaries between reality and imagination.
+
+
+
+Post-Launch Support and Community Building
+
+Step into a colorful world where tiny, vibrant creatures, like jelly beans come to life, build a whimsical and wobbly tower, each adding their unique piece to the structure. They collaborate and balance precariously, showcasing a cooperative effort that results in a grand, multi-colored tower, symbolic of their diverse community. Cartoon-like in nature, this scene is set on a bright, grassy knoll under a sunny, azure sky, amplifying the joyful and playful atmosphere.
+
 
 
 */
