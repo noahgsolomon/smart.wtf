@@ -23,6 +23,7 @@ export default function SectionCard({
         width={80}
         height={80}
         className="h-[64px] w-[64px] rounded-lg border md:h-[80px] md:w-[80px]"
+        /*className="h-[64px] w-[112px] rounded-lg border md:h-[80px] md:w-[140px]" */
       />
       <div>
         <p className="text-sm text-primary/90 md:text-base">{name}</p>
