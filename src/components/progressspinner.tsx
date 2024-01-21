@@ -2,8 +2,10 @@ import { motion } from "framer-motion";
 
 export default function ProgressSpinner({
   progress = 0,
+  className,
 }: {
   progress: number;
+  className?: string;
 }) {
   const radius = 45;
   const circumference = 2 * Math.PI * radius;
@@ -18,7 +20,13 @@ export default function ProgressSpinner({
   };
 
   return (
-    <svg fill="none" height="32" width="32" viewBox="0 0 100 100">
+    <svg
+      className={className}
+      fill="none"
+      height="32"
+      width="32"
+      viewBox="0 0 100 100"
+    >
       <motion.circle
         cx="50"
         cy="50"
