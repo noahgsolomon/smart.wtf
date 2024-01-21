@@ -46,7 +46,6 @@ export default function DemoLatestActivity() {
           className={cn(buttonVariants(), `transition-all`)}
         >
           Continue
-          <ArrowRightCircle className=" h-5 w-5 pl-1" />
         </Link>
       </>
     </div>
