@@ -47,14 +47,17 @@ export default function LearningPath() {
                       imageUrl={""}
                     />
                     <SectionCard
+                      link=""
                       name={"Introduction to Machine Learning Concepts"}
                       imageUrl={"https://images.smart.wtf/ml-1-1.png"}
                     />
                     <SectionCard
+                      link=""
                       name={'"Data Preprocessing Essentials'}
                       imageUrl={"https://images.smart.wtf/ml-1-2.png"}
                     />
                     <SectionCard
+                      link=""
                       name={"Supervised vs Unsupervised Learning"}
                       imageUrl={"https://images.smart.wtf/ml-1-3.png"}
                     />
@@ -66,14 +69,17 @@ export default function LearningPath() {
                       imageUrl={""}
                     />
                     <SectionCard
+                      link=""
                       name={"Linear Regression Techniques"}
                       imageUrl={"https://images.smart.wtf/ml-2-1.png"}
                     />
                     <SectionCard
+                      link=""
                       name={"Classification with Logistic Regression"}
                       imageUrl={"https://images.smart.wtf/ml-2-2.png"}
                     />
                     <SectionCard
+                      link=""
                       name={"Decision Trees and Random Forests"}
                       imageUrl={"https://images.smart.wtf/ml-2-3.png"}
                     />
@@ -85,14 +91,17 @@ export default function LearningPath() {
                       imageUrl={""}
                     />
                     <SectionCard
+                      link=""
                       name={"Clustering with K-Means"}
                       imageUrl={"https://images.smart.wtf/ml-3-1.png"}
                     />
                     <SectionCard
+                      link=""
                       name={"Dimensionality Reduction with PCA"}
                       imageUrl={"https://images.smart.wtf/ml-3-2.png"}
                     />
                     <SectionCard
+                      link=""
                       name={"Neural Networks and Deep Learning Basics"}
                       imageUrl={"https://images.smart.wtf/ml-3-3.png"}
                     />
@@ -136,14 +145,17 @@ export default function LearningPath() {
                     />
                     <div className="flex max-w-full flex-col gap-2 overflow-x-auto">
                       <SectionCard
+                        link=""
                         name={"Introduction to Machine Learning Concepts"}
                         imageUrl={"https://images.smart.wtf/ml-1-1.png"}
                       />
                       <SectionCard
-                        name={'"Data Preprocessing Essentials'}
+                        link=""
+                        name={"Data Preprocessing Essentials"}
                         imageUrl={"https://images.smart.wtf/ml-1-2.png"}
                       />
                       <SectionCard
+                        link=""
                         name={"Supervised vs Unsupervised Learning"}
                         imageUrl={"https://images.smart.wtf/ml-1-3.png"}
                       />
@@ -158,14 +170,17 @@ export default function LearningPath() {
 
                     <div className="flex max-w-full flex-col gap-2 overflow-x-auto">
                       <SectionCard
+                        link=""
                         name={"Linear Regression Techniques"}
                         imageUrl={"https://images.smart.wtf/ml-2-1.png"}
                       />
                       <SectionCard
+                        link=""
                         name={"Classification with Logistic Regression"}
                         imageUrl={"https://images.smart.wtf/ml-2-2.png"}
                       />
                       <SectionCard
+                        link=""
                         name={"Decision Trees and Random Forests"}
                         imageUrl={"https://images.smart.wtf/ml-2-3.png"}
                       />
@@ -179,14 +194,17 @@ export default function LearningPath() {
                     />
                     <div className="flex max-w-full flex-col gap-2 overflow-x-auto">
                       <SectionCard
+                        link=""
                         name={"Clustering with K-Means"}
                         imageUrl={"https://images.smart.wtf/ml-3-1.png"}
                       />
                       <SectionCard
+                        link=""
                         name={"Dimensionality Reduction with PCA"}
                         imageUrl={"https://images.smart.wtf/ml-3-2.png"}
                       />
                       <SectionCard
+                        link=""
                         name={"Neural Networks and Deep Learning Basics"}
                         imageUrl={"https://images.smart.wtf/ml-3-3.png"}
                       />
@@ -231,14 +249,17 @@ export default function LearningPath() {
                     />
                     <div className="flex max-w-full flex-col gap-2 overflow-x-auto">
                       <SectionCard
+                        link=""
                         name={"Introduction to Machine Learning Concepts"}
                         imageUrl={"https://images.smart.wtf/ml-1-1.png"}
                       />
                       <SectionCard
+                        link=""
                         name={'"Data Preprocessing Essentials'}
                         imageUrl={"https://images.smart.wtf/ml-1-2.png"}
                       />
                       <SectionCard
+                        link=""
                         name={"Supervised vs Unsupervised Learning"}
                         imageUrl={"https://images.smart.wtf/ml-1-3.png"}
                       />
@@ -252,14 +273,17 @@ export default function LearningPath() {
                     />
                     <div className="flex max-w-full flex-col gap-2 overflow-x-auto">
                       <SectionCard
+                        link=""
                         name={"Linear Regression Techniques"}
                         imageUrl={"https://images.smart.wtf/ml-2-1.png"}
                       />
                       <SectionCard
+                        link=""
                         name={"Classification with Logistic Regression"}
                         imageUrl={"https://images.smart.wtf/ml-2-2.png"}
                       />
                       <SectionCard
+                        link=""
                         name={"Decision Trees and Random Forests"}
                         imageUrl={"https://images.smart.wtf/ml-2-3.png"}
                       />
@@ -273,14 +297,17 @@ export default function LearningPath() {
                     />
                     <div className="flex max-w-full flex-col gap-2 overflow-x-auto">
                       <SectionCard
+                        link=""
                         name={"Clustering with K-Means"}
                         imageUrl={"https://images.smart.wtf/ml-3-1.png"}
                       />
                       <SectionCard
+                        link=""
                         name={"Dimensionality Reduction with PCA"}
                         imageUrl={"https://images.smart.wtf/ml-3-2.png"}
                       />
                       <SectionCard
+                        link=""
                         name={"Neural Networks and Deep Learning Basics"}
                         imageUrl={"https://images.smart.wtf/ml-3-3.png"}
                       />
