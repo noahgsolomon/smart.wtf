@@ -28,22 +28,22 @@ const learningPaths: learningPath = [
   {
     title: "Game Development",
     description: "Get your foot in the door with Game Development",
-    imageUrl: "",
+    imageUrl: "https://images.smart.wtf/gamedev.png",
     chapters: [
       {
         title: "Game Design Fundamentals",
         sections: [
           {
             title: "Understanding Game Genres and Player Experiences",
-            imageUrl: "https://images.smart.wtf/gamedesign-1-1.png",
+            imageUrl: "https://images.smart.wtf/gamedev-1-1.png",
           },
           {
             title: "Principles of Game Mechanics and Dynamics",
-            imageUrl: "https://images.smart.wtf/gamedesign-1-2.png",
+            imageUrl: "https://images.smart.wtf/gamedev-1-2.png",
           },
           {
             title: "Creating Engaging Game Worlds and Storylines",
-            imageUrl: "https://images.smart.wtf/gamedesign-1-3.png",
+            imageUrl: "https://images.smart.wtf/gamedev-1-3.png",
           },
         ],
       },
@@ -52,15 +52,15 @@ const learningPaths: learningPath = [
         sections: [
           {
             title: "Introduction to Game Engines and Development Environments",
-            imageUrl: "https://images.smart.wtf/gamedesign-2-1.png",
+            imageUrl: "https://images.smart.wtf/gamedev-2-1.png",
           },
           {
             title: "2D and 3D Graphics Programming",
-            imageUrl: "https://images.smart.wtf/gamedesign-2-2.png",
+            imageUrl: "https://images.smart.wtf/gamedev-2-2.png",
           },
           {
             title: "Building Interactive Gameplay Systems",
-            imageUrl: "https://images.smart.wtf/gamedesign-2-3.png",
+            imageUrl: "https://images.smart.wtf/gamedev-2-3.png",
           },
         ],
       },
@@ -69,15 +69,15 @@ const learningPaths: learningPath = [
         sections: [
           {
             title: "Artificial Intelligence in Games",
-            imageUrl: "https://images.smart.wtf/gamedesign-3-1.png",
+            imageUrl: "https://images.smart.wtf/gamedev-3-1.png",
           },
           {
             title: "Network Programming for Multiplayer Games",
-            imageUrl: "https://images.smart.wtf/gamedesign-3-2.png",
+            imageUrl: "https://images.smart.wtf/gamedev-3-2.png",
           },
           {
             title: "Optimizing Game Performance and Memory Management",
-            imageUrl: "https://images.smart.wtf/gamedesign-3-3.png",
+            imageUrl: "https://images.smart.wtf/gamedev-3-3.png",
           },
         ],
       },
@@ -86,15 +86,15 @@ const learningPaths: learningPath = [
         sections: [
           {
             title: "Testing and Debugging Game Applications",
-            imageUrl: "https://images.smart.wtf/gamedesign-4-1.png",
+            imageUrl: "https://images.smart.wtf/gamedev-4-1.png",
           },
           {
             title: "Marketing Strategies for Indie Game Developers",
-            imageUrl: "https://images.smart.wtf/gamedesign-4-2.png",
+            imageUrl: "https://images.smart.wtf/gamedev-4-2.png",
           },
           {
             title: "Post-Launch Support and Community Building",
-            imageUrl: "https://images.smart.wtf/gamedesign-4-2.png",
+            imageUrl: "https://images.smart.wtf/gamedev-4-3.png",
           },
         ],
       },
@@ -172,7 +172,7 @@ export default function DemoLearningPath() {
       {/* <div className="absolute bottom-0 left-0 right-0 top-0 z-20 flex items-center justify-center rounded-lg bg-primary/30"></div> */}
       <div className="hidden rounded-lg border bg-card/70 p-4 shadow-md dark:bg-card/80 2xl:flex">
         <Carousel className="flex h-full w-full flex-col justify-between">
-          <CarouselContent>
+          <CarouselContent className="h-[690px]">
             {learningPaths.map(
               ({ chapters, description, title, imageUrl }, index) => (
                 <CarouselItem key={index}>
@@ -181,13 +181,13 @@ export default function DemoLearningPath() {
                       src={imageUrl}
                       className="rounded-lg border"
                       alt={title}
-                      width={402.5}
-                      height={230}
+                      width={350}
+                      height={200}
                     />
                     <h2>{title}</h2>
                     <p className="text-sm opacity-80">{description}</p>
                   </div>
-                  <div className="hide-scrollbar flex h-[380px] flex-col overflow-y-auto border-b">
+                  <div className="hide-scrollbar flex h-full flex-col overflow-y-auto border-b pb-[275px]">
                     {chapters.map((chapter, index) => (
                       <div className="flex flex-col gap-2 py-4">
                         <ChapterDivider
@@ -204,11 +204,12 @@ export default function DemoLearningPath() {
                       </div>
                     ))}
                   </div>
+                  <div className="pb-[200px]"></div>
                 </CarouselItem>
               ),
             )}
           </CarouselContent>
-          <div className="flex min-h-[50px] w-full items-center justify-between  p-2 ">
+          <div className="flex h-[50px] w-full items-center justify-between  p-2 ">
             <CarouselPrevious />
             <CarouselNext />
           </div>
