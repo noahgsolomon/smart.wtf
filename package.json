@@ -48,7 +48,7 @@
     "@trpc/server": "^10.40.0",
     "@vercel/analytics": "^1.1.1",
     "ai": "^2.2.18",
-    "antd": "^5.13.0",
+    "antd": "^5.13.2",
     "antd-style": "^3.6.1",
     "aws-sdk": "^2.1517.0",
     "class-variance-authority": "^0.7.0",
