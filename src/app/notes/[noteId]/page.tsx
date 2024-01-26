@@ -7,9 +7,16 @@ import { trpc } from "@/trpc/client";
 import { type Note } from "@/types";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
-import { Clock, Copy, Download, Info, Loader2 } from "lucide-react";
+import {
+  Clock,
+  Copy,
+  Download,
+  GraduationCap,
+  Info,
+  Loader2,
+} from "lucide-react";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import Markdown from "react-markdown";
 import remarkMath from "remark-math";
 import rehypeHighlight from "rehype-highlight";
@@ -23,6 +30,7 @@ import { useContinue } from "./useContinue";
 import { useRouter } from "next/navigation";
 import { useChatContext } from "@/app/context/chat/ChatContext";
 import { toast } from "sonner";
+import Link from "next/link";
 
 type UserNote = {
   id: number;
@@ -35,11 +43,22 @@ export default function Page({ params }: { params: { noteId: string } }) {
     id: parseInt(params.noteId),
   });
 
+  const generateQuizMutation = trpc.quiz.generateQuiz.useMutation({
+    onSuccess: () => {
+      setGeneratingQuiz(false);
+      toast.success("Quiz Generated");
+    },
+    onError: (err) => {
+      console.log(err);
+      setGeneratingQuiz(false);
+    },
+  });
+
+  const isQuizActiveQuery = trpc.quiz.isQuizAvailable.useQuery({
+    noteId: parseInt(params.noteId),
+  });
+
   const retrieveUserNotesQuery = trpc.notes.getUserNotesMeta.useQuery();
-  // const generatedGif = useMemo(
-  //   () => `/generating${Math.floor(Math.random() * 12)}.gif`,
-  //   [],
-  // );
 
   const [imageMutationCalled, setImageMutationCalled] = useState(false);
   const { openNotes, setOpenNotes, setUserNotes } = useNoteContext();
@@ -51,6 +70,8 @@ export default function Page({ params }: { params: { noteId: string } }) {
   const [agentMarkdown, setAgentMarkdown] = useState("");
 
   const [generating, setGenerating] = useState(false);
+  const [generatingQuiz, setGeneratingQuiz] = useState(true);
+  const [requestedQuiz, setRequestedQuiz] = useState(false);
 
   const router = useRouter();
 
@@ -163,7 +184,10 @@ export default function Page({ params }: { params: { noteId: string } }) {
       }
 
       const noteId = parseInt(params.noteId);
-      if (!openNotes.some((openNote) => openNote.id === noteId)) {
+      if (
+        !openNotes.some((openNote) => openNote.id === noteId) &&
+        openNotes.length === 0
+      ) {
         setOpenNotes((prev) => [
           ...prev,
           {
@@ -176,7 +200,6 @@ export default function Page({ params }: { params: { noteId: string } }) {
       }
     }
   }, [
-    setOpenNotes,
     retrieveNoteQuery.data,
     retrieveNoteQuery.isSuccess,
     params.noteId,
@@ -201,6 +224,23 @@ export default function Page({ params }: { params: { noteId: string } }) {
     retrieveUserNotesQuery.isSuccess,
     setUserNotes,
   ]);
+
+  useEffect(() => {
+    const quizGenerated = isQuizActiveQuery.data?.available;
+    if (quizGenerated) {
+      setGeneratingQuiz(false);
+    } else {
+      if (note?.title && generatingQuiz && !requestedQuiz) {
+        setRequestedQuiz(true);
+        setTimeout(() => {
+          generateQuizMutation.mutate({
+            noteId: parseInt(params.noteId),
+            noteTitle: note?.title!,
+          });
+        }, 7500);
+      }
+    }
+  }, [note?.title]);
 
   if (retrieveNoteQuery.isLoading || retrieveUserNotesQuery.isLoading) {
     return <></>;
@@ -259,7 +299,6 @@ export default function Page({ params }: { params: { noteId: string } }) {
                   <div className="flex gap-2">
                     <h1 className="max-w-[15ch] text-5xl">{note?.title}</h1>
                   </div>
-
                   <div className="flex flex-row gap-2">
                     <p className="flex flex-row items-center gap-1 text-sm opacity-60">
                       <Clock className="h-3 w-3" />
@@ -277,7 +316,7 @@ export default function Page({ params }: { params: { noteId: string } }) {
                         )
                         .join("")}
                     >
-                      {note?.category}
+                      #{note?.category}
                     </Badge>
                   </div>
                   <div className="flex flex-wrap gap-2">
@@ -285,18 +324,36 @@ export default function Page({ params }: { params: { noteId: string } }) {
                       <Button
                         className="rounded-br-none rounded-tr-none hover:scale-100 active:scale-100"
                         onClick={() => setReadingMode("normal")}
-                        variant={readingMode === "normal" ? "default" : "ghost"}
+                        variant={
+                          readingMode === "normal" ? "default" : "outline"
+                        }
                       >
                         Normal
                       </Button>
                       <Button
                         onClick={() => setReadingMode("agent")}
                         className="rounded-bl-none rounded-tl-none hover:scale-100 active:scale-100"
-                        variant={readingMode === "agent" ? "default" : "ghost"}
+                        variant={
+                          readingMode === "agent" ? "default" : "outline"
+                        }
                       >
                         {note?.agents.name}
                       </Button>
                     </div>
+                    <Link
+                      className={cn(
+                        buttonVariants({
+                          variant: "default",
+                        }),
+                        `flex flex-row items-center gap-1 ${
+                          generatingQuiz ? "opacity-50" : ""
+                        }`,
+                      )}
+                      href={`${generatingQuiz ? "" : `/quiz/${note?.id}/play`}`}
+                    >
+                      <GraduationCap className="h-5 w-4" />
+                      {generatingQuiz ? "Generating Quiz..." : "Quiz"}
+                    </Link>
                     <div className="flex flex-row gap-2">
                       <Button onClick={handleCopyClick} variant={"ghost"}>
                         <Copy className="h-4 w-4" />
