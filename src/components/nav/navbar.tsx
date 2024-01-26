@@ -195,7 +195,7 @@ const NavBar = () => {
       {userId ? (
         <>
           <div className="coarse:hidden">
-            {!path.startsWith("/quiz") && <ChatButton />}
+            {/* {!path.startsWith("/quiz") && <ChatButton />} */}
             <QuickActionsModal />
           </div>
           <AddNote />
