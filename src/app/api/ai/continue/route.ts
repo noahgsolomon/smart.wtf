@@ -16,7 +16,7 @@ const markdownResponse = async (
   agent: boolean,
 ) => {
   const responseFetch = await client.createChatCompletion({
-    model: "gpt-4-1106-preview",
+    model: "gpt-4-0125-preview",
     temperature: agent ? 1.0 : 0.3,
     stream: true,
     messages: [

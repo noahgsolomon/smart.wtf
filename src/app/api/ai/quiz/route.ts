@@ -115,8 +115,6 @@ export async function POST(req: UnderstandRequest) {
       completion.choices[0]?.message.function_call?.arguments!,
     );
 
-    console.log(responseBody.questions.length);
-
     if (responseBody.questions.length !== 4) {
       await POST(req);
       return;

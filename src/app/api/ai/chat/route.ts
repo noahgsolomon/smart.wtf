@@ -13,7 +13,7 @@ const client = new OpenAIApi(configuration);
 const markdownResponse = async (messages: Message[]) => {
   console.log("messages", messages);
   const responseFetch = await client.createChatCompletion({
-    model: "gpt-4-1106-preview",
+    model: "gpt-4-0125-preview",
     temperature: 0.75,
     stream: true,
     messages: [
