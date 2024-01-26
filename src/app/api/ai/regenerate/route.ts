@@ -58,22 +58,3 @@ export async function POST(request: Request) {
 
   return stream;
 }
-
-// protectedProcedure
-//     .input(z.object({ id: z.number() }))
-//     .mutation(async ({ ctx, input }) => {
-//       const noteFetch = await ctx.db.query.notes.findFirst({
-//         where: and(eq(notes.id, input.id), eq(notes.user_id, ctx.user_id)),
-//         with: {
-//           agents: true,
-//         },
-//       });
-
-//       if (!noteFetch) {
-//         throw new Error("Note not found");
-//       }
-
-//       const markdown = await markdownResponse(noteFetch.title);
-
-//       return { markdown };
-//     }),

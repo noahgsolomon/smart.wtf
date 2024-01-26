@@ -20,14 +20,29 @@ export const useContinue = ({
   const [continuing, setContinuing] = useState(false);
   const [done, setDone] = useState(false);
   const [finishedImages, setFinishedImages] = useState<string[]>([]);
-  const [initialMarkdown, setInitialMarkdown] = useState("");
   const [addedMarkdown, setAddedMarkdown] = useState("");
+  const [initialMarkdown, setInitialMarkdown] = useState("");
 
   const updateNoteMutation = trpc.notes.updateNote.useMutation();
   const updateImagesMutation = trpc.notes.updateImages.useMutation({
-    onSuccess: ({ markdown }) => {
-      setMarkdown(initialMarkdown + "\n\n" + markdown);
-      setAddedMarkdown(markdown);
+    onSuccess: ({ replacements }) => {
+      setMarkdown(
+        (prev) =>
+          initialMarkdown +
+          "\n\n" +
+          replacements.reduce(
+            (currentMarkdown, replacement) =>
+              currentMarkdown.replace(replacement.asset, replacement.link),
+            prev,
+          ),
+      );
+      setAddedMarkdown((prev) =>
+        replacements.reduce(
+          (currentMarkdown, replacement) =>
+            currentMarkdown.replace(replacement.asset, replacement.link),
+          prev,
+        ),
+      );
     },
   });
 
@@ -67,7 +82,6 @@ export const useContinue = ({
     if (images.length > 0) {
       updateImagesMutation.mutate({
         images: images,
-        markdown: addedMarkdown,
       });
     }
   }, [addedMarkdown, markdown]);

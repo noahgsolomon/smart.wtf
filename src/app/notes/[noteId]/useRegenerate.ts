@@ -31,8 +31,14 @@ export const useRegenerate = ({
   const [finishedImages, setFinishedImages] = useState<string[]>([]);
 
   const updateImagesMutation = trpc.notes.updateImages.useMutation({
-    onSuccess: ({ markdown }) => {
-      setMarkdown(markdown);
+    onSuccess: ({ replacements }) => {
+      setMarkdown((prev) =>
+        replacements.reduce(
+          (currentMarkdown, replacement) =>
+            currentMarkdown.replace(replacement.asset, replacement.link),
+          prev,
+        ),
+      );
     },
   });
 
@@ -73,7 +79,6 @@ export const useRegenerate = ({
     if (images.length > 0) {
       updateImagesMutation.mutate({
         images: images,
-        markdown,
       });
     }
   }, [markdown]);
@@ -112,6 +117,8 @@ export const useRegenerate = ({
       setRegenerating(false);
     });
   };
+
+  console.log(markdown);
 
   return {
     handleRegenerate,
