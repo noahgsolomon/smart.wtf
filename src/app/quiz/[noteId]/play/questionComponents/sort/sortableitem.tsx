@@ -3,6 +3,10 @@ import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { Check } from "lucide-react";
 import { cn } from "@/lib/utils";
+import Markdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import remarkMath from "remark-math";
+import rehypeKatex from "rehype-katex";
 
 export function SortableItem({
   completed,
@@ -36,7 +40,7 @@ export function SortableItem({
   };
 
   return (
-    <div className="flex w-full flex-row items-center gap-2">
+    <div className="flex max-w-[300px] flex-row items-center gap-2 md:max-w-full">
       <p className="opacity-50">{order}</p>
       <div
         ref={setNodeRef}
@@ -50,7 +54,12 @@ export function SortableItem({
       >
         <div className="group rounded-lg border border-border bg-card p-4 transition-all active:scale-[101%] active:shadow-sm">
           <div className="flex items-center justify-between">
-            <p>{option}</p>
+            <Markdown
+              remarkPlugins={[remarkGfm, remarkMath]}
+              rehypePlugins={[rehypeKatex]}
+            >
+              {option}
+            </Markdown>
             {completed ? (
               <Check className="h-5 w-5 text-success" />
             ) : (
