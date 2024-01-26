@@ -14,7 +14,7 @@ export default function RecommendedLesson() {
   return (
     <div className="relative flex h-full w-full flex-col justify-between rounded-lg border bg-card/70 p-4 shadow-md dark:bg-card/80 md:w-auto ">
       <Badge
-        className="absolute -right-6 -top-2 z-30 p-1 text-sm"
+        className="absolute -right-6 -top-2 z-10 p-1 text-sm"
         variant={"arts"}
       >
         Coming soon

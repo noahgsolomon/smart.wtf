@@ -174,7 +174,7 @@ export default function Understanding({
           {side === "front" ? (
             <div className="front flex min-h-[300px] flex-col justify-between">
               <Markdown
-                className="prose prose-slate max-w-[250px] dark:prose-invert md:max-w-none"
+                className="prose prose-slate max-w-[250px] dark:prose-invert md:max-w-[500px]"
                 remarkPlugins={[remarkGfm, remarkMath]}
                 rehypePlugins={[rehypeKatex]}
               >
@@ -250,7 +250,7 @@ export default function Understanding({
           ) : (
             <div className="back flex min-h-[300px] flex-col justify-between">
               <Markdown
-                className="prose prose-slate max-w-[250px] dark:prose-invert md:max-w-none"
+                className="prose prose-slate max-w-[250px] dark:prose-invert md:max-w-[500px]"
                 remarkPlugins={[remarkGfm, remarkMath]}
                 rehypePlugins={[rehypeKatex]}
               >
