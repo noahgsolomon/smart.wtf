@@ -45,7 +45,15 @@ export default function NotesHeading({
                     <DropdownMenuItem
                       className="cursor-pointer"
                       onClick={() => {
-                        setOpenNotes([...openNotes, note]);
+                        if (openNotes.length > 2) {
+                          setOpenNotes([
+                            ...openNotes.slice(1, openNotes.length),
+                            note,
+                          ]);
+                        } else {
+                          setOpenNotes([...openNotes, note]);
+                        }
+
                         router.push(`/notes/${note.id}`);
                       }}
                     >
@@ -90,7 +98,7 @@ export default function NotesHeading({
                     <p>{note.emoji}</p>
                     <p
                       className={`hidden font-bold ${
-                        openNotes.length > 2 ? "" : "sm:block"
+                        openNotes.length > 2 ? "" : "lg:block"
                       }`}
                     >
                       {note.title}
@@ -125,7 +133,7 @@ export default function NotesHeading({
                         <p>{note.emoji}</p>
                         <p
                           className={`hidden font-bold ${
-                            openNotes.length > 2 ? "" : "sm:block"
+                            openNotes.length > 2 ? "" : "lg:block"
                           }`}
                         >
                           {note.title}
@@ -143,7 +151,7 @@ export default function NotesHeading({
       </div>
 
       <div className="flex flex-row items-center gap-2">
-        <ThemeButton className="hidden md:block" />
+        <ThemeButton className="hidden lg:block" />
       </div>
     </div>
   );
