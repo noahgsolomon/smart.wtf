@@ -495,3 +495,8 @@ input {
   scrollbar-width: none;
   /* Firefox */
 }
+
+mrow,
+mtext {
+  @apply overflow-x-auto overflow-y-hidden
+}
