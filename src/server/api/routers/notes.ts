@@ -544,7 +544,7 @@ export const notesRouter = createTRPCRouter({
 
       const s3Client = new S3Client({ region: "us-east-1" });
 
-      const s3Response = await s3Client.send(
+      await s3Client.send(
         new PutObjectCommand({
           Bucket: "smartimagebucket",
           Key: `note-${id}-image.png`,
@@ -552,8 +552,6 @@ export const notesRouter = createTRPCRouter({
           ContentType: "image/png",
         }),
       );
-
-      console.log(s3Response);
 
       await ctx.db
         .update(notes)
@@ -758,13 +756,12 @@ export const notesRouter = createTRPCRouter({
         images: z.array(
           z.object({ asset: z.string(), searchQuery: z.string() }),
         ),
-        markdown: z.string(),
       }),
     )
-    .mutation(async ({ input: { images, markdown } }) => {
+    .mutation(async ({ input: { images } }) => {
       if (!images) throw new Error("No images provided");
 
-      let markdownContent = markdown;
+      const replacements = [];
 
       for (const image of images) {
         const imageFetch = await fetch(
@@ -785,12 +782,12 @@ export const notesRouter = createTRPCRouter({
           throw new Error("Image not found");
         }
 
-        markdownContent = markdownContent.replace(
-          image.asset,
-          imageResponse.items[0].link,
-        );
+        replacements.push({
+          asset: image.asset,
+          link: imageResponse.items[0].link,
+        });
       }
 
-      return { markdown: markdownContent };
+      return { replacements };
     }),
 });
