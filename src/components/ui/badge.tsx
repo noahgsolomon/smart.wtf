@@ -49,14 +49,13 @@ const badgeVariants = cva(
         economics:
           "border-transparent bg-orange-500 text-white  hover:bg-orange-400",
         businessStudies:
-          "border-transparent bg-brown-500 text-white  hover:bg-brown-400",
-        psychology:
-          "border-transparent bg-blue-grey-500 text-white  hover:bg-blue-grey-400",
+          "border-transparent bg-red-200 text-white  hover:bg-red-400",
+        psychology: "border-transparent bg-blue text-white  hover:bg-blue/80",
         law: "border-transparent bg-red-800 text-white  hover:bg-red-700",
         politicalScience:
-          "border-transparent bg-deep-orange-800 text-white  hover:bg-deep-orange-700",
+          "border-transparent bg-orange-800 text-white  hover:bg-orange-700",
         environmentalScience:
-          "border-transparent bg-light-green-500 text-white  hover:bg-light-green-400",
+          "border-transparent bg-black text-white  hover:bg-black",
         engineering:
           "border-transparent bg-grey-500 text-white  hover:bg-grey-400",
         medicine:
