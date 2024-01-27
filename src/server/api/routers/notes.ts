@@ -572,7 +572,10 @@ export const notesRouter = createTRPCRouter({
           messages: [
             {
               role: "system",
-              content: `Assess the user's request for an academic or educational note on the topic '${title}'. Verify if the topic is suitable for an educational context. The criteria for a valid topic include appropriateness, educational value, and the potential for an in-depth exploration of at least 1,000 words. If the topic fails to meet these criteria (i.e., it is inappropriate, offensive, lacks educational value, or is nonsensical), return a JSON object with 'valid': false. For valid topics, return a JSON object with 'valid': true, a 'description' of the topic of in 1 short sentence, the 'title' of the topic, 'nextTopic' being a topic that would be a good progression or next step from this one, and the appropriate 'category'. The category must be one of the following: ENGLISH, MATH, SCIENCE, HISTORY, ARTS, MUSIC, LITERATURE, PHILOSOPHY, GEOGRAPHY, SOCIAL STUDIES, PHYSICAL EDUCATION, COMPUTER SCIENCE, ECONOMICS, BUSINESS STUDIES, PSYCHOLOGY, LAW, POLITICAL SCIENCE, ENVIRONMENTAL SCIENCE, ENGINEERING, MEDICINE, AGRICULTURE, ASTRONOMY. Ensure the category is an exact match from these options.`,
+              content:
+                title !== "RANDOM"
+                  ? `Assess the user's request for an academic or educational note on the topic '${title}'. Verify if the topic is suitable for an educational context. The criteria for a valid topic include appropriateness, educational value, and the potential for an in-depth exploration of at least 1,000 words. If the topic fails to meet these criteria (i.e., it is inappropriate, offensive, lacks educational value, or is nonsensical), return a JSON object with 'valid': false. For valid topics, return a JSON object with 'valid': true, a 'description' of the topic of in 1 short sentence, the 'title' of the topic, 'nextTopic' being a topic that would be a good progression or next step from this one, and the appropriate 'category'. The category must be one of the following: ENGLISH, MATH, SCIENCE, HISTORY, ARTS, MUSIC, LITERATURE, PHILOSOPHY, GEOGRAPHY, SOCIAL STUDIES, PHYSICAL EDUCATION, COMPUTER SCIENCE, ECONOMICS, BUSINESS STUDIES, PSYCHOLOGY, LAW, POLITICAL SCIENCE, ENVIRONMENTAL SCIENCE, ENGINEERING, MEDICINE, AGRICULTURE, ASTRONOMY. Ensure the category is an exact match from these options.`
+                  : `Create a random educational topic that is detailed and precise, very specific like for example: "Encoding Sentences Using Transformer Models" or "The Assassination of Julius Caesar: A Detailed Account" or "Investigating the Gut Microbiome's Influence on Overall Wellness" or "Decoding Ancient Scripts: The Rosetta Stone's Role in Understanding Hieroglyphics" or "Delving into Chaos Theory: The Butterfly Effect and Predictability in Complex Systems" or "Unveiling Geometry in Art: The Mathematical Structure in M.C. Escher's Work" or "The Rise of Quantum Algorithms: Breaking the Boundaries of Classical Computing" or "The Intricacies of Cryptocurrency Mining and Blockchain Technology". The topic should not be broad; it must be specific and niche, offering a focused subject for in-depth exploration. It should be something hyper-specific, fascinating, and intellectually stimulating. In one of these categories: ENGLISH, MATH, SCIENCE, HISTORY, ARTS, MUSIC, LITERATURE, PHILOSOPHY, GEOGRAPHY, SOCIAL STUDIES, PHYSICAL EDUCATION, COMPUTER SCIENCE, ECONOMICS, BUSINESS STUDIES, PSYCHOLOGY, LAW, POLITICAL SCIENCE, ENVIRONMENTAL SCIENCE, ENGINEERING, MEDICINE, AGRICULTURE, ASTRONOMY. Return a JSON object with 'valid': true, a 'description' of the topic of in 1 short sentence, the 'title' of the topic, 'nextTopic' being a topic that would be a good progression or next step from this one, and the appropriate 'category'. The category must be one of the categories above. Ensure the category is an exact match from these options.`,
             },
           ],
 
@@ -605,35 +608,41 @@ export const notesRouter = createTRPCRouter({
       }
     }),
 
-  recommendedNotes: protectedProcedure.query(async ({ ctx }) => {
-    const userNotes = await ctx.db.query.notes.findMany({
-      where: eq(notes.user_id, ctx.user_id),
-      columns: {
-        title: true,
-      },
-    });
-
-    try {
-      const response = await openai.chat.completions.create({
-        model: "gpt-3.5-turbo-1106",
-        messages: [
-          {
-            role: "system",
-            content: `Based on the user's previous learning topics, including ${userNotes
-              .map((note) => note.title)
-              .join(
-                ", ",
-              )}, generate a list of 2 or 3 new study topics as logical next steps and 1 of them being something unrelated to give the user a breadth of topics. Return these recommendations in JSON format, with each recommended topic represented as a simple string title under the 'notes' array. Avoid including descriptions or details—only the titles of the topics are required. These recommendations should be distinct, relevant, and suitable for the user's continued educational progression. If the user has no previous learning topics, return a list of 2 or 3 topics about math, science, or history.`,
-          },
-        ],
-        response_format: { type: "json_object" },
+  recommendedNotes: protectedProcedure
+    .input(z.object({ prev: z.array(z.string()) }).optional())
+    .query(async ({ ctx, input }) => {
+      const userNotes = await ctx.db.query.notes.findMany({
+        where: eq(notes.user_id, ctx.user_id),
+        columns: {
+          title: true,
+        },
       });
 
-      return JSON.parse(response.choices[0]?.message.content ?? "{}").notes;
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
-  }),
+      try {
+        const response = await openai.chat.completions.create({
+          model: "gpt-3.5-turbo-1106",
+          messages: [
+            {
+              role: "system",
+              content: `Based on the user's previous learning topics, including ${userNotes
+                .map((note) => note.title)
+                .join(
+                  ", ",
+                )}, generate a list of 3 new study topics as similar or adjacent topics. Return these recommendations in JSON format, with each recommended topic represented as a simple string title under the 'notes' array. Avoid including descriptions or details—only the titles of the topics are required. These recommendations should be distinct, relevant, and suitable for the user's continued educational progression. If the user has no previous learning topics, return a list of 3 topics about math, science, or history.${
+                input?.prev?.length ?? 0 > 0
+                  ? `avoid these topics: ${input?.prev.join(", ")}`
+                  : ""
+              }`,
+            },
+          ],
+          response_format: { type: "json_object" },
+        });
+
+        return JSON.parse(response.choices[0]?.message.content ?? "{}").notes;
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    }),
 
   getUserNotes: protectedProcedure.query(async ({ ctx }) => {
     const notesFetch = await ctx.db.query.notes.findMany({
