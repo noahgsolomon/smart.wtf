@@ -40,6 +40,9 @@ export const useRegenerate = ({
         ),
       );
     },
+    onError: (error) => {
+      console.log("error, we hit da google search api limit :(");
+    },
   });
 
   const updateNoteMutation = trpc.notes.updateNote.useMutation();
@@ -117,8 +120,6 @@ export const useRegenerate = ({
       setRegenerating(false);
     });
   };
-
-  console.log(markdown);
 
   return {
     handleRegenerate,

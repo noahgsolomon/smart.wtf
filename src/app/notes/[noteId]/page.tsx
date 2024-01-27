@@ -151,7 +151,6 @@ export default function Page({ params }: { params: { noteId: string } }) {
   const createImageMutation = trpc.notes.createImage.useMutation({
     onSuccess: (data) => {
       setImageSrc(data.imageUrl!);
-      console.log("Success:", data);
       setNote((prev) => (prev ? { ...prev, imageUrl: data.imageUrl! } : null));
     },
   });
