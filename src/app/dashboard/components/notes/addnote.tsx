@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { Flame, Loader2, PlusIcon, Wand, XIcon } from "lucide-react";
+import { Flame, Loader2, PlusIcon, RotateCw, Wand, XIcon } from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -30,8 +30,10 @@ export default function AddNote({ visible = false }: { visible?: boolean }) {
   const [recommendedTopics, setRecommendedTopics] = useState<string[]>([]);
   const [generating, setGenerating] = useState(false);
   const router = useRouter();
-
-  const recommendedNotesQuery = trpc.notes.recommendedNotes.useQuery();
+  const [prevTopics, setPrevTopics] = useState<string[]>([]);
+  const recommendedNotesQuery = trpc.notes.recommendedNotes.useQuery({
+    prev: prevTopics,
+  });
   const createNoteMutation = trpc.notes.createNote.useMutation({
     onSuccess: (data) => {
       if (data) {
@@ -53,13 +55,11 @@ export default function AddNote({ visible = false }: { visible?: boolean }) {
   });
 
   useEffect(() => {
-    if (recommendedTopics.length === 0) {
+    if (recommendedNotesQuery.isFetched && recommendedNotesQuery.data) {
       const recommended = recommendedNotesQuery.data;
-      recommended?.map((note: string) => {
-        setRecommendedTopics((prev) => [...prev, note]);
-      });
+      setRecommendedTopics(recommended);
     }
-  }, [recommendedNotesQuery.data, recommendedTopics.length, recommendedTopics]);
+  }, [recommendedNotesQuery.isFetched, recommendedNotesQuery.data]);
 
   const { isOpen, setIsOpen } = useAddNote();
 
@@ -87,6 +87,7 @@ export default function AddNote({ visible = false }: { visible?: boolean }) {
         <div>
           <div>
             <p>Recommended for you</p>
+
             <div className="flex flex-wrap gap-2">
               {recommendedTopics.map((topic, index) => (
                 <Button
@@ -106,9 +107,21 @@ export default function AddNote({ visible = false }: { visible?: boolean }) {
                   {topic}
                 </Button>
               ))}
-              {recommendedTopics.length === 0 && (
-                <Loader2 className="h-4 w-4 animate-spin" />
-              )}
+              <Button
+                disabled={recommendedNotesQuery.isFetching}
+                size={"sm"}
+                onClick={() => {
+                  setRecommendedSelect(-1);
+                  setPrevTopics((prev) => [...prev, ...recommendedTopics]);
+                  recommendedNotesQuery.refetch();
+                }}
+              >
+                <RotateCw
+                  className={`h-4 w-4 transition-all ${
+                    recommendedNotesQuery.isFetching ? "animate-spin" : ""
+                  }`}
+                />
+              </Button>
             </div>
           </div>
           <div className="flex flex-col justify-center gap-1 py-4">
@@ -273,6 +286,20 @@ export default function AddNote({ visible = false }: { visible?: boolean }) {
           >
             {generating ? "Generating" : "Generate"}
             <Wand className="h-4 w-4" />
+          </Button>
+          <Button
+            disabled={generating}
+            onClick={() => {
+              setInvalidTopic(false);
+              setGenerating(true);
+              createNoteMutation.mutate({
+                agentId: agent.id,
+                title: "RANDOM",
+              });
+            }}
+            variant={"rainbow"}
+          >
+            ???
           </Button>
         </DialogFooter>
       </DialogContent>
