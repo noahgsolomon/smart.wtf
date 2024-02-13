@@ -5,6 +5,7 @@ import * as coursesSchema from "./schemas/courses/schema";
 import * as aiSchema from "./schemas/ai/schema";
 import * as notesSchema from "./schemas/notes/schema";
 import * as agentsSchema from "./schemas/agents/schema";
+import * as brainrotSchema from "./schemas/brainrot/schema";
 
 export const db = drizzle(
   new Client({
@@ -17,6 +18,7 @@ export const db = drizzle(
       ...aiSchema,
       ...notesSchema,
       ...agentsSchema,
+      ...brainrotSchema,
     },
   },
 );
