@@ -628,7 +628,7 @@ export const notesRouter = createTRPCRouter({
                 .map((note) => note.title)
                 .join(
                   ", ",
-                )}, generate a list of 3 new study topics as similar or adjacent topics. Return these recommendations in JSON format, with each recommended topic represented as a simple string title under the 'notes' array. Avoid including descriptions or details—only the titles of the topics are required. These recommendations should be distinct, relevant, and suitable for the user's continued educational progression. If the user has no previous learning topics, return a list of 3 topics about math, science, or history.${
+                )}, generate a list of 3 new study topics as similar or adjacent topics. Return these recommendations in JSON format, with each recommended topic represented as a simple string title under the 'notes' array. The titles should be a relevant emoji followed by the topic. Avoid including descriptions or details—only the titles of the topics are required. These recommendations should be distinct, relevant, and suitable for the user's continued educational progression. If the user has no previous learning topics, return a list of 3 topics about math, science, or history.${
                 input?.prev?.length ?? 0 > 0
                   ? `avoid these topics: ${input?.prev.join(", ")}`
                   : ""

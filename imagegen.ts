@@ -68,12 +68,12 @@ const promises = [
   // imageGeneneration("Network Programming for Multiplayer Games"),
   // imageGeneneration("Optimizing Game Performance and Memory Management"),
   // imageGeneneration("Optimizing Game Performance and Memory Management"),
-  imageGeneneration("Testing and Debugging Game Applications"),
-  imageGeneneration("Testing and Debugging Game Applications"),
-  imageGeneneration("Marketing Strategies for Indie Game Developers"),
-  imageGeneneration("Marketing Strategies for Indie Game Developers"),
-  imageGeneneration("Post-Launch Support and Community Building"),
-  imageGeneneration("Post-Launch Support and Community Building"),
+  imageGeneneration("brain sad drying out in a dry desert"),
+  imageGeneneration("brain sad drying out in a dry desert"),
+  imageGeneneration("brain lonely in a dry desert"),
+  imageGeneneration("brain lonely in a dry desert"),
+  imageGeneneration("brain fading away in a dry desert"),
+  imageGeneneration("brain fading away in a dry desert"),
 ];
 
 const [
