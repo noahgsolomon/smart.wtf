@@ -114,9 +114,10 @@ export function Background() {
     <div className="pointer-events-none fixed inset-0 z-[-1] flex min-h-screen w-screen justify-center p-[120px_24px_160px]">
       <div style={styles.backgroundMainBefore} />
       <div style={styles.backgroundMainAfter} />
-      {(path === "/" || path === "/login" || path === "/signup") && (
-        <div style={styles.backgroundContent} />
-      )}
+      {(path === "/" ||
+        path === "/login" ||
+        path === "/signup" ||
+        path === "/dashboard") && <div style={styles.backgroundContent} />}
     </div>
   );
 }
