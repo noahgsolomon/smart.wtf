@@ -144,11 +144,11 @@ const NavBar = () => {
                   onClick={() => setIsOpen(true)}
                   className="relative hidden cursor-pointer transition-all hover:opacity-80 md:block"
                 >
-                  <div className="rounded-lg border border-border bg-secondary/60 py-2 pl-2 pr-24 text-sm text-primary/60">
+                  <div className="rounded-full border border-border bg-secondary/60 py-2 pl-2 pr-24 text-sm text-primary/60">
                     Search...
                   </div>
                   <Button
-                    className="bg-card md:absolute md:right-1 md:top-1/2 md:-translate-y-1/2 md:transform"
+                    className="rounded-full bg-card md:absolute md:right-1 md:top-1/2 md:-translate-y-1/2 md:transform"
                     size={"sm"}
                     variant={"outline"}
                   >

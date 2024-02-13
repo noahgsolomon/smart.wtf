@@ -71,19 +71,6 @@ export const QuickActionsModal = () => {
                 <span>Generate Quiz</span>
               </Link>
             </CommandItem>
-            <CommandItem>
-              <div
-                onClick={() => {
-                  setIsOpen(false);
-                  setIsAddNoteOpen(false);
-                  setChatOpen(true);
-                }}
-                className="z-10 flex h-full w-full cursor-pointer flex-row gap-2"
-              >
-                <Bot className="h-4 w-4" />
-                <span>Chat</span>
-              </div>
-            </CommandItem>
           </CommandGroup>
           <CommandSeparator />
           <CommandGroup heading="Settings">
