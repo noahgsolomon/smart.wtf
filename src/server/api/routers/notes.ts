@@ -608,41 +608,36 @@ export const notesRouter = createTRPCRouter({
       }
     }),
 
-  recommendedNotes: protectedProcedure
-    .input(z.object({ prev: z.array(z.string()) }).optional())
-    .query(async ({ ctx, input }) => {
-      const userNotes = await ctx.db.query.notes.findMany({
-        where: eq(notes.user_id, ctx.user_id),
-        columns: {
-          title: true,
-        },
+  recommendedNotes: protectedProcedure.query(async ({ ctx }) => {
+    const userNotes = await ctx.db.query.notes.findMany({
+      where: eq(notes.user_id, ctx.user_id),
+      columns: {
+        title: true,
+      },
+    });
+
+    try {
+      const response = await openai.chat.completions.create({
+        model: "gpt-3.5-turbo-1106",
+        messages: [
+          {
+            role: "system",
+            content: `Based on the user's previous learning topics, including ${userNotes
+              .map((note) => note.title)
+              .join(
+                ", ",
+              )}, generate a list of 3 new study topics as similar or adjacent topics. Return these recommendations in JSON format, with each recommended topic represented as a simple string title under the 'notes' array. The titles should be a relevant emoji followed by the topic. Avoid including descriptions or details—only the titles of the topics are required. These recommendations should be distinct, relevant, and suitable for the user's continued educational progression. If the user has no previous learning topics, return a list of 3 topics about math, science, or history.
+              }`,
+          },
+        ],
+        response_format: { type: "json_object" },
       });
 
-      try {
-        const response = await openai.chat.completions.create({
-          model: "gpt-3.5-turbo-1106",
-          messages: [
-            {
-              role: "system",
-              content: `Based on the user's previous learning topics, including ${userNotes
-                .map((note) => note.title)
-                .join(
-                  ", ",
-                )}, generate a list of 3 new study topics as similar or adjacent topics. Return these recommendations in JSON format, with each recommended topic represented as a simple string title under the 'notes' array. The titles should be a relevant emoji followed by the topic. Avoid including descriptions or details—only the titles of the topics are required. These recommendations should be distinct, relevant, and suitable for the user's continued educational progression. If the user has no previous learning topics, return a list of 3 topics about math, science, or history.${
-                input?.prev?.length ?? 0 > 0
-                  ? `avoid these topics: ${input?.prev.join(", ")}`
-                  : ""
-              }`,
-            },
-          ],
-          response_format: { type: "json_object" },
-        });
-
-        return JSON.parse(response.choices[0]?.message.content ?? "{}").notes;
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    }),
+      return JSON.parse(response.choices[0]?.message.content ?? "{}").notes;
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  }),
 
   getUserNotes: protectedProcedure.query(async ({ ctx }) => {
     const notesFetch = await ctx.db.query.notes.findMany({
