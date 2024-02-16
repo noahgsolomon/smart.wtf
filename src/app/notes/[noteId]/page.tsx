@@ -63,7 +63,7 @@ export default function Page({ params }: { params: { noteId: string } }) {
   const [imageMutationCalled, setImageMutationCalled] = useState(false);
   const { openNotes, setOpenNotes, setUserNotes } = useNoteContext();
   const [note, setNote] = useState<Note | null>(null);
-  const [readingMode, setReadingMode] = useState<"normal" | "agent">("normal");
+  const [readingMode, setReadingMode] = useState<"normal" | "agent">("agent");
   const [, setImageSrc] = useState<string | null>(null);
 
   const [markdown, setMarkdown] = useState("");
@@ -319,7 +319,7 @@ export default function Page({ params }: { params: { noteId: string } }) {
                     </Badge>
                   </div>
                   <div className="flex flex-wrap gap-2">
-                    <div className="flex flex-row overflow-hidden rounded-lg border border-border">
+                    {/* <div className="flex flex-row overflow-hidden rounded-lg border border-border">
                       <Button
                         className="rounded-br-none rounded-tr-none hover:scale-100 active:scale-100"
                         onClick={() => setReadingMode("normal")}
@@ -338,7 +338,7 @@ export default function Page({ params }: { params: { noteId: string } }) {
                       >
                         {note?.agents.name}
                       </Button>
-                    </div>
+                    </div> */}
                     <Link
                       className={cn(
                         buttonVariants({
