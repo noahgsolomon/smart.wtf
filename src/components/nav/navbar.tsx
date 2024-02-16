@@ -14,6 +14,7 @@ import AddNote from "@/app/dashboard/components/notes/addnote";
 import ChatButton from "../chatbutton";
 import { useEffect, useState } from "react";
 import DemoAddNote from "../demo/demoaddnote";
+import GenerationType from "@/app/dashboard/generationtype";
 
 const NavBar = () => {
   const { userId } = useAuth();
@@ -139,7 +140,7 @@ const NavBar = () => {
         )} */}
 
             <div className="flex items-center justify-end gap-4">
-              {userId && (
+              {/* {userId && (
                 <div
                   onClick={() => setIsOpen(true)}
                   className="relative hidden cursor-pointer transition-all hover:opacity-80 md:block"
@@ -155,7 +156,7 @@ const NavBar = () => {
                     ⌘K
                   </Button>
                 </div>
-              )}
+              )} */}
               <div className="coarse:hidden">
                 <ThemeButton />
               </div>
@@ -199,6 +200,7 @@ const NavBar = () => {
             <QuickActionsModal />
           </div>
           <AddNote />
+          <GenerationType />
         </>
       ) : (
         <DemoAddNote />
