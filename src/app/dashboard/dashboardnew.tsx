@@ -1,31 +1,67 @@
 "use client";
 import { Input } from "@/components/ui/input";
 import Image from "next/image";
+import { useMemo, useState } from "react";
+import { trpc } from "@/trpc/client";
+import { Button } from "@/components/ui/button";
+import { CornerDownRight, Loader2 } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
+import { useGenerationType } from "@/utils/hooks/usegenerationtype";
+import { set } from "date-fns";
+import { useAddingNote } from "@/utils/hooks/useaddingnote";
+import {
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
+} from "@/components/ui/hover-card";
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { useEffect, useState } from "react";
-import { trpc } from "@/trpc/client";
-import { Button } from "@/components/ui/button";
-import { ArrowRight, Loader2 } from "lucide-react";
 
 export default function DashboardNew() {
-  const [prevTopics, setPrevTopics] = useState<string[]>([]);
-  const recommendedNotesQuery = trpc.notes.recommendedNotes.useQuery({
-    prev: prevTopics,
-  });
+  const recommendedNotesQuery = trpc.notes.recommendedNotes.useQuery();
   const [recommendedTopics, setRecommendedTopics] = useState<string[]>([]);
+  const router = useRouter();
   const [inputTopic, setInputTopic] = useState("");
   const [generating, setGenerating] = useState(false);
-  const createNoteMutation = trpc.notes.createNote.useMutation();
+
+  const { setAgent: setAddingNoteAgent, setNoteId, setTopic } = useAddingNote();
+
+  const createNoteMutation = trpc.notes.createNote.useMutation({
+    onSuccess: (data) => {
+      if (data) {
+        if (data.valid) {
+          setNoteId(parseInt(data.noteId!));
+          setTopic(inputTopic);
+          setAgent(agent);
+          setIsOpen(true);
+          setGenerating(false);
+          setInputTopic("");
+        } else {
+          toast.error("Invalid topic");
+          setInputTopic("");
+          setGenerating(false);
+        }
+      }
+    },
+    onError: () => {
+      setGenerating(false);
+    },
+  });
+
+  const [isChangeAgentOpen, setIsChangeAgentOpen] = useState(false);
+
+  const { isOpen, setIsOpen } = useGenerationType();
+
   const [agent, setAgent] = useState<{
     name: "rick" | "mrburns" | "bender" | "patrick";
     id: number;
   }>({ name: "rick", id: 1 });
 
-  useEffect(() => {
+  useMemo(() => {
     if (recommendedNotesQuery.isFetched && recommendedNotesQuery.data) {
       const recommended = recommendedNotesQuery.data;
       setRecommendedTopics(recommended);
@@ -48,23 +84,107 @@ export default function DashboardNew() {
           }}
           onChange={(e) => setInputTopic(e.target.value)}
           value={inputTopic}
-          placeholder="What's the next mind-boggling mystery you want to unravel"
-          className=" relative w-full rounded-full border-2 bg-card/80 py-10 pl-24 text-2xl font-bold opacity-80 shadow-lg transition-all focus:border-blue/60 "
+          placeholder="Let's learn something new..."
+          className=" relative w-full rounded-full border-2 bg-card/80 py-8 pl-16 text-xl font-bold text-primary/80 opacity-80 shadow-lg transition-all placeholder:text-primary/80 focus:border-primary/30 md:py-10 md:pl-24 "
         />
-        <Tooltip delayDuration={200}>
-          <TooltipTrigger asChild>
-            <Image
-              src={`https://images.smart.wtf/${agent.name}.png`}
-              alt="agent"
-              width={65}
-              height={65}
-              className={`border-${agent.name}/80 absolute left-2 top-1/2 -translate-y-1/2 transform cursor-pointer rounded-full border-2 bg-secondary/80 transition-all hover:scale-[101%] active:scale-[99%]`}
-            />
-          </TooltipTrigger>
-          <TooltipContent className="opacity-80">Your agent</TooltipContent>
-        </Tooltip>
+        <HoverCard
+          openDelay={100}
+          onOpenChange={setIsChangeAgentOpen}
+          open={isChangeAgentOpen}
+        >
+          <HoverCardTrigger>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Image
+                  src={`https://images.smart.wtf/${agent.name}.png`}
+                  alt="agent"
+                  width={65}
+                  height={65}
+                  onClick={() => {
+                    setAgent((prev) => {
+                      if (prev.name === "rick") {
+                        return { name: "mrburns", id: 5 };
+                      } else if (prev.name === "mrburns") {
+                        return { name: "bender", id: 6 };
+                      } else if (prev.name === "patrick") {
+                        return { name: "rick", id: 1 };
+                      } else {
+                        return { name: "patrick", id: 4 };
+                      }
+                    });
+                  }}
+                  className={`absolute left-2 top-1/2 h-[50px] w-[50px] -translate-y-1/2 transform cursor-pointer rounded-full border border-border/80  bg-secondary/80 transition-all hover:scale-[101%] active:scale-[99%] md:h-[65px] md:w-[65px]`}
+                />
+              </TooltipTrigger>
+              <TooltipContent className="coarse:hidden">
+                Change your agent
+              </TooltipContent>
+            </Tooltip>
+          </HoverCardTrigger>
+          <HoverCardContent
+            className="absolute -left-2 -top-[0.5rem] w-[100px] transform border-none bg-transparent shadow-none coarse:hidden"
+            asChild
+          >
+            <div className="flex flex-col gap-1">
+              <Image
+                src={`https://images.smart.wtf/bender.png`}
+                onClick={() => {
+                  setAgent({ name: "bender", id: 6 });
+                  setIsChangeAgentOpen(false);
+                }}
+                alt="agent"
+                width={65}
+                height={65}
+                className={`${
+                  agent.name === "bender" ? "hidden" : ""
+                } h-[50px] w-[50px] transform cursor-pointer rounded-full border bg-secondary/80 transition-all hover:scale-[101%] active:scale-[99%] md:h-[65px] md:w-[65px]`}
+              />
+
+              <Image
+                onClick={() => {
+                  setAgent({ name: "mrburns", id: 5 });
+                  setIsChangeAgentOpen(false);
+                }}
+                src={`https://images.smart.wtf/mrburns.png`}
+                alt="agent"
+                width={65}
+                height={65}
+                className={`${
+                  agent.name === "mrburns" ? "hidden" : ""
+                } h-[50px] w-[50px] transform cursor-pointer rounded-full border bg-secondary/80 transition-all hover:scale-[101%] active:scale-[99%] md:h-[65px] md:w-[65px]`}
+              />
+              <Image
+                src={`https://images.smart.wtf/patrick.png`}
+                onClick={() => {
+                  setAgent({ name: "patrick", id: 4 });
+                  setIsChangeAgentOpen(false);
+                }}
+                alt="agent"
+                width={65}
+                height={65}
+                className={`${
+                  agent.name === "patrick" ? "hidden" : ""
+                } h-[50px] w-[50px] transform cursor-pointer rounded-full border bg-secondary/80 transition-all hover:scale-[101%] active:scale-[99%] md:h-[65px] md:w-[65px]`}
+              />
+              <Image
+                src={`https://images.smart.wtf/rick.png`}
+                onClick={() => {
+                  setAgent({ name: "rick", id: 1 });
+                  setIsChangeAgentOpen(false);
+                }}
+                alt="agent"
+                width={65}
+                height={65}
+                className={`${
+                  agent.name === "rick" ? "hidden" : ""
+                } h-[50px] w-[50px] transform cursor-pointer rounded-full border bg-secondary/80 transition-all hover:scale-[101%] active:scale-[99%] md:h-[65px] md:w-[65px]`}
+              />
+            </div>
+          </HoverCardContent>
+        </HoverCard>
+
         <Button
-          disabled={inputTopic === "" || generating}
+          disabled={generating}
           onClick={() => {
             if (inputTopic === "") return;
             setGenerating(true);
@@ -73,9 +193,15 @@ export default function DashboardNew() {
               title: inputTopic,
             });
           }}
-          className="absolute right-2 top-1/2 -translate-y-1/2 transform rounded-full px-[1.5rem] py-[2rem]"
+          className={`${
+            inputTopic === "" ? "opacity-0" : ""
+          }  absolute right-2 top-1/2 -translate-y-1/2 transform rounded-full px-[1rem] py-[1.5rem] transition-all md:px-[1.5rem] md:py-[2rem]`}
         >
-          <ArrowRight className="h-4 w-4" />
+          {generating ? (
+            <Loader2 className="h-4 w-4 animate-spin" />
+          ) : (
+            <CornerDownRight className="h-4 w-4 " />
+          )}
         </Button>
       </div>
       <div className="flex flex-wrap justify-center gap-1 opacity-80">
@@ -83,12 +209,12 @@ export default function DashboardNew() {
           <Button
             key={topic}
             size={"sm"}
-            className="rounded-full border bg-card/80 text-xs text-primary/80 hover:bg-card hover:text-primary md:text-base"
+            className="rounded-full border bg-card/80 text-xs text-primary/80 hover:bg-card hover:text-primary md:text-sm"
             onClick={() => {
               setGenerating(true);
               createNoteMutation.mutate({
                 agentId: agent.id,
-                title: recommendedTopics[index]!,
+                title: inputTopic,
               });
             }}
           >
@@ -99,7 +225,7 @@ export default function DashboardNew() {
           <>
             <Button
               size={"sm"}
-              className="rounded-full border bg-card/80 text-xs text-primary/80 hover:bg-card hover:text-primary md:text-base"
+              className="mb-8 rounded-full border bg-card/80 text-xs text-primary/80 hover:bg-card hover:text-primary md:text-base"
             >
               <Loader2 className="h-4 w-4 animate-spin" />
             </Button>
