@@ -8,6 +8,7 @@ import { type Note } from "@/types";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 import {
+  ArrowDown,
   Clock,
   Copy,
   Download,
@@ -27,10 +28,11 @@ import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import { AnimatePresence, motion } from "framer-motion";
 import { useRegenerate } from "./useRegenerate";
 import { useContinue } from "./useContinue";
-import { useRouter } from "next/navigation";
 import { useChatContext } from "@/app/context/chat/ChatContext";
 import { toast } from "sonner";
 import Link from "next/link";
+import { useAddingNote } from "@/utils/hooks/useaddingnote";
+import { useGenerationType } from "@/utils/hooks/usegenerationtype";
 
 type UserNote = {
   id: number;
@@ -42,6 +44,10 @@ export default function Page({ params }: { params: { noteId: string } }) {
   const retrieveNoteQuery = trpc.notes.getNote.useQuery({
     id: parseInt(params.noteId),
   });
+
+  const [lastScrollTop, setLastScrollTop] = useState(0);
+
+  const [following, setFollowing] = useState(false);
 
   const generateQuizMutation = trpc.quiz.generateQuiz.useMutation({
     onSuccess: () => {
@@ -63,23 +69,34 @@ export default function Page({ params }: { params: { noteId: string } }) {
   const [imageMutationCalled, setImageMutationCalled] = useState(false);
   const { openNotes, setOpenNotes, setUserNotes } = useNoteContext();
   const [note, setNote] = useState<Note | null>(null);
-  const [readingMode, setReadingMode] = useState<"normal" | "agent">("agent");
   const [, setImageSrc] = useState<string | null>(null);
 
-  const [markdown, setMarkdown] = useState("");
   const [agentMarkdown, setAgentMarkdown] = useState("");
 
   const [generating, setGenerating] = useState(false);
   const [generatingQuiz, setGeneratingQuiz] = useState(true);
   const [requestedQuiz, setRequestedQuiz] = useState(false);
 
-  const router = useRouter();
+  const { setAgent, setNoteId, setTopic } = useAddingNote();
+  const { setIsOpen } = useGenerationType();
 
   const createNoteMutation = trpc.notes.createNote.useMutation({
     onSuccess: (data) => {
       if (data) {
         if (data.valid) {
-          router.push(`/notes/${data.noteId}`);
+          setNoteId(parseInt(data.noteId!));
+          setTopic(note?.nextTopic!);
+          setAgent(
+            note?.agents! as {
+              name: "rick" | "patrick" | "mrburns" | "bender";
+              id: number;
+            },
+          );
+          setIsOpen(true);
+          setGenerating(false);
+        } else {
+          toast.error("Invalid topic");
+          setGenerating(false);
         }
       }
       setGenerating(false);
@@ -98,7 +115,6 @@ export default function Page({ params }: { params: { noteId: string } }) {
     setMarkdown: setAgentMarkdown,
     agent: true,
     agentPrompt: note?.agents.prompt,
-    otherMarkdown: markdown,
   });
 
   const { continuing: agentContinuing, handleContinue: agentHandleContinue } =
@@ -108,22 +124,7 @@ export default function Page({ params }: { params: { noteId: string } }) {
       setMarkdown: setAgentMarkdown,
       agent: true,
       agentPrompt: note?.agents.prompt,
-      otherMarkdown: markdown,
     });
-
-  const { handleRegenerate, regenerating } = useRegenerate({
-    note: { id: note?.id!, title: note?.title! },
-    markdown: markdown,
-    setMarkdown: setMarkdown,
-    otherMarkdown: agentMarkdown,
-  });
-
-  const { continuing, handleContinue } = useContinue({
-    note: { id: note?.id!, title: note?.title! },
-    markdown: markdown,
-    setMarkdown: setMarkdown,
-    otherMarkdown: agentMarkdown,
-  });
 
   const [hasRegenerated, setHasRegenerated] = useState(false);
   const [hasAgentRegenerated, setHasAgentRegenerated] = useState(false);
@@ -131,10 +132,6 @@ export default function Page({ params }: { params: { noteId: string } }) {
   useEffect(() => {
     if (note?.markdown) {
     } else {
-      if (note && note.id && note.title && !hasRegenerated && !note.markdown) {
-        setHasRegenerated(true);
-        handleRegenerate();
-      }
       if (
         note &&
         note.id &&
@@ -144,9 +141,10 @@ export default function Page({ params }: { params: { noteId: string } }) {
       ) {
         setHasAgentRegenerated(true);
         agentHandleRegenerate();
+        setFollowing(true);
       }
     }
-  }, [note, markdown, agentMarkdown, handleRegenerate, agentHandleRegenerate]);
+  }, [note, agentMarkdown, agentHandleRegenerate]);
 
   const createImageMutation = trpc.notes.createImage.useMutation({
     onSuccess: (data) => {
@@ -158,16 +156,9 @@ export default function Page({ params }: { params: { noteId: string } }) {
   const { setLesson } = useChatContext();
 
   useEffect(() => {
-    if (regenerating || continuing || agentRegenerating || agentContinuing)
-      return;
     const note = retrieveNoteQuery.data?.note;
     if (note) {
       setNote(note);
-
-      if (note.markdown && markdown === "") {
-        setLesson(note.markdown);
-        setMarkdown(note.markdown);
-      }
       if (note.agents_markdown && agentMarkdown === "") {
         setAgentMarkdown(note.agents_markdown);
       }
@@ -241,6 +232,50 @@ export default function Page({ params }: { params: { noteId: string } }) {
     }
   }, [note?.title]);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollTop =
+        window.pageYOffset || document.documentElement.scrollTop;
+
+      if (currentScrollTop < lastScrollTop) {
+        setFollowing(false);
+        setLastScrollTop(currentScrollTop);
+        return;
+      }
+      setLastScrollTop(currentScrollTop);
+
+      const windowHeight =
+        "innerHeight" in window
+          ? window.innerHeight
+          : document.documentElement.offsetHeight;
+      const body = document.body;
+      const html = document.documentElement;
+      const docHeight = Math.max(
+        body.scrollHeight,
+        body.offsetHeight,
+        html.clientHeight,
+        html.scrollHeight,
+        html.offsetHeight,
+      );
+      const windowBottom = windowHeight + window.pageYOffset;
+      if (windowBottom >= docHeight) {
+        setFollowing(true);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [lastScrollTop]);
+
+  useEffect(() => {
+    if ((agentContinuing || agentRegenerating) && following) {
+      const scrollDown = () => {
+        window.scrollTo(0, document.body.scrollHeight);
+      };
+      scrollDown();
+    }
+  }, [agentMarkdown, following]);
+
   if (retrieveNoteQuery.isLoading || retrieveUserNotesQuery.isLoading) {
     return <></>;
   }
@@ -252,7 +287,7 @@ export default function Page({ params }: { params: { noteId: string } }) {
   };
 
   const handleCopyClick = () => {
-    const textToCopy = readingMode === "agent" ? agentMarkdown : markdown;
+    const textToCopy = agentMarkdown;
 
     navigator.clipboard
       .writeText(textToCopy)
@@ -266,14 +301,12 @@ export default function Page({ params }: { params: { noteId: string } }) {
   };
 
   const handleDownloadClick = () => {
-    const textToDownload = readingMode === "agent" ? agentMarkdown : markdown;
+    const textToDownload = agentMarkdown;
 
     const element = document.createElement("a");
     const file = new Blob([textToDownload], { type: "text/markdown" });
     element.href = URL.createObjectURL(file);
-    element.download = `${note?.title}${
-      readingMode === "agent" ? " " + note?.agents.name : ""
-    }.md`;
+    element.download = `${note?.title}${" " + note?.agents.name}.md`;
     document.body.appendChild(element);
     element.click();
     document.body.removeChild(element);
@@ -281,9 +314,12 @@ export default function Page({ params }: { params: { noteId: string } }) {
     toast.success("Downloaded");
   };
 
+  const scrollDown = () => {
+    window.scrollTo(0, document.body.scrollHeight);
+  };
+
   return (
     <>
-      <NotesHeading currentNote={{ id: parseInt(params.noteId) }} />
       <AnimatePresence>
         <motion.div
           variants={pageVariants}
@@ -291,7 +327,7 @@ export default function Page({ params }: { params: { noteId: string } }) {
           animate="animate"
           exit="exit"
         >
-          <div className="flex flex-col gap-8 pt-[3rem]">
+          <div className="flex flex-col gap-8 pt-8 md:pt-0">
             <div className="flex justify-center px-0 pb-4 pt-48 md:px-4 lg:pt-64 ">
               <div className="relative px-8 py-2 pb-24">
                 <div className="flex flex-col gap-2">
@@ -363,7 +399,7 @@ export default function Page({ params }: { params: { noteId: string } }) {
                     </div>
                   </div>
                   <div className="flex flex-row items-center gap-1 text-sm text-primary/50">
-                    {regenerating || agentRegenerating ? (
+                    {agentRegenerating ? (
                       <div className="flex flex-col gap-2">
                         <div className="flex flex-row items-center gap-1">
                           <Loader2 className="h-4 w-4 animate-spin" />
@@ -382,11 +418,7 @@ export default function Page({ params }: { params: { noteId: string } }) {
                           <Button
                             variant={"link"}
                             className="text-primay/80 m-0 p-0 font-bold"
-                            onClick={
-                              readingMode === "agent"
-                                ? agentHandleRegenerate
-                                : handleRegenerate
-                            }
+                            onClick={agentHandleRegenerate}
                           >
                             here
                           </Button>{" "}
@@ -437,22 +469,33 @@ export default function Page({ params }: { params: { noteId: string } }) {
                       rehypeHighlight,
                     ]}
                   >
-                    {readingMode === "normal" ? markdown : agentMarkdown}
+                    {agentMarkdown}
                   </Markdown>
                 </div>
-                {!regenerating &&
-                  !continuing &&
+                <div
+                  className={`${
+                    !following ? "" : "opacity-0"
+                  } fixed bottom-6 left-0 right-0 mx-auto  flex w-full justify-center transition-all`}
+                >
+                  <Button
+                    onClick={() => {
+                      setFollowing(true);
+                      scrollDown();
+                    }}
+                    className="rounded-full"
+                  >
+                    <ArrowDown className="h-4 w-4" />
+                  </Button>
+                </div>
+                {!agentRegenerating &&
+                  !agentContinuing &&
                   !agentRegenerating &&
                   !agentContinuing && (
                     <div className="flex flex-col gap-2">
                       <div className="flex flex-row items-center gap-2 pt-8">
                         <Button
                           disabled={generating}
-                          onClick={
-                            readingMode === "agent"
-                              ? agentHandleContinue
-                              : handleContinue
-                          }
+                          onClick={agentHandleContinue}
                           className="flex flex-row gap-1 py-5"
                         >
                           Continue
