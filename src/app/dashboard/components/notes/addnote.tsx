@@ -11,13 +11,18 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { trpc } from "@/trpc/client";
 import { useRouter } from "next/navigation";
 import { useAddNote } from "@/utils/hooks/useaddnote";
+import { Textarea } from "@/components/ui/textarea";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 export default function AddNote({ visible = false }: { visible?: boolean }) {
   const [noteInput, setNoteInput] = useState("");
@@ -27,13 +32,9 @@ export default function AddNote({ visible = false }: { visible?: boolean }) {
   }>({ name: "rick", id: 1 });
   const [recommendedSelect, setRecommendedSelect] = useState(-1);
   const [invalidTopic, setInvalidTopic] = useState(false);
-  const [recommendedTopics, setRecommendedTopics] = useState<string[]>([]);
   const [generating, setGenerating] = useState(false);
   const router = useRouter();
   const [prevTopics, setPrevTopics] = useState<string[]>([]);
-  const recommendedNotesQuery = trpc.notes.recommendedNotes.useQuery({
-    prev: prevTopics,
-  });
   const createNoteMutation = trpc.notes.createNote.useMutation({
     onSuccess: (data) => {
       if (data) {
@@ -53,13 +54,6 @@ export default function AddNote({ visible = false }: { visible?: boolean }) {
       setGenerating(false);
     },
   });
-
-  useEffect(() => {
-    if (recommendedNotesQuery.isFetched && recommendedNotesQuery.data) {
-      const recommended = recommendedNotesQuery.data;
-      setRecommendedTopics(recommended);
-    }
-  }, [recommendedNotesQuery.isFetched, recommendedNotesQuery.data]);
 
   const { isOpen, setIsOpen } = useAddNote();
 
@@ -85,49 +79,13 @@ export default function AddNote({ visible = false }: { visible?: boolean }) {
           </DialogDescription>
         </DialogHeader>
         <div>
-          <div>
-            <p>Recommended for you</p>
-
-            <div className="flex flex-wrap gap-2">
-              {recommendedTopics.map((topic, index) => (
-                <Button
-                  key={index}
-                  className={`border transition-all ${
-                    recommendedSelect === index
-                      ? "border-2 border-lightBlue"
-                      : ""
-                  }`}
-                  onClick={() => {
-                    setRecommendedSelect(index);
-                    setInvalidTopic(false);
-                  }}
-                  size={"sm"}
-                  variant={"secondary"}
-                >
-                  {topic}
-                </Button>
-              ))}
-              <Button
-                disabled={recommendedNotesQuery.isFetching}
-                size={"sm"}
-                onClick={() => {
-                  setRecommendedSelect(-1);
-                  setPrevTopics((prev) => [...prev, ...recommendedTopics]);
-                  recommendedNotesQuery.refetch();
-                }}
-              >
-                <RotateCw
-                  className={`h-4 w-4 transition-all ${
-                    recommendedNotesQuery.isFetching ? "animate-spin" : ""
-                  }`}
-                />
-              </Button>
-            </div>
-          </div>
+          <p className="text-xl font-bold">
+            <span className="text-blue">1{")"}.</span> Enter a topic
+          </p>
           <div className="flex flex-col justify-center gap-1 py-4">
-            <Input
+            <Textarea
               id="name"
-              placeholder="// Multi-Variable Calculus"
+              placeholder="// What's the next mind-boggling mystery you want to unravel"
               className="col-span-3"
               value={noteInput}
               onKeyDown={(e) => {
@@ -135,10 +93,7 @@ export default function AddNote({ visible = false }: { visible?: boolean }) {
                   setGenerating(true);
                   createNoteMutation.mutate({
                     agentId: agent.id,
-                    title:
-                      noteInput === ""
-                        ? recommendedTopics[recommendedSelect]!
-                        : noteInput,
+                    title: noteInput,
                   });
                 }
               }}
@@ -160,7 +115,10 @@ export default function AddNote({ visible = false }: { visible?: boolean }) {
 
         <div className="flex flex-col gap-2">
           <div className="flex items-center gap-1">
-            <h4>Choose your fighter</h4>
+            <h4>
+              <span className="text-xl font-bold text-red-500">2{")"}. </span>
+              Choose your fighter
+            </h4>
             <Flame className="h-4 w-4 text-destructive" />
           </div>
 
@@ -276,10 +234,7 @@ export default function AddNote({ visible = false }: { visible?: boolean }) {
               setGenerating(true);
               createNoteMutation.mutate({
                 agentId: agent.id,
-                title:
-                  noteInput === ""
-                    ? recommendedTopics[recommendedSelect]!
-                    : noteInput,
+                title: noteInput,
               });
             }}
             type="submit"
@@ -287,20 +242,25 @@ export default function AddNote({ visible = false }: { visible?: boolean }) {
             {generating ? "Generating" : "Generate"}
             <Wand className="h-4 w-4" />
           </Button>
-          <Button
-            disabled={generating}
-            onClick={() => {
-              setInvalidTopic(false);
-              setGenerating(true);
-              createNoteMutation.mutate({
-                agentId: agent.id,
-                title: "RANDOM",
-              });
-            }}
-            variant={"rainbow"}
-          >
-            ???
-          </Button>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button
+                disabled={generating}
+                onClick={() => {
+                  setInvalidTopic(false);
+                  setGenerating(true);
+                  createNoteMutation.mutate({
+                    agentId: agent.id,
+                    title: "RANDOM",
+                  });
+                }}
+                variant={"rainbow"}
+              >
+                ???
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>Generate random topic</TooltipContent>
+          </Tooltip>
         </DialogFooter>
       </DialogContent>
     </Dialog>
