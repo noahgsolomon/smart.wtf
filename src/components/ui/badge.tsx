@@ -57,7 +57,7 @@ const badgeVariants = cva(
         environmentalScience:
           "border-transparent bg-black text-white  hover:bg-black",
         engineering:
-          "border-transparent bg-grey-500 text-white  hover:bg-grey-400",
+          "border-transparent bg-gray-500 text-white  hover:bg-gray-400",
         medicine:
           "border-transparent bg-pink-800 text-white  hover:bg-pink-700",
         agriculture:
