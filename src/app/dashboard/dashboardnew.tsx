@@ -84,8 +84,9 @@ export default function DashboardNew() {
           }}
           onChange={(e) => setInputTopic(e.target.value)}
           value={inputTopic}
+          maxLength={50}
           placeholder="Let's learn something new..."
-          className=" relative w-full rounded-full border-2 bg-card/80 py-8 pl-16 text-xl font-bold text-primary/80 opacity-80 shadow-lg transition-all placeholder:text-primary/80 focus:border-primary/30 md:py-10 md:pl-24 "
+          className="relative w-full rounded-lg border-2 bg-card/80 py-8 pl-16 pr-[3.5rem] text-2xl font-bold text-primary opacity-80 shadow-lg transition-all placeholder:text-primary/80 focus:border-lightBlue md:py-10 md:pl-24 md:pr-20 "
         />
         <HoverCard
           openDelay={100}
@@ -95,26 +96,35 @@ export default function DashboardNew() {
           <HoverCardTrigger>
             <Tooltip>
               <TooltipTrigger asChild>
-                <Image
-                  src={`https://images.smart.wtf/${agent.name}.png`}
-                  alt="agent"
-                  width={65}
-                  height={65}
-                  onClick={() => {
-                    setAgent((prev) => {
-                      if (prev.name === "rick") {
-                        return { name: "mrburns", id: 5 };
-                      } else if (prev.name === "mrburns") {
-                        return { name: "bender", id: 6 };
-                      } else if (prev.name === "patrick") {
-                        return { name: "rick", id: 1 };
-                      } else {
-                        return { name: "patrick", id: 4 };
-                      }
-                    });
-                  }}
-                  className={`absolute left-2 top-1/2 h-[50px] w-[50px] -translate-y-1/2 transform cursor-pointer rounded-full border border-border/80  bg-secondary/80 transition-all hover:scale-[101%] active:scale-[99%] md:h-[65px] md:w-[65px]`}
-                />
+                <div className="absolute left-2 top-1/2 h-[50px] w-[50px] -translate-y-1/2 transform overflow-hidden rounded-lg md:h-[65px] md:w-[65px]">
+                  <Image
+                    src={`https://images.smart.wtf/${agent.name}.png`}
+                    alt="agent"
+                    width={65}
+                    height={65}
+                    onClick={() => {
+                      setAgent((prev) => {
+                        if (prev.name === "rick") {
+                          return { name: "mrburns", id: 5 };
+                        } else if (prev.name === "mrburns") {
+                          return { name: "bender", id: 6 };
+                        } else if (prev.name === "patrick") {
+                          return { name: "rick", id: 1 };
+                        } else {
+                          return { name: "patrick", id: 4 };
+                        }
+                      });
+                    }}
+                    className={`absolute z-10 cursor-pointer rounded-lg border border-border/80 transition-all hover:scale-[101%] active:scale-[99%] md:h-[65px] md:w-[65px]`}
+                  />
+                  <Image
+                    className={`absolute z-0 overflow-hidden transition-all`}
+                    height={75}
+                    width={75}
+                    src={"/fireball.gif"}
+                    alt="fire"
+                  />
+                </div>
               </TooltipTrigger>
               <TooltipContent className="coarse:hidden">
                 Change your agent
@@ -137,7 +147,7 @@ export default function DashboardNew() {
                 height={65}
                 className={`${
                   agent.name === "bender" ? "hidden" : ""
-                } h-[50px] w-[50px] transform cursor-pointer rounded-full border bg-secondary/80 transition-all hover:scale-[101%] active:scale-[99%] md:h-[65px] md:w-[65px]`}
+                } h-[50px] w-[50px] transform cursor-pointer rounded-lg border bg-secondary/80 transition-all hover:scale-[101%] active:scale-[99%] md:h-[65px] md:w-[65px]`}
               />
 
               <Image
@@ -151,7 +161,7 @@ export default function DashboardNew() {
                 height={65}
                 className={`${
                   agent.name === "mrburns" ? "hidden" : ""
-                } h-[50px] w-[50px] transform cursor-pointer rounded-full border bg-secondary/80 transition-all hover:scale-[101%] active:scale-[99%] md:h-[65px] md:w-[65px]`}
+                } h-[50px] w-[50px] transform cursor-pointer rounded-lg border bg-secondary/80 transition-all hover:scale-[101%] active:scale-[99%] md:h-[65px] md:w-[65px]`}
               />
               <Image
                 src={`https://images.smart.wtf/patrick.png`}
@@ -164,7 +174,7 @@ export default function DashboardNew() {
                 height={65}
                 className={`${
                   agent.name === "patrick" ? "hidden" : ""
-                } h-[50px] w-[50px] transform cursor-pointer rounded-full border bg-secondary/80 transition-all hover:scale-[101%] active:scale-[99%] md:h-[65px] md:w-[65px]`}
+                } h-[50px] w-[50px] transform cursor-pointer rounded-lg border bg-secondary/80 transition-all hover:scale-[101%] active:scale-[99%] md:h-[65px] md:w-[65px]`}
               />
               <Image
                 src={`https://images.smart.wtf/rick.png`}
@@ -177,7 +187,7 @@ export default function DashboardNew() {
                 height={65}
                 className={`${
                   agent.name === "rick" ? "hidden" : ""
-                } h-[50px] w-[50px] transform cursor-pointer rounded-full border bg-secondary/80 transition-all hover:scale-[101%] active:scale-[99%] md:h-[65px] md:w-[65px]`}
+                } h-[50px] w-[50px] transform cursor-pointer rounded-lg border bg-secondary/80 transition-all hover:scale-[101%] active:scale-[99%] md:h-[65px] md:w-[65px]`}
               />
             </div>
           </HoverCardContent>
@@ -195,7 +205,7 @@ export default function DashboardNew() {
           }}
           className={`${
             inputTopic === "" ? "opacity-0" : ""
-          }  absolute right-2 top-1/2 -translate-y-1/2 transform rounded-full px-[1rem] py-[1.5rem] transition-all md:px-[1.5rem] md:py-[2rem]`}
+          }  absolute right-2 top-1/2 -translate-y-1/2 transform rounded-lg px-[1rem] py-[1.5rem] transition-all md:px-[1.5rem] md:py-[2rem]`}
         >
           {generating ? (
             <Loader2 className="h-4 w-4 animate-spin" />
@@ -209,7 +219,7 @@ export default function DashboardNew() {
           <Button
             key={topic}
             size={"sm"}
-            className="rounded-full border bg-card/80 text-xs text-primary/80 hover:bg-card hover:text-primary md:text-sm"
+            className="rounded-lg border bg-card/80 text-xs text-primary hover:bg-card hover:text-primary md:text-sm"
             onClick={() => {
               setGenerating(true);
               createNoteMutation.mutate({
@@ -225,7 +235,7 @@ export default function DashboardNew() {
           <>
             <Button
               size={"sm"}
-              className="mb-8 rounded-full border bg-card/80 text-xs text-primary/80 hover:bg-card hover:text-primary md:text-base"
+              className="mb-8 rounded-lg border bg-card/80 text-xs text-primary/80 hover:bg-card hover:text-primary md:text-base"
             >
               <Loader2 className="h-4 w-4 animate-spin" />
             </Button>
