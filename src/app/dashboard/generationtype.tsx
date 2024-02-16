@@ -44,10 +44,10 @@ export default function GenerationType() {
             }}
             disabled={typeSelected === "podcast" || typeSelected === "note"}
             className={cn(
-              `flex h-[250px] w-full cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-purple-500 bg-purple-200 transition-all hover:scale-[101%] hover:opacity-80 active:scale-[99%]`,
+              `flex h-[250px] w-full cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-purple-500 bg-purple-200 transition-all hover:scale-[101%] hover:opacity-80 active:scale-[99%] dark:border-purple-900/80 dark:bg-purple-400/80`,
             )}
           >
-            <p className="text-xl font-bold text-purple-900/80 opacity-60">
+            <p className="text-xl font-bold text-purple-900/80 opacity-60 dark:text-purple-200/80">
               Podcast Style
             </p>
             <svg
@@ -79,13 +79,13 @@ export default function GenerationType() {
               toast.info("Preparing your note...");
             }}
             className={cn(
-              `flex h-[250px] w-full cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-yellow-500 bg-yellow-200 transition-all hover:scale-[101%] hover:opacity-80 active:scale-[99%]`,
+              `flex h-[250px] w-full cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-red-500 bg-red-200 transition-all hover:scale-[101%] hover:opacity-80 active:scale-[99%] dark:border-red-900/80 dark:bg-red-300/80`,
             )}
           >
-            <p className="text-xl font-bold text-yellow-900/80 opacity-60">
+            <p className="text-xl font-bold text-red-900/80 opacity-60 dark:text-red-200/80">
               Note Style
             </p>
-            <ScrollText className="h-[64px] w-[64px] text-yellow-100/70" />
+            <ScrollText className="h-[64px] w-[64px] text-red-100/70" />
           </Button>
         </div>
       </DialogContent>
