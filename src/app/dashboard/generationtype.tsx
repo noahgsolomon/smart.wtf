@@ -21,8 +21,6 @@ export default function GenerationType() {
   const [typeSelected, setTypeSelected] = useState<"podcast" | "note" | "">("");
   const router = useRouter();
 
-  console.log(agent, noteId, topic);
-
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogContent className=" rounded-lg sm:max-w-[425px]">
@@ -34,7 +32,7 @@ export default function GenerationType() {
             Choose a learning style to generate a note
           </DialogDescription>
         </DialogHeader>
-        <div className="flex flex-row gap-1">
+        <div className="flex flex-row gap-4">
           <Button
             variant={"none"}
             onClick={() => {
@@ -44,7 +42,7 @@ export default function GenerationType() {
             }}
             disabled={typeSelected === "podcast" || typeSelected === "note"}
             className={cn(
-              `flex h-[250px] w-full cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-purple-500 bg-purple-200 transition-all hover:scale-[101%] hover:opacity-80 active:scale-[99%] dark:border-purple-900/80 dark:bg-purple-400/80`,
+              `flex h-[250px] w-full cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-purple-500 bg-purple-200 shadow-sm transition-all hover:scale-[101%] hover:opacity-80 active:scale-[99%] dark:border-purple-900/80 dark:bg-purple-400/80`,
             )}
           >
             <p className="text-xl font-bold text-purple-900/80 opacity-60 dark:text-purple-200/80">
@@ -79,13 +77,13 @@ export default function GenerationType() {
               toast.info("Preparing your note...");
             }}
             className={cn(
-              `flex h-[250px] w-full cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-red-500 bg-red-200 transition-all hover:scale-[101%] hover:opacity-80 active:scale-[99%] dark:border-red-900/80 dark:bg-red-300/80`,
+              `flex h-[250px] w-full cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-blue bg-lightBlue shadow-sm transition-all hover:scale-[101%] hover:opacity-80 active:scale-[99%]`,
             )}
           >
-            <p className="text-xl font-bold text-red-900/80 opacity-60 dark:text-red-200/80">
+            <p className="text-xl font-bold text-blue opacity-60 dark:text-lightBlue/80">
               Note Style
             </p>
-            <ScrollText className="h-[64px] w-[64px] text-red-100/70" />
+            <ScrollText className="h-[64px] w-[64px] text-lightBlue/70" />
           </Button>
         </div>
       </DialogContent>
