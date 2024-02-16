@@ -537,7 +537,7 @@ export default function DashboardNew() {
           value={inputTopic}
           maxLength={50}
           placeholder="Let's learn something new..."
-          className="relative w-full rounded-lg border-2 bg-card/80 py-8 pl-16 pr-[3.5rem] text-2xl font-bold text-primary opacity-80 shadow-lg transition-all placeholder:text-primary/80 focus:border-lightBlue md:py-10 md:pl-24 md:pr-20 "
+          className="relative w-full rounded-lg bg-card/80 py-8 pl-16 pr-[3.5rem] text-xl font-bold text-primary shadow-lg transition-all placeholder:text-primary/80 focus:border-lightBlue md:py-10 md:pl-24 md:pr-20 md:text-2xl "
         />
         <HoverCard
           openDelay={100}
