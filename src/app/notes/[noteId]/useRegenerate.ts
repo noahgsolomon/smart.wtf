@@ -17,14 +17,12 @@ export const useRegenerate = ({
   setMarkdown,
   agent = false,
   agentPrompt = "",
-  otherMarkdown = "",
 }: {
   note: { id: number; title: string } | undefined;
   markdown: string;
   setMarkdown: React.Dispatch<React.SetStateAction<string>>;
   agent?: boolean;
   agentPrompt?: string;
-  otherMarkdown: string;
 }) => {
   const [regenerating, setRegenerating] = useState(false);
   const [done, setDone] = useState(false);
@@ -49,9 +47,7 @@ export const useRegenerate = ({
 
   useEffect(() => {
     if (done) {
-      const minutes = calculateReadingTime(
-        markdown.length + otherMarkdown.length,
-      );
+      const minutes = calculateReadingTime(markdown.length);
       updateNoteMutation.mutate({
         id: note?.id!,
         markdown,

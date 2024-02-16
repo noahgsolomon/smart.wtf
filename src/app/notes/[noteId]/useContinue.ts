@@ -8,12 +8,10 @@ export const useContinue = ({
   setMarkdown,
   agent = false,
   agentPrompt = "",
-  otherMarkdown = "",
 }: {
   note: { id: number; title: string } | undefined;
   markdown: string;
   setMarkdown: React.Dispatch<React.SetStateAction<string>>;
-  otherMarkdown: string;
   agent?: boolean;
   agentPrompt?: string;
 }) => {
@@ -48,9 +46,7 @@ export const useContinue = ({
 
   useEffect(() => {
     if (done) {
-      const minutes = calculateReadingTime(
-        markdown.length + otherMarkdown.length,
-      );
+      const minutes = calculateReadingTime(markdown.length);
       updateNoteMutation.mutate({
         id: note?.id!,
         markdown,
