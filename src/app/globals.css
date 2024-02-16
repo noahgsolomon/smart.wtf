@@ -2,9 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-html {
+/* html {
   scroll-behavior: smooth;
-}
+} */
 
 @layer base {
   :root {
