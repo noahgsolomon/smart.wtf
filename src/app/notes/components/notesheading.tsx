@@ -32,57 +32,9 @@ export default function NotesHeading({
           <X className="h-4 w-4" />
         </a>
         <div className="flex flex-row items-center gap-2">
-          <DropdownMenu>
-            <DropdownMenuTrigger>
-              <Button variant={"ghost"}>
-                <PlusIcon className="h-4 w-4" />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent>
-              {userNotes.map((note) => (
-                <Fragment key={note.id}>
-                  {!openNotes.some((openNote) => openNote.id === note.id) && (
-                    <DropdownMenuItem
-                      className="cursor-pointer"
-                      onClick={() => {
-                        if (openNotes.length > 2) {
-                          setOpenNotes([
-                            ...openNotes.slice(1, openNotes.length),
-                            note,
-                          ]);
-                        } else {
-                          setOpenNotes([...openNotes, note]);
-                        }
-
-                        router.push(`/notes/${note.id}`);
-                      }}
-                    >
-                      <div className="flex flex-row items-center gap-2">
-                        <p>{note.emoji}</p>
-                        <p className="font-bold">{note.title}</p>
-                      </div>
-                    </DropdownMenuItem>
-                  )}
-                </Fragment>
-              ))}
-              {userNotes.every((note) =>
-                openNotes.some((openNote) => openNote.id === note.id),
-              ) && (
-                <DropdownMenuItem disabled>
-                  <p>No more notes</p>
-                </DropdownMenuItem>
-              )}
-              <div className="flex justify-center p-1">
-                <Button
-                  onClick={() => setIsOpen(true)}
-                  className="flex flex-row gap-2"
-                >
-                  <PlusIcon className="h-4 w-4" />
-                  Generate
-                </Button>
-              </div>
-            </DropdownMenuContent>
-          </DropdownMenu>
+          <Button onClick={() => setIsOpen(true)} variant={"ghost"}>
+            <PlusIcon className="h-4 w-4" />
+          </Button>
           <div className="flex flex-row items-center gap-1">
             {openNotes.map((note, index) => (
               <Fragment key={note.id}>
