@@ -10,11 +10,11 @@ import { usePathname } from "next/navigation";
 import UserButton from "./UserButton";
 import { QuickActionsModal } from "../ui/modals/quickactionsmodal";
 import { useQuickActions } from "@/utils/hooks/usequickactions";
-import AddNote from "@/app/dashboard/components/notes/addnote";
-import ChatButton from "../chatbutton";
 import { useEffect, useState } from "react";
 import DemoAddNote from "../demo/demoaddnote";
 import GenerationType from "@/app/dashboard/generationtype";
+import { Search } from "lucide-react";
+import { motion } from "framer-motion";
 
 const NavBar = () => {
   const { userId } = useAuth();
@@ -52,30 +52,46 @@ const NavBar = () => {
 
   const { setIsOpen } = useQuickActions();
 
-  const [isTop, setIsTop] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(window.scrollY);
+  const [headerStyle, setHeaderStyle] = useState({});
+
+  const [sum, setSum] = useState(0);
 
   useEffect(() => {
-    const checkScroll = () => {
-      setIsTop(window.scrollY <= 35);
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      const direction = scrollY - lastScrollY;
+
+      console.log(sum);
+
+      if (direction > 0) {
+        setSum((prev) => Math.min(prev + direction, 75));
+        setHeaderStyle({
+          transform: `translateY(${-sum}px)`,
+          transition: "transform 0.3s ease-in-out",
+        });
+      } else {
+        setSum((prev) => Math.max(prev + direction, 0));
+        setHeaderStyle({
+          transform: `translateY(${-sum}px)`,
+          transition: "transform 0.3s ease-in-out",
+        });
+      }
+
+      setLastScrollY(scrollY);
     };
 
-    window.addEventListener("scroll", checkScroll);
-    return () => {
-      window.removeEventListener("scroll", checkScroll);
-    };
-  }, []);
+    window.addEventListener("scroll", handleScroll);
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [lastScrollY]);
 
   return (
     <>
-      {!path.startsWith("/lesson") &&
-      !path.startsWith("/notes") &&
-      !path.startsWith("/quiz") ? (
+      {!path.startsWith("/lesson") && !path.startsWith("/quiz") ? (
         <header
-          className={`border-sm fixed left-0 right-0 top-0 z-20 transition-all coarse:border-b coarse:bg-card/80 coarse:backdrop-blur-3xl ${
-            isTop
-              ? ""
-              : "fine:border-sm fine:border-b fine:bg-card/80 fine:backdrop-blur-3xl"
-          } `}
+          style={headerStyle}
+          className="fixed left-0 right-0 top-0 z-20 border-b bg-card backdrop-blur-3xl transition-all"
         >
           {/* <div 
             className={
@@ -104,7 +120,7 @@ const NavBar = () => {
             />
           )} */}
           <div className="flex items-center justify-between px-[5%] py-1">
-            <div>
+            <div className="flex flex-row items-center gap-2">
               <Link href={"/"}>
                 <SmartWtfLogo
                   className={cn(
@@ -113,6 +129,24 @@ const NavBar = () => {
                   )}
                 />
               </Link>
+              {userId && (
+                <div
+                  onClick={() => setIsOpen(true)}
+                  className="relative hidden cursor-pointer transition-all hover:opacity-80 sm:block"
+                >
+                  <div className="flex flex-row items-center gap-1 rounded-lg border border-border bg-secondary/60 py-2 pl-2 pr-24 text-sm text-primary/60">
+                    <Search className="h-4 w-4 text-primary/60" />
+                    Search...
+                  </div>
+                  <Button
+                    className="rounded-lg bg-card sm:absolute sm:right-1 sm:top-1/2 sm:-translate-y-1/2 sm:transform"
+                    size={"sm"}
+                    variant={"outline"}
+                  >
+                    ⌘K
+                  </Button>
+                </div>
+              )}
             </div>
             {/* <div className="flex flex-row gap-4">
               <Button className="flex flex-row gap-1" variant={"link"}>
@@ -140,24 +174,17 @@ const NavBar = () => {
         )} */}
 
             <div className="flex items-center justify-end gap-4">
-              {/* {userId && (
+              {userId && (
                 <div
                   onClick={() => setIsOpen(true)}
-                  className="relative hidden cursor-pointer transition-all hover:opacity-80 md:block"
+                  className="relative cursor-pointer transition-all hover:opacity-80 sm:hidden"
                 >
-                  <div className="rounded-full border border-border bg-secondary/60 py-2 pl-2 pr-24 text-sm text-primary/60">
-                    Search...
+                  <div className="flex flex-row items-center text-primary/80">
+                    <Search className="h-6 w-6" />
                   </div>
-                  <Button
-                    className="rounded-full bg-card md:absolute md:right-1 md:top-1/2 md:-translate-y-1/2 md:transform"
-                    size={"sm"}
-                    variant={"outline"}
-                  >
-                    ⌘K
-                  </Button>
                 </div>
-              )} */}
-              <div className="coarse:hidden">
+              )}
+              <div className="hidden sm:block coarse:hidden">
                 <ThemeButton />
               </div>
 
@@ -195,11 +222,11 @@ const NavBar = () => {
       ) : null}
       {userId ? (
         <>
-          <div className="coarse:hidden">
-            {/* {!path.startsWith("/quiz") && <ChatButton />} */}
-            <QuickActionsModal />
-          </div>
-          <AddNote />
+          {/* <div className="coarse:hidden"> */}
+          {/* {!path.startsWith("/quiz") && <ChatButton />} */}
+          <QuickActionsModal />
+          {/* </div> */}
+          {/* <AddNote /> */}
           <GenerationType />
         </>
       ) : (
