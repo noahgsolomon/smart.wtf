@@ -45,11 +45,11 @@ export default function GenerationType() {
               `flex h-[250px] w-full cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-purple-500 bg-purple-200 shadow-sm transition-all hover:scale-[101%] hover:opacity-80 active:scale-[99%] dark:border-purple-900/80 dark:bg-purple-400/80`,
             )}
           >
-            <p className="text-xl font-bold text-purple-900/80 opacity-60 dark:text-purple-200/80">
+            <p className="text-xl font-bold text-secondary/80 dark:text-primary/80">
               Podcast Style
             </p>
             <svg
-              className=" text-purple-100/70"
+              className="text-secondary/60 dark:text-primary/60"
               xmlns="http://www.w3.org/2000/svg"
               width="64"
               height="64"
@@ -80,10 +80,10 @@ export default function GenerationType() {
               `flex h-[250px] w-full cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-blue bg-lightBlue shadow-sm transition-all hover:scale-[101%] hover:opacity-80 active:scale-[99%]`,
             )}
           >
-            <p className="text-xl font-bold text-blue opacity-60 dark:text-lightBlue/80">
+            <p className="text-xl font-bold text-secondary/80 dark:text-primary/80 ">
               Note Style
             </p>
-            <ScrollText className="h-[64px] w-[64px] text-lightBlue/70" />
+            <ScrollText className="h-[64px] w-[64px] text-secondary/60 dark:text-primary/60 " />
           </Button>
         </div>
       </DialogContent>
