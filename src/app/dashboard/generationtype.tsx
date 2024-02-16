@@ -1,4 +1,5 @@
 "use client";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -36,15 +37,21 @@ export default function GenerationType() {
           <Button
             variant={"none"}
             onClick={() => {
-              router.push(`/notes/${noteId}`);
-              setIsOpen(false);
-              toast.info("Preparing your note...");
+              // router.push(`/notes/${noteId}`);
+              // setIsOpen(false);
+              // toast.info("Preparing your note...");
             }}
-            disabled={typeSelected === "podcast" || typeSelected === "note"}
             className={cn(
-              `flex h-[250px] w-full cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-purple-500 bg-purple-200 shadow-sm transition-all hover:scale-[101%] hover:opacity-80 active:scale-[99%] dark:border-purple-900/80 dark:bg-purple-400/80`,
+              `relative flex h-[250px] w-full cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-purple-500 bg-purple-200 shadow-sm transition-all hover:scale-[101%] hover:opacity-80 active:scale-[99%] dark:border-purple-900/80 dark:bg-purple-400/80`,
             )}
           >
+            <Badge
+              variant={"history"}
+              className="absolute -right-2 -top-2 z-10"
+            >
+              Coming Soon
+            </Badge>
+            <div className="absolute inset-0 flex items-center justify-center rounded-lg bg-black/30"></div>
             <p className="text-xl font-bold text-secondary/80 dark:text-primary/80">
               Podcast Style
             </p>
