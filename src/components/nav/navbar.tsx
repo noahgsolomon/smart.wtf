@@ -65,7 +65,7 @@ const NavBar = () => {
       console.log(sum);
 
       if (direction > 0) {
-        setSum((prev) => Math.min(prev + direction, 75));
+        setSum((prev) => Math.min(prev + direction, 85));
         setHeaderStyle({
           transform: `translateY(${-sum}px)`,
           transition: "transform 0.3s ease-in-out",
@@ -91,7 +91,7 @@ const NavBar = () => {
       {!path.startsWith("/lesson") && !path.startsWith("/quiz") ? (
         <header
           style={headerStyle}
-          className="fixed left-0 right-0 top-0 z-20 border-b bg-card backdrop-blur-3xl transition-all"
+          className="fixed left-2 right-2 top-3 z-20 mx-auto rounded-lg  border bg-card/80 shadow-sm backdrop-blur-3xl transition-all"
         >
           {/* <div 
             className={
@@ -124,7 +124,6 @@ const NavBar = () => {
               <Link href={"/"}>
                 <SmartWtfLogo
                   className={cn(
-                    buttonVariants({ variant: "ghost" }),
                     "h-14 w-14 cursor-pointer p-0 transition-all hover:opacity-80",
                   )}
                 />

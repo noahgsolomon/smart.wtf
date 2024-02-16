@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import NotesHeading from "../components/notesheading";
 import { useNoteContext } from "../context/notescontext";
 import { trpc } from "@/trpc/client";
 import { type Note } from "@/types";
@@ -33,6 +32,7 @@ import { toast } from "sonner";
 import Link from "next/link";
 import { useAddingNote } from "@/utils/hooks/useaddingnote";
 import { useGenerationType } from "@/utils/hooks/usegenerationtype";
+import { useRouter } from "next/navigation";
 
 type UserNote = {
   id: number;
@@ -65,6 +65,7 @@ export default function Page({ params }: { params: { noteId: string } }) {
   });
 
   const retrieveUserNotesQuery = trpc.notes.getUserNotesMeta.useQuery();
+  const router = useRouter();
 
   const [imageMutationCalled, setImageMutationCalled] = useState(false);
   const { openNotes, setOpenNotes, setUserNotes } = useNoteContext();
@@ -188,6 +189,8 @@ export default function Page({ params }: { params: { noteId: string } }) {
           },
         ]);
       }
+    } else if (retrieveNoteQuery.isFetched) {
+      router.push("/404");
     }
   }, [
     retrieveNoteQuery.data,
