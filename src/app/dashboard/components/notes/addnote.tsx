@@ -86,7 +86,7 @@ export default function AddNote({ visible = false }: { visible?: boolean }) {
             <Textarea
               id="name"
               placeholder="// What's the next mind-boggling mystery you want to unravel"
-              className="col-span-3"
+              className="col-span-3 dark:bg-secondary/20"
               value={noteInput}
               onKeyDown={(e) => {
                 if (e.key === "Enter") {
