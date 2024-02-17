@@ -1,9 +1,5 @@
 import { auth } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
-import DemoNotesMenu from "@/components/demo/demonotesmenu";
-import DemoLatestActivity from "@/components/demo/demolatestactivity";
-import DemoStreak from "@/components/demo/demostreak";
-import DemoLearningPath from "@/components/demo/demolearningpath";
 import { Badge } from "@/components/ui/badge";
 import DashboardNew from "./dashboard/dashboardnew";
 
