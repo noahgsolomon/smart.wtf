@@ -11,7 +11,6 @@ import UserButton from "./UserButton";
 import { QuickActionsModal } from "../ui/modals/quickactionsmodal";
 import { useQuickActions } from "@/utils/hooks/usequickactions";
 import { useEffect, useState } from "react";
-import DemoAddNote from "../demo/demoaddnote";
 import GenerationType from "@/app/dashboard/generationtype";
 import { Search } from "lucide-react";
 import { motion } from "framer-motion";
@@ -52,7 +51,9 @@ const NavBar = () => {
 
   const { setIsOpen } = useQuickActions();
 
-  const [lastScrollY, setLastScrollY] = useState(window.scrollY);
+  const [lastScrollY, setLastScrollY] = useState(
+    typeof window !== "undefined" ? window.scrollY : 0,
+  );
   const [headerStyle, setHeaderStyle] = useState({});
 
   const [sum, setSum] = useState(0);
@@ -221,16 +222,10 @@ const NavBar = () => {
       ) : null}
       {userId ? (
         <>
-          {/* <div className="coarse:hidden"> */}
-          {/* {!path.startsWith("/quiz") && <ChatButton />} */}
           <QuickActionsModal />
-          {/* </div> */}
-          {/* <AddNote /> */}
           <GenerationType />
         </>
-      ) : (
-        <DemoAddNote />
-      )}
+      ) : null}
     </>
   );
 };
