@@ -1,5 +1,6 @@
 import { Badge } from "@/components/ui/badge";
 import DashboardNew from "./dashboardnew";
+import FlyingRecommendations from "./flyingrecommendations";
 
 const Page = async () => {
   return (
@@ -23,6 +24,7 @@ const Page = async () => {
         </div>
         <DashboardNew />
       </main>
+      <FlyingRecommendations />
     </>
   );
 };
