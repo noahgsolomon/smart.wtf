@@ -18,6 +18,8 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { useUser } from "@clerk/nextjs";
+import { User } from "@/types";
 
 const intriguingTopics = [
   "🔭 Kepler's Cosmic Laws",
@@ -471,42 +473,66 @@ const intriguingTopics = [
   "🔬 The Discovery of New Antibiotics",
 ];
 
-export default function DashboardNew() {
+export default function DashboardNew({
+  searchParams,
+}: {
+  searchParams: {
+    noteTopic?: string;
+    noteAgent?: string;
+    noteCategory?: string;
+    noteNextTopic?: string;
+  };
+}) {
   const [inputTopic, setInputTopic] = useState("");
   const [generating, setGenerating] = useState(false);
 
-  const { setNoteId, setTopic } = useAddingNote();
+  const {
+    setTopic,
+    setAgent: setAddingNoteAgent,
+    setCategory,
+    setNextTopic,
+  } = useAddingNote();
+  const { setIsOpen, setIsSignedIn } = useGenerationType();
 
-  const createNoteMutation = trpc.notes.createNote.useMutation({
-    onSuccess: (data) => {
-      if (data) {
-        if (data.valid) {
-          setNoteId(parseInt(data.noteId!));
-          setTopic(inputTopic);
-          setAgent(agent);
-          setIsOpen(true);
-          setGenerating(false);
-          setInputTopic("");
-        } else {
-          toast.error("Invalid topic");
-          setInputTopic("");
-          setGenerating(false);
-        }
-      }
-    },
-    onError: () => {
-      setGenerating(false);
-    },
-  });
+  const user = useUser();
 
-  const [isChangeAgentOpen, setIsChangeAgentOpen] = useState(false);
-
-  const { setIsOpen } = useGenerationType();
+  useEffect(() => {
+    if (
+      searchParams?.noteTopic &&
+      searchParams?.noteAgent &&
+      searchParams?.noteCategory &&
+      searchParams?.noteNextTopic &&
+      user.user
+    ) {
+      setIsSignedIn(true);
+      setIsOpen(true);
+      setTopic(searchParams.noteTopic);
+      setCategory(searchParams.noteCategory);
+      setNextTopic(searchParams.noteNextTopic);
+      setAddingNoteAgent({
+        name: searchParams.noteAgent as
+          | "rick"
+          | "mrburns"
+          | "bender"
+          | "patrick",
+        id:
+          searchParams.noteAgent === "rick"
+            ? 1
+            : searchParams.noteAgent === "mrburns"
+            ? 5
+            : searchParams.noteAgent === "bender"
+            ? 6
+            : 4,
+      });
+    }
+  }, [user.user]);
 
   const [agent, setAgent] = useState<{
-    name: "rick" | "mrburns" | "bender" | "patrick";
+    name: "rick" | "patrick" | "mrburns" | "bender";
     id: number;
   }>({ name: "rick", id: 1 });
+
+  const [isChangeAgentOpen, setIsChangeAgentOpen] = useState(false);
 
   const [recommendedTopics, setRecommendedTopics] = useState<string[]>([]);
 
@@ -522,6 +548,30 @@ export default function DashboardNew() {
     setRecommendedTopics(randomTopics as string[]);
   }, []);
 
+  const [title, setTitle] = useState("");
+
+  const validateTopicQuery = trpc.notes.validateTopic.useQuery({ title });
+
+  useEffect(() => {
+    if (validateTopicQuery.isFetched && title !== "") {
+      const validateTopic = validateTopicQuery.data;
+      if (validateTopic?.valid) {
+        setIsSignedIn(!!user.user);
+        setTopic(title);
+        setAgent(agent);
+        setIsOpen(true);
+        setNextTopic(validateTopic.nextTopic);
+        setCategory(validateTopic.category);
+        setGenerating(false);
+        setInputTopic("");
+      } else {
+        toast.error("Invalid topic");
+        setInputTopic("");
+        setGenerating(false);
+      }
+    }
+  }, [validateTopicQuery.data, validateTopicQuery.isFetched]);
+
   return (
     <div className="flex w-full flex-col gap-2">
       <div className="relative w-full">
@@ -530,10 +580,7 @@ export default function DashboardNew() {
             if (e.key === "Enter") {
               if (inputTopic === "") return;
               setGenerating(true);
-              createNoteMutation.mutate({
-                agentId: agent.id,
-                title: inputTopic,
-              });
+              setTitle(inputTopic);
             }
           }}
           onChange={(e) => setInputTopic(e.target.value)}
@@ -575,7 +622,7 @@ export default function DashboardNew() {
                     className={`absolute z-0 overflow-hidden transition-all`}
                     height={75}
                     width={75}
-                    src={"/fireball.gif"}
+                    src={"https://images.smart.wtf/fireball.gif"}
                     alt="fire"
                   />
                 </div>
@@ -652,10 +699,7 @@ export default function DashboardNew() {
           onClick={() => {
             if (inputTopic === "") return;
             setGenerating(true);
-            createNoteMutation.mutate({
-              agentId: agent.id,
-              title: inputTopic,
-            });
+            setTitle(inputTopic);
           }}
           className={`${
             inputTopic === "" ? "opacity-0" : ""
@@ -676,10 +720,7 @@ export default function DashboardNew() {
             className="rounded-lg border bg-card/80 text-xs text-primary hover:bg-card hover:text-primary md:text-sm"
             onClick={() => {
               setGenerating(true);
-              createNoteMutation.mutate({
-                agentId: agent.id,
-                title: recommendedTopics[index]!,
-              });
+              setTitle(topic);
             }}
           >
             {topic}
