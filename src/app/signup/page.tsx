@@ -1,10 +1,35 @@
 import React from "react";
 import { SignUp } from "@clerk/nextjs";
 
-const SignUpPage = () => {
+const SignUpPage = ({
+  searchParams,
+}: {
+  searchParams: {
+    noteTopic?: string;
+    noteAgent?: string;
+    noteCategory?: string;
+    noteNextTopic?: string;
+  };
+}) => {
   return (
     <div className="flex h-[calc(100vh)] items-center justify-center">
       <SignUp
+        redirectUrl={`/auth${
+          searchParams.noteTopic &&
+          searchParams.noteAgent &&
+          searchParams.noteCategory &&
+          searchParams.noteNextTopic
+            ? `?noteTopic=${encodeURIComponent(
+                searchParams.noteTopic,
+              )}&noteAgent=${encodeURIComponent(
+                searchParams.noteAgent,
+              )}&noteCategory=${encodeURIComponent(
+                searchParams.noteCategory,
+              )}&noteNextTopic=${encodeURIComponent(
+                searchParams.noteNextTopic,
+              )}`
+            : ""
+        }`}
         appearance={{
           elements: {
             alertText: "text-primary",
