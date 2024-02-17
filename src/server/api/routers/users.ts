@@ -1,4 +1,8 @@
-import { createTRPCRouter, protectedProcedure } from "@/server/api/trpc";
+import {
+  createTRPCRouter,
+  protectedProcedure,
+  publicProcedure,
+} from "@/server/api/trpc";
 import { streak, users } from "@/server/db/schemas/users/schema";
 import { and, eq } from "drizzle-orm";
 import { currentUser } from "@clerk/nextjs";
@@ -94,6 +98,16 @@ export const userRouter = createTRPCRouter({
 
     return { user: user };
   }),
+
+  getUserFromClerkId: publicProcedure
+    .input(z.object({ clerkId: z.string() }))
+    .query(async ({ ctx, input: { clerkId } }) => {
+      const user = await ctx.db.query.users.findFirst({
+        where: eq(users.clerk_id, clerkId),
+      });
+
+      return { user: user };
+    }),
 
   // Mutation to update the current user's username
   setUsername: protectedProcedure
