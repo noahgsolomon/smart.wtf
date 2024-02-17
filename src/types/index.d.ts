@@ -1,5 +1,22 @@
 import { type User } from "@clerk/nextjs/dist/types/server";
 
+export type User =
+  | {
+      id: number;
+      name: string;
+      password: string | null;
+      email: string;
+      username: string;
+      clerk_id: string;
+      subscribed: boolean;
+      created_at: Date;
+      stripeCustomerId: string | null;
+      stripeSubscriptionId: string | null;
+      stripePriceId: string | null;
+      stripeCurrentPeriodEnd: Date | null;
+    }
+  | undefined;
+
 export type SubscriptionPlan = {
   name: string;
   description: string;
