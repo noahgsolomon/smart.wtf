@@ -27,7 +27,6 @@ import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import { AnimatePresence, motion } from "framer-motion";
 import { useRegenerate } from "./useRegenerate";
 import { useContinue } from "./useContinue";
-import { useChatContext } from "@/app/context/chat/ChatContext";
 import { toast } from "sonner";
 import Link from "next/link";
 import { useAddingNote } from "@/utils/hooks/useaddingnote";
@@ -154,8 +153,6 @@ export default function Page({ params }: { params: { noteId: string } }) {
     },
   });
 
-  const { setLesson } = useChatContext();
-
   useEffect(() => {
     const note = retrieveNoteQuery.data?.note;
     if (note) {
@@ -199,23 +196,6 @@ export default function Page({ params }: { params: { noteId: string } }) {
     openNotes,
     imageMutationCalled,
     createImageMutation,
-  ]);
-
-  useEffect(() => {
-    const userNotes = retrieveUserNotesQuery.data?.notes;
-    if (userNotes) {
-      setUserNotes(
-        userNotes.map((note: UserNote) => ({
-          id: note.id,
-          title: note.title,
-          emoji: note.emoji,
-        })),
-      );
-    }
-  }, [
-    retrieveUserNotesQuery.data,
-    retrieveUserNotesQuery.isSuccess,
-    setUserNotes,
   ]);
 
   useEffect(() => {
