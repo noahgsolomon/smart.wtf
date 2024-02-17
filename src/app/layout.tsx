@@ -7,13 +7,13 @@ import { headers } from "next/headers";
 import { type Metadata } from "next";
 import ProgressBarProvider from "./progressbar";
 import { GeistSans } from "geist/font";
-import { ChatProvider } from "./context/chat/ChatContext";
 import { Background } from "@/components/ui/background";
 import { Analytics } from "@vercel/analytics/react";
 import { TooltipProvider } from "@/components/ui/tooltip";
 
 export const metadata: Metadata = {
   appleWebApp: true,
+  metadataBase: new URL("https://smart.wtf"),
   manifest: "/manifest.json",
   icons: { apple: "/icon.png" },
   openGraph: {
@@ -47,12 +47,10 @@ export default function RootLayout({
             <TooltipProvider delayDuration={0}>
               <Providers>
                 <ProgressBarProvider>
-                  <ChatProvider>
-                    <NavBar />
-                    <Background />
-                    {children}
-                    {modal}
-                  </ChatProvider>
+                  <NavBar />
+                  <Background />
+                  {children}
+                  {modal}
                 </ProgressBarProvider>
               </Providers>
             </TooltipProvider>
