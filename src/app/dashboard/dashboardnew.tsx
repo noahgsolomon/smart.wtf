@@ -1,7 +1,7 @@
 "use client";
 import { Input } from "@/components/ui/input";
 import Image from "next/image";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { trpc } from "@/trpc/client";
 import { Button } from "@/components/ui/button";
 import { CornerDownRight, Loader2 } from "lucide-react";
@@ -508,15 +508,18 @@ export default function DashboardNew() {
     id: number;
   }>({ name: "rick", id: 1 });
 
-  const recommendedTopics = useMemo(() => {
+  const [recommendedTopics, setRecommendedTopics] = useState<string[]>([]);
+
+  useEffect(() => {
     let randomTopics = [];
+    let topics = [...intriguingTopics];
     for (let i = 0; i < 3; i++) {
-      let randomIndex = Math.floor(Math.random() * intriguingTopics.length);
-      randomTopics.push(intriguingTopics[randomIndex]);
-      intriguingTopics.splice(randomIndex, 1);
+      let randomIndex = Math.floor(Math.random() * topics.length);
+      randomTopics.push(topics[randomIndex]);
+      topics.splice(randomIndex, 1);
     }
 
-    return randomTopics;
+    setRecommendedTopics(randomTopics as string[]);
   }, []);
 
   return (
