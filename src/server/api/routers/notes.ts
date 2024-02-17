@@ -1,10 +1,9 @@
-import { and, eq, sql } from "drizzle-orm";
+import { eq, sql } from "drizzle-orm";
 import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
 import { notes } from "@/server/db/schemas/notes/schema";
 import { z } from "zod";
 import OpenAI from "openai";
 import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
-import { streak } from "@/server/db/schemas/users/schema";
 import { type NoteCategories } from "@/types";
 import { db } from "@/server/db";
 
@@ -488,9 +487,9 @@ export const notesRouter = createTRPCRouter({
     .mutation(async ({ ctx, input }) => {
       await ctx.db.delete(notes).where(eq(notes.id, input.id));
     }),
-  createImage: protectedProcedure
+  createImage: publicProcedure
     .input(z.object({ title: z.string(), id: z.number() }))
-    .mutation(async ({ ctx, input: { title, id } }) => {
+    .mutation(async ({ input: { title, id } }) => {
       const imagePrompt = async (title: string) => {
         try {
           const response = await openai.chat.completions.create({
@@ -554,7 +553,7 @@ export const notesRouter = createTRPCRouter({
         }),
       );
 
-      await ctx.db
+      await db
         .update(notes)
         .set({
           imageUrl: `https://images.smart.wtf/note-${id}-image.png`,
@@ -609,33 +608,33 @@ export const notesRouter = createTRPCRouter({
       }
     }),
 
-  recommendedNotes: protectedProcedure.query(async ({ ctx }) => {
-    // const userNotes = await ctx.db.query.notes.findMany({
-    //   where: eq(notes.user_id, ctx.user_id),
-    //   columns: {
-    //     title: true,
-    //   },
-    // });
-    // try {
-    //   const response = await openai.chat.completions.create({
-    //     model: "gpt-3.5-turbo-1106",
-    //     messages: [
-    //       {
-    //         role: "system",
-    //         content: `Based on the user's previous learning topics, including ${userNotes
-    //           .map((note) => note.title)
-    //           .join(
-    //             ", ",
-    //           )}, generate a list of 3 new study topics as similar or adjacent topics. Return these recommendations in JSON format, with each recommended topic represented as a simple string title under the 'notes' array. The titles should be a relevant emoji followed by the topic. Avoid including descriptions or details—only the titles of the topics are required. These recommendations should be distinct, relevant, and suitable for the user's continued educational progression.`,
-    //       },
-    //     ],
-    //     response_format: { type: "json_object" },
-    //   });
-    //   return JSON.parse(response.choices[0]?.message.content ?? "{}").notes;
-    // } catch (error) {
-    //   console.error("Error fetching data:", error);
-    // }
-  }),
+  // recommendedNotes: protectedProcedure.query(async ({ ctx }) => {
+  //   // const userNotes = await ctx.db.query.notes.findMany({
+  //   //   where: eq(notes.user_id, ctx.user_id),
+  //   //   columns: {
+  //   //     title: true,
+  //   //   },
+  //   // });
+  //   // try {
+  //   //   const response = await openai.chat.completions.create({
+  //   //     model: "gpt-3.5-turbo-1106",
+  //   //     messages: [
+  //   //       {
+  //   //         role: "system",
+  //   //         content: `Based on the user's previous learning topics, including ${userNotes
+  //   //           .map((note) => note.title)
+  //   //           .join(
+  //   //             ", ",
+  //   //           )}, generate a list of 3 new study topics as similar or adjacent topics. Return these recommendations in JSON format, with each recommended topic represented as a simple string title under the 'notes' array. The titles should be a relevant emoji followed by the topic. Avoid including descriptions or details—only the titles of the topics are required. These recommendations should be distinct, relevant, and suitable for the user's continued educational progression.`,
+  //   //       },
+  //   //     ],
+  //   //     response_format: { type: "json_object" },
+  //   //   });
+  //   //   return JSON.parse(response.choices[0]?.message.content ?? "{}").notes;
+  //   // } catch (error) {
+  //   //   console.error("Error fetching data:", error);
+  //   // }
+  // }),
 
   findRandomNotes: publicProcedure.query(async () => {
     const randomNotes = await db.execute(
@@ -649,19 +648,6 @@ export const notesRouter = createTRPCRouter({
       where: eq(notes.user_id, ctx.user_id),
       with: {
         agents: true,
-      },
-    });
-
-    return { notes: notesFetch };
-  }),
-
-  getUserNotesMeta: protectedProcedure.query(async ({ ctx }) => {
-    const notesFetch = await ctx.db.query.notes.findMany({
-      where: eq(notes.user_id, ctx.user_id),
-      columns: {
-        id: true,
-        title: true,
-        emoji: true,
       },
     });
 

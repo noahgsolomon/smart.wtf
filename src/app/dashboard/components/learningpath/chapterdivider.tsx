@@ -1,11 +1,9 @@
 export default function ChapterDivider({
   chapter,
   title,
-  imageUrl,
 }: {
   chapter: number;
   title: string;
-  imageUrl: string;
 }) {
   return (
     <div className="pb-2">

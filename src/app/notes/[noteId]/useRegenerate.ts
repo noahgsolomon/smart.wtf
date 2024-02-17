@@ -38,7 +38,7 @@ export const useRegenerate = ({
         ),
       );
     },
-    onError: (error) => {
+    onError: () => {
       console.log("error, we hit da google search api limit :(");
     },
   });

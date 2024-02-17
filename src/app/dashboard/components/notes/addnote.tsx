@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { Flame, Loader2, PlusIcon, RotateCw, Wand, XIcon } from "lucide-react";
+import { Flame, PlusIcon, Wand, XIcon } from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -11,7 +11,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { trpc } from "@/trpc/client";
@@ -34,7 +34,6 @@ export default function AddNote({ visible = false }: { visible?: boolean }) {
   const [invalidTopic, setInvalidTopic] = useState(false);
   const [generating, setGenerating] = useState(false);
   const router = useRouter();
-  const [prevTopics, setPrevTopics] = useState<string[]>([]);
   const createNoteMutation = trpc.notes.createNote.useMutation({
     onSuccess: (data) => {
       if (data) {

@@ -11,7 +11,7 @@ import {
   CommandSeparator,
 } from "@/components/ui/command";
 
-import { Bot, Feather, FileQuestion, Landmark, User2 } from "lucide-react";
+import { Feather, FileQuestion, Landmark, User2 } from "lucide-react";
 
 import { DialogModal } from "./dialoguemodal";
 import { useQuickActions } from "@/utils/hooks/usequickactions";

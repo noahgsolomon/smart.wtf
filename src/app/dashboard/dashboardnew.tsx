@@ -1,7 +1,7 @@
 "use client";
 import { Input } from "@/components/ui/input";
 import Image from "next/image";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { trpc } from "@/trpc/client";
 import { Button } from "@/components/ui/button";
 import { CornerDownRight, Loader2 } from "lucide-react";
@@ -475,7 +475,7 @@ export default function DashboardNew() {
   const [inputTopic, setInputTopic] = useState("");
   const [generating, setGenerating] = useState(false);
 
-  const { setAgent: setAddingNoteAgent, setNoteId, setTopic } = useAddingNote();
+  const { setNoteId, setTopic } = useAddingNote();
 
   const createNoteMutation = trpc.notes.createNote.useMutation({
     onSuccess: (data) => {
@@ -501,7 +501,7 @@ export default function DashboardNew() {
 
   const [isChangeAgentOpen, setIsChangeAgentOpen] = useState(false);
 
-  const { isOpen, setIsOpen } = useGenerationType();
+  const { setIsOpen } = useGenerationType();
 
   const [agent, setAgent] = useState<{
     name: "rick" | "mrburns" | "bender" | "patrick";
@@ -511,10 +511,10 @@ export default function DashboardNew() {
   const [recommendedTopics, setRecommendedTopics] = useState<string[]>([]);
 
   useEffect(() => {
-    let randomTopics = [];
-    let topics = [...intriguingTopics];
+    const randomTopics = [];
+    const topics = [...intriguingTopics];
     for (let i = 0; i < 3; i++) {
-      let randomIndex = Math.floor(Math.random() * topics.length);
+      const randomIndex = Math.floor(Math.random() * topics.length);
       randomTopics.push(topics[randomIndex]);
       topics.splice(randomIndex, 1);
     }

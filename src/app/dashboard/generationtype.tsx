@@ -18,8 +18,8 @@ import { toast } from "sonner";
 
 export default function GenerationType() {
   const { isOpen, setIsOpen } = useGenerationType();
-  const { agent, noteId, topic } = useAddingNote();
-  const [typeSelected, setTypeSelected] = useState<"podcast" | "note" | "">("");
+  const { noteId } = useAddingNote();
+  const [typeSelected, _] = useState<"podcast" | "note" | "">("");
   const router = useRouter();
 
   return (

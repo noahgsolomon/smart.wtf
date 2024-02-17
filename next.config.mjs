@@ -3,10 +3,6 @@
  * for Docker builds.
  */
 /** @type {import("next").NextConfig} */
-const withPWA = require("next-pwa")({
-  dest: "public",
-  disable: process.env.NODE_ENV !== "PROD",
-});
 
 const nextConfig = {
   pageExtensions: ["js", "jsx", "mdx", "ts", "tsx"],
@@ -29,11 +25,6 @@ const nextConfig = {
       },
       {
         protocol: "https",
-        hostname: "oaidalleapiprodscus.blob.core.windows.net",
-        pathname: "**",
-      },
-      {
-        protocol: "https",
         hostname: "images.smart.wtf",
         pathname: "**",
       },
@@ -41,4 +32,4 @@ const nextConfig = {
   },
 };
 
-module.exports = withPWA(nextConfig);
+export default nextConfig;

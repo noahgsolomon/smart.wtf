@@ -13,7 +13,6 @@ import { useQuickActions } from "@/utils/hooks/usequickactions";
 import { useEffect, useState } from "react";
 import GenerationType from "@/app/dashboard/generationtype";
 import { Search } from "lucide-react";
-import { motion } from "framer-motion";
 
 const NavBar = () => {
   const { userId } = useAuth();

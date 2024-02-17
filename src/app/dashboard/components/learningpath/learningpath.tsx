@@ -218,7 +218,6 @@ export default function LearningPath() {
                           key={index}
                           chapter={index + 1}
                           title={chapter.title}
-                          imageUrl=""
                         />
                         {chapter.sections.map((section, index) => (
                           <SectionCard
@@ -267,7 +266,6 @@ export default function LearningPath() {
                         <ChapterDivider
                           chapter={index + 1}
                           title={chapter.title}
-                          imageUrl=""
                         />
                         <div className="flex max-w-full flex-col gap-2 overflow-x-auto">
                           {chapter.sections.map((section, index) => (
@@ -317,7 +315,6 @@ export default function LearningPath() {
                         <ChapterDivider
                           chapter={index + 1}
                           title={chapter.title}
-                          imageUrl=""
                         />
                         <div className="flex max-w-full flex-col gap-2 overflow-x-auto">
                           {chapter.sections.map((section, index) => (

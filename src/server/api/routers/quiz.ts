@@ -1,5 +1,5 @@
 import { eq } from "drizzle-orm";
-import { createTRPCRouter, protectedProcedure } from "../trpc";
+import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
 import {
   interactiveComponents,
   quizzes,
@@ -9,16 +9,17 @@ import {
 import { z } from "zod";
 import OpenAI from "openai";
 import { type Question } from "@/types";
+import { db } from "@/server/db";
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
 export const quizRouter = createTRPCRouter({
-  getQuestions: protectedProcedure
+  getQuestions: publicProcedure
     .input(z.object({ noteId: z.number() }))
-    .query(async ({ input: { noteId }, ctx }) => {
-      const quizQuestions = await ctx.db.query.interactiveComponents.findMany({
+    .query(async ({ input: { noteId } }) => {
+      const quizQuestions = await db.query.interactiveComponents.findMany({
         where: eq(interactiveComponents.noteId, noteId),
         with: {
           quizzes: true,
@@ -32,10 +33,10 @@ export const quizRouter = createTRPCRouter({
 
       return { available: true, questions: quizQuestions };
     }),
-  isQuizAvailable: protectedProcedure
+  isQuizAvailable: publicProcedure
     .input(z.object({ noteId: z.number() }))
-    .query(async ({ ctx, input }) => {
-      const quizQuestions = await ctx.db.query.interactiveComponents.findMany({
+    .query(async ({ input }) => {
+      const quizQuestions = await db.query.interactiveComponents.findMany({
         where: eq(interactiveComponents.noteId, input.noteId),
       });
       if (quizQuestions.length === 0) {

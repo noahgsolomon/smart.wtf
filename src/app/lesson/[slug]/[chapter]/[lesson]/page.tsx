@@ -18,7 +18,6 @@ import { Button } from "@/components/ui/button";
 import Understanding from "@/app/lesson/components/interactive/understanding";
 import useSound from "use-sound";
 import Sort from "@/app/lesson/components/interactive/sort/sort";
-import { useChatContext } from "@/app/context/chat/ChatContext";
 import { toast } from "sonner";
 
 export default function Page({
@@ -85,10 +84,6 @@ export default function Page({
       }
     },
   });
-
-  const { setLesson } = useChatContext();
-
-  let chatContext = "";
 
   const handleContinue = ({
     blockId,
@@ -179,10 +174,6 @@ export default function Page({
               {section[lessonNumber - 1]?.blocks
                 .sort((a, b) => a.order - b.order)
                 .map((block, index) => {
-                  chatContext += "\n\n" + block.markdown;
-                  if (index === section[lessonNumber - 1]?.blocks.length! - 1) {
-                    setLesson(chatContext);
-                  }
                   const markdown = (
                     <Markdown
                       components={{

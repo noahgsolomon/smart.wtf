@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useNoteContext } from "../context/notescontext";
 import { trpc } from "@/trpc/client";
 import { type Note } from "@/types";
 import Image from "next/image";
@@ -33,12 +32,6 @@ import { useAddingNote } from "@/utils/hooks/useaddingnote";
 import { useGenerationType } from "@/utils/hooks/usegenerationtype";
 import { useRouter } from "next/navigation";
 
-type UserNote = {
-  id: number;
-  title: string;
-  emoji: string;
-};
-
 export default function Page({ params }: { params: { noteId: string } }) {
   const retrieveNoteQuery = trpc.notes.getNote.useQuery({
     id: parseInt(params.noteId),
@@ -63,11 +56,9 @@ export default function Page({ params }: { params: { noteId: string } }) {
     noteId: parseInt(params.noteId),
   });
 
-  const retrieveUserNotesQuery = trpc.notes.getUserNotesMeta.useQuery();
   const router = useRouter();
 
   const [imageMutationCalled, setImageMutationCalled] = useState(false);
-  const { openNotes, setOpenNotes, setUserNotes } = useNoteContext();
   const [note, setNote] = useState<Note | null>(null);
   const [, setImageSrc] = useState<string | null>(null);
 
@@ -126,7 +117,6 @@ export default function Page({ params }: { params: { noteId: string } }) {
       agentPrompt: note?.agents.prompt,
     });
 
-  const [hasRegenerated, setHasRegenerated] = useState(false);
   const [hasAgentRegenerated, setHasAgentRegenerated] = useState(false);
 
   useEffect(() => {
@@ -170,30 +160,14 @@ export default function Page({ params }: { params: { noteId: string } }) {
       } else if (note.imageUrl) {
         setImageSrc(note.imageUrl);
       }
-
-      const noteId = parseInt(params.noteId);
-      if (
-        !openNotes.some((openNote) => openNote.id === noteId) &&
-        openNotes.length === 0
-      ) {
-        setOpenNotes((prev) => [
-          ...prev,
-          {
-            id: noteId,
-            pfp: note.agents.pfp,
-            title: note.title,
-            emoji: note.emoji,
-          },
-        ]);
-      }
     } else if (retrieveNoteQuery.isFetched) {
+      console.log("Note not found");
       router.push("/404");
     }
   }, [
     retrieveNoteQuery.data,
     retrieveNoteQuery.isSuccess,
     params.noteId,
-    openNotes,
     imageMutationCalled,
     createImageMutation,
   ]);
@@ -259,7 +233,7 @@ export default function Page({ params }: { params: { noteId: string } }) {
     }
   }, [agentMarkdown, following]);
 
-  if (retrieveNoteQuery.isLoading || retrieveUserNotesQuery.isLoading) {
+  if (retrieveNoteQuery.isLoading) {
     return <></>;
   }
 

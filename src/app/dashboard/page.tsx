@@ -2,7 +2,7 @@ import { Badge } from "@/components/ui/badge";
 import DashboardNew from "./dashboardnew";
 import FlyingRecommendations from "./flyingrecommendations";
 
-const Page = async () => {
+const Page = () => {
   return (
     <>
       <main className="mx-4 flex h-[60vh] flex-col items-center justify-center pt-24 transition-all md:mx-20 xl:mx-80">
