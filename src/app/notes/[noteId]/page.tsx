@@ -438,7 +438,8 @@ export default function Page({ params }: { params: { noteId: string } }) {
                         >
                           Continue
                         </Button>
-                        <p>or</p>
+                        {/*TODO: FIX */}
+                        {/* <p>or</p>
 
                         <Button
                           disabled={generating}
@@ -449,11 +450,12 @@ export default function Page({ params }: { params: { noteId: string } }) {
                             createNoteMutation.mutate({
                               agentId: note?.agent_id ?? 1,
                               title: note?.nextTopic!,
+
                             });
                           }}
                         >
                           {generating ? "Generating" : note?.nextTopic}
-                        </Button>
+                        </Button> */}
                       </div>
                     </div>
                   )}

@@ -217,7 +217,7 @@ const NavBar = () => {
           </div>
         </header>
       ) : null}
-      <QuickActionsModal />
+      {/* <QuickActionsModal /> */}
       <GenerationType />
     </>
   );
