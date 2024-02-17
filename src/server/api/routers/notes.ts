@@ -1,11 +1,12 @@
-import { and, eq } from "drizzle-orm";
-import { createTRPCRouter, protectedProcedure } from "../trpc";
+import { and, eq, sql } from "drizzle-orm";
+import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
 import { notes } from "@/server/db/schemas/notes/schema";
 import { z } from "zod";
 import OpenAI from "openai";
 import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
 import { streak } from "@/server/db/schemas/users/schema";
 import { type NoteCategories } from "@/types";
+import { db } from "@/server/db";
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
@@ -636,6 +637,13 @@ export const notesRouter = createTRPCRouter({
     // }
   }),
 
+  findRandomNotes: publicProcedure.query(async () => {
+    const randomNotes = await db.execute(
+      sql`SELECT image_url, title, agent_id, id FROM notes where image_url IS NOT NULL ORDER BY RAND() LIMIT 50`,
+    );
+    return randomNotes.rows;
+  }),
+
   getUserNotes: protectedProcedure.query(async ({ ctx }) => {
     const notesFetch = await ctx.db.query.notes.findMany({
       where: eq(notes.user_id, ctx.user_id),
@@ -660,11 +668,11 @@ export const notesRouter = createTRPCRouter({
     return { notes: notesFetch };
   }),
 
-  getNote: protectedProcedure
+  getNote: publicProcedure
     .input(z.object({ id: z.number() }))
-    .query(async ({ ctx, input }) => {
-      const noteFetch = await ctx.db.query.notes.findFirst({
-        where: and(eq(notes.id, input.id), eq(notes.user_id, ctx.user_id)),
+    .query(async ({ input }) => {
+      const noteFetch = await db.query.notes.findFirst({
+        where: eq(notes.id, input.id),
         with: {
           agents: true,
         },
@@ -672,57 +680,6 @@ export const notesRouter = createTRPCRouter({
 
       if (!noteFetch) {
         throw new Error("Note not found");
-      }
-
-      const currentDate = new Date();
-      const year = currentDate.getUTCFullYear();
-      const month = currentDate.getUTCMonth();
-      const day = currentDate.getUTCDate();
-
-      const dateOnly = new Date(Date.UTC(year, month, day));
-
-      const streakDb = await ctx.db.query.streak.findFirst({
-        where: and(eq(streak.userId, ctx.user_id), eq(streak.date, dateOnly)),
-      });
-
-      if (!streakDb) {
-        const year = currentDate.getUTCFullYear();
-        const month = currentDate.getUTCMonth();
-        const day = currentDate.getUTCDate();
-        const prevDateOnly = new Date(Date.UTC(year, month, day));
-        prevDateOnly.setDate(prevDateOnly.getDate() - 1);
-        const prevStreakDb = await ctx.db.query.streak.findFirst({
-          where: and(
-            eq(streak.userId, ctx.user_id),
-            eq(streak.date, prevDateOnly),
-          ),
-        });
-        if (prevStreakDb) {
-          await ctx.db.insert(streak).values({
-            userId: ctx.user_id,
-            date: currentDate,
-            year: currentDate.getFullYear().toString(),
-            count: prevStreakDb.count + 1,
-            dailyEngagementCount: 1,
-            activity: "notes",
-          });
-        } else {
-          await ctx.db.insert(streak).values({
-            userId: ctx.user_id,
-            date: currentDate,
-            year: currentDate.getFullYear().toString(),
-            count: 1,
-            activity: "notes",
-            dailyEngagementCount: 1,
-          });
-        }
-      } else {
-        await ctx.db
-          .update(streak)
-          .set({
-            dailyEngagementCount: streakDb.dailyEngagementCount + 1,
-          })
-          .where(eq(streak.id, streakDb.id));
       }
 
       return { note: noteFetch };
