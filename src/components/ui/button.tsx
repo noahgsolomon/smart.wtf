@@ -8,6 +8,8 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
+        red: "shadow-sm hover:scale-[101%] active:scale-[99%] transition-all bg-red-500 text-secondary dark:text-primary hover:bg-red-500/90",
+        blue: "shadow-sm hover:scale-[101%] active:scale-[99%] transition-all bg-blue  text-secondary dark:text-primary hover:bg-blue/90",
         default:
           "shadow-sm hover:scale-[101%] active:scale-[99%] transition-all bg-primary text-primary-foreground hover:bg-primary/90",
         darkMode:

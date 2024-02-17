@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { trpc } from "@/trpc/client";
-import { type Note } from "@/types";
+import { User, type Note } from "@/types";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 import {
@@ -31,6 +31,7 @@ import Link from "next/link";
 import { useAddingNote } from "@/utils/hooks/useaddingnote";
 import { useGenerationType } from "@/utils/hooks/usegenerationtype";
 import { useRouter } from "next/navigation";
+import { useUser } from "@clerk/nextjs";
 
 export default function Page({ params }: { params: { noteId: string } }) {
   const retrieveNoteQuery = trpc.notes.getNote.useQuery({
@@ -233,7 +234,7 @@ export default function Page({ params }: { params: { noteId: string } }) {
     }
   }, [agentMarkdown, following]);
 
-  if (retrieveNoteQuery.isLoading) {
+  if (retrieveNoteQuery.isLoading || !note) {
     return <></>;
   }
 
@@ -312,26 +313,6 @@ export default function Page({ params }: { params: { noteId: string } }) {
                     </Badge>
                   </div>
                   <div className="flex flex-wrap gap-2">
-                    {/* <div className="flex flex-row overflow-hidden rounded-lg border border-border">
-                      <Button
-                        className="rounded-br-none rounded-tr-none hover:scale-100 active:scale-100"
-                        onClick={() => setReadingMode("normal")}
-                        variant={
-                          readingMode === "normal" ? "default" : "outline"
-                        }
-                      >
-                        Normal
-                      </Button>
-                      <Button
-                        onClick={() => setReadingMode("agent")}
-                        className="rounded-bl-none rounded-tl-none hover:scale-100 active:scale-100"
-                        variant={
-                          readingMode === "agent" ? "default" : "outline"
-                        }
-                      >
-                        {note?.agents.name}
-                      </Button>
-                    </div> */}
                     <Link
                       className={cn(
                         buttonVariants({
@@ -387,7 +368,7 @@ export default function Page({ params }: { params: { noteId: string } }) {
                 </div>
                 <div className="absolute -top-[125px] left-8 ">
                   <Image
-                    src={note?.agents.pfp!}
+                    src={`https://images.smart.wtf${note?.agents.pfp!}`}
                     alt="agent"
                     width={100}
                     height={100}
