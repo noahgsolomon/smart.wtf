@@ -50,47 +50,44 @@ const NavBar = () => {
 
   const { setIsOpen } = useQuickActions();
 
-  const [lastScrollY, setLastScrollY] = useState(
-    typeof window !== "undefined" ? window.scrollY : 0,
-  );
-  const [headerStyle, setHeaderStyle] = useState({});
+  // const [lastScrollY, setLastScrollY] = useState(
+  //   typeof window !== "undefined" ? window.scrollY : 0,
+  // );
+  // const [headerStyle, setHeaderStyle] = useState({});
 
-  const [sum, setSum] = useState(0);
+  // const [sum, setSum] = useState(0);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollY = window.scrollY;
-      const direction = scrollY - lastScrollY;
+  // useEffect(() => {
+  //   const handleScroll = () => {
+  //     const scrollY = window.scrollY;
+  //     const direction = scrollY - lastScrollY;
 
-      if (direction > 0) {
-        setSum((prev) => Math.min(prev + direction, 85));
-        setHeaderStyle({
-          transform: `translateY(${-sum}px)`,
-          transition: "transform 0.3s ease-in-out",
-        });
-      } else {
-        setSum((prev) => Math.max(prev + direction, 0));
-        setHeaderStyle({
-          transform: `translateY(${-sum}px)`,
-          transition: "transform 0.3s ease-in-out",
-        });
-      }
+  //     if (direction > 0) {
+  //       setSum((prev) => Math.min(prev + direction, 85));
+  //       setHeaderStyle({
+  //         transform: `translateY(${-sum}px)`,
+  //         transition: "transform 0.3s ease-in-out",
+  //       });
+  //     } else {
+  //       setSum((prev) => Math.max(prev + direction, 0));
+  //       setHeaderStyle({
+  //         transform: `translateY(${-sum}px)`,
+  //         transition: "transform 0.3s ease-in-out",
+  //       });
+  //     }
 
-      setLastScrollY(scrollY);
-    };
+  //     setLastScrollY(scrollY);
+  //   };
 
-    window.addEventListener("scroll", handleScroll);
+  //   window.addEventListener("scroll", handleScroll);
 
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [lastScrollY]);
+  //   return () => window.removeEventListener("scroll", handleScroll);
+  // }, [lastScrollY]);
 
   return (
     <>
       {!path.startsWith("/lesson") && !path.startsWith("/quiz") ? (
-        <header
-          style={headerStyle}
-          className="fixed left-2 right-2 top-3 z-20 mx-auto rounded-lg  border bg-card/80 shadow-sm backdrop-blur-3xl transition-all"
-        >
+        <header className="fixed left-0 right-0 top-0 z-20 rounded-b-lg  border-b bg-card shadow-sm transition-all">
           {/* <div 
             className={
               "flex flex-row items-center justify-center gap-4 border-b border-border pt-1"

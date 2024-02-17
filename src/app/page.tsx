@@ -33,7 +33,9 @@ export default function Home({
         </div>
         <DashboardNew searchParams={searchParams} />
       </main>
-      <FlyingRecommendations />
+      <div className="hidden md:block coarse:hidden">
+        <FlyingRecommendations />
+      </div>
     </>
   );
 }
