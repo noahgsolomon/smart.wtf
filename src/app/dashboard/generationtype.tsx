@@ -1,6 +1,6 @@
 "use client";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -9,22 +9,92 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { cn } from "@/lib/utils";
+import { trpc } from "@/trpc/client";
 import { useAddingNote } from "@/utils/hooks/useaddingnote";
 import { useGenerationType } from "@/utils/hooks/usegenerationtype";
 import { ScrollText } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "sonner";
 
+const removeSpecialCharacters = (str: string) => {
+  return str.replace(/[^a-zA-Z0-9 _-]/g, "");
+};
+
 export default function GenerationType() {
-  const { isOpen, setIsOpen } = useGenerationType();
-  const { noteId } = useAddingNote();
+  const { isOpen, setIsOpen, isSignedIn } = useGenerationType();
+  const { noteId, topic, agent, category, nextTopic } = useAddingNote();
   const [typeSelected, _] = useState<"podcast" | "note" | "">("");
   const router = useRouter();
 
+  const [generating, setGenerating] = useState(false);
+
+  const createNoteMutation = trpc.notes.createNote.useMutation({
+    onSuccess: (data) => {
+      if (data) {
+        setIsOpen(false);
+        router.push(`/notes/${data.noteId}`);
+        toast.info("Preparing your note...");
+      }
+    },
+    onError: () => {
+      toast.error("Error generating note.");
+      setIsOpen(false);
+    },
+  });
+
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
-      <DialogContent className=" rounded-lg sm:max-w-[425px]">
+      <DialogContent className="rounded-lg sm:max-w-[425px]">
+        {!isSignedIn && (
+          <div className="absolute inset-0 z-20 flex flex-col items-center justify-center gap-4 rounded-lg bg-black/60 text-secondary dark:text-primary">
+            <div className="text-xl font-bold">
+              You must be signed in to generate a note
+            </div>
+            <div className="flex flex-row gap-6">
+              <Link
+                onClick={() => setIsOpen(false)}
+                href={`/login?noteTopic=${encodeURIComponent(
+                  removeSpecialCharacters(topic),
+                )}&noteAgent=${encodeURIComponent(
+                  agent.name,
+                )}&noteCategory=${encodeURIComponent(
+                  category,
+                )}&noteNextTopic=${encodeURIComponent(nextTopic)}`}
+                className={buttonVariants({ variant: "blue" })}
+              >
+                Log in
+              </Link>
+              <Link
+                onClick={() => setIsOpen(false)}
+                href={`/signup?noteTopic=${encodeURIComponent(
+                  removeSpecialCharacters(topic),
+                )}&noteAgent=${encodeURIComponent(
+                  agent.name,
+                )}&noteCategory=${encodeURIComponent(
+                  category,
+                )}&noteNextTopic=${encodeURIComponent(nextTopic)}`}
+                className={buttonVariants({ variant: "red" })}
+              >
+                Sign up
+              </Link>
+            </div>
+          </div>
+        )}
+        <div>
+          <div className="flex flex-row items-center gap-2 rounded-lg border bg-accent p-2">
+            <Image
+              width={64}
+              height={64}
+              className="rounded-full border bg-secondary"
+              alt={agent.name}
+              src={`https://images.smart.wtf/${agent.name}.png`}
+            />
+            <p className="text-xl font-bold">{topic}</p>
+          </div>
+        </div>
         <DialogHeader>
           <DialogTitle className="relative ">
             <h3>How would you like to learn?</h3>
@@ -77,11 +147,19 @@ export default function GenerationType() {
           </Button>
           <Button
             variant={"none"}
-            disabled={typeSelected === "podcast" || typeSelected === "note"}
+            disabled={
+              typeSelected === "podcast" ||
+              typeSelected === "note" ||
+              generating
+            }
             onClick={() => {
-              router.push(`/notes/${noteId}`);
-              setIsOpen(false);
-              toast.info("Preparing your note...");
+              setGenerating(true);
+              createNoteMutation.mutate({
+                agentId: agent.id,
+                category,
+                title: topic,
+                nextTopic,
+              });
             }}
             className={cn(
               `flex h-[250px] w-full cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-blue bg-lightBlue shadow-sm transition-all hover:scale-[101%] hover:opacity-80 active:scale-[99%]`,
