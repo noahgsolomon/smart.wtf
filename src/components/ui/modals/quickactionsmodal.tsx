@@ -18,14 +18,11 @@ import { useQuickActions } from "@/utils/hooks/usequickactions";
 import Link from "next/link";
 import { useAddNote } from "@/utils/hooks/useaddnote";
 import { usePathname } from "next/navigation";
-import { useChatContext } from "@/app/context/chat/ChatContext";
 
 export const QuickActionsModal = () => {
   const { isOpen, setIsOpen } = useQuickActions();
   const { setIsOpen: setIsAddNoteOpen } = useAddNote();
   const pathname = usePathname();
-
-  const { setOpen: setChatOpen } = useChatContext();
 
   useEffect(() => {
     const down = (e: KeyboardEvent) => {
