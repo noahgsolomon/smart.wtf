@@ -13,6 +13,10 @@ interface UseAddingNoteProps {
   }) => void;
   noteId: number;
   setNoteId: (noteId: number) => void;
+  category: string;
+  setCategory: (category: string) => void;
+  nextTopic: string;
+  setNextTopic: (nextTopic: string) => void;
 }
 
 export const useAddingNote = create<UseAddingNoteProps>((set) => ({
@@ -22,4 +26,8 @@ export const useAddingNote = create<UseAddingNoteProps>((set) => ({
   setAgent: (agent) => set({ agent }),
   noteId: 0,
   setNoteId: (noteId) => set({ noteId }),
+  category: "",
+  setCategory: (category) => set({ category }),
+  nextTopic: "",
+  setNextTopic: (nextTopic) => set({ nextTopic }),
 }));
