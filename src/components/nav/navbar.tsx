@@ -62,8 +62,6 @@ const NavBar = () => {
       const scrollY = window.scrollY;
       const direction = scrollY - lastScrollY;
 
-      console.log(sum);
-
       if (direction > 0) {
         setSum((prev) => Math.min(prev + direction, 85));
         setHeaderStyle({
@@ -219,12 +217,8 @@ const NavBar = () => {
           </div>
         </header>
       ) : null}
-      {userId ? (
-        <>
-          <QuickActionsModal />
-          <GenerationType />
-        </>
-      ) : null}
+      <QuickActionsModal />
+      <GenerationType />
     </>
   );
 };

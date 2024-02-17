@@ -563,9 +563,9 @@ export const notesRouter = createTRPCRouter({
       return { imageUrl };
     }),
 
-  createNote: protectedProcedure
-    .input(z.object({ title: z.string(), agentId: z.number() }))
-    .mutation(async ({ ctx, input: { title, agentId } }) => {
+  validateTopic: publicProcedure
+    .input(z.object({ title: z.string() }))
+    .query(async ({ input: { title } }) => {
       try {
         const response = await openai.chat.completions.create({
           model: "gpt-3.5-turbo-1106",
@@ -574,7 +574,7 @@ export const notesRouter = createTRPCRouter({
               role: "system",
               content:
                 title !== "RANDOM"
-                  ? `Assess the user's request for an academic or educational note on the topic '${title}'. Verify if the topic is suitable for an educational context. The criteria for a valid topic include appropriateness, educational value, and the potential for an in-depth exploration of at least 1,000 words. If the topic fails to meet these criteria (i.e., it is inappropriate, offensive, lacks educational value, or is nonsensical), return a JSON object with 'valid': false. For valid topics, return a JSON object with 'valid': true, a 'description' of the topic of in 1 short sentence, the 'title' of the topic, 'nextTopic' being a topic that would be a good progression or next step from this one, and the appropriate 'category'. The category must be one of the following: ENGLISH, MATH, SCIENCE, HISTORY, ARTS, MUSIC, LITERATURE, PHILOSOPHY, GEOGRAPHY, SOCIAL STUDIES, PHYSICAL EDUCATION, COMPUTER SCIENCE, ECONOMICS, BUSINESS STUDIES, PSYCHOLOGY, LAW, POLITICAL SCIENCE, ENVIRONMENTAL SCIENCE, ENGINEERING, MEDICINE, AGRICULTURE, ASTRONOMY. Ensure the category is an exact match from these options.`
+                  ? `Assess the user's request for an academic or educational note on the topic '${title}'. Verify if the topic is suitable for an educational context. The criteria for a valid topic include appropriateness, educational value, and the potential for an in-depth exploration of at least 1,000 words. If the topic fails to meet these criteria (i.e., it is inappropriate, offensive, lacks educational value, or is nonsensical), return a JSON object with 'valid': false. For valid topics, return a JSON object with 'valid': true, the 'title' of the topic, 'nextTopic' being a topic that would be a good progression or next step from this one, and the appropriate 'category'. The category must be one of the following: ENGLISH, MATH, SCIENCE, HISTORY, ARTS, MUSIC, LITERATURE, PHILOSOPHY, GEOGRAPHY, SOCIAL STUDIES, PHYSICAL EDUCATION, COMPUTER SCIENCE, ECONOMICS, BUSINESS STUDIES, PSYCHOLOGY, LAW, POLITICAL SCIENCE, ENVIRONMENTAL SCIENCE, ENGINEERING, MEDICINE, AGRICULTURE, ASTRONOMY. Ensure the category is an exact match from these options.`
                   : `Create a random educational topic that is detailed and precise, very specific like for example: "Encoding Sentences Using Transformer Models" or "The Assassination of Julius Caesar: A Detailed Account" or "Investigating the Gut Microbiome's Influence on Overall Wellness" or "Decoding Ancient Scripts: The Rosetta Stone's Role in Understanding Hieroglyphics" or "Delving into Chaos Theory: The Butterfly Effect and Predictability in Complex Systems" or "Unveiling Geometry in Art: The Mathematical Structure in M.C. Escher's Work" or "The Rise of Quantum Algorithms: Breaking the Boundaries of Classical Computing" or "The Intricacies of Cryptocurrency Mining and Blockchain Technology". The topic should not be broad; it must be specific and niche, offering a focused subject for in-depth exploration. It should be something hyper-specific, fascinating, and intellectually stimulating. In one of these categories: ENGLISH, MATH, SCIENCE, HISTORY, ARTS, MUSIC, LITERATURE, PHILOSOPHY, GEOGRAPHY, SOCIAL STUDIES, PHYSICAL EDUCATION, COMPUTER SCIENCE, ECONOMICS, BUSINESS STUDIES, PSYCHOLOGY, LAW, POLITICAL SCIENCE, ENVIRONMENTAL SCIENCE, ENGINEERING, MEDICINE, AGRICULTURE, ASTRONOMY. Return a JSON object with 'valid': true, a 'description' of the topic of in 1 short sentence, the 'title' of the topic, 'nextTopic' being a topic that would be a good progression or next step from this one, and the appropriate 'category'. The category must be one of the categories above. Ensure the category is an exact match from these options.`,
             },
           ],
@@ -590,23 +590,43 @@ export const notesRouter = createTRPCRouter({
           return { valid: false };
         }
 
-        const newNote = await ctx.db.insert(notes).values({
-          agent_id: agentId,
-          user_id: ctx.user_id,
-          title: argumentsData.title,
+        return {
+          valid: true,
           category: argumentsData.category,
           description: argumentsData.description,
-          markdown: "",
-          emoji: getRandomEmoji(argumentsData.category),
-          minutes: 13,
-          nextTopic: argumentsData.nextTopic ?? "",
-        });
-
-        return { valid: true, noteId: newNote.insertId };
+          nextTopic: argumentsData.nextTopic,
+        };
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     }),
+
+  createNote: protectedProcedure
+    .input(
+      z.object({
+        title: z.string(),
+        agentId: z.number(),
+        category: z.string(),
+        nextTopic: z.string(),
+      }),
+    )
+    .mutation(
+      async ({ ctx, input: { title, agentId, category, nextTopic } }) => {
+        const newNote = await db.insert(notes).values({
+          agent_id: agentId,
+          user_id: ctx.user_id,
+          title,
+          category,
+          markdown: "",
+          description: "",
+          emoji: "",
+          minutes: 13,
+          nextTopic: nextTopic ?? "",
+        });
+
+        return { valid: true, noteId: newNote.insertId };
+      },
+    ),
 
   // recommendedNotes: protectedProcedure.query(async ({ ctx }) => {
   //   // const userNotes = await ctx.db.query.notes.findMany({
@@ -638,7 +658,11 @@ export const notesRouter = createTRPCRouter({
 
   findRandomNotes: publicProcedure.query(async () => {
     const randomNotes = await db.execute(
-      sql`SELECT image_url, title, agent_id, id FROM notes where image_url IS NOT NULL ORDER BY RAND() LIMIT 50`,
+      sql`SELECT image_url, title, agent_id, id
+            FROM notes
+            WHERE image_url IS NOT NULL AND agents_markdown IS NOT NULL AND agents_markdown <> ''
+            ORDER BY RAND()
+            LIMIT 20;`,
     );
     return randomNotes.rows;
   }),
