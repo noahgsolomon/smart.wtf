@@ -59,7 +59,7 @@ export default function FlyingRecommendations() {
           note.startSide === "left" ? "slideInFromLeft" : "slideInFromRight";
         return (
           <Link
-            href={`/notes/${note.id}`}
+            href={`/notes/${note.id}/public`}
             key={index}
             style={{
               width: note.width,
