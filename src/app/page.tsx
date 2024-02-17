@@ -1,16 +1,17 @@
-import { auth } from "@clerk/nextjs";
-import { redirect } from "next/navigation";
 import { Badge } from "@/components/ui/badge";
 import DashboardNew from "./dashboard/dashboardnew";
 import FlyingRecommendations from "./dashboard/flyingrecommendations";
 
-export default function Home() {
-  const user = auth();
-
-  if (user?.userId) {
-    redirect("/dashboard");
-  }
-
+export default function Home({
+  searchParams,
+}: {
+  searchParams: {
+    noteTopic?: string;
+    noteAgent?: string;
+    noteCategory?: string;
+    noteNextTopic?: string;
+  };
+}) {
   return (
     <>
       <main className="mx-4 flex h-[60vh] flex-col items-center justify-center pt-24 transition-all md:mx-20 xl:mx-80">
@@ -30,7 +31,7 @@ export default function Home() {
             </h1>
           </div>
         </div>
-        <DashboardNew />
+        <DashboardNew searchParams={searchParams} />
       </main>
       <FlyingRecommendations />
     </>
