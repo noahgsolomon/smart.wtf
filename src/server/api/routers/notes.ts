@@ -623,7 +623,7 @@ export const notesRouter = createTRPCRouter({
           nextTopic: nextTopic ?? "",
         });
 
-        return { valid: true, noteId: newNote.insertId };
+        return { valid: true, noteId: newNote.findIndex };
       },
     ),
 
@@ -663,7 +663,7 @@ export const notesRouter = createTRPCRouter({
             ORDER BY RAND()
             LIMIT 20;`,
     );
-    return randomNotes.rows;
+    return randomNotes[0];
   }),
 
   getUserNotes: protectedProcedure.query(async ({ ctx }) => {

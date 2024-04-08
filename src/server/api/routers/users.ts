@@ -59,6 +59,7 @@ export const userRouter = createTRPCRouter({
 
   // Mutation to check if a user exists in the database and create a new user if not
   exists: protectedProcedure.mutation(async ({ ctx }) => {
+    console.log("SUPPPPPP");
     const clerkUser = await currentUser();
     if (clerkUser) {
       // Check if the user already exists in the database
