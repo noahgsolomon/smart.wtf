@@ -33,7 +33,7 @@ const imageGeneneration = async (initialPrompt: string) => {
     model: "dall-e-3",
     prompt: fullPrompt,
     n: 1,
-    size: "1024x1024",
+    size: "1792x1024",
     quality: "hd",
     style: "vivid",
     response_format: "url",
@@ -68,12 +68,16 @@ const promises = [
   // imageGeneneration("Network Programming for Multiplayer Games"),
   // imageGeneneration("Optimizing Game Performance and Memory Management"),
   // imageGeneneration("Optimizing Game Performance and Memory Management"),
-  imageGeneneration("brain sad drying out in a dry desert"),
-  imageGeneneration("brain sad drying out in a dry desert"),
-  imageGeneneration("brain lonely in a dry desert"),
-  imageGeneneration("brain lonely in a dry desert"),
-  imageGeneneration("brain fading away in a dry desert"),
-  imageGeneneration("brain fading away in a dry desert"),
+  imageGeneneration("shannon entropy"),
+  imageGeneneration("shannon entropy"),
+  imageGeneneration("entropy"),
+  imageGeneneration("entropy"),
+  imageGeneneration("entropy"),
+  // imageGeneneration("robot training to fight in a dystopian world"),
+  // imageGeneneration("robot training to fight in a dystopian world"),
+  // imageGeneneration("robot training to fight in a dystopian world"),
+  // imageGeneneration("robot training to fight in a dystopian world"),
+  // imageGeneneration("robot training to fight in a dystopian world"),
 ];
 
 const [
@@ -102,7 +106,6 @@ const [
   imageGen23,
   imageGen24,
   imageGen25,
-  imageGen26,
 ] = await Promise.all(promises);
 
 // console.log(
@@ -179,9 +182,6 @@ console.log(
 );
 console.log(
   `prompt: ${imageGen25?.initialPrompt}, image gen prompt: ${imageGen25?.prompt}, image: ${imageGen25?.imageUrl}`,
-);
-console.log(
-  `prompt: ${imageGen26?.initialPrompt}, image gen prompt: ${imageGen26?.prompt}, image: ${imageGen26?.imageUrl}`,
 );
 
 /*
@@ -463,7 +463,7 @@ Imagine a lone elephant standing beneath a cascading waterfall on the desolate p
 
 
 
-Serverless Computing 
+Serverless Computing
 
 Imagine a vast galaxy where lines of code dance as serverless functions, responding to triggers from bustling asteroids (applications) and emitting results as brilliant energy bursts. The galaxy's core represents the serverless cloud, surrounded by zones ensuring scalability and redundancy. This vibrant scene mirrors the efficiency and dynamism of serverless computing, where code powers applications and transforms technology.
 
