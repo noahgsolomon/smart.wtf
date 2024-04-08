@@ -611,19 +611,22 @@ export const notesRouter = createTRPCRouter({
     )
     .mutation(
       async ({ ctx, input: { title, agentId, category, nextTopic } }) => {
-        const newNote = await db.insert(notes).values({
-          agent_id: agentId,
-          user_id: ctx.user_id,
-          title,
-          category,
-          markdown: "",
-          description: "",
-          emoji: "",
-          minutes: 13,
-          nextTopic: nextTopic ?? "",
-        });
+        const [newNote] = await db
+          .insert(notes)
+          .values({
+            agent_id: agentId,
+            user_id: ctx.user_id,
+            title,
+            category,
+            markdown: "",
+            description: "",
+            emoji: "",
+            minutes: 13,
+            nextTopic: nextTopic ?? "",
+          })
+          .execute();
 
-        return { valid: true, noteId: newNote.findIndex };
+        return { valid: true, noteId: newNote.insertId };
       },
     ),
 

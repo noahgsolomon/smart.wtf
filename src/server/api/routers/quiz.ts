@@ -58,40 +58,49 @@ export const quizRouter = createTRPCRouter({
       for (const question of generatedQuestions) {
         if (question.quiz) {
           console.log("quiz", question.quiz);
-          const quizId = await ctx.db.insert(quizzes).values({
-            questionMarkdown: question.quiz.questionMarkdown,
-            options: question.quiz.options,
-            correctOption: question.quiz.correctOption,
-            explanationMarkdown: question.quiz.explanationMarkdown,
-          });
+          const [quizId] = await ctx.db
+            .insert(quizzes)
+            .values({
+              questionMarkdown: question.quiz.questionMarkdown,
+              options: question.quiz.options,
+              correctOption: question.quiz.correctOption,
+              explanationMarkdown: question.quiz.explanationMarkdown,
+            })
+            .execute();
           await ctx.db.insert(interactiveComponents).values({
             noteId,
             type: "QUIZ",
-            quizId: parseInt(quizId.insertId),
+            quizId: quizId.insertId,
           });
         }
         if (question.understanding) {
           console.log("understanding", question.understanding);
-          const understandingId = await ctx.db.insert(understanding).values({
-            questionMarkdown: question.understanding.questionMarkdown,
-            explanationMarkdown: question.understanding.explanationMarkdown,
-          });
+          const [understandingId] = await ctx.db
+            .insert(understanding)
+            .values({
+              questionMarkdown: question.understanding.questionMarkdown,
+              explanationMarkdown: question.understanding.explanationMarkdown,
+            })
+            .execute();
           await ctx.db.insert(interactiveComponents).values({
             noteId,
             type: "UNDERSTANDING",
-            understandingId: parseInt(understandingId.insertId),
+            understandingId: understandingId.insertId,
           });
         }
         if (question.sorting) {
-          const sortingId = await ctx.db.insert(sorting).values({
-            questionMarkdown: question.sorting.questionMarkdown,
-            options: question.sorting.options,
-            explanationMarkdown: question.sorting.explanationMarkdown,
-          });
+          const [sortingId] = await ctx.db
+            .insert(sorting)
+            .values({
+              questionMarkdown: question.sorting.questionMarkdown,
+              options: question.sorting.options,
+              explanationMarkdown: question.sorting.explanationMarkdown,
+            })
+            .execute();
           await ctx.db.insert(interactiveComponents).values({
             noteId,
             type: "SORTING",
-            sortingId: parseInt(sortingId.insertId),
+            sortingId: sortingId.insertId,
           });
         }
       }

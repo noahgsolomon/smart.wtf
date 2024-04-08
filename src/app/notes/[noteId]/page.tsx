@@ -76,7 +76,7 @@ export default function Page({ params }: { params: { noteId: string } }) {
     onSuccess: (data) => {
       if (data) {
         if (data.valid) {
-          setNoteId(parseInt(data.noteId!));
+          setNoteId(data.noteId!);
           setTopic(note?.nextTopic!);
           setAgent(
             note?.agents! as {
