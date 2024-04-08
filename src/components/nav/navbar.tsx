@@ -123,24 +123,6 @@ const NavBar = () => {
                   )}
                 />
               </Link>
-              {userId && (
-                <div
-                  onClick={() => setIsOpen(true)}
-                  className="relative hidden cursor-pointer transition-all hover:opacity-80 sm:block"
-                >
-                  <div className="flex flex-row items-center gap-1 rounded-lg border border-border bg-secondary/60 py-2 pl-2 pr-24 text-sm text-primary/60">
-                    <Search className="h-4 w-4 text-primary/60" />
-                    Search...
-                  </div>
-                  <Button
-                    className="rounded-lg bg-card sm:absolute sm:right-1 sm:top-1/2 sm:-translate-y-1/2 sm:transform"
-                    size={"sm"}
-                    variant={"outline"}
-                  >
-                    ⌘K
-                  </Button>
-                </div>
-              )}
             </div>
             {/* <div className="flex flex-row gap-4">
               <Button className="flex flex-row gap-1" variant={"link"}>
