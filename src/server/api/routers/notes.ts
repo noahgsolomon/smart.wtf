@@ -663,7 +663,7 @@ export const notesRouter = createTRPCRouter({
             ORDER BY RAND()
             LIMIT 20;`,
     );
-    return randomNotes[0];
+    return randomNotes[0] as any;
   }),
 
   getUserNotes: protectedProcedure.query(async ({ ctx }) => {

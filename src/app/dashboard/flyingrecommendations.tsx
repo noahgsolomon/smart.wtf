@@ -26,7 +26,7 @@ export default function FlyingRecommendations() {
 
   useEffect(() => {
     if (randomNotesQuery.data) {
-      const updatedNotes = randomNotesQuery.data.map((note) => {
+      const updatedNotes = randomNotesQuery.data.map((note: any) => {
         const randomVal = Math.floor(Math.random() * 100) + 300;
         return {
           ...note,
@@ -37,16 +37,20 @@ export default function FlyingRecommendations() {
         };
       });
 
-      const updatedNotesWithPosition = updatedNotes.map((note, index) => {
-        const offScreenPosition = `-500px`;
-        return {
-          ...note,
-          top: `${Math.random() * (window.innerHeight - 600 - note.height)}px`,
-          left: note.startSide === "left" ? offScreenPosition : undefined,
-          animationDelay: `${index * 8}s`,
-          speed: (window.innerWidth / 1000) * 40,
-        };
-      });
+      const updatedNotesWithPosition = updatedNotes.map(
+        (note: any, index: number) => {
+          const offScreenPosition = `-500px`;
+          return {
+            ...note,
+            top: `${
+              Math.random() * (window.innerHeight - 600 - note.height)
+            }px`,
+            left: note.startSide === "left" ? offScreenPosition : undefined,
+            animationDelay: `${index * 8}s`,
+            speed: (window.innerWidth / 1000) * 40,
+          };
+        },
+      );
 
       setRandomNotes(updatedNotesWithPosition as FlyingImage[]);
     }
